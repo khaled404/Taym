@@ -37,9 +37,7 @@ interface IHeader {
 
 const SearchSubmitBtn: FC = () => {
   return (
-    <IconTouchableContainer
-      style={styles.submitSearchBtn}
-      onPress={global.DrawerProps.openDrawer}>
+    <IconTouchableContainer style={styles.submitSearchBtn}>
       <SearchIcon width={17} height={17} />
     </IconTouchableContainer>
   );
@@ -81,10 +79,10 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
         </View>
 
         <View style={styles.leftContainer}>
-          <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
+          <IconTouchableContainer>
             <CartIcon />
           </IconTouchableContainer>
-          <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
+          <IconTouchableContainer>
             <NotificationIcon />
           </IconTouchableContainer>
         </View>
@@ -92,9 +90,10 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
 
       <View style={styles.searchInputContainer}>
         <Input
-          options={{placeholder: t('What You Are Looking For ?')}}
-          placeholderTextColor={'#949494'}
-          textInputContainer={{fontSize: Pixel(25)}}
+          options={{
+            placeholder: t('What You Are Looking For ?'),
+            placeholderTextColor: '#949494',
+          }}
           contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
           rightContent={() => <SearchSubmitBtn />}
         />
