@@ -1,12 +1,10 @@
 import React, {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
-import HomeHeader from '../components/header/HomeHeader';
 import {Colors} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import CategoryList from '../components/Home/CategoryList';
-import OfferSlider from '../components/Home/OfferSlider';
 import FavoriteList from '../components/Home/FavoriteList';
+import Header from "../components/header/Header";
 
 const categoryHomeData = [
     {
@@ -44,48 +42,21 @@ const categoryHomeData = [
         image: 'Voucher 12457',
     },
 ];
-const carouselItems = [
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-];
 
-const Home: FC = () => {
+const Favorite: FC = () => {
     const {t} = useTranslation();
     return (
         <Container style={styles.container}>
-            <HomeHeader title="Home"/>
+            <Header title="Favorite"/>
             <Content noPadding>
                 <View style={styles.contentContainer}>
-                    <CategoryList data={categoryHomeData}/>
-                </View>
-                <OfferSlider data={carouselItems}/>
-                <View style={styles.contentContainer}>
-                    <FavoriteList inHome data={categoryHomeData}/>
+                    <FavoriteList  data={categoryHomeData}/>
                 </View>
             </Content>
         </Container>
     );
 };
 
-export default Home;
 
 const styles = StyleSheet.create({
     container: {
@@ -93,5 +64,8 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         paddingHorizontal: 20,
+        paddingVertical: 15,
     },
 });
+
+export default Favorite;

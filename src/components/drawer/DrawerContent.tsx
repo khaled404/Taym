@@ -42,7 +42,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
         <TouchableOpacity
           style={styles.header}
           onPress={() => {
-            navigation?.navigate(isLogin ? 'Profile' : 'Login');
+            navigation?.navigate('Profile');
           }}>
           <View style={styles.userImage}>
             <View style={styles.editIcon}>
@@ -75,9 +75,9 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
           />
           <DrawerItem
             Icon={HeartIcon}
-            title={t('Favoriets')}
+            title={t('Favorite')}
             onPress={() => {
-              navigation?.navigate('Home');
+              navigation?.navigate('Favorite');
             }}
           />
           <DrawerItem
@@ -92,7 +92,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             Icon={ListIcon}
             title={t('My Orders')}
             onPress={() => {
-              navigation?.navigate('Home');
+              navigation?.navigate('MyOrders');
             }}
           />
           <DrawerItem
