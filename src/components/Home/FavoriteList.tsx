@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {commonStyles} from '../../styles/styles';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import FavoriteItem from './FavoriteItem';
+import {useNavigation} from "@react-navigation/native";
 
 interface IFavoriteList {
     data: Array<{ title: string; image: string }>;
@@ -13,12 +14,12 @@ interface IFavoriteList {
 
 const FavoriteList: FC<IFavoriteList> = ({data, inHome}) => {
     const {t} = useTranslation();
-
+    const {navigate} = useNavigation();
     return (
         <>
             {inHome && <View style={styles.sectionTitleContainer}>
                 <Text style={styles.sectionTitle}>{'Favorite'}</Text>
-                <Touchable>
+                <Touchable onPress={()=>navigate('Favorite')}>
                     <Text style={styles.viewAllBtnText}>{t('View All')}</Text>
                 </Touchable>
             </View>}

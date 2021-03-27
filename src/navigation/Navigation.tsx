@@ -2,7 +2,18 @@ import React, {FC, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {Favorite, Home, MyOrders, Profile, Voucher} from '../screens/index';
+import {
+    CompleteRegister,
+    Favorite,
+    Forget,
+    Forget2, Forget3,
+    Home,
+    Login,
+    MyOrders,
+    Profile,
+    Register,
+    Voucher
+} from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
 import {I18nManager, StyleSheet} from 'react-native';
@@ -87,12 +98,18 @@ const Stacks: FC<any> = ({style}) => {
         <Animated.View style={[styles.stacksStyles, style]}>
             <Stack.Navigator
                 screenOptions={{headerShown: false, ...navigationTransition} as any}
-                initialRouteName={'Home'}>
+                initialRouteName={'Forget3'}>
                 <Stack.Screen name="Home" component={Home}/>
                 <Stack.Screen name="Voucher" component={Voucher}/>
                 <Stack.Screen name="MyOrders" component={MyOrders}/>
                 <Stack.Screen name="Favorite" component={Favorite}/>
                 <Stack.Screen name="Profile" component={Profile}/>
+                <Stack.Screen name="Login" component={Login}/>
+                <Stack.Screen name="Register" component={Register}/>
+                <Stack.Screen name="CompleteRegister" component={CompleteRegister}/>
+                <Stack.Screen name="Forget" component={Forget}/>
+                <Stack.Screen name="Forget2" component={Forget2}/>
+                <Stack.Screen name="Forget3" component={Forget3}/>
             </Stack.Navigator>
         </Animated.View>
     );
