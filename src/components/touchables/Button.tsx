@@ -29,7 +29,7 @@ const Button: FC<Props> = ({
   loader,
 }) => {
   return (
-    <Touchable dark={dark} onPress={onPress}>
+    <Touchable dark={dark} onPress={() => !loader && onPress()}>
       <View style={[styles.container, style]}>
         {children}
         {loader ? (
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 25,
     height: Pixel(100),
-    backgroundColor: Colors.colorSacand,
-    borderRadius: 12,
+    backgroundColor: Colors.minColor,
+    borderRadius: 30,
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    color: Colors.white,
-    fontFamily: Fonts.medium,
-    fontSize: Pixel(28),
+    color: Colors.dark,
+    fontFamily: Fonts.bold,
+    fontSize: Pixel(35),
   },
 });

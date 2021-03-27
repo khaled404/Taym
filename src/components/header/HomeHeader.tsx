@@ -96,6 +96,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
           }}
           contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
           rightContent={() => <SearchSubmitBtn />}
+          iconRightStyle={{top: 5}}
         />
       </View>
     </View>

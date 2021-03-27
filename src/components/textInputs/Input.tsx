@@ -14,6 +14,7 @@ interface Props {
   options?: TextInputProps & {ref?: (ref: any) => void};
   contentContainerStyle?: StyleProp<ViewStyle>;
   textInputContainer?: StyleProp<ViewStyle>;
+  iconRightStyle?: StyleProp<ViewStyle>;
   placeholderTextColor?: TextInputProps;
   leftContent?: () => JSX.Element;
   rightContent?: () => JSX.Element;
@@ -28,6 +29,7 @@ const Input: React.FC<Props> = ({
   leftContent,
   rightContent,
   erorrMessage,
+  iconRightStyle,
 }) => {
   return (
     <>
@@ -37,7 +39,11 @@ const Input: React.FC<Props> = ({
           contentContainerStyle,
           !!erorrMessage && {borderColor: Colors.warning},
         ]}>
-        {rightContent && <View style={styles.iconRight}>{rightContent()}</View>}
+        {rightContent && (
+          <View style={[styles.iconRight, iconRightStyle]}>
+            {rightContent()}
+          </View>
+        )}
         <TextInput
           {...options}
           style={[
@@ -89,7 +95,7 @@ const styles = StyleSheet.create({
   iconRight: {
     position: 'absolute',
     // paddingRight: 10,
-    top: 5,
+    top: 14,
     right: 10,
     alignSelf: 'center',
   },

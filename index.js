@@ -10,6 +10,9 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from './src/store/store';
 import 'react-native-gesture-handler';
+import {enableScreens} from 'react-native-screens';
+
+enableScreens();
 // if (!I18nManager.isRTL) {
 //   I18nManager.allowRTL(true);
 //   I18nManager.forceRTL(true);

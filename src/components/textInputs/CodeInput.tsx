@@ -1,12 +1,13 @@
 import React, {FC, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, View, Keyboard} from 'react-native';
-import {Fonts} from '../../constants/styleConstants';
+import {Colors, Fonts} from '../../constants/styleConstants';
 
 const CodeInput: FC = () => {
   const [state, setstate] = useState<any>({
     inputRefs: {} as any,
     inputValues: {} as any,
     value: '',
+    active: null,
   });
   const GetInputValues = () => {
     setstate((old: any) => ({
@@ -28,10 +29,15 @@ const CodeInput: FC = () => {
   }, []);
   return (
     <View style={styles.container}>
-      {[...Array(6).keys()].map(index => (
+      {[...Array(4).keys()].map(index => (
         <View style={styles.textInpuContainer} key={index}>
           <TextInput
-            style={styles.textInput}
+            style={[
+              styles.textInput,
+              state.active === index && {
+                borderBottomColor: Colors.minColor,
+              },
+            ]}
             keyboardType="numeric"
             maxLength={1}
             ref={ref => {
@@ -41,16 +47,16 @@ const CodeInput: FC = () => {
               keyPress.persist();
               if (keyPress.nativeEvent.key === 'Backspace') {
                 if (
-                  state.inputValues[`input_${index}`].length != 0 &&
+                  state.inputValues[`input_${index}`]?.length != 0 &&
                   index !== 5 &&
                   index !== 0
                 ) {
-                  state.inputRefs[`input_${index + 1}`].focus();
+                  state.inputRefs[`input_${index + 1}`]?.focus();
                 } else if (
                   index !== 0 &&
-                  state.inputValues[`input_${index}`].length === 0
+                  state.inputValues[`input_${index}`]?.length === 0
                 ) {
-                  state.inputRefs[`input_${index - 1}`].focus();
+                  state.inputRefs[`input_${index - 1}`]?.focus();
                 }
               }
             }}
@@ -60,12 +66,14 @@ const CodeInput: FC = () => {
                 inputValues: {...old.inputValues, [`input_${index}`]: text},
               }));
               if (text.length != 0 && index !== 5) {
-                state.inputRefs[`input_${index + 1}`].focus();
+                state.inputRefs[`input_${index + 1}`]?.focus();
               } else if (index !== 0 && text.length === 0) {
-                state.inputRefs[`input_${index - 1}`].focus();
+                state.inputRefs[`input_${index - 1}`]?.focus();
               }
             }}
-            onFocus={props => {}}
+            onFocus={() => {
+              setstate((old: any) => ({...old, active: index}));
+            }}
           />
         </View>
       ))}
@@ -87,12 +95,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   textInput: {
-    borderRadius: 10,
-    backgroundColor: '#F0F0F0',
+    borderBottomColor: Colors.dark,
+    borderBottomWidth: 2,
     width: '100%',
+    color: Colors.dark,
     height: '100%',
     fontSize: 20,
-    fontFamily: Fonts.light,
+    fontFamily: Fonts.bold,
     textAlign: 'center',
     textAlignVertical: 'center',
   },
