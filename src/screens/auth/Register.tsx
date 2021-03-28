@@ -10,24 +10,47 @@ import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import SocialLogin from '../../components/touchables/SocialLogin';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RegisterHandler} from '../../store/actions/auth';
+import {RootState} from '../../store/store';
+import {InputErorrHandler} from '../../constants/helpers';
 
 const Register: FC = () => {
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-
+  const [state, setstate] = useState({
+    name: '',
+    email: '',
+    password: '',
+    secureTextEntry: true,
+    loader: false,
+  });
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
+  const dispatch = useDispatch();
+  const {registerErorrs} = useSelector(
+    (state: RootState) => state.auth,
+    shallowEqual,
+  );
+  const submitHandler = () => {
+    setstate(old => ({...old, loader: true}));
+    dispatch(
+      RegisterHandler(state.name, state.email, state.password, success => {
+        setstate(old => ({...old, loader: false}));
+        success && navigate('CompleteRegister');
+      }),
+    );
+  };
   const PasswordIcon = () => {
     return (
       <IconTouchableContainer
-        onPress={() => setSecureTextEntry(!secureTextEntry)}>
+        dark
+        onPress={() => {
+          setstate(old => ({...old, secureTextEntry: !old.secureTextEntry}));
+        }}>
         <EyeIcon />
       </IconTouchableContainer>
     );
   };
 
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
   return (
     <Container style={styles.container}>
       <AuthHeader />
@@ -41,10 +64,11 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setUsername(value);
+                  setstate(old => ({...old, name: value}));
                 },
-                value: username,
+                value: state.name,
               }}
+              erorrMessage={InputErorrHandler(registerErorrs, 'name')}
             />
           </View>
 
@@ -55,11 +79,12 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setEmail(value);
+                  setstate(old => ({...old, email: value}));
                 },
-                value: email,
+                value: state.email,
                 keyboardType: 'email-address',
               }}
+              erorrMessage={InputErorrHandler(registerErorrs, 'email')}
             />
           </View>
 
@@ -72,19 +97,20 @@ const Register: FC = () => {
               iconRightStyle={{top: 10}}
               options={{
                 onChangeText: value => {
-                  setPassword(value);
+                  setstate(old => ({...old, password: value}));
                 },
-                value: password,
-                secureTextEntry: secureTextEntry,
+                value: state.password,
+                secureTextEntry: state.secureTextEntry,
+                onSubmitEditing: submitHandler,
               }}
+              erorrMessage={InputErorrHandler(registerErorrs, 'password')}
             />
           </View>
           <View style={styles.submitContainer}>
             <Button
               title={t('Register')}
-              onPress={() => {
-                navigate('PhoneCode');
-              }}
+              onPress={submitHandler}
+              loader={state.loader}
             />
           </View>
           <SocialLogin title={t('Or Register With')} />
@@ -159,7 +185,6 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     borderRadius: 14,
-    borderWidth: 0,
     padding: 0,
     paddingHorizontal: 15,
   },

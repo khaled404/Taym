@@ -2,7 +2,7 @@ import axios from 'axios';
 import {I18nManager} from 'react-native';
 import {AsyncKeys, getItem} from './helpers';
 const {isRTL} = I18nManager;
-export const baseUrl = 'url';
+export const baseUrl = 'https://staging.backend.trytaym.com/api/App/v1/';
 export const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -16,8 +16,8 @@ export const axiosAPI = axios.create({
 });
 axiosAPI.interceptors.request.use(
   async config => {
-    const {api_token} = (await getItem(AsyncKeys.USER_DATA)) || '';
-    config.headers['Api-Token'] = api_token;
+    const {token} = (await getItem(AsyncKeys.USER_DATA)) || '';
+    config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   },
   error => Promise.reject(error),

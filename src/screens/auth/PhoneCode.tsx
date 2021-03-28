@@ -3,39 +3,61 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import CodeInput from '../../components/textInputs/CodeInput';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {VerifyPhoneCodeHandler} from '../../store/actions/auth';
 
-const Forget: FC = () => {
-  const [email, setEmail] = useState('');
+const PhoneCode: FC = () => {
+  const [code, setCode] = useState('');
+  const [state, setstate] = useState({
+    code: '',
+    loader: false,
+  });
 
+  const dispatch = useDispatch();
+  const {userData}: any = useSelector(
+    (state: RootState) => state.auth,
+    shallowEqual,
+  );
   const {t} = useTranslation();
   const {navigate} = useNavigation();
+  console.log(code);
+  const submitHandler = () => {
+    setstate(old => ({...old, loader: true}));
+    dispatch(
+      VerifyPhoneCodeHandler(state.code, success => {
+        setstate(old => ({...old, loader: false}));
+        success && navigate('Home');
+      }),
+    );
+  };
   return (
     <Container style={styles.container}>
       <AuthHeader />
       <Content noPadding style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
-          <Text style={styles.mainTitle}>
-            {t('Enter Email / Mobile Number ')}
-          </Text>
           <Text style={styles.sectionTitle}>
-            {t("And We'll Send You The Instructions")}
+            {t('Enter the 4-digit code sent to number')}
           </Text>
+          <Text style={styles.sectionTitle}>{userData.phone}</Text>
         </View>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <CodeInput />
+            <CodeInput
+              onChangeText={text => {
+                setstate(old => ({...old, code: text}));
+              }}
+            />
           </View>
           <View style={styles.submitContainer}>
             <Button
               title={t('Verify And Proceed')}
-              onPress={() => {
-                navigate('Forget2');
-              }}
+              onPress={submitHandler}
+              loader={state.loader}
             />
           </View>
         </View>
@@ -96,8 +118,9 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: Fonts.medium,
     color: '#4D4D4D',
-    marginLeft: 10,
+    fontSize: Pixel(28),
+    textAlign: 'center',
   },
 });
 
-export default Forget;
+export default PhoneCode;

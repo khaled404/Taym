@@ -6,14 +6,41 @@ import {useTranslation} from 'react-i18next';
 import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
-import Touchable from '../../components/touchables/Touchable';
 import Button from '../../components/touchables/Button';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {InputErorrHandler} from '../../constants/helpers';
+import {RegisterPhoneHandler} from '../../store/actions/auth';
+import {showMessage} from 'react-native-flash-message';
 
 const CompleteRegister: FC = () => {
-  const [phone, setPhone] = useState('0123456789');
-
+  const [state, setstate] = useState({
+    phone: '',
+    loader: false,
+  });
+  const {registerErorrs} = useSelector(
+    (state: RootState) => state.auth,
+    shallowEqual,
+  );
+  const dispatch = useDispatch();
   const {t} = useTranslation();
   const {navigate} = useNavigation();
+  const submitHandler = () => {
+    setstate(old => ({...old, loader: true}));
+    if (state.phone.length === 11) {
+      dispatch(
+        RegisterPhoneHandler(state.phone, success => {
+          setstate(old => ({...old, loader: false}));
+          success && navigate('PhoneCode');
+        }),
+      );
+    } else {
+      showMessage({
+        message: t('Please enter a valid mobile number'),
+      });
+    }
+  };
+
   return (
     <Container style={styles.container}>
       <AuthHeader />
@@ -32,16 +59,22 @@ const CompleteRegister: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setPhone(value);
+                  setstate(old => ({...old, phone: value}));
                 },
-                value: phone,
+                value: state.phone,
                 keyboardType: 'number-pad',
+                onSubmitEditing: submitHandler,
               }}
+              erorrMessage={InputErorrHandler(registerErorrs, 'phone')}
             />
           </View>
 
           <View style={styles.submitContainer}>
-            <Button title={t('Get OTP')} onPress={() => {}} />
+            <Button
+              title={t('Get OTP')}
+              onPress={submitHandler}
+              loader={state.loader}
+            />
           </View>
         </View>
       </Content>

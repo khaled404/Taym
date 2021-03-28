@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -9,8 +9,6 @@ import {SuccessIcon} from '../../../assets/Icons/Icons';
 import Button from '../../components/touchables/Button';
 
 const Forget3: FC = () => {
-  const [email, setEmail] = useState('');
-
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   return (

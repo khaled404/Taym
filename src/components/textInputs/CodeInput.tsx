@@ -1,8 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import {StyleSheet, TextInput, View, Keyboard} from 'react-native';
 import {Colors, Fonts} from '../../constants/styleConstants';
-
-const CodeInput: FC = () => {
+interface ICodeInput {
+  onChangeText?: (text: string) => void;
+}
+const CodeInput: FC<ICodeInput> = ({onChangeText}) => {
   const [state, setstate] = useState<any>({
     inputRefs: {} as any,
     inputValues: {} as any,
@@ -23,10 +25,15 @@ const CodeInput: FC = () => {
     GetInputValues();
   }, [state.inputValues]);
   useEffect(() => {
+    onChangeText && onChangeText(state.value);
+  }, [state.value]);
+
+  useEffect(() => {
     if (state.inputRefs[`input_0`]) {
       state.inputRefs[`input_0`].focus();
     }
   }, []);
+  //onChangeText
   return (
     <View style={styles.container}>
       {[...Array(4).keys()].map(index => (

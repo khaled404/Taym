@@ -18,7 +18,7 @@ interface Props {
   placeholderTextColor?: TextInputProps;
   leftContent?: () => JSX.Element;
   rightContent?: () => JSX.Element;
-  erorrMessage?: string;
+  erorrMessage?: string | boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     padding: 5,
     width: '100%',
     borderWidth: 1,
-    borderColor: Colors.minColor,
+    borderColor: Colors.inputBackground,
     paddingHorizontal: 20,
   },
   textInputContainer: {
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     top: 14,
     right: 10,
     alignSelf: 'center',
+    zIndex: 100,
   },
   errorMessage: {
     textAlign: 'center',

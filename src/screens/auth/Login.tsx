@@ -10,23 +10,41 @@ import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import SocialLogin from '../../components/touchables/SocialLogin';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {InputErorrHandler} from '../../constants/helpers';
+import {LoginHandler} from '../../store/actions/auth';
 
 const Login: FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('0123456789');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
+  const {loginErorrs} = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const [state, setstate] = useState({
+    email: '',
+    password: '',
+    secureTextEntry: true,
+    loader: false,
+  });
   const PasswordIcon = () => {
     return (
       <IconTouchableContainer
-        onPress={() => setSecureTextEntry(!secureTextEntry)}>
+        onPress={() => {
+          setstate(old => ({...old, secureTextEntry: !old.secureTextEntry}));
+        }}>
         <EyeIcon />
       </IconTouchableContainer>
     );
   };
-
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
+  const submitHandler = () => {
+    setstate(old => ({...old, loader: true}));
+    dispatch(
+      LoginHandler(state.email, state.password, success => {
+        setstate(old => ({...old, loader: false}));
+        success && navigate('Home');
+      }),
+    );
+  };
   return (
     <Container style={styles.container}>
       <AuthHeader />
@@ -40,11 +58,15 @@ const Login: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setEmail(value);
+                  setstate(old => ({
+                    ...old,
+                    email: value,
+                  }));
                 },
-                value: email,
+                value: state.email,
                 keyboardType: 'email-address',
               }}
+              erorrMessage={InputErorrHandler(loginErorrs, 'email')}
             />
           </View>
 
@@ -57,11 +79,16 @@ const Login: FC = () => {
               iconRightStyle={{top: 10}}
               options={{
                 onChangeText: value => {
-                  setPassword(value);
+                  setstate(old => ({
+                    ...old,
+                    password: value,
+                  }));
                 },
-                value: password,
-                secureTextEntry: secureTextEntry,
+                value: state.password,
+                secureTextEntry: state.secureTextEntry,
+                onSubmitEditing: submitHandler,
               }}
+              erorrMessage={InputErorrHandler(loginErorrs, 'password')}
             />
           </View>
 
@@ -81,9 +108,8 @@ const Login: FC = () => {
           <View style={styles.submitContainer}>
             <Button
               title={t('Sign In')}
-              onPress={() => {
-                navigate('Home');
-              }}
+              onPress={submitHandler}
+              loader={state.loader}
             />
           </View>
           <SocialLogin title={t('Or Sign In With')} />

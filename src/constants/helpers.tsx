@@ -154,17 +154,12 @@ export const HandleErrors = (errorMessage: string) => {
 };
 /**
  * show input erorr message
- * @param data Array of errors
- * @param key input name to return error message
+ * @param data object of keys errors
+ * @param key input key name to return error message
  * @returns string or boolean
  */
-export const InputErorrHandler = (
-  data: Array<any>,
-  key: string,
-): string | boolean => {
-  return Array.isArray(data)
-    ? data.filter((item: any) => item.key === key)[0]?.value[0]
-    : false;
+export const InputErorrHandler = (data: any, key: string): string | boolean => {
+  return typeof data === 'object' && data[key] ? data[key][0] : false;
 };
 /**
  * Share Handler

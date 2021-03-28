@@ -24,4 +24,5 @@ export default {
   'What You Are Looking For ?': 'ما الذي تبحث عنه؟',
   'Explore Category': 'استعرض الفئات',
   'View All': 'عرض الكل',
+  'Please enter a valid mobile number': 'الرجاء إدخال رقم جوال صحيح',
 };

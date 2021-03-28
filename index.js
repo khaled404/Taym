@@ -23,8 +23,7 @@ LogBox.ignoreLogs([
   "Looks like you're passing an inline function",
   'Cannot update a component (`initNavgtion`) while rendering',
   'Warning: Cannot update a component from inside the function body of a different component',
-  "Warning: Can't perform a React state update on an unmounted component.",
-  'interpolate() was renamed to interpolateNode() in Reanimated 2. Please use interpolateNode() instead',
+  "Warning: Can't perform a React state update on an unmounted component",
 ]);
 const RNapp = () => (
   <Provider store={store}>

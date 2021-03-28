@@ -8,17 +8,19 @@ import {
   Forget,
   Forget2,
   Forget3,
-  Home,
   Login,
   MyOrders,
   Profile,
   Register,
   Voucher,
   PhoneCode,
+  Home,
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
 import {I18nManager, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/store';
 
 const {isRTL} = I18nManager;
 const Stack = createStackNavigator();
@@ -96,11 +98,12 @@ const navigationSlideToTop = {
 };
 
 const Stacks: FC<any> = ({style}) => {
+  const {isLogin} = useSelector((state: RootState) => state.auth);
   return (
     <Animated.View style={[styles.stacksStyles, style]}>
       <Stack.Navigator
         screenOptions={{headerShown: false, ...navigationTransition} as any}
-        initialRouteName={'Login'}>
+        initialRouteName={isLogin ? 'Home' : 'Login'}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />
         <Stack.Screen name="MyOrders" component={MyOrders} />

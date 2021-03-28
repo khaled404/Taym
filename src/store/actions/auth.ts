@@ -2,17 +2,161 @@ import {Dispatch} from 'redux';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {ActionType} from './actions';
-import {AsyncKeys, getItem, saveItem} from '../../constants/helpers';
+import {AsyncKeys, saveItem} from '../../constants/helpers';
 import {showMessage} from 'react-native-flash-message';
 
 /**
- * save user data to redux state and  asyncstorage
- * @param payload object with user data
+ * Register user step 1
+ * @param name uer name
+ * @param email user email
+ * @param password user password
+ * @param phone user phone number
+ * @param cb callback function with success is true or false
  */
-export const SaveUserDataHandler = (payload: any) => ({
-  type: ActionType.SAVE_USER_DATA,
-  payload: payload,
-});
+export const RegisterHandler = (
+  name: string,
+  email: string,
+  password: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('guest/register-new-user', {
+        name,
+        email,
+        password,
+      });
+      dispatch({
+        type: ActionType.SAVE_REGISTER_ERORRS,
+        payload: {},
+      });
+      await saveItem(AsyncKeys.USER_DATA, data);
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_STEP_1,
+        payload: data,
+      });
+      console.log(data);
+      cb(true);
+    } catch (error) {
+      cb(false);
+      dispatch({
+        type: ActionType.SAVE_REGISTER_ERORRS,
+        payload: error?.response.data.message,
+      });
+      console.log(error?.response.data.message);
+    }
+  };
+};
+/**
+ * Register user step 2
+ * @param phone uer phone number
+ * @param cb callback function with success is true or false
+ */
+export const RegisterPhoneHandler = (
+  phone: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/register-phone', {
+        phone,
+      });
+      console.log(data);
+      dispatch({
+        type: ActionType.SAVE_REGISTER_ERORRS,
+        payload: {},
+      });
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_STEP_2,
+        payload: phone,
+      });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      dispatch({
+        type: ActionType.SAVE_REGISTER_ERORRS,
+        payload: error?.response.data.message,
+      });
+      console.log(error?.response.data.message);
+    }
+  };
+};
+
+/**
+ * Register user step 3
+ * @param code otp code
+ * @param cb callback function with success is true or false
+ */
+export const VerifyPhoneCodeHandler = (
+  code: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/verify-phone', {
+        code,
+      });
+      console.log(data);
+      showMessage({
+        message: data.message,
+        type: 'info',
+      });
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_STEP_3,
+      });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message.code[0],
+        type: 'danger',
+      });
+      console.log(error?.response);
+    }
+  };
+};
+
+/**
+ * Login user
+ * @param email user email
+ * @param password user password
+ * @param cb callback function with success is true or false
+ */
+export const LoginHandler = (
+  email: string,
+  password: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('guest/login-user', {
+        email,
+        password,
+      });
+      console.log(data);
+      showMessage({
+        message: data.success.message,
+        type: 'success',
+      });
+      dispatch({
+        type: ActionType.SAVE_LOGIN_DATA,
+        payload: data.user,
+      });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      dispatch({
+        type: ActionType.SAVE_LOGIN_ERORRS,
+        payload: error?.response.data.message,
+      });
+      console.log(error?.response);
+    }
+  };
+};
+
 /**
  * logout user
  * @param cb callback function
