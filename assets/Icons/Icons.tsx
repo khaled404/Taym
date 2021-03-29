@@ -1,5 +1,5 @@
 import React from 'react';
-import Svg, {SvgProps, G, Path, Circle} from 'react-native-svg';
+import Svg, {Circle, G, Path, SvgProps} from 'react-native-svg';
 
 export const LogoIcon = (props?: SvgProps) => (
     <Svg
@@ -154,6 +154,88 @@ export const StatusOrderIcon = (props?: SvgProps) => (
                 d="M2.639 5.277a.369.369 0 01-.262-.108L.109 2.9a.37.37 0 01.524-.524l2.006 2.007L6.913.109a.37.37 0 11.524.524L2.9 5.168a.369.369 0 01-.262.108zm0 0"
             />
         </G>
+    </Svg>
+);
+
+export const CartItemOfferIcon = (props?: SvgProps) => (
+    <Svg
+        width={30}
+        height={37}
+        viewBox="0 0 28.557 37.448"
+        {...props}
+    >
+        <Path
+            data-name="Subtraction 7"
+            d="M.002 37.448V0h28.555v37.445l-14.278-10.3L.002 37.447z"
+            fill="#ff5023"
+        />
+    </Svg>
+);
+export const PlusIcon = (props?: SvgProps) => (
+    <Svg
+        width={7}
+        height={7}
+        viewBox="0 0 5.848 6.211"
+        {...props}
+    >
+        <Path
+            data-name="Path 1451"
+            d="M3.621 2.373h2.223v1.3H3.621v2.538H2.238V3.673H0v-1.3h2.238V0h1.383z"
+            fill="#f9f9f9"
+        />
+    </Svg>
+);
+
+export const MinusIcon = (props?: SvgProps) => (
+    <Svg
+        width={7.066}
+        height={2}
+        viewBox="0 0 7.066 1.646"
+        {...props}
+    >
+        <Path data-name="Path 1439" d="M7.066 0v1.646H0V0z" fill="#f9f9f9"/>
+    </Svg>
+);
+
+export const DeleteIcon = (props?: SvgProps) => (
+    <Svg
+        width={18.675}
+        height={20.507}
+        viewBox="0 0 18.675 20.507"
+        {...props}
+    >
+        <Path
+            data-name="Path 1445"
+            d="M2.917 5.48v-.729a2.188 2.188 0 012.189-2.189H2.917A2.188 2.188 0 00.729 4.75v.729a2.188 2.188 0 002.188 2.188h2.188A2.188 2.188 0 012.917 5.48z"
+            fill="#deb6f1"
+        />
+        <Path
+            data-name="Path 1446"
+            d="M15.757 8.398H2.918A2.921 2.921 0 010 5.48v-.729a2.921 2.921 0 012.918-2.918h12.839a2.921 2.921 0 012.918 2.918v.729a2.921 2.921 0 01-2.918 2.918zM2.918 3.292a1.461 1.461 0 00-1.459 1.459v.729a1.461 1.461 0 001.459 1.459h12.839a1.461 1.461 0 001.459-1.459v-.729a1.461 1.461 0 00-1.459-1.459zm14.663 12.841v-5.546a.73.73 0 00-1.459 0v5.546a2.921 2.921 0 01-2.922 2.916H5.471a2.921 2.921 0 01-2.918-2.916v-5.546a.73.73 0 00-1.459 0v5.546a4.382 4.382 0 004.377 4.377H13.2a4.382 4.382 0 004.381-4.377z"
+            fill="#622a7b"
+        />
+        <Path
+            data-name="Path 1447"
+            d="M11.759 2.727H6.915a1.1 1.1 0 01-1.1-1.101V1.35a1.1 1.1 0 011.1-1.1h4.844a1.1 1.1 0 011.1 1.1v.275a1.1 1.1 0 01-1.1 1.102zM6.915.8a.551.551 0 00-.55.55v.275a.551.551 0 00.55.55h4.844a.551.551 0 00.55-.55V1.35a.551.551 0 00-.55-.55z"
+            fill="#622a7b"
+            stroke="#622a7b"
+            strokeWidth={0.5}
+        />
+        <Path
+            data-name="Path 1448"
+            d="M13.392 12.064H5.283a.73.73 0 110-1.459h8.109a.73.73 0 010 1.459z"
+            fill="#ffde00"
+        />
+        <Path
+            data-name="Path 1449"
+            d="M13.392 14.747H5.283a.73.73 0 110-1.459h8.109a.73.73 0 010 1.459z"
+            fill="#ffde00"
+        />
+        <Path
+            data-name="Path 1450"
+            d="M13.392 17.43H5.283a.73.73 0 110-1.459h8.109a.73.73 0 010 1.459z"
+            fill="#ffde00"
+        />
     </Svg>
 );
 
@@ -379,6 +461,42 @@ export const EyeIcon = (props?: SvgProps) => (
     </Svg>
 );
 
+export const UnCheckedIcon = (props?: SvgProps) => (
+    <Svg
+        width={16}
+        height={16}
+        viewBox="0 0 16 16"
+        {...props}
+    >
+        <G data-name="Ellipse 48" fill="#fff" stroke="#622a7b">
+            <Circle cx={8} cy={8} r={8} stroke="none" />
+            <Circle cx={8} cy={8} r={7.5} fill="none" />
+        </G>
+    </Svg>
+);
+
+export const CheckedIcon = (props?: SvgProps) => (
+    <Svg
+        width={16}
+        height={16}
+        viewBox="0 0 16 16"
+        {...props}
+    >
+        <G data-name="Ellipse 48" fill="#fff" stroke="#622a7b">
+            <Circle cx={8} cy={8} r={8} stroke="none" />
+            <Circle cx={8} cy={8} r={7.5} fill="none" />
+        </G>
+        <Circle
+            data-name="Ellipse 51"
+            cx={5}
+            cy={5}
+            r={5}
+            transform="translate(3 3)"
+            fill="#622a7b"
+        />
+    </Svg>
+);
+
 export const AuthLogo = (props?: SvgProps) => (
     <Svg
         width={135.725}
@@ -558,8 +676,8 @@ export const SuccessIcon = (props?: SvgProps) => (
                 stroke="#ffde00"
                 strokeWidth={10}
             >
-                <Circle cx={58} cy={58} r={58} stroke="none" />
-                <Circle cx={58} cy={58} r={53} />
+                <Circle cx={58} cy={58} r={58} stroke="none"/>
+                <Circle cx={58} cy={58} r={53}/>
             </G>
         </G>
     </Svg>

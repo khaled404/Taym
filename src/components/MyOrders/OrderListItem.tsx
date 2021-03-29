@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {CartOrderIcon, StatusOrderIcon} from "../../../assets/Icons/Icons";
+import {useNavigation} from "@react-navigation/native";
 
 interface IOrderListItem {
     orderId: string;
@@ -27,6 +28,7 @@ const OrderListItem: FC<IOrderListItem> = ({
                                                store,
                                                footerBtnTitle
                                            }) => {
+    const {navigate} = useNavigation();
     return (
         <View
             style={[styles.container]}>
@@ -38,7 +40,8 @@ const OrderListItem: FC<IOrderListItem> = ({
             <View style={[styles.box, styles.orderDetailsBox]}>
                 <CartOrderIcon/>
                 <Text style={styles.orderDetails}>{details}
-                    <TouchableOpacity style={styles.moreBtn}>
+                    <TouchableOpacity style={styles.moreBtn}
+                                      onPress={() => navigate('OrderDetails', {orderId: orderId})}>
                         <Text style={styles.moreBtnText}>{'More Details ...'}</Text>
                     </TouchableOpacity>
                 </Text>
@@ -56,7 +59,7 @@ const OrderListItem: FC<IOrderListItem> = ({
                 justifyContent: !note ? 'flex-end' : 'space-between'
             }]}>
                 {!!note && <Text style={styles.orderNote}>{note}</Text>}
-                <TouchableOpacity style={{}}>
+                <TouchableOpacity style={{}}  onPress={() => navigate('OrderDetails', {orderId: orderId})}>
                     <Text style={styles.trackBtnText}>
                         {footerBtnTitle}
                     </Text>

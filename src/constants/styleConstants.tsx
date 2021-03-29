@@ -43,6 +43,8 @@ export enum Images {
     homeBanner = require('../../assets/images/ttt.jpg'),
     offerSlider = require('../../assets/images/offerimage.jpg'),
     authHeader = require('../../assets/images/authHeader.png'),
+    cartItem = require('../../assets/images/cartItem-1.png'),
+    cartItem1 = require('../../assets/images/cartItem-2.png'),
 }
 
 export enum ScreenOptions {

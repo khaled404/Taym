@@ -106,7 +106,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             Icon={SettingsIcon}
             title={t('Settings')}
             onPress={() => {
-              navigation?.navigate('Home');
+              navigation?.navigate('Settings');
             }}
           />
           <DrawerItem

@@ -16,7 +16,6 @@ export const commonStyles = StyleSheet.create({
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.3,
     shadowRadius: 1,
-    marginBottom: 5,
   },
   minTitle: {
     fontFamily: Fonts.bold,
