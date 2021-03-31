@@ -43,7 +43,7 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
       dispatch(
         SocialLoginHandler(
           userInfo.user.id,
-          userInfo.user.name,
+          userInfo.user.name as any,
           userInfo.user.email,
           'google',
           () => {
