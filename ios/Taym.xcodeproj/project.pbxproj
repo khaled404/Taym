@@ -11,6 +11,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		29C2BC7F26153E97002009BD /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 29C2BC7E26153E97002009BD /* FacebookLogin */; };
+		29F005D12615327E00664905 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F005D02615327E00664905 /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A072D4BDD66A0B0CACDD14E8 /* libPods-Taym-TaymTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 826507BC87E479DB0E71D5EC /* libPods-Taym-TaymTests.a */; };
 		F0159551D851D81E12D388D5 /* libPods-Taym.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7CF0BE2843F96FF7E5C58D /* libPods-Taym.a */; };
@@ -38,6 +40,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Taym/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Taym/main.m; sourceTree = "<group>"; };
 		19022F710D89D2502AABEDC0 /* Pods-Taym-TaymTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taym-TaymTests.release.xcconfig"; path = "Target Support Files/Pods-Taym-TaymTests/Pods-Taym-TaymTests.release.xcconfig"; sourceTree = "<group>"; };
+		29F005D02615327E00664905 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6A7CF0BE2843F96FF7E5C58D /* libPods-Taym.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taym.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Taym/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		826507BC87E479DB0E71D5EC /* libPods-Taym-TaymTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taym-TaymTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C2BC7F26153E97002009BD /* FacebookLogin in Frameworks */,
 				F0159551D851D81E12D388D5 /* libPods-Taym.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +90,7 @@
 		13B07FAE1A68108700A75B9A /* Taym */ = {
 			isa = PBXGroup;
 			children = (
+				29F005D02615327E00664905 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -190,6 +195,9 @@
 			dependencies = (
 			);
 			name = Taym;
+			packageProductDependencies = (
+				29C2BC7E26153E97002009BD /* FacebookLogin */,
+			);
 			productName = Taym;
 			productReference = 13B07F961A680F5B00A75B9A /* Taym.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +228,9 @@
 				Base,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
+			packageReferences = (
+				29C2BC7D26153E97002009BD /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,6 +255,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				29F005D12615327E00664905 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,7 +507,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taym;
 				PRODUCT_NAME = Taym;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -520,7 +532,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.taym;
 				PRODUCT_NAME = Taym;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -681,6 +693,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29C2BC7D26153E97002009BD /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29C2BC7E26153E97002009BD /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C2BC7D26153E97002009BD /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
