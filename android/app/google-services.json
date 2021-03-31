@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226921527475",
+    "project_id": "taym-app",
+    "storage_bucket": "taym-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226921527475:android:06480b227cac08368898c6",
+        "android_client_info": {
+          "package_name": "com.taym"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226921527475-o64c9cief53ebakhnkcdl45nmi90tlot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBITXu2-R64qnxBqfeEQN-wuA_rz5bwALU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226921527475-o64c9cief53ebakhnkcdl45nmi90tlot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -35,6 +35,7 @@ export const RegisterHandler = (
         type: ActionType.SAVE_USER_DATA_STEP_1,
         payload: data,
       });
+      await saveItem(AsyncKeys.USER_DATA, data);
       console.log(data);
       cb(true);
     } catch (error) {
@@ -144,7 +145,7 @@ export const LoginHandler = (
         type: ActionType.SAVE_LOGIN_DATA,
         payload: data.user,
       });
-
+      await saveItem(AsyncKeys.USER_DATA, data.user);
       cb(true);
     } catch (error) {
       cb(false);
@@ -153,6 +154,49 @@ export const LoginHandler = (
         payload: error?.response.data.message,
       });
       console.log(error?.response);
+    }
+  };
+};
+/**
+ * login user with social media apis
+ * @param social_id Social user id
+ * @param name user name
+ * @param email user email
+ * @param type Social type  facebook | google
+ * @param cb callback function with success is true or false
+ */
+export const SocialLoginHandler = (
+  social_id: string,
+  name: string,
+  email: string,
+  type: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('guest/social-register', {
+        email: email,
+        social_id: social_id,
+        name: name,
+        type: type,
+      });
+      showMessage({
+        message: data.message,
+        type: 'success',
+      });
+      dispatch({
+        type: ActionType.SAVE_LOGIN_DATA,
+        payload: data.user,
+      });
+      await saveItem(AsyncKeys.USER_DATA, data.user);
+      cb && cb();
+    } catch (error) {
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+
+      console.log(error.response);
     }
   };
 };
