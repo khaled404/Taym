@@ -22,3 +22,13 @@ axiosAPI.interceptors.request.use(
   },
   error => Promise.reject(error),
 );
+
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBITXu2-R64qnxBqfeEQN-wuA_rz5bwALU',
+  // authDomain: 'your-auth-domain-b1234.firebaseapp.com',
+  databaseURL: 'https://taym-app.firebaseio.com',
+  projectId: 'taym-app',
+  storageBucket: 'taym-app.appspot.com',
+  messagingSenderId: '12345-insert-yourse',
+  appId: '1:226921527475:ios:06480b227cac08368898c6',
+};

@@ -18,6 +18,9 @@ export const OrderDetails = register({loader: () => import('./OrderDetails')});
 export const Settings = register({loader: () => import('./Settings')});
 export const MyAddresses = register({loader: () => import('./MyAddresses')});
 export const AddLocation = register({loader: () => import('./AddLocation')});
-export const AddressLocation = register({loader: () => import('./AddressLocation')});
-
-
+export const AddressLocation = register({
+  loader: () => import('./AddressLocation'),
+});
+export const ForgetPhoneCode = register({
+  loader: () => import('./auth/ForgetPhoneCode'),
+});

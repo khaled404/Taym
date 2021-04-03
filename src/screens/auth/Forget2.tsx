@@ -7,14 +7,38 @@ import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {NewPasswordHandler} from '../../store/actions/auth';
 
 const Forget2: FC = () => {
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-
+  const [state, setstate] = useState({
+    confirmPassword: '',
+    password: '',
+    secureTextEntry: true,
+  });
   const {t} = useTranslation();
   const {navigate} = useNavigation();
+  const {phoneNumber}: any = useSelector(
+    (state: RootState) => state.auth,
+    shallowEqual,
+  );
+  const dispatch = useDispatch();
+  const submitHandler = () => {
+    setstate(old => ({...old, loader: true}));
+    dispatch(
+      NewPasswordHandler(
+        phoneNumber,
+        state.password,
+        state.confirmPassword,
+        success => {
+          setstate(old => ({...old, loader: false}));
+          success && navigate('Forget3');
+        },
+      ),
+    );
+  };
+
   return (
     <Container style={styles.container}>
       <AuthHeader />
@@ -34,10 +58,13 @@ const Forget2: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setPassword(value);
+                  setstate(old => ({
+                    ...old,
+                    password: value,
+                  }));
                 },
-                value: password,
-                secureTextEntry: secureTextEntry,
+                value: state.password,
+                secureTextEntry: state.secureTextEntry,
               }}
             />
           </View>
@@ -49,10 +76,13 @@ const Forget2: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setConfirmPassword(value);
+                  setstate(old => ({
+                    ...old,
+                    confirmPassword: value,
+                  }));
                 },
-                value: confirmPassword,
-                secureTextEntry: secureTextEntry,
+                value: state.confirmPassword,
+                secureTextEntry: state.secureTextEntry,
               }}
             />
           </View>

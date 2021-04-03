@@ -3,8 +3,9 @@ import {StyleSheet, TextInput, View, Keyboard} from 'react-native';
 import {Colors, Fonts} from '../../constants/styleConstants';
 interface ICodeInput {
   onChangeText?: (text: string) => void;
+  numOfInputs?: number;
 }
-const CodeInput: FC<ICodeInput> = ({onChangeText}) => {
+const CodeInput: FC<ICodeInput> = ({onChangeText, numOfInputs = 4}) => {
   const [state, setstate] = useState<any>({
     inputRefs: {} as any,
     inputValues: {} as any,
@@ -36,7 +37,7 @@ const CodeInput: FC<ICodeInput> = ({onChangeText}) => {
   //onChangeText
   return (
     <View style={styles.container}>
-      {[...Array(4).keys()].map(index => (
+      {[...Array(numOfInputs).keys()].map(index => (
         <View style={styles.textInpuContainer} key={index}>
           <TextInput
             style={[

@@ -8,14 +8,8 @@
  * @format
  */
 
-import React, {FC} from 'react';
-import {
-  StatusBar,
-  I18nManager,
-  Dimensions,
-  View,
-  StyleSheet,
-} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {StatusBar, I18nManager, View, StyleSheet, Platform} from 'react-native';
 import i18n from 'i18next';
 import {initReactI18next, useTranslation} from 'react-i18next';
 import FlashMessage from 'react-native-flash-message';
@@ -23,6 +17,10 @@ import ar from './src/localization/ar';
 import en from './src/localization/en';
 import {Colors, Fonts, ScreenOptions} from './src/constants/styleConstants';
 import AppInitializer from './src/screens/AppInitializer';
+import messaging, {firebase} from '@react-native-firebase/messaging';
+import {firebaseConfig} from './src/constants/Config';
+import {AsyncKeys, saveItem} from './src/constants/helpers';
+
 const {isRTL} = I18nManager;
 
 i18n.use(initReactI18next).init({
@@ -41,6 +39,38 @@ i18n.use(initReactI18next).init({
   },
 });
 const App: FC = () => {
+  const requestUserPermission = async () => {
+    try {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      const token = await messaging().getToken();
+      await saveItem(AsyncKeys.NOTFICTION_TOKEN, token);
+
+      if (enabled) {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app(); // if already initialized, use that one
+      }
+    }
+    requestUserPermission();
+    messaging()
+      .getInitialNotification()
+      .then(async (remoteMessage: any) => {
+        if (remoteMessage) {
+          console.log(remoteMessage);
+        }
+      });
+  }, []);
   return (
     <>
       <View

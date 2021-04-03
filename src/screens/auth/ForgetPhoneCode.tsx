@@ -3,62 +3,61 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
-import {useDispatch} from 'react-redux';
-import {ForgetHandler} from '../../store/actions/auth';
+import CodeInput from '../../components/textInputs/CodeInput';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {VerifyPhoneForgetHandler} from '../../store/actions/auth';
 
-const Forget: FC = () => {
+const ForgetPhoneCode: FC = () => {
   const [state, setstate] = useState({
-    phone: '',
+    code: '',
     loader: false,
   });
+
   const dispatch = useDispatch();
+  const {phoneNumber}: any = useSelector(
+    (state: RootState) => state.auth,
+    shallowEqual,
+  );
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
-      ForgetHandler(state.phone, success => {
+      VerifyPhoneForgetHandler(state.code, success => {
         setstate(old => ({...old, loader: false}));
-        success && navigate('ForgetPhoneCode');
+        success && navigate('Forget2');
       }),
     );
   };
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
   return (
     <Container style={styles.container}>
       <AuthHeader />
       <Content noPadding style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
-          <Text style={styles.mainTitle}>
-            {t('Enter Email / Mobile Number ')}
-          </Text>
           <Text style={styles.sectionTitle}>
-            {t("And We'll Send You The Instructions")}
+            {t('Enter the 4-digit code sent to number')}
           </Text>
+          <Text style={styles.sectionTitle}>{phoneNumber}</Text>
         </View>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Mobile Nember</Text>
-            <Input
-              textInputContainer={styles.textInput}
-              contentContainerStyle={styles.contentContainerStyle}
-              options={{
-                onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    phone: value,
-                  }));
-                },
-                value: state.phone,
-                onSubmitEditing: submitHandler,
+            <CodeInput
+              onChangeText={text => {
+                setstate(old => ({...old, code: text}));
               }}
+              numOfInputs={6}
             />
           </View>
           <View style={styles.submitContainer}>
-            <Button title={t('Next')} onPress={submitHandler} />
+            <Button
+              title={t('Verify And Proceed')}
+              onPress={submitHandler}
+              loader={state.loader}
+            />
           </View>
         </View>
       </Content>
@@ -118,8 +117,9 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: Fonts.medium,
     color: '#4D4D4D',
-    marginLeft: 10,
+    fontSize: Pixel(28),
+    textAlign: 'center',
   },
 });
 
-export default Forget;
+export default ForgetPhoneCode;

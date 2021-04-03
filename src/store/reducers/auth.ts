@@ -7,6 +7,7 @@ const initialState = {
   registerErorrs: {},
   loginErorrs: {},
   forgetPasswordErorrs: {},
+  phoneNumber: '',
 };
 export default (state = initialState, {type, payload}: IReduser) => {
   switch (type) {
@@ -44,6 +45,8 @@ export default (state = initialState, {type, payload}: IReduser) => {
       return {...state, loginErorrs: payload};
     case ActionType.SAVE_FORGET_PASSWORD_ERORRS:
       return {...state, forgetPasswordErorrs: payload};
+    case ActionType.SAVE_PHONE:
+      return {...state, phoneNumber: payload};
   }
   return state;
 };

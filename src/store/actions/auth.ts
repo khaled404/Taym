@@ -157,6 +157,114 @@ export const LoginHandler = (
     }
   };
 };
+
+/**
+ * Forget password step 1
+ * @param phone user phone
+ * @param cb callback function with success is true or false
+ */
+export const ForgetHandler = (
+  phone: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('guest/forget-password-code', {
+        phone,
+      });
+      console.log(data);
+      showMessage({
+        message: data.success.message,
+        type: 'success',
+      });
+      dispatch({
+        type: ActionType.SAVE_PHONE,
+        payload: phone,
+      });
+      await saveItem(AsyncKeys.USER_DATA, data.user);
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+
+      console.log(error?.response);
+    }
+  };
+};
+
+/**
+ * Forget password step 2
+ * @param code otp code
+ * @param cb callback function with success is true or false
+ */
+export const VerifyPhoneForgetHandler = (
+  code: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/confirm-forget-password-code', {
+        code,
+      });
+      console.log(data);
+      showMessage({
+        message: data.message,
+        type: 'success',
+      });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message.code[0],
+        type: 'danger',
+      });
+      console.log(error?.response);
+    }
+  };
+};
+
+/**
+ * Forget password step 3
+ * @param phone user phone
+ * @param password
+ * @param password_confirmation
+ * @param cb callback function with success is true or false
+ */
+export const NewPasswordHandler = (
+  phone: string,
+  password: string,
+  password_confirmation: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/forget-password-new-password', {
+        phone,
+        password,
+        password_confirmation,
+      });
+      console.log(data);
+      showMessage({
+        message: data.message,
+        type: 'success',
+      });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message.code[0],
+        type: 'danger',
+      });
+      console.log(error?.response);
+    }
+  };
+};
+
 /**
  * login user with social media apis
  * @param social_id Social user id

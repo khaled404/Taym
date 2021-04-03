@@ -10,6 +10,7 @@ export enum AsyncKeys {
   IS_LOGIN = 'IS_LOGIN',
   USER_DATA = 'USER_DATA',
   PHONE_NUMBER = 'PHONE_NUMBER',
+  NOTFICTION_TOKEN = 'NOTFICTION_TOKEN',
 }
 /**
  * save reduser keys on Async Storage

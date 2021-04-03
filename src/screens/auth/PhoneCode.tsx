@@ -12,7 +12,6 @@ import {RootState} from '../../store/store';
 import {VerifyPhoneCodeHandler} from '../../store/actions/auth';
 
 const PhoneCode: FC = () => {
-  const [code, setCode] = useState('');
   const [state, setstate] = useState({
     code: '',
     loader: false,
@@ -25,7 +24,6 @@ const PhoneCode: FC = () => {
   );
   const {t} = useTranslation();
   const {navigate} = useNavigation();
-  console.log(code);
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
