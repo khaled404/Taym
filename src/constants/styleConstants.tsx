@@ -1,6 +1,5 @@
-import {Dimensions, I18nManager, NativeModules} from 'react-native';
+import {Dimensions, NativeModules} from 'react-native';
 
-const {isRTL} = I18nManager;
 const {width, height} = Dimensions.get('screen');
 
 export enum Colors {
@@ -28,12 +27,12 @@ export enum Colors {
 }
 
 export enum Fonts {
-    medium = !isRTL ? 'Roboto-Medium' : 'Tajawal-Medium',
-    regular = !isRTL ? 'Roboto-Regular' : 'Tajawal-Regular',
-    black = !isRTL ? 'Roboto-Black' : 'Tajawal-Black',
-    bold = !isRTL ? 'Roboto-Bold' : 'Tajawal-Bold',
-    extraLight = !isRTL ? 'Roboto-Thin' : 'Tajawal-ExtraLight',
-    light = !isRTL ? 'Roboto-Light' : 'Tajawal-Light',
+    medium = 'Roboto-Medium',
+    regular = 'Roboto-Regular',
+    black = 'Roboto-Black',
+    bold = 'Roboto-Bold',
+    extraLight = 'Roboto-Thin',
+    light = 'Roboto-Light',
 }
 
 export enum Images {
@@ -46,6 +45,7 @@ export enum Images {
     authHeader = require('../../assets/images/authHeader.png'),
     cartItem = require('../../assets/images/cartItem-1.png'),
     cartItem1 = require('../../assets/images/cartItem-2.png'),
+    storelogo1 = require('../../assets/images/storelogo-2.png'),
 }
 
 export enum ScreenOptions {

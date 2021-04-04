@@ -10,6 +10,7 @@ import FavoriteList from '../components/Home/FavoriteList';
 import {useDispatch, useSelector} from "react-redux";
 import {toggleLangSwitcher} from "../store/actions/settings";
 import {RootState} from "../store/store";
+import {useNavigation} from "@react-navigation/native";
 
 
 const categoryHomeData = [
@@ -81,10 +82,10 @@ const Home: FC = () => {
     const handleChangeLang = () => {
         dispatch(toggleLangSwitcher(true));
     }
-
+    const {navigate} = useNavigation();
     return (
         <Container style={styles.container}>
-            <HomeHeader title="Home"/>
+            <HomeHeader navigate={navigate} title="Home"/>
             <Content noPadding>
                 <View>
                     <TouchableOpacity style={{paddingVertical: 20, paddingHorizontal: 40}} onPress={handleChangeLang}>

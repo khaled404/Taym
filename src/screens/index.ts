@@ -25,3 +25,8 @@ export const AddressLocation = register({
 export const ForgetPhoneCode = register({
   loader: () => import('./auth/ForgetPhoneCode'),
 });
+export const Category = register({loader: () => import('./Category')});
+export const Cart = register({loader: () => import('./Cart/Cart')});
+export const CartDetails = register({loader: () => import('./Cart/CartDetails')});
+export const CartAddress = register({loader: () => import('./Cart/CartAddress')});
+export const CartCheckout = register({loader: () => import('./Cart/CartCheckout')});

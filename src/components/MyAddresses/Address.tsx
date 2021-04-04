@@ -14,6 +14,7 @@ interface IAddress {
     phone: string;
     onPress: () => void;
     selected: boolean,
+    inCart?: boolean,
 }
 
 const Address: FC<IAddress> = ({
@@ -22,7 +23,8 @@ const Address: FC<IAddress> = ({
                                    address,
                                    phone,
                                    onPress,
-                                   selected
+                                   selected,
+                                   inCart
                                }) => {
     const {t} = useTranslation();
     const {navigate} = useNavigation();
@@ -30,7 +32,7 @@ const Address: FC<IAddress> = ({
     const EditBtn = () => {
         return (
             <IconTouchableContainer
-                style={{marginBottom:5}}
+                style={{marginBottom: 5}}
                 onPress={() => navigate('EditAddress')}>
                 <InputEditIcon/>
             </IconTouchableContainer>
@@ -41,7 +43,7 @@ const Address: FC<IAddress> = ({
     const DeleteBtn = () => {
         return (
             <IconTouchableContainer
-                style={{marginTop:5}}
+                style={{marginTop: 5}}
                 onPress={() => {
                     console.log('Delete Address!')
                 }}>
@@ -63,8 +65,11 @@ const Address: FC<IAddress> = ({
                 </View>
             </View>
             <View style={styles.actionsContainer}>
-                <EditBtn/>
-                <DeleteBtn/>
+                {!inCart &&
+                <>
+                    <EditBtn/>
+                    <DeleteBtn/>
+                </>}
             </View>
         </TouchableOpacity>
     );
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: Colors.white,
     },
-    detailsContainer:{
+    detailsContainer: {
         paddingVertical: Pixel(37),
     },
     checkBtn: {
@@ -98,16 +103,16 @@ const styles = StyleSheet.create({
     addressTitle: {
         fontFamily: Fonts.bold,
         fontSize: Pixel(33),
-        marginLeft:Pixel(25),
+        marginLeft: Pixel(25),
     },
     address: {
         fontFamily: Fonts.medium,
         fontSize: Pixel(25),
         color: '#4D4D4D',
-        marginBottom:Pixel(5),
+        marginBottom: Pixel(5),
     },
-    actionsContainer:{
-        justifyContent:"space-between",
+    actionsContainer: {
+        justifyContent: "space-between",
     }
 
 });
