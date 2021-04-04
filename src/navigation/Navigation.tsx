@@ -2,16 +2,18 @@ import React, {FC, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {
     AddLocation,
     AddressLocation,
+    Cart,
+    Category,
     CompleteRegister,
     Favorite,
     Forget,
     Forget2,
     Forget3,
-    ForgetPhoneCode,
-    Home, Language,
+    Home,
     Login,
     MyAddresses,
     MyOrders,
@@ -103,14 +105,16 @@ const navigationSlideToTop = {
     },
 };
 
+
 const Stacks: FC<any> = ({style}) => {
     const {isLogin} = useSelector((state: RootState) => state.auth);
     return (
         <Animated.View style={[styles.stacksStyles, style]}>
+
             <Stack.Navigator
                 screenOptions={{headerShown: false, ...navigationTransition} as any}
-                initialRouteName={isLogin ? 'Language' : 'Language'}>
-                <Stack.Screen name="Language" component={Language}/>
+                initialRouteName={isLogin ? 'Home' : 'Login'}>
+                {/*initialRouteName={'Cart'}>*/}
                 <Stack.Screen name="Home" component={Home}/>
                 <Stack.Screen name="Voucher" component={Voucher}/>
                 <Stack.Screen name="MyOrders" component={MyOrders}/>
@@ -127,10 +131,13 @@ const Stacks: FC<any> = ({style}) => {
                 <Stack.Screen name="Settings" component={Settings}/>
                 <Stack.Screen name="MyAddresses" component={MyAddresses}/>
                 <Stack.Screen name="AddLocation" component={AddLocation}/>
-                <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode}/>
                 <Stack.Screen name="AddressLocation" component={AddressLocation}/>
+                <Stack.Screen name="Category" component={Category}/>
+                <Stack.Screen name="Cart" component={Cart}/>
             </Stack.Navigator>
+
         </Animated.View>
+
     );
 };
 

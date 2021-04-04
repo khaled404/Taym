@@ -6,6 +6,7 @@ import {NavigationProps} from '../../constants/interfaces';
 import {
     ArrowHeaderIcon,
     CartIcon,
+    HeaderSearchIcon,
     LogoIcon,
     MenuIcon,
     NotificationIcon,
@@ -14,12 +15,13 @@ import {
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useTranslation} from 'react-i18next';
 import Input from '../textInputs/Input';
-import {useNavigation} from "@react-navigation/native";
 
-interface IHeader {
+interface ICategoryHeader {
     title: string;
     containerStyle?: StyleProp<ViewStyle>;
     titleStyle?: StyleProp<TextStyle>;
+    toggleHeader: Boolean;
+    handleToggleHeader: () => void;
 }
 
 const SearchSubmitBtn: FC = () => {
@@ -30,51 +32,76 @@ const SearchSubmitBtn: FC = () => {
     );
 };
 
-const HomeHeader: FC<NavigationProps & IHeader> = ({
-                                                       navigate,
-                                                       goBack,
-                                                       name,
-                                                       title,
-                                                       containerStyle,
-                                                       titleStyle,
-                                                   }) => {
+const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
+                                                                   navigate,
+                                                                   goBack,
+                                                                   name,
+                                                                   title,
+                                                                   containerStyle,
+                                                                   titleStyle,
+                                                                   toggleHeader,
+                                                                   handleToggleHeader,
+                                                               }) => {
     const {t} = useTranslation();
+
     return (
         <View style={[styles.mainContainer, containerStyle]}>
             <View style={[styles.rowConatiner]}>
                 <View style={styles.right}>
-                    <View style={styles.titleConatiner}>
+                    {!toggleHeader && (<View style={styles.titleConatiner}>
                         <LogoIcon width={56} height={30}/>
-                    </View>
+                    </View>)}
                     <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
                         <MenuIcon/>
                     </IconTouchableContainer>
                 </View>
 
                 <View style={styles.centerContainer}>
-                    <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
-                    <TouchableOpacity
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                        }}>
-                        <Text style={styles.addressText}>Alexandria - Miami</Text>
-                        <ArrowHeaderIcon/>
-                    </TouchableOpacity>
+                    {!toggleHeader && (
+                        <>
+                            <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
+                            <TouchableOpacity
+                                style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                }}>
+                                <Text style={styles.addressText}>Alexandria - Miami</Text>
+                                <ArrowHeaderIcon/>
+                            </TouchableOpacity>
+                        </>
+                    )}
+                    {toggleHeader && (
+                        <View style={[styles.titleConatiner, {marginLeft: 0}]}>
+                            <Text
+                                style={[styles.title, titleStyle]}
+                                ellipsizeMode="tail"
+                                numberOfLines={1}>
+                                {title ? title : ''}
+                            </Text>
+                        </View>
+                    )}
                 </View>
 
                 <View style={styles.leftContainer}>
-                    <IconTouchableContainer onPress={() => navigate('Cart')}>
-                        <CartIcon/>
-                    </IconTouchableContainer>
+
+                    {!toggleHeader ? (
+                        <IconTouchableContainer onPress={() => navigate('Cart')}>
+                            <CartIcon/>
+                        </IconTouchableContainer>
+                    ) : (
+                        <IconTouchableContainer onPress={handleToggleHeader}>
+                            <HeaderSearchIcon/>
+                        </IconTouchableContainer>
+                    )}
+
                     <IconTouchableContainer>
                         <NotificationIcon/>
                     </IconTouchableContainer>
                 </View>
             </View>
 
-            <View style={styles.searchInputContainer}>
+            {!toggleHeader && (<View style={styles.searchInputContainer}>
                 <Input
                     options={{
                         placeholder: t('What You Are Looking For ?'),
@@ -84,12 +111,12 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
                     rightContent={() => <SearchSubmitBtn/>}
                     iconRightStyle={{top: 5}}
                 />
-            </View>
+            </View>)}
+
         </View>
     );
-};
+}
 
-export default HomeHeader;
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -101,7 +128,7 @@ const styles = StyleSheet.create({
                 : 64 + ScreenOptions.StatusBarHeight,
         paddingHorizontal: 15,
         zIndex: 200,
-        paddingBottom: Pixel(30),
+        // paddingBottom: Pixel(30),
     },
     rowConatiner: {
         ...commonStyles.rowBox,
@@ -176,3 +203,5 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
 });
+
+export default CategoryHeader;
