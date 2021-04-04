@@ -19,4 +19,7 @@ const AppInitializer: FC = () => {
   }
 };
 
+
+
+
 export default AppInitializer;
