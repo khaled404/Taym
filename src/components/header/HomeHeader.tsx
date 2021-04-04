@@ -73,6 +73,9 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
                     </IconTouchableContainer>
                 </View>
             </View>
+
+
+            
             <View style={styles.searchInputContainer}>
                 <Input
                     options={{
