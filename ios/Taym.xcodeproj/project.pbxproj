@@ -16,6 +16,19 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A072D4BDD66A0B0CACDD14E8 /* libPods-Taym-TaymTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 826507BC87E479DB0E71D5EC /* libPods-Taym-TaymTests.a */; };
 		F0159551D851D81E12D388D5 /* libPods-Taym.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A7CF0BE2843F96FF7E5C58D /* libPods-Taym.a */; };
+		1E25CCA883AD48919E0E75E8 /* Cairo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A31768CE6184620B7A489D3 /* Cairo-Black.ttf */; };
+		9FC78D1304D148E5B19121C1 /* Cairo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53551CA05354420C8B09F7C2 /* Cairo-Bold.ttf */; };
+		F8658EB23A0E4166995FC24A /* Cairo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEC1B3FEF8D54DCDA37877A6 /* Cairo-ExtraLight.ttf */; };
+		141D1B8CAC20418C848F25AD /* Cairo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51B87C6DBB7B49C6A8699523 /* Cairo-Light.ttf */; };
+		8DF69F85AFD24270BCA69499 /* Cairo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9B273B5AC204243B8480451 /* Cairo-Regular.ttf */; };
+		DDD5AE29C29D463293640E0A /* Cairo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFAB5B4C6F42BBB2D704E8 /* Cairo-SemiBold.ttf */; };
+		FECAF7F4FF804AB9AAF3DD7E /* Tajawal-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C010EC1675D47FC832FF3F3 /* Tajawal-Black.ttf */; };
+		ECCB71B6283E4330A6551A56 /* Tajawal-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1BC34B1606047A19DC1514A /* Tajawal-Bold.ttf */; };
+		5750A3B7D653459184D6EE93 /* Tajawal-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E58563AE29E4D11A44A43C1 /* Tajawal-ExtraBold.ttf */; };
+		228C3972B7DC48E4BB3458EB /* Tajawal-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F7D4CB08C9440089CB70629 /* Tajawal-ExtraLight.ttf */; };
+		433955D661BD463BA6707274 /* Tajawal-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D90027DFC7984F568A32C4F8 /* Tajawal-Light.ttf */; };
+		B1899BF17E3144CE97439E44 /* Tajawal-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA3A52B4BFBA46C7A3CDF79F /* Tajawal-Medium.ttf */; };
+		2A44B22AE90241E594EE4566 /* Tajawal-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE896E6831484DE496F88BD9 /* Tajawal-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +60,19 @@
 		BF844F8654080DFDBCD6850F /* Pods-Taym.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taym.release.xcconfig"; path = "Target Support Files/Pods-Taym/Pods-Taym.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FDE0FD0848A68D2259B4C9F7 /* Pods-Taym.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Taym.debug.xcconfig"; path = "Target Support Files/Pods-Taym/Pods-Taym.debug.xcconfig"; sourceTree = "<group>"; };
+		9A31768CE6184620B7A489D3 /* Cairo-Black.ttf */ = {isa = PBXFileReference; name = "Cairo-Black.ttf"; path = "../assets/fonts/Cairo-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		53551CA05354420C8B09F7C2 /* Cairo-Bold.ttf */ = {isa = PBXFileReference; name = "Cairo-Bold.ttf"; path = "../assets/fonts/Cairo-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FEC1B3FEF8D54DCDA37877A6 /* Cairo-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Cairo-ExtraLight.ttf"; path = "../assets/fonts/Cairo-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		51B87C6DBB7B49C6A8699523 /* Cairo-Light.ttf */ = {isa = PBXFileReference; name = "Cairo-Light.ttf"; path = "../assets/fonts/Cairo-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9B273B5AC204243B8480451 /* Cairo-Regular.ttf */ = {isa = PBXFileReference; name = "Cairo-Regular.ttf"; path = "../assets/fonts/Cairo-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		03FFAB5B4C6F42BBB2D704E8 /* Cairo-SemiBold.ttf */ = {isa = PBXFileReference; name = "Cairo-SemiBold.ttf"; path = "../assets/fonts/Cairo-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C010EC1675D47FC832FF3F3 /* Tajawal-Black.ttf */ = {isa = PBXFileReference; name = "Tajawal-Black.ttf"; path = "../assets/fonts/Tajawal-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F1BC34B1606047A19DC1514A /* Tajawal-Bold.ttf */ = {isa = PBXFileReference; name = "Tajawal-Bold.ttf"; path = "../assets/fonts/Tajawal-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3E58563AE29E4D11A44A43C1 /* Tajawal-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Tajawal-ExtraBold.ttf"; path = "../assets/fonts/Tajawal-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F7D4CB08C9440089CB70629 /* Tajawal-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Tajawal-ExtraLight.ttf"; path = "../assets/fonts/Tajawal-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D90027DFC7984F568A32C4F8 /* Tajawal-Light.ttf */ = {isa = PBXFileReference; name = "Tajawal-Light.ttf"; path = "../assets/fonts/Tajawal-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FA3A52B4BFBA46C7A3CDF79F /* Tajawal-Medium.ttf */ = {isa = PBXFileReference; name = "Tajawal-Medium.ttf"; path = "../assets/fonts/Tajawal-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EE896E6831484DE496F88BD9 /* Tajawal-Regular.ttf */ = {isa = PBXFileReference; name = "Tajawal-Regular.ttf"; path = "../assets/fonts/Tajawal-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +153,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				FB9E97D67F74A85AC855BC15 /* Pods */,
+				DE742C873AEC41FD9A93B7A9 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -152,6 +179,27 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		DE742C873AEC41FD9A93B7A9 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				9A31768CE6184620B7A489D3 /* Cairo-Black.ttf */,
+				53551CA05354420C8B09F7C2 /* Cairo-Bold.ttf */,
+				FEC1B3FEF8D54DCDA37877A6 /* Cairo-ExtraLight.ttf */,
+				51B87C6DBB7B49C6A8699523 /* Cairo-Light.ttf */,
+				F9B273B5AC204243B8480451 /* Cairo-Regular.ttf */,
+				03FFAB5B4C6F42BBB2D704E8 /* Cairo-SemiBold.ttf */,
+				6C010EC1675D47FC832FF3F3 /* Tajawal-Black.ttf */,
+				F1BC34B1606047A19DC1514A /* Tajawal-Bold.ttf */,
+				3E58563AE29E4D11A44A43C1 /* Tajawal-ExtraBold.ttf */,
+				3F7D4CB08C9440089CB70629 /* Tajawal-ExtraLight.ttf */,
+				D90027DFC7984F568A32C4F8 /* Tajawal-Light.ttf */,
+				FA3A52B4BFBA46C7A3CDF79F /* Tajawal-Medium.ttf */,
+				EE896E6831484DE496F88BD9 /* Tajawal-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -256,6 +304,19 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				29F005D12615327E00664905 /* GoogleService-Info.plist in Resources */,
+				1E25CCA883AD48919E0E75E8 /* Cairo-Black.ttf in Resources */,
+				9FC78D1304D148E5B19121C1 /* Cairo-Bold.ttf in Resources */,
+				F8658EB23A0E4166995FC24A /* Cairo-ExtraLight.ttf in Resources */,
+				141D1B8CAC20418C848F25AD /* Cairo-Light.ttf in Resources */,
+				8DF69F85AFD24270BCA69499 /* Cairo-Regular.ttf in Resources */,
+				DDD5AE29C29D463293640E0A /* Cairo-SemiBold.ttf in Resources */,
+				FECAF7F4FF804AB9AAF3DD7E /* Tajawal-Black.ttf in Resources */,
+				ECCB71B6283E4330A6551A56 /* Tajawal-Bold.ttf in Resources */,
+				5750A3B7D653459184D6EE93 /* Tajawal-ExtraBold.ttf in Resources */,
+				228C3972B7DC48E4BB3458EB /* Tajawal-ExtraLight.ttf in Resources */,
+				433955D661BD463BA6707274 /* Tajawal-Light.ttf in Resources */,
+				B1899BF17E3144CE97439E44 /* Tajawal-Medium.ttf in Resources */,
+				2A44B22AE90241E594EE4566 /* Tajawal-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
