@@ -1,5 +1,6 @@
-import {Dimensions, NativeModules} from 'react-native';
+import {Dimensions, I18nManager, NativeModules} from 'react-native';
 
+const {isRTL} = I18nManager;
 const {width, height} = Dimensions.get('screen');
 
 export enum Colors {
@@ -27,12 +28,12 @@ export enum Colors {
 }
 
 export enum Fonts {
-    medium = 'Roboto-Medium',
-    regular = 'Roboto-Regular',
-    black = 'Roboto-Black',
-    bold = 'Roboto-Bold',
-    extraLight = 'Roboto-Thin',
-    light = 'Roboto-Light',
+    medium = !isRTL ? 'Roboto-Medium' : 'Tajawal-Medium',
+    regular = !isRTL ? 'Roboto-Regular' : 'Tajawal-Regular',
+    black = !isRTL ? 'Roboto-Black' : 'Tajawal-Black',
+    bold = !isRTL ? 'Roboto-Bold' : 'Tajawal-Bold',
+    extraLight = !isRTL ? 'Roboto-Thin' : 'Tajawal-ExtraLight',
+    light = !isRTL ? 'Roboto-Light' : 'Tajawal-Light',
 }
 
 export enum Images {
