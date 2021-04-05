@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
+import React, { FC } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { commonStyles } from '../../styles/styles';
 interface IBalance {
   value: string;
   date: string;
 }
-const Balance: FC<IBalance> = ({date, value}) => {
+const Balance: FC<IBalance> = ({ date, value }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Balance</Text>
