@@ -14,6 +14,7 @@ export default {
     'Forgot Password?': 'نسيت كلمة المرور ؟',
     'Your Identity Has Been Verified': 'لقد تم تأكيد هويتك',
     Profile: 'حسابي',
+    Notifications: 'الاشعارات',
     "Or Sign In With": 'أو سجل دخول عن طريق',
     "Skip >>": "تخطي >>",
     "Don't Have An Account ?": 'ليس لدي حساب !',
@@ -104,6 +105,8 @@ export default {
     'My Addresses': 'العنوان',
     'Notification': 'الاشعارات',
     'Birth Date': 'تاريخ الميلاد',
+    'Banana Item Is unfortunately Out Of Stock And We Suggest You Another Items Please Check It': 'للأسف لقد نفذ طلبك ( الموز ) لدينا و لكن نقترح عليك منتج اخر ك بديل ألقي عليه نظره',
+    'Fresh Market Order 1247': 'فريش ماركت طلب 12478 اليوم 2:30',
     'Miami st.12 - Building 20 , Alexandria , Egypt': 'ميامي شارع 12 - عمارة رقم 20 , الاسكندريه , مصر',
 
 };
