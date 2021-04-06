@@ -68,7 +68,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
                     <IconTouchableContainer onPress={() => navigate('Cart')}>
                         <CartIcon/>
                     </IconTouchableContainer>
-                    <IconTouchableContainer>
+                    <IconTouchableContainer onPress={() => navigate('Notifications')}>
                         <NotificationIcon/>
                     </IconTouchableContainer>
                 </View>

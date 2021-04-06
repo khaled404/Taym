@@ -24,7 +24,7 @@ const CategoryItem: FC<ICategoryItem> = ({title, image, index}) => {
   }, []);
 
   return (
-    <TouchableOpacity style={{width: categoryWidth, marginBottom: 5}}>
+    <TouchableOpacity activeOpacity={0.7} style={{width: categoryWidth, marginBottom: 5}}>
       <View
         style={[
           styles.imageContainer,
