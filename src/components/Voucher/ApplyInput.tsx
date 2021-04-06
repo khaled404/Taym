@@ -1,33 +1,30 @@
-import React, {FC} from 'react';
-import {useTranslation} from 'react-i18next';
-import {StyleProp, StyleSheet, Text, TextInputProps, View, ViewStyle} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, View, TextInputProps } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { commonStyles } from '../../styles/styles';
 import Touchable from '../touchables/Touchable';
 
 interface IApplyInput {
-    contentContainerStyle?: StyleProp<ViewStyle>;
-    textInputContainer?: StyleProp<ViewStyle>;
+    onPress?: () => void;
     options?: TextInputProps & { ref?: (ref: any) => void };
 }
 
-const ApplyInput: FC<IApplyInput> = (
-    {contentContainerStyle,
-        textInputContainer,
-        options}) => {
-    const {t} = useTranslation();
+
+const ApplyInput: FC<IApplyInput> = ({ onPress, options }) => {
+    const { t } = useTranslation();
     return (
-        <View style={[styles.container, contentContainerStyle]}>
+        <View style={styles.container}>
             <View style={styles.inputContainer}>
                 <TextInput
-                    style={[styles.textInput, textInputContainer]}
+                    style={styles.textInput}
                     placeholder={t('Add Voucher')}
                     {...options}
                 />
             </View>
             <View style={styles.buttonContainer}>
-                <Touchable>
+                <Touchable onPress={onPress} >
                     <View style={styles.buttonContent}>
                         <Text style={styles.title}>{t('Apply')}</Text>
                     </View>
