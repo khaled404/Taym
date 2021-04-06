@@ -17,6 +17,7 @@ import {
     Login,
     MyAddresses,
     MyOrders,
+    Notifications,
     OrderDetails,
     PhoneCode,
     Profile,
@@ -138,6 +139,7 @@ const Stacks: FC<any> = ({style}) => {
                 <Stack.Screen name="Category" component={Category}/>
                 <Stack.Screen name="Cart" component={Cart}/>
                 <Stack.Screen name="Language" component={Language}/>
+                <Stack.Screen name="Notifications" component={Notifications}/>
             </Stack.Navigator>
 
         </Animated.View>

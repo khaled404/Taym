@@ -28,102 +28,101 @@ import {getUniqueId} from 'react-native-device-info';
 const {isRTL, forceRTL, allowRTL} = I18nManager;
 
 i18n.use(initReactI18next).init({
-    resources: {
-        ar: {
-            translation: ar,
-        },
-        en: {
-            translation: en,
-        },
+  resources: {
+    ar: {
+      translation: ar,
     },
-    lng: isRTL ? 'ar' : 'en',
-    fallbackLng: isRTL ? 'ar' : 'en',
-    interpolation: {
-        escapeValue: false,
+    en: {
+      translation: en,
     },
+  },
+  lng: isRTL ? 'ar' : 'en',
+  fallbackLng: isRTL ? 'ar' : 'en',
+  interpolation: {
+    escapeValue: false,
+  },
 });
 
 const App: FC = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const {isRTL}: any = useSelector((state: RootState) => state.settings);
-    const [fcmToken, setFcmToken] = useState<string>('');
-    const requestUserPermission = async () => {
-        try {
-            const authStatus = await messaging().requestPermission();
-            const enabled =
-                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-                authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-            const token = await messaging().getToken();
-            setFcmToken(token);
-            await saveItem(AsyncKeys.NOTFICTION_TOKEN, token);
-            if (enabled) {
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        if (Platform.OS === 'ios') {
-            if (!firebase.apps.length) {
-                firebase.initializeApp(firebaseConfig);
-            } else {
-                firebase.app(); // if already initialized, use that one
-            }
-        }
-        requestUserPermission();
-        messaging()
-            .getInitialNotification()
-            .then(async (remoteMessage: any) => {
-                if (remoteMessage) {
-                    console.log(remoteMessage);
-                }
-            });
-    }, []);
-
-    const handleAppLang = async () => {
-
+  const {isRTL}: any = useSelector((state: RootState) => state.settings);
+  const [fcmToken, setFcmToken] = useState<string>('');
+  const requestUserPermission = async () => {
+    try {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+      const token = await messaging().getToken();
+      setFcmToken(token);
+      await saveItem(AsyncKeys.NOTFICTION_TOKEN, token);
+      if (enabled) {
+      }
+    } catch (error) {
+      console.log(error);
     }
-    useEffect(() => {
-        let uuid = getUniqueId();
-        console.log('fcmToken',fcmToken);
-        if (uuid !== null && uuid !== undefined) {
-            dispatch(createUpdateDeviceApi(fcmToken, uuid));
+  };
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app(); // if already initialized, use that one
+      }
+    }
+    requestUserPermission();
+    messaging()
+      .getInitialNotification()
+      .then(async (remoteMessage: any) => {
+        if (remoteMessage) {
+          console.log(remoteMessage);
         }
+      });
+  }, []);
 
-        // console.log('isRTLisRTLisRTLisRTL',isRTL)
-        // handleAppLang();
-    }, []);
-    return (
-        <>
-            <View
-                style={{
-                    ...StyleSheet.absoluteFillObject,
-                    backgroundColor: Colors.minColor,
-                }}
-            />
-            <StatusBar
-                translucent={true}
-                backgroundColor={'transparent'}
-                barStyle="dark-content"
-            />
-            <AppInitializer/>
+  const handleAppLang = async () => {
 
-            <FlashMessage
-                position="top"
-                hideOnPress={true}
-                style={{paddingTop: ScreenOptions.StatusBarHeight}}
-                titleStyle={{
-                    fontFamily: Fonts.medium,
-                    paddingTop: ScreenOptions.StatusBarHeight,
-                }}
-                textStyle={{
-                    fontFamily: Fonts.medium,
-                }}
-            />
-        </>
-    );
+  }
+  useEffect(() => {
+    let uuid = getUniqueId();
+    console.log('fcmToken', fcmToken);
+    if (uuid !== null && uuid !== undefined) {
+      dispatch(createUpdateDeviceApi(fcmToken, uuid));
+    }
+    // console.log('isRTLisRTLisRTLisRTL',isRTL)
+    // handleAppLang();
+  }, []);
+  return (
+    <>
+      <View
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          backgroundColor: Colors.minColor,
+        }}
+      />
+      <StatusBar
+        translucent={true}
+        backgroundColor={'transparent'}
+        barStyle="dark-content"
+      />
+      <AppInitializer/>
+
+      <FlashMessage
+        position="top"
+        hideOnPress={true}
+        style={{paddingTop: ScreenOptions.StatusBarHeight}}
+        titleStyle={{
+          fontFamily: Fonts.medium,
+          paddingTop: ScreenOptions.StatusBarHeight,
+        }}
+        textStyle={{
+          fontFamily: Fonts.medium,
+        }}
+      />
+    </>
+  );
 };
 
 export default App;
