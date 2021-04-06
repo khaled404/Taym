@@ -1,5 +1,5 @@
-import { IReduser } from '../../constants/interfaces';
-import { ActionType } from '../actions/actions';
+import {IReduser} from '../../constants/interfaces';
+import {ActionType} from '../actions/actions';
 
 const initialState = {
   userData: {},
@@ -9,7 +9,7 @@ const initialState = {
   forgetPasswordErorrs: {},
   phoneNumber: '',
 };
-export default (state = initialState, { type, payload }: IReduser) => {
+export default (state = initialState, {type, payload}: IReduser) => {
   switch (type) {
     case ActionType.SAVE_USER_DATA_STEP_1:
       return {
@@ -19,7 +19,7 @@ export default (state = initialState, { type, payload }: IReduser) => {
     case ActionType.SAVE_USER_DATA_STEP_2:
       return {
         ...state,
-        userData: { ...state.userData, phone: payload },
+        userData: {...state.userData, phone: payload},
       };
     case ActionType.SAVE_USER_DATA_STEP_3:
       return {
@@ -40,13 +40,13 @@ export default (state = initialState, { type, payload }: IReduser) => {
         isLogin: false,
       };
     case ActionType.SAVE_REGISTER_ERORRS:
-      return { ...state, registerErorrs: payload };
+      return {...state, registerErorrs: payload};
     case ActionType.SAVE_LOGIN_ERORRS:
-      return { ...state, loginErorrs: payload };
+      return {...state, loginErorrs: payload};
     case ActionType.SAVE_FORGET_PASSWORD_ERORRS:
-      return { ...state, forgetPasswordErorrs: payload };
+      return {...state, forgetPasswordErorrs: payload};
     case ActionType.SAVE_PHONE:
-      return { ...state, phoneNumber: payload };
+      return {...state, phoneNumber: payload};
   }
   return state;
 };

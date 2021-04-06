@@ -7,15 +7,17 @@ import {commonStyles} from "../styles/styles";
 import SettingsItem from "../components/Settings/SettingsItem";
 import LangSwitcher from "../components/Settings/LangSwitcher";
 import NotificationBtn from "../components/Settings/NotificationBtn";
+import {useTranslation} from "react-i18next";
 
 const Settings: FC = () => {
+    const {t} = useTranslation();
     return (
         <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-            <Header title="Settings"/>
+            <Header title={t('Settings')}/>
             <Content noPadding>
                 <View style={styles.container}>
-                    <SettingsItem title={'Addresses'} btnTitle={'Check Out  >'} btnAction={'MyAddresses'}/>
-                    <SettingsItem title={'My Cards'} btnTitle={'Check Out  >'} btnAction={'MyCards'}/>
+                    <SettingsItem title={t('Addresses')} btnTitle={t('Check Out  >')} btnAction={'MyAddresses'}/>
+                    <SettingsItem title={t('My Cards')} btnTitle={t('Check Out  >')} btnAction={'MyCards'}/>
                     <LangSwitcher/>
                     <NotificationBtn/>
                 </View>

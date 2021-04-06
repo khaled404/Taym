@@ -5,6 +5,7 @@ import Header from '../components/header/Header';
 import {Colors} from '../constants/styleConstants';
 import {commonStyles} from '../styles/styles';
 import MapView from 'react-native-maps';
+import {useTranslation} from "react-i18next";
 
 const data = [
     {
@@ -35,9 +36,10 @@ const data = [
 
 
 const AddressLocation: FC = () => {
+    const {t} = useTranslation();
     return (
         <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-            <Header title="Address Location"/>
+            <Header title={t('Current Location')}/>
             <Content noPadding>
                 <MapView
                     style={styles.map}

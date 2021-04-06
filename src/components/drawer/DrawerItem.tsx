@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {FC} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import Touchable from '../touchables/Touchable';
-import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { commonStyles } from '../../styles/styles';
-import { SvgProps } from 'react-native-svg';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {commonStyles} from '../../styles/styles';
+import {SvgProps} from 'react-native-svg';
 
 interface Props {
   onPress: () => void;
@@ -12,11 +12,11 @@ interface Props {
   active?: boolean;
   voucher?: string;
 }
-const DrawerItem: FC<Props> = ({ onPress, Icon, title, active, voucher }) => (
+const DrawerItem: FC<Props> = ({onPress, Icon, title, active, voucher}) => (
   <View
     style={[
       styles.container,
-      active && { backgroundColor: `${Colors.white}30` },
+      active && {backgroundColor: `${Colors.white}30`},
     ]}>
     <Touchable onPress={onPress}>
       <View style={styles.list}>

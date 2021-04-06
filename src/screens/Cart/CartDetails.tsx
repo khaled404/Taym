@@ -8,29 +8,30 @@ import ApplyInput from "../../components/Voucher/ApplyInput";
 import {commonStyles} from "../../styles/styles";
 import {useNavigation} from "@react-navigation/native";
 
-const data = [
-    {
-        id: 1,
-        title: 'KitKat Ruby Cocoa Beans',
-        price: '150 LE',
-        specifications: '500 ml',
-        offerValue: '-10%',
-        quantity: 2,
-        image: Images.cartItem,
-    }, {
-        id: 2,
-        title: 'KitKat Ruby Cocoa Beans',
-        price: '150 LE',
-        specifications: '500 ml',
-        offerValue: '-15%',
-        quantity: 4,
-        image: Images.cartItem1,
-    },
-
-];
-
 const CartDetails: FC = () => {
     const {t} = useTranslation();
+
+    const data = [
+        {
+            id: 1,
+            title: t('KitKat Ruby Cocoa Beans'),
+            price: '150 LE',
+            specifications: t('500 ml'),
+            offerValue: '-10%',
+            quantity: 2,
+            image: Images.cartItem,
+        }, {
+            id: 2,
+            title: t('KitKat Ruby Cocoa Beans'),
+            price: '150 LE',
+            specifications: t('500 ml'),
+            offerValue: '-15%',
+            quantity: 4,
+            image: Images.cartItem1,
+        },
+
+    ];
+
     const {navigate} = useNavigation();
     return (
         <Content noPadding style={styles.contentContainer}>
@@ -48,32 +49,33 @@ const CartDetails: FC = () => {
             <View style={{paddingHorizontal: 20, paddingBottom: Pixel(50)}}>
                 <View style={styles.orderDetailsContainer}>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Cart Total</Text>
+                        <Text style={styles.orderDetailsText}>{t('Cart Total')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>130 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>130 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Services Charge</Text>
+                        <Text style={styles.orderDetailsText}>{t('Services Charge')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>20 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>20 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Discount</Text>
+                        <Text style={styles.orderDetailsText}>{t('Discount')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>50 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>50 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsDivider}/>
                     <View style={[styles.orderDetailsRow]}>
-                        <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>Total Amount</Text>
+                        <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>{t('Total Amount')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>100 EG</Text>
+                            <Text style={[styles.orderDetailsText, {color: '#622A7B', textAlign: 'center'}]}>100
+                                EG</Text>
                         </View>
                     </View>
                 </View>
@@ -139,9 +141,10 @@ const styles = StyleSheet.create({
     },
     orderDetailsText: {
         fontSize: Pixel(31),
-        fontFamily: Fonts.regular,
+        fontFamily: Fonts.medium,
         flex: 0.7,
-        color: Colors.dark
+        color: Colors.dark,
+        // textAlign: "left",
     },
     textCenter: {
         flex: 0.7,

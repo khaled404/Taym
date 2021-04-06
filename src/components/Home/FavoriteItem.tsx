@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {commonStyles} from '../../styles/styles';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {AddCartIcon, FavoriteIcon} from '../../../assets/Icons/Icons';
+import {useTranslation} from "react-i18next";
 
 interface IFavoriteItem {
     title: string;
@@ -11,6 +12,7 @@ interface IFavoriteItem {
 }
 
 const FavoriteItem: FC<IFavoriteItem> = ({title, image, index}) => {
+    const {t} = useTranslation();
     return (
         <TouchableOpacity style={styles.itemContainer}>
             <TouchableOpacity style={styles.favoriteBtn}>
@@ -24,7 +26,7 @@ const FavoriteItem: FC<IFavoriteItem> = ({title, image, index}) => {
             </View>
             <View style={styles.productDetailsContainer}>
                 <View style={styles.productDetails}>
-                    <Text style={styles.productTitle}>Green Apple</Text>
+                    <Text style={styles.productTitle}>{t('Green Apple')}</Text>
                     <Text style={styles.productPrice}>12 LE</Text>
                 </View>
                 <TouchableOpacity style={styles.productActions}>
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
         color: Colors.colorSacand,
         textTransform: 'uppercase',
         marginTop: Pixel(5),
+        textAlign: 'left'
     },
     productActions: {
         shadowColor: '#000',

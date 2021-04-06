@@ -9,90 +9,6 @@ import {commonStyles} from "../styles/styles";
 import CategoryStoresList from "../components/Category/CategoryStoresList";
 import {useNavigation} from "@react-navigation/native";
 
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        title: "Market",
-        image: 'Text 1',
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Fruit",
-        image: 'Text 1',
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        title: "Fish",
-        image: 'Text 1',
-    },
-    {
-        id: "58694a0f-3da1-471f-bsd96-145571e29d72",
-        title: "Vegetables",
-        image: 'Text 1',
-    },
-    {
-        id: "58694a0f-3da1-471f-bsdad96-145571e29d72",
-        title: "Beef",
-        image: 'Text 1',
-    },
-];
-
-const STORES_DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        title: "Refresh Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Smile Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "3ac68afc-c60s5-48d3-a4f8-fbd91aa97f63",
-        title: "Smile Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "3ac68afc-c605-48df3-a4f8-fbd91aa97f63",
-        title: "Smile Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "3ac68afc-c60asd5-48d3-a4f8-fbd91aa97f63",
-        title: "Smile Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "3ac68dsaafc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Smile Market",
-        image: 'Text 1',
-        category: 'Market'
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        title: "Restaurant Market",
-        image: 'Text 1',
-        category: 'Fruit'
-    },
-    {
-        id: "58694a0f-3da1-471f-bsd96-145571e29d72",
-        title: "Refresh Market",
-        image: 'Text 1',
-        category: 'Fish'
-    },
-    {
-        id: "58694a0f-3da1-471f-bsdad96-145571e29d72",
-        title: "Restaurant Market",
-        image: 'Text 1',
-        category: 'Vegetables'
-    },
-];
 
 const Item = ({item, selectedCategory, handleSelectedCategory}) => (
     <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>
@@ -112,9 +28,121 @@ const Item = ({item, selectedCategory, handleSelectedCategory}) => (
 );
 
 
-
 const Category: FC = () => {
     const {t} = useTranslation();
+
+    const DATA = [
+        {
+            id: 1,
+            title: t('Supermarket'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 2,
+            title: t('Beef'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 3,
+            title: t('Chicken'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 4,
+            title: t('Fish'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 5,
+            title: t('Fruit'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 6,
+            title: t('Vegetables'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 7,
+            title: t('Vegetables'),
+            image: 'Voucher 12457',
+        },
+    ];
+    const STORES_DATA = [
+        {
+            id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+            title: t('Refresh Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "3ac682afc-c605-48d3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Beef')
+        },
+        {
+            id: "3ac682afc-c605-48dw3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Chicken')
+        },
+        {
+            id: "3ac68afc-c60s5-48d3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "3ac68afc-c605-48df3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "3ac68afc-c60asd5-48d3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "3ac68dsaafc-c605-48d3-a4f8-fbd91aa97f63",
+            title: t('Smile Market'),
+            image: 'Text 1',
+            category: t('Supermarket')
+        },
+        {
+            id: "58694a0f-3da1-471f-bd96-145571e29d72",
+            title: t('Restaurant Market'),
+            image: 'Text 1',
+            category: t('Fruit')
+        },
+        {
+            id: "58694a0f-3da1-471f-bsd96-145571e29d72",
+            title: t('Refresh Market'),
+            image: 'Text 1',
+            category: t('Fish')
+        },
+        {
+            id: "58694a0f-3da1-471f-bsdad96-145571e29d72",
+            title: t('Restaurant Market'),
+            image: 'Text 1',
+            category: t('Vegetables')
+        },
+    ];
+
     const {navigate} = useNavigation();
     // const [contentOffsetY, setContentOffsetY] = useState(0);
     const [toggleHeader, setToggleHeader] = useState(false);
@@ -140,8 +168,8 @@ const Category: FC = () => {
     }
 
     useEffect(() => {
-        setSelectedCategory("Market");
-        let data = STORES_DATA.filter(store => store.category === "Market");
+        setSelectedCategory(t('Supermarket'));
+        let data = STORES_DATA.filter(store => store.category === t('Supermarket'));
         setFilteredData(data);
     }, []);
 
@@ -150,7 +178,7 @@ const Category: FC = () => {
             <CategoryHeader
                 navigate={navigate}
                 handleToggleHeader={handleToggleHeader} toggleHeader={toggleHeader}
-                            title={selectedCategory}/>
+                title={selectedCategory}/>
             <View style={styles.headerCategoryList}>
                 <FlatList
                     data={DATA}
