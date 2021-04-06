@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, {FC, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,16 +6,16 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { Colors, Fonts, Images, Pixel } from '../../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
-import { ScreenProps } from '../../constants/interfaces';
+import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
+import {ScreenProps} from '../../constants/interfaces';
 import DrawerItem from './DrawerItem';
 import FastImage from 'react-native-fast-image';
-import { commonStyles } from '../../styles/styles';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { LogoutHandler } from '../../store/actions/auth'
+import {commonStyles} from '../../styles/styles';
+import {ScrollView} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {LogoutHandler} from '../../store/actions/auth';
 //import { useNavigation } from '@react-navigation/native';
 
 import {
@@ -30,14 +30,12 @@ import {
   LogOut,
 } from '../../../assets/Icons/Icons';
 
+const {height, width} = Dimensions.get('window');
 
-const { height, width } = Dimensions.get('window');
-
-const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
-
+const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   //const { navigate } = useNavigation();
   const dispatch = useDispatch();
-  const { isLogin, userData }: any = useSelector(
+  const {isLogin, userData}: any = useSelector(
     (state: RootState) => state.auth,
   );
 
@@ -49,15 +47,14 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
     );
   };
 
-  const getLetter: any = (st: string) => {
+  const getLetter = (st: string) => {
     const fullName = st.split(' ');
     const letters = fullName.shift().charAt(0) + fullName.pop().charAt(0);
     return letters.toUpperCase();
-  }
+  };
 
-
-  const { t }: any = useTranslation();
-  console.log(userData, 'userData')
+  const {t}: any = useTranslation();
+  console.log(userData, 'userData');
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -79,8 +76,10 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
               resizeMode="contain"
             /> */}
 
-            <View style={styles.image} >
-              <Text style={styles.imageText} >{getLetter(userData.name)}</Text>
+            <View style={styles.image}>
+              <Text style={styles.imageText}>
+                {userData.name && getLetter(userData.name)}
+              </Text>
             </View>
           </View>
           <View style={styles.userContent}>
@@ -96,7 +95,6 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
         </TouchableOpacity>
         <View style={styles.body}>
           <View>
-
             <DrawerItem
               Icon={HomeIcon}
               title={t('Home')}
@@ -148,10 +146,7 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
               }}
             />
           </View>
-          <View  >
-
-
-          </View>
+          <View></View>
         </View>
         <DrawerItem
           Icon={LogOut}
@@ -230,5 +225,5 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(45),
     textAlign: 'left',
-  }
+  },
 });
