@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {Colors, Fonts, Pixel,Images} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {useTranslation} from "react-i18next";
+import {BlackLine} from '../../../assets/Icons/Icons'
 interface IBalance {
   value: string;
   date: string;
@@ -10,12 +11,39 @@ interface IBalance {
 const Balance: FC<IBalance> = ({date, value}) => {
   const {t} = useTranslation();
   return (
-    <View style={styles.container}>
+    <ImageBackground 
+    source={Images.voucherBackground}
+    style={styles.container}>
+      <View style={{
+        width:'100%',
+        height:'65%',
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
+      }} >
+
       <Text style={styles.title}>{t('Balance')}</Text>
       <Text style={styles.value}>{value}</Text>
+      </View>
       {/*<Text style={styles.date}>{date}</Text>*/}
-      <Text style={styles.date}>{t("EX . 22 January 2022")}</Text>
-    </View>
+      <View style={{
+        width:'100%',
+        height:'20%',
+        backgroundColor:Colors.dark
+      }} ></View>
+      <View style={{
+        width:'100%',
+        height:'15%',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        paddingHorizontal:20
+      }} >
+
+<Text style={styles.date}>{t('Eslam mohamed')}</Text>
+<Text style={styles.date}>{t('11 August')}</Text>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -23,26 +51,23 @@ export default Balance;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: Pixel(20),
-    paddingHorizontal: Pixel(35),
-    backgroundColor: Colors.minColor,
-    height: Pixel(280),
+    //paddingVertical: Pixel(20),
+    //paddingHorizontal: Pixel(35),
+   // backgroundColor: Colors.minColor,
+    height: Pixel(300),
     borderRadius: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
+    
     ...commonStyles.boxShadow,
   },
   title: {
-    fontFamily: Fonts.black,
-    fontSize: Pixel(40),
+    fontFamily: Fonts.medium,
+    fontSize: Pixel(35),
   },
   value: {
-    fontFamily: Fonts.black,
+    fontFamily: Fonts.medium,
     fontSize: Pixel(75),
   },
   date: {
-    marginLeft: 'auto',
-    marginTop: Pixel(15),
-    fontFamily: Fonts.black,
+    fontFamily: Fonts.medium,
   },
 });

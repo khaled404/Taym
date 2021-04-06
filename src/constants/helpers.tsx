@@ -13,6 +13,7 @@ export enum AsyncKeys {
     PHONE_NUMBER = 'PHONE_NUMBER',
     NOTFICTION_TOKEN = 'NOTFICTION_TOKEN',
     IS_RTL = 'IS_RTL',
+    GET_USER_VOUCHERS='GET_USER_VOUCHERS',
 }
 
 /**

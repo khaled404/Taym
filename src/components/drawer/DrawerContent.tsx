@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState,useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,7 @@ import {commonStyles} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
+import { LogoutHandler } from '../../store/actions/auth'
 import {
   HomeIcon,
   HeartIcon,
@@ -24,6 +25,7 @@ import {
   SettingsIcon,
   TelephoneIcon,
   EditIcon,
+  LogOut
 } from '../../../assets/Icons/Icons';
 
 const {height, width} = Dimensions.get('window');
@@ -34,7 +36,34 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   );
   const {t}: any = useTranslation();
 
-  return (
+  /**********
+   * get first 2 letters
+   * ************ */
+  const getLetter: any = (st: string) => {
+        const fullName = st.split(' ');
+        const letters = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+        return letters.toUpperCase();
+      }
+
+      /********
+       * 
+       * logOut
+       * ********* */
+
+  const logOut = () => {
+      dispatch(
+        LogoutHandler(success => {
+          success && navigation?.navigate('Login');
+        }),
+      );
+    };
+  
+   
+  
+  
+
+  
+       return (
     <ScrollView
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}>
@@ -45,33 +74,49 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             navigation?.navigate('Profile');
           }}>
           <View style={styles.userImage}>
+              {
+                isLogin?
             <View style={styles.editIcon}>
-              <EditIcon />
+                <EditIcon />
             </View>
-            <FastImage
-              source={userData.image ? {uri: userData.image} : Images.userImage}
+              :
+              null
+              }
+          {/*   <FastImage
+              source={isLogin? userData.image ? {uri: userData.image} : Images.userImage:Images.defAvatar}
               style={commonStyles.image}
               resizeMode="contain"
-            />
+            /> */}
+
+          <View style={styles.image} >
+                <Text style={styles.imageText} >{getLetter(userData.name)}</Text>
+            </View>
+
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
-              Yassin Ahmed
+              {!isLogin?'Login Or Sign up':userData.name}
               {/* {isLogin ? userData.name : t('Login')} */}
             </Text>
+            {isLogin?
             <Text style={styles.userSupTitle}>
-              0123456789
+             {userData.phone}
               {/* {isLogin ? userData.name : t('Login')} */}
             </Text>
+            :
+            null
+            }
           </View>
         </TouchableOpacity>
         <View style={styles.body}>
+        <View>
           <DrawerItem
             Icon={HomeIcon}
             title={t('Home')}
             onPress={() => {
               navigation?.navigate('Home');
             }}
+            isLogin={true}
           />
           <DrawerItem
             Icon={HeartIcon}
@@ -79,6 +124,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('Favorite');
             }}
+            isLogin={isLogin}
           />
           <DrawerItem
             Icon={VouchergIcon}
@@ -87,6 +133,8 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('Voucher');
             }}
+            isLogin={isLogin}
+
           />
           <DrawerItem
             Icon={ListIcon}
@@ -94,6 +142,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('MyOrders');
             }}
+            isLogin={isLogin}
           />
           <DrawerItem
             Icon={OffersIcon}
@@ -101,6 +150,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('Home');
             }}
+            isLogin={true}
           />
           <DrawerItem
             Icon={SettingsIcon}
@@ -108,6 +158,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('Settings');
             }}
+            isLogin={true}
           />
           <DrawerItem
             Icon={TelephoneIcon}
@@ -115,7 +166,26 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             onPress={() => {
               navigation?.navigate('Home');
             }}
+            isLogin={true}
           />
+          </View>
+            { isLogin?
+          <View style={{
+            marginTop:30
+          }} >
+        <DrawerItem
+          Icon={LogOut}
+          title={t('Log Out')}
+          onPress={() => {
+            logOut();
+          }}
+          isLogin={isLogin}
+        />
+       </View>
+       :
+       null
+}
+
         </View>
       </View>
     </ScrollView>
@@ -174,4 +244,18 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 15,
   },
+  image: {
+      backgroundColor: '#00000029',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: Pixel(70),
+      width: Pixel(140),
+      height: Pixel(140),
+    },
+    imageText: {
+      color: Colors.dark,
+      fontFamily: Fonts.bold,
+      fontSize: Pixel(45),
+      textAlign: 'left',
+    }
 });
