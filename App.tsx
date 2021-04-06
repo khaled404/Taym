@@ -87,9 +87,11 @@ const App: FC = () => {
     }
     useEffect(() => {
         let uuid = getUniqueId();
+        console.log('fcmToken',fcmToken);
         if (uuid !== null && uuid !== undefined) {
             dispatch(createUpdateDeviceApi(fcmToken, uuid));
         }
+
         // console.log('isRTLisRTLisRTLisRTL',isRTL)
         // handleAppLang();
     }, []);

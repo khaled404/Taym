@@ -105,7 +105,8 @@ const navigationSlideToTop = {
         };
     },
 };
-let isRtl;
+
+let isRtl:string;
 getItem(AsyncKeys.IS_RTL).then(isRtlValue => isRtl = isRtlValue);
 const Stacks: FC<any> = ({style}) => {
     const {isLogin} = useSelector((state: RootState) => state.auth);
