@@ -18,7 +18,7 @@ const FavoriteList: FC<IFavoriteList> = ({data, inHome}) => {
     return (
         <>
             {inHome && <View style={styles.sectionTitleContainer}>
-                <Text style={styles.sectionTitle}>{'Favorite'}</Text>
+                <Text style={styles.sectionTitle}>{t('Favorite')}</Text>
                 <Touchable onPress={()=>navigate('Favorite')}>
                     <Text style={styles.viewAllBtnText}>{t('View All')}</Text>
                 </Touchable>

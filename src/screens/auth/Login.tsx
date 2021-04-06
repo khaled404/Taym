@@ -49,10 +49,10 @@ const Login: FC = () => {
     <Container style={styles.container}>
       <AuthHeader />
       <Content noPadding style={styles.contentContainer}>
-        <Text style={styles.mainTitle}>Sign In</Text>
+        <Text style={styles.mainTitle}>{t('Sign In')}</Text>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Phone Number / Email Address</Text>
+            <Text style={styles.inputLabel}>{t('Phone Number / Email Address')}</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
@@ -71,7 +71,7 @@ const Login: FC = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Password</Text>
+            <Text style={styles.inputLabel}>{t('Password')}</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
@@ -101,7 +101,7 @@ const Login: FC = () => {
                 fontFamily: Fonts.regular,
                 fontSize: Pixel(27),
               }}>
-              Forgot Password?
+                {t('Forgot Password?')}
             </Text>
           </TouchableOpacity>
 
@@ -126,7 +126,7 @@ const Login: FC = () => {
                 color: Colors.dark,
                 fontFamily: Fonts.bold,
                 fontSize: Pixel(35),
-              }}>{`Skip >>`}</Text>
+              }}>{t(`Skip >>`)}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -141,14 +141,14 @@ const Login: FC = () => {
                 color: Colors.dark,
                 fontFamily: Fonts.medium,
                 fontSize: Pixel(30),
-              }}>{`Don't Have An Account ?`}</Text>
+              }}>{t(`Don't Have An Account ?`)}</Text>
             <Text
               style={{
                 color: Colors.colorSacand,
                 fontFamily: Fonts.medium,
                 fontSize: Pixel(30),
                 marginLeft: 10,
-              }}>{`Register`}</Text>
+              }}>{t(`Register`)}</Text>
           </TouchableOpacity>
         </View>
       </Content>

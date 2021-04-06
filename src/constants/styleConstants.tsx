@@ -1,6 +1,7 @@
-import { Dimensions, NativeModules } from 'react-native';
+import {Dimensions, I18nManager, NativeModules} from 'react-native';
 
-const { width, height } = Dimensions.get('screen');
+const {isRTL} = I18nManager;
+const {width, height} = Dimensions.get('screen');
 
 export enum Colors {
     minColor = '#FFDE00',
@@ -27,12 +28,12 @@ export enum Colors {
 }
 
 export enum Fonts {
-    medium = 'Roboto-Medium',
-    regular = 'Roboto-Regular',
-    black = 'Roboto-Black',
-    bold = 'Roboto-Bold',
-    extraLight = 'Roboto-Thin',
-    light = 'Roboto-Light',
+    medium = !isRTL ? 'Roboto-Medium' : 'Tajawal-Medium',
+    regular = !isRTL ? 'Roboto-Regular' : 'Tajawal-Regular',
+    black = !isRTL ? 'Roboto-Black' : 'Tajawal-Black',
+    bold = !isRTL ? 'Roboto-Bold' : 'Tajawal-Bold',
+    extraLight = !isRTL ? 'Roboto-Thin' : 'Tajawal-ExtraLight',
+    light = !isRTL ? 'Roboto-Light' : 'Tajawal-Light',
 }
 
 export enum Images {
@@ -63,7 +64,7 @@ export enum ScreenOptions {
  * @param designSize uor psd or xd workflow size
  * @returns function to use in PixelPerfect
  */
-export const createPerfectPixel = (designSize = { width: 750, height: 1624 }) => {
+export const createPerfectPixel = (designSize = {width: 750, height: 1624}) => {
     if (
         !designSize ||
         !designSize.width ||

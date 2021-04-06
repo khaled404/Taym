@@ -9,19 +9,6 @@ import PaymentOption from "../../components/cart/PaymentOption";
 import PaymentCardsList from "../../components/cart/PaymentCardsList";
 import {commonStyles} from "../../styles/styles";
 
-const data = [
-    {
-        id: 1,
-        title: 'Cash By Deliver',
-        price: 120,
-    },
-    {
-        id: 2,
-        title: 'Online Payment',
-        price: 100,
-    },
-];
-
 const DATA = [
     {
         id: 1,
@@ -50,6 +37,20 @@ const DATA = [
 const CartCheckout: FC = () => {
     const [selectedId, setSelectedId] = useState(null);
     const {t} = useTranslation();
+
+    const data = [
+        {
+            id: 1,
+            title: t('Cash By Deliver'),
+            price: 120,
+        },
+        {
+            id: 2,
+            title: t('Online Payment'),
+            price: 100,
+        },
+    ];
+
     const {navigate} = useNavigation();
 
     return (
@@ -75,32 +76,32 @@ const CartCheckout: FC = () => {
             <View style={{paddingHorizontal: 20, paddingBottom: Pixel(50)}}>
                 <View style={styles.orderDetailsContainer}>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Cart Total</Text>
+                        <Text style={styles.orderDetailsText}>{t('Cart Total')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>130 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>130 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Services Charge</Text>
+                        <Text style={styles.orderDetailsText}>{t('Services Charge')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>20 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>20 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsRow}>
-                        <Text style={styles.orderDetailsText}>Discount</Text>
+                        <Text style={styles.orderDetailsText}>{t('Discount')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText]}>50 EG</Text>
+                            <Text style={[styles.orderDetailsText, {textAlign: 'center'}]}>50 EG</Text>
                         </View>
                     </View>
                     <View style={styles.orderDetailsDivider}/>
                     <View style={[styles.orderDetailsRow]}>
-                        <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>Total Amount</Text>
+                        <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>{t('Total Amount')}</Text>
                         <Text style={{flex: 0.2}}> : </Text>
                         <View style={styles.textCenter}>
-                            <Text style={[styles.orderDetailsText, {color: '#622A7B'}]}>100 EG</Text>
+                            <Text style={[styles.orderDetailsText, {color: '#622A7B',textAlign: 'center'}]}>100 EG</Text>
                         </View>
                     </View>
                 </View>
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     },
     orderDetailsText: {
         fontSize: Pixel(31),
-        fontFamily: Fonts.regular,
+        fontFamily: Fonts.medium,
         flex: 0.7,
         color: Colors.dark
     },

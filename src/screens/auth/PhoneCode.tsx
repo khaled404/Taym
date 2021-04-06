@@ -39,7 +39,7 @@ const PhoneCode: FC = () => {
       <Content noPadding style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
-            {t('Enter the 4-digit code sent to number')}
+            {t('Enter the 6-digit code sent to number')}
           </Text>
           <Text style={styles.sectionTitle}>{userData.phone}</Text>
         </View>

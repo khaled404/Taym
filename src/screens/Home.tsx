@@ -13,85 +13,82 @@ import {RootState} from "../store/store";
 import {useNavigation} from "@react-navigation/native";
 
 
-const categoryHomeData = [
-    {
-        title: 'Supermarket',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Beef',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Chicken',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Fish',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Fruit',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Vegetables',
-        image: 'Voucher 12457',
-    },
-
-    {
-        title: 'Vegetables',
-        image: 'Voucher 12457',
-    },
-];
-const carouselItems = [
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-    {
-        title: 'You Can Get Our Offer',
-        image: 'Text 1',
-    },
-];
-
-
 const Home: FC = () => {
     const {t} = useTranslation();
+
+    const categoryHomeData = [
+        {
+            id: 1,
+            title: t('Supermarket'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 2,
+            title: t('Beef'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 3,
+            title: t('Chicken'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 4,
+            title: t('Fish'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 5,
+            title: t('Fruit'),
+            image: 'Voucher 12457',
+        },
+
+        {
+            id: 6,
+            title: t('Vegetables'),
+            image: 'Voucher 12457',
+        },
+    ];
+    const carouselItems = [
+        {
+            id: 1,
+            title: t('You Can Get Our Offer'),
+            image: 'Text 1',
+        },
+        {
+            id: 2,
+            title: t('You Can Get Our Offer'),
+            image: 'Text 1',
+        },
+        {
+            id: 3,
+            title: t('You Can Get Our Offer'),
+            image: 'Text 1',
+        },
+        {
+            id: 4,
+            title: t('You Can Get Our Offer'),
+            image: 'Text 1',
+        },
+        {
+            id: 5,
+            title: t('You Can Get Our Offer'),
+            image: 'Text 1',
+        },
+    ];
+
     const dispatch = useDispatch();
     const {isRTL}: any = useSelector((state: RootState) => state.settings);
-    // console.log('isRTL', isRTL)
-
-    const handleChangeLang = () => {
-        dispatch(toggleLangSwitcher(true));
-    }
     const {navigate} = useNavigation();
     return (
         <Container style={styles.container}>
             <HomeHeader navigate={navigate} title="Home"/>
             <Content noPadding>
-                <View>
-                    <TouchableOpacity style={{paddingVertical: 20, paddingHorizontal: 40}} onPress={handleChangeLang}>
-                        <Text>change lang</Text>
-                    </TouchableOpacity>
-                </View>
+
                 <View style={styles.contentContainer}>
                     <CategoryList data={categoryHomeData}/>
                 </View>

@@ -53,7 +53,7 @@ const CompleteRegister: FC = () => {
         </View>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>Mobile Number</Text>
+            <Text style={styles.inputLabel}>{t('Mobile Number')}</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
