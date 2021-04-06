@@ -1,6 +1,6 @@
-import {Dimensions, NativeModules} from 'react-native';
+import { Dimensions, NativeModules } from 'react-native';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export enum Colors {
     minColor = '#FFDE00',
@@ -63,7 +63,7 @@ export enum ScreenOptions {
  * @param designSize uor psd or xd workflow size
  * @returns function to use in PixelPerfect
  */
-export const createPerfectPixel = (designSize = {width: 750, height: 1624}) => {
+export const createPerfectPixel = (designSize = { width: 750, height: 1624 }) => {
     if (
         !designSize ||
         !designSize.width ||

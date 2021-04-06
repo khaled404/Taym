@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   StyleProp,
   StyleSheet,
@@ -10,8 +10,8 @@ import {
 import Touchable from './Touchable';
 import LottieView from 'lottie-react-native';
 
-import {TouchableProps} from '../../constants/interfaces';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import { TouchableProps } from '../../constants/interfaces';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
 interface Props extends TouchableProps {
   title: string;
   style?: StyleProp<ViewStyle>;
@@ -37,7 +37,7 @@ const Button: FC<Props> = ({
             source={require('../../../assets/animation/loader.json')}
             autoPlay
             loop
-            style={{width: 20, height: 20, marginRight: 4}}
+            style={{ width: 20, height: 20, marginRight: 4 }}
           />
         ) : (
           <Text style={[styles.title, styleTitle]}>{title}</Text>

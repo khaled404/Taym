@@ -1,8 +1,8 @@
-import React, {FC, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import React, { FC, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
     AddLocation,
     AddressLocation,
@@ -23,14 +23,15 @@ import {
     Register,
     Settings,
     Voucher,
+    ForgetPhoneCode
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
-import {I18nManager, StyleSheet} from 'react-native';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/store';
+import { I18nManager, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
-const {isRTL} = I18nManager;
+const { isRTL } = I18nManager;
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -40,7 +41,7 @@ const navigationTransition = {
         open: TransitionSpecs.TransitionIOSSpec,
         close: TransitionSpecs.TransitionIOSSpec,
     },
-    cardStyleInterpolator: ({current, next, layouts}: any) => {
+    cardStyleInterpolator: ({ current, next, layouts }: any) => {
         return {
             cardStyle: {
                 transform: [
@@ -81,7 +82,7 @@ const navigationSlideToTop = {
         open: TransitionSpecs.TransitionIOSSpec,
         close: TransitionSpecs.TransitionIOSSpec,
     },
-    cardStyleInterpolator: ({current, next, layouts}: any) => {
+    cardStyleInterpolator: ({ current, next, layouts }: any) => {
         return {
             cardStyle: {
                 transform: [
@@ -106,34 +107,35 @@ const navigationSlideToTop = {
 };
 
 
-const Stacks: FC<any> = ({style}) => {
-    const {isLogin} = useSelector((state: RootState) => state.auth);
+const Stacks: FC<any> = ({ style }) => {
+    const { isLogin } = useSelector((state: RootState) => state.auth);
     return (
         <Animated.View style={[styles.stacksStyles, style]}>
 
             <Stack.Navigator
-                screenOptions={{headerShown: false, ...navigationTransition} as any}
+                screenOptions={{ headerShown: false, ...navigationTransition } as any}
                 initialRouteName={isLogin ? 'Home' : 'Login'}>
                 {/*initialRouteName={'Cart'}>*/}
-                <Stack.Screen name="Home" component={Home}/>
-                <Stack.Screen name="Voucher" component={Voucher}/>
-                <Stack.Screen name="MyOrders" component={MyOrders}/>
-                <Stack.Screen name="OrderDetails" component={OrderDetails}/>
-                <Stack.Screen name="Favorite" component={Favorite}/>
-                <Stack.Screen name="Profile" component={Profile}/>
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="Register" component={Register}/>
-                <Stack.Screen name="CompleteRegister" component={CompleteRegister}/>
-                <Stack.Screen name="Forget" component={Forget}/>
-                <Stack.Screen name="Forget2" component={Forget2}/>
-                <Stack.Screen name="Forget3" component={Forget3}/>
-                <Stack.Screen name="PhoneCode" component={PhoneCode}/>
-                <Stack.Screen name="Settings" component={Settings}/>
-                <Stack.Screen name="MyAddresses" component={MyAddresses}/>
-                <Stack.Screen name="AddLocation" component={AddLocation}/>
-                <Stack.Screen name="AddressLocation" component={AddressLocation}/>
-                <Stack.Screen name="Category" component={Category}/>
-                <Stack.Screen name="Cart" component={Cart}/>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Voucher" component={Voucher} />
+                <Stack.Screen name="MyOrders" component={MyOrders} />
+                <Stack.Screen name="OrderDetails" component={OrderDetails} />
+                <Stack.Screen name="Favorite" component={Favorite} />
+                <Stack.Screen name="Profile" component={Profile} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Register" component={Register} />
+                <Stack.Screen name="CompleteRegister" component={CompleteRegister} />
+                <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode} />
+                <Stack.Screen name="Forget" component={Forget} />
+                <Stack.Screen name="Forget2" component={Forget2} />
+                <Stack.Screen name="Forget3" component={Forget3} />
+                <Stack.Screen name="PhoneCode" component={PhoneCode} />
+                <Stack.Screen name="Settings" component={Settings} />
+                <Stack.Screen name="MyAddresses" component={MyAddresses} />
+                <Stack.Screen name="AddLocation" component={AddLocation} />
+                <Stack.Screen name="AddressLocation" component={AddressLocation} />
+                <Stack.Screen name="Category" component={Category} />
+                <Stack.Screen name="Cart" component={Cart} />
             </Stack.Navigator>
 
         </Animated.View>
@@ -154,7 +156,7 @@ const initNavgtion: FC = () => {
 
     const animatedStyle = {
         borderRadius,
-        transform: [{scale}],
+        transform: [{ scale }],
     };
 
     return (
@@ -162,13 +164,13 @@ const initNavgtion: FC = () => {
             <Drawer.Navigator
                 drawerType="slide"
                 overlayColor="transparent"
-                sceneContainerStyle={{backgroundColor: 'transparent'}}
+                sceneContainerStyle={{ backgroundColor: 'transparent' }}
                 drawerContentOptions={{
                     activeBackgroundColor: 'transparent',
                     activeTintColor: 'transparent',
                     inactiveTintColor: 'transparent',
                 }}
-                drawerStyle={{backgroundColor: 'transparent'}}
+                drawerStyle={{ backgroundColor: 'transparent' }}
                 lazy
                 drawerContent={props => {
                     setProgress(props.progress as any);
@@ -177,7 +179,7 @@ const initNavgtion: FC = () => {
                 }}>
                 <Drawer.Screen
                     name="Stacks"
-                    component={() => <Stacks style={animatedStyle}/>}
+                    component={() => <Stacks style={animatedStyle} />}
                 />
             </Drawer.Navigator>
         </NavigationContainer>
