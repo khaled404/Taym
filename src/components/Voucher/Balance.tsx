@@ -1,17 +1,20 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { commonStyles } from '../../styles/styles';
+import React, {FC} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {commonStyles} from '../../styles/styles';
+import {useTranslation} from "react-i18next";
 interface IBalance {
   value: string;
   date: string;
 }
-const Balance: FC<IBalance> = ({ date, value }) => {
+const Balance: FC<IBalance> = ({date, value}) => {
+  const {t} = useTranslation();
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Balance</Text>
+      <Text style={styles.title}>{t('Balance')}</Text>
       <Text style={styles.value}>{value}</Text>
-      <Text style={styles.date}>{date}</Text>
+      {/*<Text style={styles.date}>{date}</Text>*/}
+      <Text style={styles.date}>{t("EX . 22 January 2022")}</Text>
     </View>
   );
 };

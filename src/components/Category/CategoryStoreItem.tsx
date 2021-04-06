@@ -40,7 +40,7 @@ const CategoryStoreItem: FC<ICategoryStoreItem> = ({index, id, title, image, isL
                 <Text style={styles.storeTitle}>{title}</Text>
                 <View style={styles.storeDeliveryDetails}>
                     <DeliveryIcon/>
-                    <Text style={styles.storeDeliveryPeriod}>{'30 Min'}</Text>
+                    <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
                 </View>
 
             </View>

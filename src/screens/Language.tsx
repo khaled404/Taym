@@ -16,6 +16,7 @@ const Language: FC = () => {
     const handleChangeLang = (rtl: boolean) => {
         dispatch(toggleLangSwitcher(rtl));
     }
+
     return (
         <View
             style={{

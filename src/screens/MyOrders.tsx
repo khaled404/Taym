@@ -49,7 +49,7 @@ const MyOrders: FC = () => {
     const {t} = useTranslation();
     return (
         <Container style={styles.container}>
-            <Header title="My Orders"/>
+            <Header title={t("My Orders")}/>
             <Content noPadding style={{paddingVertical: Pixel(20)}}>
                 <View style={styles.listContainer}>
                     {data.map((item, index) => (

@@ -1,9 +1,9 @@
-import { Dispatch } from 'redux';
-import { axiosAPI } from '../../constants/Config';
-import { IDispatch } from '../../constants/interfaces';
-import { ActionType } from './actions';
-import { AsyncKeys, saveItem } from '../../constants/helpers';
-import { showMessage } from 'react-native-flash-message';
+import {Dispatch} from 'redux';
+import {axiosAPI} from '../../constants/Config';
+import {IDispatch} from '../../constants/interfaces';
+import {ActionType} from './actions';
+import {AsyncKeys, saveItem} from '../../constants/helpers';
+import {showMessage} from 'react-native-flash-message';
 
 /**
  * Register user step 1
@@ -21,7 +21,7 @@ export const RegisterHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('guest/register-new-user', {
+      const {data} = await axiosAPI.post('guest/register-new-user', {
         name,
         email,
         password,
@@ -59,7 +59,7 @@ export const RegisterPhoneHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('user/register-phone', {
+      const {data} = await axiosAPI.post('user/register-phone', {
         phone,
       });
       console.log(data);
@@ -95,7 +95,7 @@ export const VerifyPhoneCodeHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('user/verify-phone', {
+      const {data} = await axiosAPI.post('user/verify-phone', {
         code,
       });
       console.log(data);
@@ -132,7 +132,7 @@ export const LoginHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('guest/login-user', {
+      const {data} = await axiosAPI.post('guest/login-user', {
         email,
         password,
       });
@@ -169,11 +169,12 @@ export const ForgetHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('guest/forget-password-code', {
+      const {data} = await axiosAPI.post('guest/forget-password-code', {
         phone,
       });
+      console.log(data);
       showMessage({
-        message: data.message,
+        message: data.success.message,
         type: 'success',
       });
       dispatch({
@@ -200,13 +201,13 @@ export const ForgetHandler = (
  * @param cb callback function with success is true or false
  */
 export const VerifyPhoneForgetHandler = (
-  token: string,
+  code: string,
   cb: (success?: boolean) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('guest/confirm-forget-password-code', {
-        token,
+      const {data} = await axiosAPI.post('user/confirm-forget-password-code', {
+        code,
       });
       console.log(data);
       showMessage({
@@ -216,7 +217,6 @@ export const VerifyPhoneForgetHandler = (
 
       cb(true);
     } catch (error) {
-      console.log(error.response, 'err')
       cb(false);
       showMessage({
         message: error?.response.data.message.code[0],
@@ -242,7 +242,7 @@ export const NewPasswordHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('user/forget-password-new-password', {
+      const {data} = await axiosAPI.post('user/forget-password-new-password', {
         phone,
         password,
         password_confirmation,
@@ -282,7 +282,7 @@ export const SocialLoginHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const { data } = await axiosAPI.post('guest/social-register', {
+      const {data} = await axiosAPI.post('guest/social-register', {
         email: email,
         social_id: social_id,
         name: name,
@@ -315,7 +315,7 @@ export const SocialLoginHandler = (
  */
 export const LogoutHandler = (cb?: () => void) => {
   return (dispatch: Dispatch<IDispatch>) => {
-    dispatch({ type: ActionType.LOGOUT });
+    dispatch({type: ActionType.LOGOUT});
     cb && cb();
   };
 };

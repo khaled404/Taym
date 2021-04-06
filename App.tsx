@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {I18nManager, Platform, StatusBar, StyleSheet, View} from 'react-native';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
@@ -19,10 +19,11 @@ import {Colors, Fonts, ScreenOptions} from './src/constants/styleConstants';
 import AppInitializer from './src/screens/AppInitializer';
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import {firebaseConfig} from './src/constants/Config';
-import {AsyncKeys, getItem, saveItem} from './src/constants/helpers';
+import {AsyncKeys, saveItem} from './src/constants/helpers';
 import {useDispatch, useSelector} from "react-redux";
-import {toggleLangSwitcher} from "./src/store/actions/settings";
+import {createUpdateDeviceApi} from "./src/store/actions/settings";
 import {RootState} from "./src/store/store";
+import {getUniqueId} from 'react-native-device-info';
 
 const {isRTL, forceRTL, allowRTL} = I18nManager;
 
@@ -44,7 +45,9 @@ i18n.use(initReactI18next).init({
 
 const App: FC = () => {
     const dispatch = useDispatch();
+
     const {isRTL}: any = useSelector((state: RootState) => state.settings);
+    const [fcmToken, setFcmToken] = useState<string>('');
     const requestUserPermission = async () => {
         try {
             const authStatus = await messaging().requestPermission();
@@ -52,14 +55,15 @@ const App: FC = () => {
                 authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
                 authStatus === messaging.AuthorizationStatus.PROVISIONAL;
             const token = await messaging().getToken();
+            setFcmToken(token);
             await saveItem(AsyncKeys.NOTFICTION_TOKEN, token);
-
             if (enabled) {
             }
         } catch (error) {
             console.log(error);
         }
     };
+
     useEffect(() => {
         if (Platform.OS === 'ios') {
             if (!firebase.apps.length) {
@@ -79,17 +83,15 @@ const App: FC = () => {
     }, []);
 
     const handleAppLang = async () => {
-        const IS_RTL = await getItem(AsyncKeys.IS_RTL);
-        console.log('IS_RTLIS_RTL', IS_RTL)
-        console.log('toggleLangSwitcher', I18nManager.isRTL)
-        // dispatch(toggleLangSwitcher(IS_RTL, () => {
-        //     console.log('toggleLangSwitcher', I18nManager.isRTL)
-        // }));
+
     }
     useEffect(() => {
-        console.log('isRTLisRTLisRTLisRTL',isRTL)
-        handleAppLang();
-
+        let uuid = getUniqueId();
+        if (uuid !== null && uuid !== undefined) {
+            dispatch(createUpdateDeviceApi(fcmToken, uuid));
+        }
+        // console.log('isRTLisRTLisRTLisRTL',isRTL)
+        // handleAppLang();
     }, []);
     return (
         <>
