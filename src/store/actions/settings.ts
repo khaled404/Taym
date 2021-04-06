@@ -36,13 +36,13 @@ export const toggleLangSwitcher = (isRtl: boolean) => {
 }
 
 
-export const createUpdateDeviceApi = (fcmToken: string, uuid: string) => {
+export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
     return async (dispatch: Dispatch<any>) => {
         try {
-            const {data} = await axiosAPI.post(`user/update-or-create-device`, {fcm_token: fcmToken, uuid,});
+            const {data} = await axiosAPI.post(`user/update-or-create-device`, {fcm_token, uuid});
             console.log('createUpdateDeviceApidata', data)
         } catch (error) {
-            console.log('createUpdateDeviceApiError', error);
+            console.log('createUpdateDeviceApiError', error.response);
         }
     };
 };
