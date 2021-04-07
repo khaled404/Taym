@@ -50,6 +50,7 @@ export enum Images {
     storelogo1 = require('../../assets/images/storelogo-2.png'),
     defAvatar = require('../../assets/images/def-avatar.png'),
     voucherBackground = require('../../assets/images/voucher-background.png'),
+    supermarket = require('../../assets/images/superMarket.jpg'),
 }
 
 export enum ScreenOptions {
