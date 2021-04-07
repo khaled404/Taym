@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         ...commonStyles.boxShadow,
         ...commonStyles.rowBox,
-        marginTop: Pixel(45),
+        marginTop: Pixel(70),
         borderRadius: 20,
     },
     inputContainer: {

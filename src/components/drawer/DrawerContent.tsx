@@ -5,6 +5,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  Image
 } from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
@@ -80,11 +81,19 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               resizeMode="contain"
             /> */}
 
+                {
+                  isLogin?
             <View style={styles.image}>
               <Text style={styles.imageText}>
-                {!!userData.name && getLetter(userData.name)}
+              {!!userData.name && getLetter(userData.name)}
               </Text>
             </View>
+              :
+              <Image
+                source={Images.defAvatar}
+                   resizeMode="contain"
+             />
+            }
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
@@ -120,7 +129,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={VouchergIcon}
               title={t('Voucher')}
-              voucher="120 LE"
+              voucher="150 LE"
               onPress={() => {
                 navigation?.navigate('Voucher');
               }}
@@ -129,9 +138,9 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={ListIcon}
               title={t('My Orders')}
-              onPress={() => {
+              /* onPress={() => {
                 navigation?.navigate('MyOrders');
-              }}
+              }} */
               isLogin={isLogin}
             />
             <DrawerItem

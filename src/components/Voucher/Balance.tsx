@@ -4,6 +4,8 @@ import {Colors, Fonts, Pixel,Images} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {useTranslation} from "react-i18next";
 import {BlackLine} from '../../../assets/Icons/Icons'
+import LinearGradient from 'react-native-linear-gradient';
+
 interface IBalance {
   value: string;
   date: string;
@@ -26,11 +28,15 @@ const Balance: FC<IBalance> = ({date, value}) => {
       <Text style={styles.value}>{value}</Text>
       </View>
       {/*<Text style={styles.date}>{date}</Text>*/}
-      <View style={{
+      <LinearGradient
+       style={{
         width:'100%',
         height:'20%',
         backgroundColor:Colors.dark
-      }} ></View>
+      }}
+      colors={['#000000', '#363636','#000000']}
+      start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+      ></LinearGradient>
       <View style={{
         width:'100%',
         height:'15%',

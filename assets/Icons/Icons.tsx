@@ -509,22 +509,22 @@ export const MenuIcon = (props?: SvgProps) => (
     </Svg>
 );
 
-export const HeartIcon = (props?: SvgProps,color?:string) => (
+export const HeartIcon = ({props,color}) => (
     <Svg width={20.599} height={20.6} viewBox="0 0 20.599 20.6" {...props}>
         <Path
             data-name="Path 1373"
             d="M3.32 10.393A9.527 9.527 0 0111.566.887a9.731 9.731 0 00-1.261-.082 9.521 9.521 0 00-9.5 9.588v9.4l.157-.157a4.417 4.417 0 012.357-1.228z"
-            fill={color==undefined?Colors.lock:"#deb6f1"}
+            fill={color!=undefined?Colors.lock:"#deb6f1"}
         />
         <Path
             data-name="Path 1374"
             d="M.8 20.6a.8.8 0 01-.8-.8v-9.4A10.325 10.325 0 0110.3 0a10.271 10.271 0 0110.3 10.4 10.309 10.309 0 01-10.338 10.2h-.01a10.175 10.175 0 01-4.6-1.081 3.565 3.565 0 00-4.12.688l-.157.157A.8.8 0 01.8 20.6zm3.27-3.064a5.12 5.12 0 012.3.544 8.581 8.581 0 003.88.91h.008a8.735 8.735 0 008.729-8.6A8.68 8.68 0 004.133 4.192a8.627 8.627 0 00-2.523 6.193v7.776a5.185 5.185 0 012.465-.625z"
-            fill={color==undefined?Colors.lock:"#622a7b"}
+            fill={color!=undefined?Colors.lock:"#622a7b"}
         />
         <Path
             data-name="Path 1375"
             d="M10.3 14.602a2.55 2.55 0 01-1.53-.506 6.3 6.3 0 01-2.9-4.82V9.26a2.614 2.614 0 014.426-1.891 2.614 2.614 0 014.426 1.891v.016a6.3 6.3 0 01-2.9 4.821 2.551 2.551 0 01-1.522.505zm-2.816-5.35a4.924 4.924 0 002.251 3.556.948.948 0 001.131 0 4.924 4.924 0 002.251-3.556 1.006 1.006 0 00-2.012 0 .804.804 0 01-1.609 0 1.006 1.006 0 00-2.012 0z"
-            fill={color==undefined?Colors.lock:"#622a7b"}
+            fill={color!=undefined?Colors.lock:"#622a7b"}
         />
     </Svg>
 );
@@ -580,7 +580,7 @@ export const EyeIcon = (props?: SvgProps) => (
     >
         <Path
             d="M19.382 6.006A10.858 10.858 0 009.75 0 10.86 10.86 0 00.118 6.006a1.1 1.1 0 000 .988A10.858 10.858 0 009.75 13a10.86 10.86 0 009.632-6.006 1.1 1.1 0 000-.988zM9.75 11.375A4.875 4.875 0 1114.625 6.5a4.875 4.875 0 01-4.875 4.875zm0-8.125a3.227 3.227 0 00-.857.128 1.62 1.62 0 01-2.265 2.265A3.243 3.243 0 109.75 3.25z"
-            fill="#622a7b"
+            fill="#070707"
         />
     </Svg>
 );
@@ -868,28 +868,28 @@ export const AuthLogo = (props?: SvgProps) => (
     </Svg>
 );
 
-export const VouchergIcon = (props?: SvgProps,color?:string) => (
+export const VouchergIcon = ({props,color}) => (
     <Svg width={19.751} height={16.356} viewBox="0 0 19.751 16.356" {...props}>
         <G data-name="testing">
             <Path
                 data-name="Path 1465"
                 d="M4.627 3.086h10.5a3.851 3.851 0 013.852 3.847V4.591A3.858 3.858 0 0015.121.733H4.629A3.858 3.858 0 00.771 4.591v2.342a3.851 3.851 0 013.856-3.847z"
-                fill={color==undefined?Colors.lock:"#deb6f1"}
+                fill={color!=undefined?Colors.lock:"#deb6f1"}
             />
             <Path
                 data-name="Path 1466"
                 d="M0 11.727v-7.1A4.634 4.634 0 014.629 0h10.493a4.634 4.634 0 014.629 4.629v7.1a4.634 4.634 0 01-4.629 4.629H4.629A4.634 4.634 0 010 11.727zm18.208-7.1a3.09 3.09 0 00-3.086-3.086H4.629a3.09 3.09 0 00-3.086 3.086v7.1a3.09 3.09 0 003.086 3.086h10.493a3.09 3.09 0 003.086-3.086z"
-                fill={color==undefined?Colors.lock:"#622a7b"}
+                fill={color!=undefined?Colors.lock:"#622a7b"}
             />
             <Path
                 data-name="Path 1467"
                 d="M13.169 11.766V5.247a.771.771 0 011.543 0v6.519a.771.771 0 11-1.543 0z"
-                fill={color==undefined?Colors.lock:"#622a7b"}
+                fill={color!=undefined?Colors.lock:"#622a7b"}
             />
             <Path
                 data-name="Path 2506"
                 d="M5.129 5.905a.8.8 0 11-.8.8.8.8 0 01.8-.8zm2.679 4.4a.8.8 0 10.8-.8.8.8 0 00-.8.8zm-2.348.6l3.769-3.92a.638.638 0 10-.924-.88l-3.766 3.922a.638.638 0 00.921.884z"
-                fill={color==undefined?Colors.lock:"#622a7b"}
+                fill={color!=undefined?Colors.lock:"#622a7b"}
             />
         </G>
     </Svg>
@@ -964,22 +964,22 @@ export const SuccessIcon = (props?: SvgProps) => (
         </G>
     </Svg>
 );
-export const ListIcon = (props?: SvgProps, color?:string) => (
+export const ListIcon = ({props, color}) => (
     <Svg width={18.897} height={22.819} viewBox="0 0 18.897 22.819"  {...props}>
         <Path
             data-name="Path 1465"
             d="M3.566 17.473V5.347A4.45 4.45 0 018.01.892H5.304A4.457 4.457 0 00.847 5.349v12.123a4.457 4.457 0 004.457 4.457H8.01a4.45 4.45 0 01-4.444-4.455z"
-            fill={color==undefined?Colors.lock:"#deb6f1"}
+            fill={color!=undefined?Colors.lock:"#deb6f1"}
         />
         <Path
             data-name="Path 1466"
             d="M13.549 22.819h-8.2A5.354 5.354 0 010 17.471V5.348A5.354 5.354 0 015.348 0h8.2A5.354 5.354 0 0118.9 5.348v12.123a5.354 5.354 0 01-5.351 5.348zm-8.2-21.037a3.57 3.57 0 00-3.566 3.566v12.123a3.57 3.57 0 003.566 3.566h8.2a3.57 3.57 0 003.566-3.566V5.348a3.57 3.57 0 00-3.566-3.566zm8.914 2.585a.891.891 0 10-1.783 0A1.339 1.339 0 0111.142 5.7H7.755a1.339 1.339 0 01-1.337-1.337.891.891 0 00-1.783 0 3.123 3.123 0 003.12 3.12h3.387a3.123 3.123 0 003.12-3.115z"
-            fill={color==undefined?Colors.lock:"#622a7b"}
+            fill={color!=undefined?Colors.lock:"#622a7b"}
         />
         <Path
             data-name="Path 1467"
             d="M13.593 17.605H6.061a.891.891 0 010-1.783h7.532a.891.891 0 110 1.783zm.891-4.323a.891.891 0 00-.891-.891h-1.738a.891.891 0 000 1.783h1.738a.891.891 0 00.892-.888zm-5.937.358l1.712-1.726a.891.891 0 10-1.266-1.255l-1.712 1.726a.017.017 0 01-.026 0l-.829-.836a.891.891 0 00-1.266 1.255l.829.836a1.8 1.8 0 002.559 0z"
-            fill={color==undefined?Colors.lock:"#622a7b"}
+            fill={color!=undefined?Colors.lock:"#622a7b"}
         />
     </Svg>
 );
