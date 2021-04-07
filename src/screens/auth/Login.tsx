@@ -21,8 +21,8 @@ const Login: FC = () => {
   const {loginErorrs} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [state, setstate] = useState({
-    email: 'm@m.con',
-    password: 'Aa@123456',
+    email: '',
+    password: '',
     secureTextEntry: true,
     loader: false,
   });
