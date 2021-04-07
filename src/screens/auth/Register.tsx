@@ -17,9 +17,9 @@ import {InputErorrHandler} from '../../constants/helpers';
 
 const Register: FC = () => {
     const [state, setstate] = useState({
-        name: '',
-        email: '',
-        password: '',
+        name: 'aboelela',
+        email: 'aboelela1@nospam.today',
+        password: 'Sayed@123',
         secureTextEntry: true,
         loader: false,
     });
