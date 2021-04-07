@@ -26,6 +26,8 @@ export const RegisterHandler = (
         email,
         password,
       });
+      console.log('RegisterHandler data',data);
+      
       dispatch({
         type: ActionType.SAVE_REGISTER_ERORRS,
         payload: {},
@@ -56,13 +58,14 @@ export const RegisterHandler = (
 export const RegisterPhoneHandler = (
   phone: string,
   cb: (success?: boolean) => void,
+  navigate:(screen: string) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const { data } = await axiosAPI.post('user/register-phone', {
         phone,
       });
-      console.log(data);
+      console.log('RegisterPhoneHandler',data);
       dispatch({
         type: ActionType.SAVE_REGISTER_ERORRS,
         payload: {},
@@ -71,7 +74,7 @@ export const RegisterPhoneHandler = (
         type: ActionType.SAVE_USER_DATA_STEP_2,
         payload: phone,
       });
-
+      navigate('PhoneCode');
       cb(true);
     } catch (error) {
       cb(false);
@@ -136,7 +139,7 @@ export const LoginHandler = (
         email,
         password,
       });
-      console.log(data);
+      console.log('LoginHandler data',data);
       showMessage({
         message: data.success.message,
         type: 'success',
@@ -153,7 +156,7 @@ export const LoginHandler = (
         type: ActionType.SAVE_LOGIN_ERORRS,
         payload: error?.response.data.message,
       });
-      console.log(error?.response);
+      console.log('LoginHandler',error?.response);
     }
   };
 };

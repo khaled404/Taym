@@ -1,6 +1,5 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "Tokyo Night",
   "[typescriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -26,8 +25,8 @@
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
-  "editor.fontSize": 15,
-  "editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
+//   "editor.fontSize": 15,
+//   "editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,

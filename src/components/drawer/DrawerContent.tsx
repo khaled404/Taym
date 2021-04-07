@@ -83,6 +83,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <View style={styles.image}>
               <Text style={styles.imageText}>
                 {!!userData.name && getLetter(userData.name)}
+                {/* sayed */}
               </Text>
             </View>
           </View>
