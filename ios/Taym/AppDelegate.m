@@ -3,9 +3,8 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import "RNGoogleSignin.h"
-#import "FBSDKCoreKit"
 #import <Firebase.h>
+#import "RNGoogleSignin.h"
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -36,7 +35,6 @@ static void InitializeFlipper(UIApplication *application) {
 if ([FIRApp defaultApp] == nil) {
     [FIRApp configure];
   }
-  [FBSDKApplicationDelegate initializeSDK:launchOptions];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
@@ -56,23 +54,20 @@ if ([FIRApp defaultApp] == nil) {
   [self.window makeKeyAndVisible];
   return YES;
 }
-- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
-  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] || [RNGoogleSignin application:application openURL:url options:options];
-}
-- (BOOL)application:(UIApplication *)app
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
-{
-  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
-    return YES;
-  }
+// - (BOOL)application:(UIApplication *)app
+//             openURL:(NSURL *)url
+//             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+// {
+//   if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
+//     return YES;
+//   }
 
-  if ([RCTLinkingManager application:app openURL:url options:options]) {
-    return YES;
-  }
+//   if ([RCTLinkingManager application:app openURL:url options:options]) {
+//     return YES;
+//   }
 
-  return NO;
-}
+//   return NO;
+// }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

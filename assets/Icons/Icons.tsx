@@ -90,6 +90,48 @@ export const LogoIcon = (props?: SvgProps) => (
         </G>
     </Svg>
 );
+export const TrashIcon = (props?: SvgProps) => (
+  <Svg
+    width={24.071}
+    height={26.361}
+    viewBox="0 0 24.071 26.361"
+    {...props}
+  >
+      <Path
+        data-name="Path 1445"
+        d="M3.761 6.991v-.94A2.821 2.821 0 016.582 3.23H3.761A2.821 2.821 0 00.94 6.051v.94a2.821 2.821 0 002.821 2.821h2.821a2.821 2.821 0 01-2.821-2.821z"
+        fill="#deb6f1"
+      />
+      <Path
+        data-name="Path 1446"
+        d="M20.31 10.753H3.761A3.765 3.765 0 010 6.99v-.94a3.765 3.765 0 013.761-3.76H20.31a3.765 3.765 0 013.761 3.761v.939a3.765 3.765 0 01-3.761 3.763zM3.761 4.171a1.883 1.883 0 00-1.88 1.88v.939a1.883 1.883 0 001.88 1.882H20.31a1.883 1.883 0 001.881-1.882v-.94a1.883 1.883 0 00-1.881-1.879zm18.9 16.549v-7.147a.94.94 0 10-1.881 0v7.147a3.765 3.765 0 01-3.761 3.761H7.052a3.765 3.765 0 01-3.761-3.761v-7.147a.94.94 0 10-1.881 0v7.147a5.648 5.648 0 005.642 5.642h9.967a5.648 5.648 0 005.642-5.642z"
+        fill="#622a7b"
+      />
+      <Path
+        data-name="Path 1447"
+        d="M15.157 3.442H8.914a1.42 1.42 0 01-1.419-1.418v-.355A1.42 1.42 0 018.914.25h6.243a1.42 1.42 0 011.419 1.419v.355a1.42 1.42 0 01-1.419 1.418zM8.914.959a.71.71 0 00-.709.709v.355a.71.71 0 00.709.709h6.243a.71.71 0 00.709-.709v-.354a.71.71 0 00-.709-.71z"
+        fill="#622a7b"
+        stroke="#622a7b"
+        strokeWidth={0.5}
+      />
+      <Path
+        data-name="Path 1448"
+        d="M17.262 15.478H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+        fill="#ffde00"
+      />
+      <Path
+        data-name="Path 1449"
+        d="M17.262 18.936H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+        fill="#ffde00"
+      />
+      <Path
+        data-name="Path 1450"
+        d="M17.262 22.394H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+        fill="#ffde00"
+      />
+  </Svg>
+);
+
 export const CartIcon = (props?: SvgProps) => (
     <Svg
         width={20.88}
@@ -113,6 +155,17 @@ export const CartIcon = (props?: SvgProps) => (
             fill="#ffde00"
         />
     </Svg>
+);
+
+export const NotificationItemIcon = (props?: SvgProps) => (
+  <Svg
+    width={6}
+    height={6}
+    viewBox="0 0 6 6"
+    {...props}
+  >
+      <Circle data-name="Ellipse 51" cx={3} cy={3} r={3} fill="#622a7b" />
+  </Svg>
 );
 
 export const VisaIcon = (props?: SvgProps) => (
