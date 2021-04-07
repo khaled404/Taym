@@ -25,6 +25,7 @@ export enum Colors {
     snapchat = '#fffc00',
     instagram = '#405de6',
     whatsapp = '#128c7e',
+    lock='#989898'
 }
 
 export enum Fonts {
@@ -47,6 +48,9 @@ export enum Images {
     cartItem = require('../../assets/images/cartItem-1.png'),
     cartItem1 = require('../../assets/images/cartItem-2.png'),
     storelogo1 = require('../../assets/images/storelogo-2.png'),
+    defAvatar = require('../../assets/images/def-avatar.png'),
+    voucherBackground = require('../../assets/images/voucher-background.png'),
+    supermarket = require('../../assets/images/superMarket.jpg'),
 }
 
 export enum ScreenOptions {

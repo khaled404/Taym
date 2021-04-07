@@ -47,6 +47,7 @@ const App: FC = () => {
   const dispatch = useDispatch();
 
   const {isRTL}: any = useSelector((state: RootState) => state.settings);
+  const {isLogin} = useSelector((state: RootState) => state.auth);
   const [fcmToken, setFcmToken] = useState<string>('');
   const requestUserPermission = async () => {
     try {
@@ -82,18 +83,12 @@ const App: FC = () => {
       });
   }, []);
 
-  const handleAppLang = async () => {
-
-  }
   useEffect(() => {
     let uuid = getUniqueId();
-    console.log('fcmToken', fcmToken);
-    if (uuid !== null && uuid !== undefined) {
+    if (isLogin && uuid !== null && uuid !== undefined) {
       dispatch(createUpdateDeviceApi(fcmToken, uuid));
     }
-    // console.log('isRTLisRTLisRTLisRTL',isRTL)
-    // handleAppLang();
-  }, []);
+  }, [fcmToken]);
   return (
     <>
       <View

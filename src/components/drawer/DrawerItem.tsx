@@ -11,20 +11,26 @@ interface Props {
   title: string;
   active?: boolean;
   voucher?: string;
+  isLogin?:boolean
 }
-const DrawerItem: FC<Props> = ({onPress, Icon, title, active, voucher}) => (
+const DrawerItem: FC<Props> = ({onPress, Icon, title, active, voucher,isLogin}) => (
   <View
     style={[
       styles.container,
       active && {backgroundColor: `${Colors.white}30`},
     ]}>
-    <Touchable onPress={onPress}>
+    <Touchable onPress={isLogin?onPress:null}>
       <View style={styles.list}>
         <View style={styles.listIcon}>
-          {Icon && <Icon width={Pixel(45)} height={Pixel(45)} />}
+          {Icon && <Icon width={Pixel(45)} height={Pixel(45)} color={isLogin?undefined:Colors.lock}  />}
         </View>
-        <Text style={styles.listText}>{title}</Text>
-        {!!voucher && <Text style={styles.voucher}>{voucher}</Text>}
+        <Text style={[styles.listText,{
+          color:isLogin?Colors.dark:Colors.lock
+        }]}>{title}</Text>
+        {!!voucher && <Text style={[styles.voucher,{
+          backgroundColor:isLogin?Colors.colorSacand:Colors.lock,
+          color:isLogin?Colors.white:Colors.dark
+        }]}>{isLogin?voucher:'0 LE'}</Text>}
       </View>
     </Touchable>
   </View>

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,7 @@ import {commonStyles} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
+import {LogoutHandler} from '../../store/actions/auth';
 import {
   HomeIcon,
   HeartIcon,
@@ -24,6 +25,7 @@ import {
   SettingsIcon,
   TelephoneIcon,
   EditIcon,
+  LogOut,
 } from '../../../assets/Icons/Icons';
 
 const {height, width} = Dimensions.get('window');
@@ -33,6 +35,28 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
     (state: RootState) => state.auth,
   );
   const {t}: any = useTranslation();
+
+  /**********
+   * get first 2 letters
+   * ************ */
+  const getLetter: any = (st: string) => {
+    const fullName = st?.split(' ');
+    const letters = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+    return letters.toUpperCase();
+  };
+
+  /********
+   *
+   * logOut
+   * ********* */
+
+  const logOut = () => {
+    dispatch(
+      LogoutHandler(success => {
+        success && navigation?.navigate('Login');
+      }),
+    );
+  };
 
   return (
     <ScrollView
@@ -45,77 +69,111 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             navigation?.navigate('Profile');
           }}>
           <View style={styles.userImage}>
-            <View style={styles.editIcon}>
-              <EditIcon />
-            </View>
-            <FastImage
-              source={userData.image ? {uri: userData.image} : Images.userImage}
+            {isLogin ? (
+              <View style={styles.editIcon}>
+                <EditIcon />
+              </View>
+            ) : null}
+            {/*   <FastImage
+              source={isLogin? userData.image ? {uri: userData.image} : Images.userImage:Images.defAvatar}
               style={commonStyles.image}
               resizeMode="contain"
-            />
+            /> */}
+
+            <View style={styles.image}>
+              <Text style={styles.imageText}>
+                {!!userData.name && getLetter(userData.name)}
+              </Text>
+            </View>
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
-              Yassin Ahmed
+              {!isLogin ? 'Login Or Sign up' : userData.name}
               {/* {isLogin ? userData.name : t('Login')} */}
             </Text>
-            <Text style={styles.userSupTitle}>
-              0123456789
-              {/* {isLogin ? userData.name : t('Login')} */}
-            </Text>
+            {isLogin ? (
+              <Text style={styles.userSupTitle}>
+                {userData.phone}
+                {/* {isLogin ? userData.name : t('Login')} */}
+              </Text>
+            ) : null}
           </View>
         </TouchableOpacity>
         <View style={styles.body}>
-          <DrawerItem
-            Icon={HomeIcon}
-            title={t('Home')}
-            onPress={() => {
-              navigation?.navigate('Home');
-            }}
-          />
-          <DrawerItem
-            Icon={HeartIcon}
-            title={t('Favorite')}
-            onPress={() => {
-              navigation?.navigate('Favorite');
-            }}
-          />
-          <DrawerItem
-            Icon={VouchergIcon}
-            title={t('Voucher')}
-            voucher="120 LE"
-            onPress={() => {
-              navigation?.navigate('Voucher');
-            }}
-          />
-          <DrawerItem
-            Icon={ListIcon}
-            title={t('My Orders')}
-            onPress={() => {
-              navigation?.navigate('MyOrders');
-            }}
-          />
-          <DrawerItem
-            Icon={OffersIcon}
-            title={t('Offers')}
-            onPress={() => {
-              navigation?.navigate('Home');
-            }}
-          />
-          <DrawerItem
-            Icon={SettingsIcon}
-            title={t('Settings')}
-            onPress={() => {
-              navigation?.navigate('Settings');
-            }}
-          />
-          <DrawerItem
-            Icon={TelephoneIcon}
-            title={t('Suport')}
-            onPress={() => {
-              navigation?.navigate('Home');
-            }}
-          />
+          <View>
+            <DrawerItem
+              Icon={HomeIcon}
+              title={t('Home')}
+              onPress={() => {
+                navigation?.navigate('Home');
+              }}
+              isLogin={true}
+            />
+            <DrawerItem
+              Icon={HeartIcon}
+              title={t('Favorite')}
+              onPress={() => {
+                navigation?.navigate('Favorite');
+              }}
+              isLogin={isLogin}
+            />
+            <DrawerItem
+              Icon={VouchergIcon}
+              title={t('Voucher')}
+              voucher="120 LE"
+              onPress={() => {
+                navigation?.navigate('Voucher');
+              }}
+              isLogin={isLogin}
+            />
+            <DrawerItem
+              Icon={ListIcon}
+              title={t('My Orders')}
+              onPress={() => {
+                navigation?.navigate('MyOrders');
+              }}
+              isLogin={isLogin}
+            />
+            <DrawerItem
+              Icon={OffersIcon}
+              title={t('Offers')}
+              onPress={() => {
+                navigation?.navigate('Home');
+              }}
+              isLogin={true}
+            />
+            <DrawerItem
+              Icon={SettingsIcon}
+              title={t('Settings')}
+              onPress={() => {
+                navigation?.navigate('Settings');
+              }}
+              isLogin={true}
+            />
+            <DrawerItem
+              Icon={TelephoneIcon}
+              title={t('Suport')}
+              onPress={() => {
+                navigation?.navigate('Home');
+              }}
+              isLogin={true}
+            />
+          </View>
+          {isLogin ? (
+            <View
+              style={{
+                marginTop: 30,
+              }}>
+              <DrawerItem
+                Icon={LogOut}
+                title={t('Log Out')}
+                onPress={() => {
+                  logOut();
+                }}
+                isLogin={isLogin}
+              />
+            </View>
+          ) : null}
         </View>
       </View>
     </ScrollView>
@@ -173,5 +231,19 @@ const styles = StyleSheet.create({
   body: {
     paddingTop: 30,
     paddingBottom: 15,
+  },
+  image: {
+    backgroundColor: '#00000029',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: Pixel(70),
+    width: Pixel(140),
+    height: Pixel(140),
+  },
+  imageText: {
+    color: Colors.dark,
+    fontFamily: Fonts.bold,
+    fontSize: Pixel(45),
+    textAlign: 'left',
   },
 });

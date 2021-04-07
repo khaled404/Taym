@@ -24,6 +24,8 @@ import {
     Register,
     Settings,
     Voucher,
+    ForgetPhoneCode,
+    ShopDetails
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -131,6 +133,7 @@ const Stacks: FC<any> = ({style}) => {
                 <Stack.Screen name="Forget" component={Forget}/>
                 <Stack.Screen name="Forget2" component={Forget2}/>
                 <Stack.Screen name="Forget3" component={Forget3}/>
+                <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode} />
                 <Stack.Screen name="PhoneCode" component={PhoneCode}/>
                 <Stack.Screen name="Settings" component={Settings}/>
                 <Stack.Screen name="MyAddresses" component={MyAddresses}/>
@@ -139,6 +142,7 @@ const Stacks: FC<any> = ({style}) => {
                 <Stack.Screen name="Category" component={Category}/>
                 <Stack.Screen name="Cart" component={Cart}/>
                 <Stack.Screen name="Language" component={Language}/>
+                <Stack.Screen name="ShopDetails" component={ShopDetails}/>
                 <Stack.Screen name="Notifications" component={Notifications}/>
             </Stack.Navigator>
 

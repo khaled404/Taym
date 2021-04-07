@@ -34,7 +34,6 @@ const Profile: FC = () => {
         );
     };
 
-    console.log('userdata', userData);
     return (
         <Container style={styles.container}>
             <Header title={t('Profile')}/>

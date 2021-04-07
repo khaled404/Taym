@@ -1,14 +1,14 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Container, Content} from '../../components/containers/Containers';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
+import React, { FC, useState } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Container, Content } from '../../components/containers/Containers';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
 import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
-import {useDispatch} from 'react-redux';
-import {ForgetHandler} from '../../store/actions/auth';
+import { useDispatch } from 'react-redux';
+import { ForgetHandler } from '../../store/actions/auth';
 
 const Forget: FC = () => {
   const [state, setstate] = useState({
@@ -17,23 +17,25 @@ const Forget: FC = () => {
   });
   const dispatch = useDispatch();
   const submitHandler = () => {
-    setstate(old => ({...old, loader: true}));
+    console.log('success1')
+    setstate(old => ({ ...old, loader: true }));
     dispatch(
       ForgetHandler(state.phone, success => {
-        setstate(old => ({...old, loader: false}));
+        console.log(success, '   ', state.phone, 'success')
+        setstate(old => ({ ...old, loader: false }));
         success && navigate('ForgetPhoneCode');
       }),
     );
   };
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
+  const { t } = useTranslation();
+  const { navigate } = useNavigation();
   return (
     <Container style={styles.container}>
       <AuthHeader />
       <Content noPadding style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.mainTitle}>
-            {t('Enter Email / Mobile Number')}
+            {t('Enter Email / Mobile Number ')}
           </Text>
           <Text style={styles.sectionTitle}>
             {t("And We'll Send You The Instructions")}
@@ -41,7 +43,7 @@ const Forget: FC = () => {
         </View>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{t('Mobile Number')}</Text>
+            <Text style={styles.inputLabel}>Mobile Nember</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
@@ -58,6 +60,7 @@ const Forget: FC = () => {
             />
           </View>
           <View style={styles.submitContainer}>
+
             <Button title={t('Next')} onPress={submitHandler} />
           </View>
         </View>

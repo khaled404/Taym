@@ -1,15 +1,15 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Container, Content} from '../../components/containers/Containers';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
+import React, { FC, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Container, Content } from '../../components/containers/Containers';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
 import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {NewPasswordHandler} from '../../store/actions/auth';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { NewPasswordHandler } from '../../store/actions/auth';
 
 const Forget2: FC = () => {
   const [state, setstate] = useState({
@@ -17,22 +17,26 @@ const Forget2: FC = () => {
     password: '',
     secureTextEntry: true,
   });
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
-  const {phoneNumber}: any = useSelector(
+  const { t } = useTranslation();
+  const { navigate } = useNavigation();
+  const { phoneNumber }: any = useSelector(
     (state: RootState) => state.auth,
     shallowEqual,
   );
   const dispatch = useDispatch();
   const submitHandler = () => {
-    setstate(old => ({...old, loader: true}));
+    setstate(old => ({ ...old, loader: true }));
     dispatch(
       NewPasswordHandler(
         phoneNumber,
         state.password,
         state.confirmPassword,
         success => {
-          setstate(old => ({...old, loader: false}));
+          console.log(phoneNumber,
+            state.password,
+            state.confirmPassword,
+            success, 'succ')
+          setstate(old => ({ ...old, loader: false }));
           success && navigate('Forget3');
         },
       ),
@@ -45,14 +49,14 @@ const Forget2: FC = () => {
       <Content noPadding style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
-            {t('Your Identity Has Been Verified')} {' '}
+            Your Identity Has Been Verified{' '}
           </Text>
-          <Text style={styles.sectionTitle}>{t('Set Your New Password')}</Text>
+          <Text style={styles.sectionTitle}>Set Your New Password</Text>
         </View>
 
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{t('New Password')}</Text>
+            <Text style={styles.inputLabel}>New Password</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
@@ -70,7 +74,7 @@ const Forget2: FC = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{t('Confirm New Password')}</Text>
+            <Text style={styles.inputLabel}>Confirm New Password</Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
