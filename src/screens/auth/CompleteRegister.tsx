@@ -32,7 +32,7 @@ const CompleteRegister: FC = () => {
         RegisterPhoneHandler(state.phone, success => {
           setstate(old => ({...old, loader: false}));
           success && navigate('PhoneCode');
-        }),
+        },()=>navigate("PhoneCode")),
       );
     } else {
       showMessage({

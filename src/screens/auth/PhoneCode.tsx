@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC,useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -33,6 +33,9 @@ const PhoneCode: FC = () => {
       }),
     );
   };
+  useEffect(() => {
+  console.log('PhoneCode');
+  }, []);
   return (
     <Container style={styles.container}>
       <AuthHeader />
