@@ -5,7 +5,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  Image
+  Image,
 } from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
@@ -37,24 +37,16 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   );
   const {t}: any = useTranslation();
 
-  /**********
-   * get first 2 letters
-   * ************ */
-  const getLetter: any = (st: string) => {
+  const getLetter = (st: string) => {
     const fullName = st?.split(' ');
     const letters = fullName.shift().charAt(0) + fullName.pop().charAt(0);
     return letters.toUpperCase();
   };
 
-  /********
-   *
-   * logOut
-   * ********* */
-
   const logOut = () => {
     dispatch(
-      LogoutHandler(success => {
-        success && navigation?.navigate('Login');
+      LogoutHandler(() => {
+        navigation.closeDrawer();
       }),
     );
   };
@@ -67,7 +59,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
         <TouchableOpacity
           style={styles.header}
           onPress={() => {
-            navigation?.navigate('Profile');
+            navigation?.navigate(isLogin ? 'Profile' : 'Login');
           }}>
           <View style={styles.userImage}>
             {isLogin ? (
@@ -81,19 +73,15 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               resizeMode="contain"
             /> */}
 
-                {
-                  isLogin?
-            <View style={styles.image}>
-              <Text style={styles.imageText}>
-              {!!userData.name && getLetter(userData.name)}
-              </Text>
-            </View>
-              :
-              <Image
-                source={Images.defAvatar}
-                   resizeMode="contain"
-             />
-            }
+            {isLogin ? (
+              <View style={styles.image}>
+                <Text style={styles.imageText}>
+                  {!!userData.name && getLetter(userData.name)}
+                </Text>
+              </View>
+            ) : (
+              <Image source={Images.defAvatar} resizeMode="contain" />
+            )}
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>

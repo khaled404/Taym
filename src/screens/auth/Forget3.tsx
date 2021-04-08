@@ -14,7 +14,7 @@ const Forget3: FC = () => {
   return (
     <Container style={styles.container}>
       <AuthHeader />
-      <Content noPadding style={styles.contentContainer}>
+      <Content style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.mainTitle}>{t('Congratulations')}</Text>
           <Text style={styles.sectionTitle}>
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: Colors.sacandAppBackgroundColor,
     flex: 1,
@@ -53,6 +52,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(43),
     marginVertical: Pixel(20),
+    textAlign: 'left',
   },
   submitContainer: {
     marginVertical: Pixel(80),
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     color: Colors.dark,
     marginLeft: 5,
     fontSize: Pixel(32),
+    textAlign: 'left',
   },
   successIconContainer: {
     width: '100%',

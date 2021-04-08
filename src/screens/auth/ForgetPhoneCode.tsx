@@ -1,15 +1,15 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Container, Content } from '../../components/containers/Containers';
-import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
+import React, {FC, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {Container, Content} from '../../components/containers/Containers';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
 import AuthHeader from '../../components/header/AuthHeader';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import CodeInput from '../../components/textInputs/CodeInput';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { VerifyPhoneForgetHandler } from '../../store/actions/auth';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {VerifyPhoneForgetHandler} from '../../store/actions/auth';
 
 const ForgetPhoneCode: FC = () => {
   const [state, setstate] = useState({
@@ -18,17 +18,17 @@ const ForgetPhoneCode: FC = () => {
   });
 
   const dispatch = useDispatch();
-  const { phoneNumber }: any = useSelector(
+  const {phoneNumber}: any = useSelector(
     (state: RootState) => state.auth,
     shallowEqual,
   );
-  const { t } = useTranslation();
-  const { navigate } = useNavigation();
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
   const submitHandler = () => {
-    setstate(old => ({ ...old, loader: true }));
+    setstate(old => ({...old, loader: true}));
     dispatch(
       VerifyPhoneForgetHandler(state.code, success => {
-        setstate(old => ({ ...old, loader: false }));
+        setstate(old => ({...old, loader: false}));
         success && navigate('Forget2');
       }),
     );
@@ -36,7 +36,7 @@ const ForgetPhoneCode: FC = () => {
   return (
     <Container style={styles.container}>
       <AuthHeader />
-      <Content noPadding style={styles.contentContainer}>
+      <Content style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
             {t('Enter the 6-digit code sent to number')}
@@ -47,9 +47,9 @@ const ForgetPhoneCode: FC = () => {
           <View style={styles.inputContainer}>
             <CodeInput
               onChangeText={text => {
-                setstate(old => ({ ...old, code: text }));
+                setstate(old => ({...old, code: text}));
               }}
-            //numOfInputs={6}
+              //numOfInputs={6}
             />
           </View>
           <View style={styles.submitContainer}>
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: Colors.sacandAppBackgroundColor,
     flex: 1,

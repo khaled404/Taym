@@ -14,6 +14,7 @@ export interface IDispatch extends IReduser {}
 export interface NavigationProps {
   goBack?: () => void;
   openDrawer?: () => void;
+  closeDrawer?: () => void;
   navigate?: any;
   replace?: any;
   reset?: any;
