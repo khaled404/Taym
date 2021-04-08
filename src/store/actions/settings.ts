@@ -52,6 +52,8 @@ export const LanguageHandler = (lang: string) => {
     allowRTL(lang === 'ar');
     forceRTL(lang === 'ar');
     swapLeftAndRightInRTL(lang === 'ar');
-    RNRestart.Restart();
+    setTimeout(() => {
+      RNRestart.Restart();
+    }, 500);
   };
 };
