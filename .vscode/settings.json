@@ -31,7 +31,7 @@
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
   "editor.lineHeight": 25,
-  "editor.multiCursorModifier": "ctrlCmd",
+//   "editor.multiCursorModifier": "ctrlCmd",
   "editor.suggestSelection": "first",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,

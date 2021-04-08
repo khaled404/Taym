@@ -17,7 +17,7 @@ const CategoryStoresList: FC<ICategoryStoresList> = ({data}) => {
                 renderItem={({item,index}) => <CategoryStoreItem isLast={index === data.length - 1} index={index} {...item}/>}
                 keyExtractor={(item) => item.id}
             />
-
+            
         </View>
     );
 };

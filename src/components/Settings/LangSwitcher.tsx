@@ -4,44 +4,46 @@ import {commonStyles} from '../../styles/styles';
 import {useNavigation} from '@react-navigation/native';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AsyncKeys, getItem} from '../../constants/helpers';
+import {LanguageHandler} from '../../store/actions/settings';
+import {RootState} from '../../store/store';
 
 let isRtl: string;
 getItem(AsyncKeys.IS_RTL).then(isRtlValue => (isRtl = isRtlValue));
 
 const LangSwitcher: FC = () => {
   const {t} = useTranslation();
+  const {language}: any = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
 
-  const handleChangeLang = (rtl: boolean) => {};
   return (
     <View style={styles.settingsItemContainer}>
       <Text style={styles.settingsItemText}>{t('Language')}</Text>
       <View style={styles.langBtnsContainer}>
         <TouchableOpacity
           onPress={() => {
-            handleChangeLang(false);
+            dispatch(LanguageHandler('en'));
             setToggle(false);
           }}
           style={[
             styles.langBtn,
             {
-              backgroundColor: isRtl ? 'white' : Colors.minColor,
+              backgroundColor: language === 'ar' ? 'white' : Colors.minColor,
             },
           ]}>
           <Text style={styles.langBtnText}>{t('English')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            handleChangeLang(true);
+            dispatch(LanguageHandler('ar'));
             setToggle(true);
           }}
           style={[
             styles.langBtn,
             {
-              backgroundColor: !isRtl ? 'white' : Colors.minColor,
+              backgroundColor: language === 'en' ? 'white' : Colors.minColor,
             },
           ]}>
           <Text style={styles.langBtnText}>{t('Arabic')}</Text>
