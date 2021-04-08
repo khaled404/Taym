@@ -11,26 +11,53 @@ interface Props {
   title: string;
   active?: boolean;
   voucher?: string;
-  isLogin?:boolean
+  isLogin?: boolean;
 }
-const DrawerItem: FC<Props> = ({onPress, Icon, title, active, voucher,isLogin}) => (
+const DrawerItem: FC<Props> = ({
+  onPress,
+  Icon,
+  title,
+  active,
+  voucher,
+  isLogin,
+}) => (
   <View
     style={[
       styles.container,
       active && {backgroundColor: `${Colors.white}30`},
     ]}>
-    <Touchable onPress={isLogin?onPress:null}>
+    <Touchable onPress={isLogin ? onPress : null}>
       <View style={styles.list}>
         <View style={styles.listIcon}>
-          {Icon && <Icon width={Pixel(45)} height={Pixel(45)} color={isLogin?undefined:Colors.lock}  />}
+          {Icon && (
+            <Icon
+              width={Pixel(45)}
+              height={Pixel(45)}
+              color={isLogin ? undefined : Colors.lock}
+            />
+          )}
         </View>
-        <Text style={[styles.listText,{
-          color:isLogin?Colors.dark:Colors.lock
-        }]}>{title}</Text>
-        {!!voucher && <Text style={[styles.voucher,{
-          backgroundColor:isLogin?Colors.colorSacand:Colors.lock,
-          color:isLogin?Colors.white:Colors.dark
-        }]}>{isLogin?voucher:'0 LE'}</Text>}
+        <Text
+          style={[
+            styles.listText,
+            {
+              color: isLogin ? Colors.dark : Colors.lock,
+            },
+          ]}>
+          {title}
+        </Text>
+        {!!voucher && (
+          <Text
+            style={[
+              styles.voucher,
+              {
+                backgroundColor: isLogin ? Colors.colorSacand : Colors.lock,
+                color: isLogin ? Colors.white : Colors.dark,
+              },
+            ]}>
+            {isLogin ? voucher : '0 LE'}
+          </Text>
+        )}
       </View>
     </Touchable>
   </View>
@@ -52,6 +79,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(28),
     color: Colors.dark,
+    textAlign: 'left',
   },
   container: {
     marginBottom: 5,

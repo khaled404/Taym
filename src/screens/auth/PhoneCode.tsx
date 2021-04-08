@@ -1,4 +1,4 @@
-import React, {FC,useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -33,13 +33,11 @@ const PhoneCode: FC = () => {
       }),
     );
   };
-  useEffect(() => {
-  console.log('PhoneCode');
-  }, []);
+
   return (
     <Container style={styles.container}>
       <AuthHeader />
-      <Content noPadding style={styles.contentContainer}>
+      <Content style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
             {t('Enter the 6-digit code sent to number')}
@@ -73,7 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: Colors.sacandAppBackgroundColor,
     flex: 1,

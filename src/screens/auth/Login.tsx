@@ -48,11 +48,13 @@ const Login: FC = () => {
   return (
     <Container style={styles.container}>
       <AuthHeader />
-      <Content noPadding style={styles.contentContainer}>
+      <Content style={styles.contentContainer}>
         <Text style={styles.mainTitle}>{t('Sign In')}</Text>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
-            <Text style={styles.inputLabel}>{t('Phone Number / Email Address')}</Text>
+            <Text style={styles.inputLabel}>
+              {t('Phone Number / Email Address')}
+            </Text>
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
@@ -101,7 +103,7 @@ const Login: FC = () => {
                 fontFamily: Fonts.regular,
                 fontSize: Pixel(27),
               }}>
-                {t('Forgot Password?')}
+              {t('Forgot Password?')}
             </Text>
           </TouchableOpacity>
 
@@ -126,7 +128,9 @@ const Login: FC = () => {
                 color: Colors.dark,
                 fontFamily: Fonts.bold,
                 fontSize: Pixel(35),
-              }}>{t(`Skip >>`)}</Text>
+              }}>
+              {t(`Skip >>`)}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -141,14 +145,18 @@ const Login: FC = () => {
                 color: Colors.dark,
                 fontFamily: Fonts.medium,
                 fontSize: Pixel(30),
-              }}>{t(`Don't Have An Account ?`)}</Text>
+              }}>
+              {t(`Don't Have An Account ?`)}
+            </Text>
             <Text
               style={{
                 color: Colors.colorSacand,
                 fontFamily: Fonts.medium,
                 fontSize: Pixel(30),
                 marginLeft: 10,
-              }}>{t(`Register`)}</Text>
+              }}>
+              {t(`Register`)}
+            </Text>
           </TouchableOpacity>
         </View>
       </Content>
@@ -162,7 +170,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: Colors.sacandAppBackgroundColor,
     flex: 1,
@@ -172,6 +179,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(60),
     marginVertical: Pixel(25),
+    textAlign: 'left',
   },
   submitContainer: {
     marginVertical: Pixel(80),
@@ -189,6 +197,7 @@ const styles = StyleSheet.create({
     color: Colors.dark,
     fontFamily: Fonts.medium,
     marginBottom: Pixel(17),
+    textAlign: 'left',
   },
   textInput: {
     height: Pixel(100),
