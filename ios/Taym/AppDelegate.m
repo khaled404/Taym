@@ -5,7 +5,7 @@
 #import <React/RCTRootView.h>
 #import <Firebase.h>
 #import "RNGoogleSignin.h"
-
+#import <React/RCTI18nUtil.h>
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -29,6 +29,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+[[RCTI18nUtil sharedInstance] allowRTL:YES];
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
