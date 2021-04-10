@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC,useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,8 @@ import {
   ImageBackground,
   Image,
   FlatList,
+  Animated,
+  Dimensions
 } from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import HomeHeader from '../components/header/HomeHeader';
@@ -20,10 +22,29 @@ import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {SearchIcon} from '../../assets/Icons/Icons';
+import {SearchIcon,CartIcon,ArrowLeftSmIcon,DeliveryIcon} from '../../assets/Icons/Icons';
 import FavoriteItem from '../components/Home/FavoriteItem';
+
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+const heightHeader=(Dimensions.get('window').height)/4
 const ShopDetails: FC = () => {
   const {t} = useTranslation();
+  const animatedValue=useState(new Animated.Value(0))[0]
+
+  const translateY = animatedValue.interpolate({
+    inputRange: [0, heightHeader/1.7],
+    outputRange: [0, -heightHeader/1.7],
+    extrapolate: 'clamp',
+  });
+
+  const imageWidth = animatedValue.interpolate({
+    inputRange: [-1, 250],
+    outputRange: [1, -1],
+  });
+
+
+  
 
   const categoryHomeData = [
     {
@@ -62,33 +83,6 @@ const ShopDetails: FC = () => {
       image: 'Voucher 12457',
     },
   ];
-  const carouselItems = [
-    {
-      id: 1,
-      title: t('You Can Get Our Offer'),
-      image: 'Text 1',
-    },
-    {
-      id: 2,
-      title: t('You Can Get Our Offer'),
-      image: 'Text 1',
-    },
-    {
-      id: 3,
-      title: t('You Can Get Our Offer'),
-      image: 'Text 1',
-    },
-    {
-      id: 4,
-      title: t('You Can Get Our Offer'),
-      image: 'Text 1',
-    },
-    {
-      id: 5,
-      title: t('You Can Get Our Offer'),
-      image: 'Text 1',
-    },
-  ];
 
   const SearchSubmitBtn: FC = () => {
     return (
@@ -97,53 +91,93 @@ const ShopDetails: FC = () => {
       </IconTouchableContainer>
     );
   };
-
   return (
     <Container style={styles.container}>
       <ImageBackground
         source={Images.supermarket}
         style={styles.header}
-        imageStyle={{}}>
-        <View style={styles.overlay}></View>
+        imageStyle={{}}
+        >
+        <View style={styles.overlay}>
+        <View style={{
+          height:heightHeader/2,
+          paddingHorizontal:Pixel(50),
+          flexDirection:'row',
+          justifyContent:'space-between',
+          alignItems:'center',
+          position:'relative',
+        }} >
+        
+
+          <ArrowLeftSmIcon/>
+          
+          <CartIcon/>
+
+        </View>
+
+        </View>
       </ImageBackground>
-      <View style={styles.content}>
-        <View
+      <Animated.View style={[styles.content, {transform: [{translateY}]}]}>
+        <Animated.View
           style={{
             width: '100%',
             alignItems: 'center',
             height: 50,
           }}>
-          <View style={styles.imageContainer}>
-            <Image source={Images.logo} style={{width: 70, height: 70}} />
-          </View>
-        </View>
+          <Animated.View style={[styles.imageContainer ,{
+            opacity:imageWidth,
+          }]}>
+            <Animated.Image 
+            source={Images.marketLogo} 
+            resizeMode={'contain'} 
+            style={[{width: Pixel(180), height: Pixel(180)},{
+              opacity:imageWidth,
+            }]} />
+          </Animated.View>
+        </Animated.View>
 
         <View
           style={{
             width: '95%',
-            height: 40,
+            height: Pixel(100),
             borderBottomColor: '#707070',
             borderBottomWidth: 1,
-            marginHorizontal: Pixel(20),
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-start',
-            marginTop: 20,
+            //marginTop: 20,
           }}>
+            <View style={{
+            flexDirection:'row',
+            alignItems:'center',
+            justifyContent:'center',
+            height:'100%'
+          }} >
+
           <Text
             style={{
-              fontSize: Pixel(40),
-              fontFamily: Fonts.bold,
+              fontSize: Pixel(45),
+              fontFamily: Fonts.black,
             }}>
             Refresh Supermarket
           </Text>
+              </View>
+          <View style={{
+            flexDirection:'row',
+            alignItems:'center',
+            justifyContent:'center',
+            height:'100%'
+          }} >
+            <DeliveryIcon/>
           <Text
             style={{
-              fontSize: Pixel(40),
-              fontFamily: Fonts.regular,
+              fontSize: Pixel(30),
+              fontFamily: Fonts.medium,
+              paddingLeft:Pixel(15)
             }}>
             30 Min
           </Text>
+          </View>
         </View>
 
         <View style={styles.searchInputContainer}>
@@ -161,7 +195,12 @@ const ShopDetails: FC = () => {
             iconRightStyle={{top: 5}}
           />
         </View>
-        <FlatList
+        <AnimatedFlatList
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: animatedValue}}}],
+          {useNativeDriver: true} // <-- Add this
+        )}
+        scrollEventThrottle={16}
           data={categoryHomeData}
           numColumns={2}
           horizontal={false}
@@ -172,7 +211,7 @@ const ShopDetails: FC = () => {
             <FavoriteItem {...item} key={index} index={index} />
           )}
         />
-      </View>
+      </Animated.View>
     </Container>
   );
 };
@@ -181,21 +220,30 @@ export default ShopDetails;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(0,0,0,.1)',
+    backgroundColor: Colors.white,
   },
   header: {
-    flex: 1,
+    height:heightHeader,
+    zIndex:1,
+    position:'relative',
+    justifyContent:'flex-start'
   },
   overlay: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(250,250,250,0.6)',
+    backgroundColor: 'rgba(250,250,250,0.7)',
+    zIndex:1,
+    position:'relative'
   },
   content: {
     flex: 4,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+    zIndex:1000,
+    position:'relative',
+    marginTop:-50,
+    paddingHorizontal:Pixel(30)
   },
   imageContainer: {
     width: 110,
@@ -210,7 +258,7 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     marginTop: Pixel(30),
     paddingBottom: Pixel(20),
-    width: '95%',
+    width: '100%',
     alignSelf: 'center',
   },
   submitSearchBtn: {
