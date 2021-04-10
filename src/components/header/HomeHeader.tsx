@@ -29,7 +29,8 @@ import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useTranslation} from 'react-i18next';
 import Input from '../textInputs/Input';
 import {useNavigation} from '@react-navigation/native';
-
+import {RootState} from '../../store/store';
+import {useSelector} from 'react-redux';
 interface IHeader {
   title: string;
   containerStyle?: StyleProp<ViewStyle>;
@@ -53,6 +54,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
   titleStyle,
 }) => {
   const {t} = useTranslation();
+  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
@@ -72,6 +74,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
+              marginTop: 5,
             }}>
             <Text style={styles.addressText}>Alexandria - Miami</Text>
             <ArrowHeaderIcon />
@@ -88,17 +91,21 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
         </View>
       </View>
 
-      {/* <View style={styles.searchInputContainer}>
+      <View style={styles.searchInputContainer}>
         <Input
           options={{
             placeholder: t('What You Are Looking For ?'),
             placeholderTextColor: '#949494',
           }}
           contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
+          textInputContainer={{
+            textAlign: language === 'ar' ? 'right' : 'left',
+            paddingVertical: Pixel(35),
+          }}
           rightContent={() => <SearchSubmitBtn />}
           iconRightStyle={{top: 5}}
         />
-      </View> */}
+      </View>
     </View>
   );
 };

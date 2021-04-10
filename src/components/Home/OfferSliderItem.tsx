@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     color: '#fff',
     paddingVertical: Pixel(40),
+    textAlign: 'left',
   },
   image: {
     flex: 1,
