@@ -25,7 +25,8 @@ import {
   Voucher,
   ForgetPhoneCode,
   ShopDetails,
-  OrderDone
+  OrderDone,
+  OrderOut
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -117,7 +118,7 @@ const Stacks: FC<any> = ({style}) => {
       <Stack.Navigator
         screenOptions={{headerShown: false, ...navigationTransition} as any}
         initialRouteName={
-          language === null ? 'Language' : isLogin ? 'ShopDetails' : 'Login'
+          language === null ? 'Language' : isLogin ? 'Home' : 'Login'
         }>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />
@@ -142,6 +143,7 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Language" component={Language} />
         <Stack.Screen name="ShopDetails" component={ShopDetails} />
+        <Stack.Screen name="OrderOut" component={OrderOut} />
       </Stack.Navigator>
     </Animated.View>
   );
