@@ -5,6 +5,7 @@ export const Home = register({loader: () => import('./Home')});
 export const Voucher = register({loader: () => import('./Voucher')});
 export const Profile = register({loader: () => import('./auth/Profile')});
 export const MyOrders = register({loader: () => import('./MyOrders')});
+export const OrderDone = register({loader: () => import('./OrderDone')});
 export const Favorite = register({loader: () => import('./Favorite')});
 export const Login = register({loader: () => import('./auth/Login')});
 export const Register = register({loader: () => import('./auth/Register')});
