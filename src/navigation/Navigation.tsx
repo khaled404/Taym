@@ -25,6 +25,7 @@ import {
   Voucher,
   ForgetPhoneCode,
   ShopDetails,
+  OrderDone
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -122,6 +123,7 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Voucher" component={Voucher} />
         <Stack.Screen name="MyOrders" component={MyOrders} />
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
+        <Stack.Screen name="OrderDone" component={OrderDone} />
         <Stack.Screen name="Favorite" component={Favorite} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Login" component={Login} />

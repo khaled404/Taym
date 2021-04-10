@@ -1103,3 +1103,47 @@ export const LogOut = (props?: SvgProps) => (
             </G>
         </Svg>
     );
+
+    export const Done = (props?: SvgProps) => (
+        <Svg
+      data-name="Component 1 \u2013 1"
+      //xmlns="http://www.w3.org/2000/svg"
+      width={62}
+      height={62}
+      viewBox="0 0 62 62"
+      {...props}
+    >
+      <G data-name="Ellipse 133" fill="#fff" stroke="#622a7b">
+        <Circle cx={31} cy={31} r={31} stroke="none" />
+        <Circle cx={31} cy={31} r={30.5} fill="none" />
+      </G>
+      <Path
+        d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
+        fill="#622a7b"
+        stroke="#622a7b"
+        strokeWidth={2}
+      />
+    </Svg>
+    );
+
+    export const SolidDone = (props?: SvgProps) => (
+        <Svg
+      data-name="Component 1 \u2013 1"
+      //xmlns="http://www.w3.org/2000/svg"
+      width={35}
+      height={35}
+      viewBox="0 0 62 62"
+      {...props}
+    >
+      <G data-name="Ellipse 133" fill="#FFDE00" stroke="#FFDE00">
+        <Circle cx={31} cy={31} r={31} stroke="none" />
+        <Circle cx={31} cy={31} r={30.5} fill="none" />
+      </G>
+      <Path
+        d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
+        fill="#622a7b"
+        stroke="#622a7b"
+        strokeWidth={4}
+      />
+    </Svg>
+    );
