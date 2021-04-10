@@ -48,18 +48,22 @@ const CartItem: FC<ICartItem> = ({
                     }}>
                         <Text style={styles.cartItemPrice}>{price}</Text>
                         <View style={styles.cartItemActions}>
-                            <TouchableOpacity style={[styles.cartItemActionBtn, {padding: Pixel(15)}]}>
+                            <TouchableOpacity style={[styles.cartItemActionBtn, {
+                                padding: Pixel(15),
+                                backgroundColor:Colors.warning
+                                }]}>
                                 <MinusIcon/>
                             </TouchableOpacity>
                             <Text style={styles.cartItemQuantity}>{quantity}</Text>
-                            <TouchableOpacity style={[styles.cartItemActionBtn]}>
+                            <TouchableOpacity style={[styles.cartItemActionBtn,{
+                                backgroundColor:Colors.success
+                            }]}>
                                 <PlusIcon/>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </View>
             </View>
-
             <View style={styles.cartItemOffer}>
                 <CartItemOfferIcon/>
                 <Text style={styles.cartItemOfferText}>{offerValue}</Text>
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         justifyContent: 'space-between',
         marginBottom: Pixel(35),
+        flexDirection:'column'
     },
     cartItemDetail: {
         ...commonStyles.rowBox,

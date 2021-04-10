@@ -26,7 +26,8 @@ export enum Colors {
     instagram = '#405de6',
     whatsapp = '#128c7e',
     lock='#989898',
-    lightGray='#4D4D4D'
+    lightGray='#4D4D4D',
+    CommonBorderColor='#DCDCDC'
 }
 
 export enum Fonts {
