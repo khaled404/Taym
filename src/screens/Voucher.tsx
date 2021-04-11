@@ -45,7 +45,10 @@ getItem(AsyncKeys.GET_USER_VOUCHERS).then(data => voucherData = data);
   */
 const Voucher: FC = () => {
   const dispatch = useDispatch();
- const { voucherData }: any = useSelector((state: RootState) => state.voucher);
+ const { transaction }: any = useSelector((state: RootState) => state.voucher);
+ const {userData}: any = useSelector(
+  (state: RootState) => state.auth,
+);
   const [state, setstate] = useState({
     code: '',
     loader: false,
@@ -55,25 +58,23 @@ const Voucher: FC = () => {
     dispatch(getVoucherData())
   }, [])
 
-console.log(voucherData , 'voucherData')
   const addVouchers = () => {
     setstate(old => ({ ...old, loader: true }));
     dispatch(
       addVoucher(state.code, success => {
-        setstate(old => ({ ...old, loader: false }));
+        setstate(old => ({ ...old, loader: false, code:'' }));
         success
       }),
     );
   };
+console.log(transaction , 'ccc')
 
-
-  console.log(voucherData, 'aaaaaa')
   return (
     <Container style={{ backgroundColor: Colors.sacandAppBackgroundColor }}>
       <Header title="Voucher" />
       <Content noPadding>
         <View style={styles.container}>
-          <Balance value="150 LE" date="EX . 22 January 2021" />
+          <Balance name={userData.name} value="150 LE" date="EX . 22 January 2021" />
           <ApplyInput
             onPress={() => addVouchers()}
             options={{
@@ -88,11 +89,11 @@ console.log(voucherData , 'voucherData')
           />
         </View>
         <View style={styles.listContainer}>
-          {voucherData.length==0?null: voucherData.transaction.map((item, index) => (
+          {!transaction?null:transaction.map((item, index) => (
             <VoucherDetails
               {...item}
               key={index}
-              isLast={index === voucherData.transaction.length - 1}
+              isLast={index === transaction.length - 1}
             />
           ))}
         </View>

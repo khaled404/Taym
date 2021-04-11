@@ -60,7 +60,7 @@ const Forget: FC = () => {
             />
           </View>
           <View style={styles.submitContainer}>
-            <Button title={t('Next')} onPress={submitHandler} />
+            <Button title={t('Next')} onPress={submitHandler} loader={state.loader} />
           </View>
         </View>
       </Content>

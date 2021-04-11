@@ -1,21 +1,29 @@
 import {IReduser} from '../../constants/interfaces';
 import {ActionType} from '../actions/actions';
+import { getVoucherData } from '../actions/voucher';
 
 const initialState = {
-  voucherData: [],
+  voucherData: {},
+  voucherError:{},
+  transaction:[]
 };
 export default (state = initialState, {type, payload}: IReduser) => {
   switch (type) {
     case ActionType.GET_USER_VOUCHERS:
       return {
         ...state,
-        voucherData: payload,
+        transaction: payload.transaction,
       };
     case ActionType.ADD_USER_VOUCHER:
       return {
         ...state,
-        voucherData: {...state.voucherData, transaction: payload},
+        transaction:state.transaction.concat(payload),
       };
+      case ActionType.ADD_USER_VOUCHER_ERROR:
+        return {
+          ...state,
+          voucherError: payload,
+        }
   }
   return state;
 };

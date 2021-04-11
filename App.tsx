@@ -47,7 +47,7 @@ const App: FC = () => {
   const dispatch = useDispatch();
 
   const {isRTL}: any = useSelector((state: RootState) => state.settings);
-  const {isLogin} = useSelector((state: RootState) => state.auth);
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
   const [fcmToken, setFcmToken] = useState<string>('');
   const requestUserPermission = async () => {
     try {

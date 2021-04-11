@@ -161,7 +161,15 @@ export const LoginHandler = (
         type: ActionType.SAVE_LOGIN_ERORRS,
         payload: error?.response.data.message,
       });
-      console.log('LoginHandler', error?.response);
+      {
+        error.response.data.error?
+        showMessage({
+          message: error?.response.data.error,
+          type: 'danger',
+        })
+        :null
+      }
+      console.log('Loginerorr', error?.response);
     }
   };
 };
@@ -250,7 +258,7 @@ export const NewPasswordHandler = (
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const {data} = await axiosAPI.post('user/forget-password-new-password', {
+      const {data} = await axiosAPI.post('guest/forget-password-new-password', {
         phone,
         password,
         password_confirmation,
@@ -264,10 +272,7 @@ export const NewPasswordHandler = (
       cb(true);
     } catch (error) {
       cb(false);
-      showMessage({
-        message: error?.response.data.message.code[0],
-        type: 'danger',
-      });
+
       console.log(error?.response);
     }
   };

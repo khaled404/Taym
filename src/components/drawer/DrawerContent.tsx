@@ -39,7 +39,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
 
   const getLetter = (st: string) => {
     const fullName = st?.split(' ');
-    const letters = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+    const letters = fullName.shift().charAt(0) 
     return letters.toUpperCase();
   };
 

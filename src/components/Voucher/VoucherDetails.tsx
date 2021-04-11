@@ -2,39 +2,44 @@ import React, {FC} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
+import {getDateHandler} from '../../constants/helpers'
+import Moment from 'react-moment';
+
 interface IVoucherDetails {
   date: string;
   code: string;
-  price: string;
+  total_amount: string;
   ex: string;
-  note: string | null;
+  voucher_name: string | null;
   isLast: boolean;
-  isExpired: boolean;
+  status: boolean;
 }
 
 const VoucherDetails: FC<IVoucherDetails> = ({
   code,
   date,
   ex,
-  note,
-  price,
+  voucher_name,
+  total_amount,
   isLast,
-  isExpired,
+  status,
 }) => {
+  let switchData=new Date(date)
+  let switchStatus=new Date(status)
   return (
     <View
       style={[styles.container, isLast && {borderBottomColor: 'transparent'}]}>
       <View style={styles.box}>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.date}>{switchData.toString().slice(0,15)}</Text>
         <Text style={styles.code}>{code}</Text>
       </View>
       <View style={styles.box}>
-        <Text style={styles.price}>{price}</Text>
-        <Text style={[styles.ex, isExpired && {color: Colors.warning}]}>
-          {ex}
+        <Text style={styles.price}>{total_amount + ' LE'}</Text>
+        <Text style={[styles.ex, status && {color: Colors.success}]}>
+          {'EX. ' + switchStatus.toString().slice(0,15)}
         </Text>
       </View>
-      {!!note && <Text style={styles.note}>{note}</Text>}
+      {!!voucher_name && <Text style={styles.note}>{voucher_name}</Text>}
     </View>
   );
 };
@@ -46,6 +51,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.grayDark,
     borderBottomWidth: Pixel(2),
     paddingVertical: Pixel(25),
+
   },
   box: {
     marginBottom: Pixel(20),
@@ -73,6 +79,6 @@ const styles = StyleSheet.create({
   note: {
     color: Colors.dark,
     fontFamily: Fonts.regular,
-    fontSize: Pixel(20),
+    fontSize: Pixel(25),
   },
 });

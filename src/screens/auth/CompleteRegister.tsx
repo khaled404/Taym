@@ -35,6 +35,7 @@ const CompleteRegister: FC = () => {
         },()=>navigate("PhoneCode")),
       );
     } else {
+      setstate(old => ({...old, loader: false}));
       showMessage({
         message: t('Please enter a valid mobile number'),
       });

@@ -10,13 +10,29 @@ import Button from '../../components/touchables/Button';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {NewPasswordHandler} from '../../store/actions/auth';
+import IconTouchableContainer from '../../components/touchables/IconTouchableContainer';
+import {EyeIcon} from '../../../assets/Icons/Icons';
 
 const Forget2: FC = () => {
   const [state, setstate] = useState({
     confirmPassword: '',
     password: '',
     secureTextEntry: true,
+    loader:false
   });
+
+  const PasswordIcon = () => {
+    return (
+      <IconTouchableContainer
+        onPress={() => {
+          setstate(old => ({...old, secureTextEntry: !old.secureTextEntry}));
+        }}>
+        <EyeIcon />
+      </IconTouchableContainer>
+    );
+  };
+
+
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   const {phoneNumber}: any = useSelector(
@@ -63,6 +79,7 @@ const Forget2: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
+              rightContent={PasswordIcon}
               options={{
                 onChangeText: value => {
                   setstate(old => ({
@@ -96,9 +113,8 @@ const Forget2: FC = () => {
           <View style={styles.submitContainer}>
             <Button
               title={t('Update')}
-              onPress={() => {
-                navigate('Forget3');
-              }}
+              onPress={submitHandler}
+              loader={state.loader}
             />
           </View>
         </View>
