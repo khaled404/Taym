@@ -37,7 +37,12 @@ const Profile: FC = () => {
   return (
     <Container style={styles.container}>
       <Header title={t('Profile')} />
-      <Content noPadding style={styles.contentContainer}>
+      <Content
+        noPadding
+        contentContainerStyle={{
+          paddingHorizontal: 20,
+        }}
+        style={styles.contentContainer}>
         <View style={styles.profileHeader}>
           <TouchableOpacity style={styles.userImage}>
             <View style={styles.editIcon}>
@@ -142,10 +147,11 @@ const Profile: FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.sacandAppBackgroundColor,
+    // backgroundColor: Colors.sacandAppBackgroundColor,
+    backgroundColor: '#313131',
   },
   contentContainer: {
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: Colors.sacandAppBackgroundColor,
   },
@@ -200,6 +206,7 @@ const styles = StyleSheet.create({
     color: '#4D4D4D',
     fontFamily: Fonts.medium,
     marginBottom: Pixel(17),
+    textAlign: 'left',
   },
   textInput: {
     height: Pixel(100),

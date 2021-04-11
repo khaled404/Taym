@@ -182,6 +182,7 @@ export const LoginHandler = (
 export const ForgetHandler = (
   phone: string,
   cb: (success?: boolean) => void,
+  navigate: (screen: string) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
@@ -198,6 +199,7 @@ export const ForgetHandler = (
       });
       await saveItem(AsyncKeys.USER_DATA, data.user);
       cb(true);
+      navigate('ForgetPhoneCode')
     } catch (error) {
       cb(false);
       showMessage({

@@ -2,18 +2,24 @@ import React, {FC} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
-import {CartItemOfferIcon, MinusIcon, PlusIcon} from "../../../assets/Icons/Icons";
-import {useNavigation} from "@react-navigation/native";
-import FastImage from "react-native-fast-image";
+import {
+  CartItemOfferIcon,
+  MinusIcon,
+  PlusIcon,
+} from '../../../assets/Icons/Icons';
+import {useNavigation} from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
+import {RootState} from '../../store/store';
+import {useSelector} from 'react-redux';
 
 interface ICartItem {
-    id: number;
-    title: string;
-    price: string;
-    specifications: string;
-    offerValue: string;
-    quantity: number;
-    image: Images;
+  id: number;
+  title: string;
+  price: string;
+  specifications: string;
+  offerValue: string;
+  quantity: number;
+  image: Images;
 }
 
 const CartItem: FC<ICartItem> = ({
@@ -67,13 +73,22 @@ const CartItem: FC<ICartItem> = ({
             <View style={styles.cartItemOffer}>
                 <CartItemOfferIcon/>
                 <Text style={styles.cartItemOfferText}>{offerValue}</Text>
+
             </View>
+          </View>
         </View>
-    );
+      </View>
+
+      <View style={styles.cartItemOffer}>
+        <CartItemOfferIcon />
+        <Text style={styles.cartItemOfferText}>{offerValue}</Text>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    cartItemContainer: {
+  cartItemContainer: {
         backgroundColor: Colors.white,
         width: '100%',
         ...commonStyles.boxShadow,
