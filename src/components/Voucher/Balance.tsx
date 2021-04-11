@@ -9,8 +9,9 @@ import LinearGradient from 'react-native-linear-gradient';
 interface IBalance {
   value: string;
   date: string;
+  name:string;
 }
-const Balance: FC<IBalance> = ({date, value}) => {
+const Balance: FC<IBalance> = ({date, value, name}) => {
   const {t} = useTranslation();
   return (
     <ImageBackground 
@@ -46,8 +47,8 @@ const Balance: FC<IBalance> = ({date, value}) => {
         paddingHorizontal:20
       }} >
 
-<Text style={styles.date}>{t('Eslam mohamed')}</Text>
-<Text style={styles.date}>{t('11 August')}</Text>
+<Text style={styles.date}>{t(name)}</Text>
+<Text style={styles.date2}>{t('11 August')}</Text>
       </View>
     </ImageBackground>
   );
@@ -75,5 +76,9 @@ const styles = StyleSheet.create({
   },
   date: {
     fontFamily: Fonts.medium,
+  },
+  date2: {
+    fontFamily: Fonts.medium,
+    fontSize:Pixel(20)
   },
 });

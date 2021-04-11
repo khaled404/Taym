@@ -38,9 +38,10 @@ const Login: FC = () => {
   };
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
+    console.log( state , ' state' )
     dispatch(
       LoginHandler(state.email, state.password, success => {
-        setstate(old => ({...old, loader: false}));
+        setstate(old => ({...old,email:'',password:'', loader: false}));
         success && navigate('Home');
       }),
     );

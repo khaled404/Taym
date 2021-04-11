@@ -3,6 +3,7 @@ import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {ActionType} from './actions';
 import {AsyncKeys, saveItem} from '../../constants/helpers';
+import {showMessage} from 'react-native-flash-message';
 
 /**
  * Get Voucher Data
@@ -29,7 +30,11 @@ export const getVoucherData = () => {
         type: ActionType.GET_USER_VOUCHERS_ERROR,
         payload: error?.response.data.message,
       });
-      console.log(error?.response.data.message);
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+      console.log(error?.response.data.message , 'erroe');
     }
   };
 };
@@ -46,17 +51,24 @@ export const addVoucher = (code: string, cb: (success?: boolean) => void) => {
       const {data} = await axiosAPI.post('user/add-user-voucher', {
         code,
       });
-
-      dispatch({
-        type: ActionType.ADD_USER_VOUCHER_ERROR,
-        payload: {},
-      });
+{
+  data.message!=='Voucher Added'?
+  showMessage({
+    message: data.message,
+    type: 'danger',
+  })
+  :
+  /* dispatch({
+    type: ActionType.ADD_USER_VOUCHER_ERROR,
+    payload: {},
+      }); */
       dispatch({
         type: ActionType.ADD_USER_VOUCHER,
         payload: data,
       });
       console.log(data);
       cb(true);
+    }
     } catch (error) {
       cb(false);
       dispatch({
