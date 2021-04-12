@@ -1,17 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Container, Content } from '../components/containers/Containers';
+import React, {FC, useEffect, useState} from 'react';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
 import ApplyInput from '../components/Voucher/ApplyInput';
 import Balance from '../components/Voucher/Balance';
 import VoucherDetails from '../components/Voucher/VoucherDetails';
-import { Colors } from '../constants/styleConstants';
-import { commonStyles } from '../styles/styles';
-import { getVoucherData, addVoucher } from '../store/actions/voucher';
-import { axiosAPI } from '../constants/Config';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store'
-import {AsyncKeys, getItem} from "../constants/helpers";
+import {Colors} from '../constants/styleConstants';
+import {commonStyles} from '../styles/styles';
+import {getVoucherData, addVoucher} from '../store/actions/voucher';
+import {axiosAPI} from '../constants/Config';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store/store';
+import {AsyncKeys, getItem} from '../constants/helpers';
 
 const data = [
   {
@@ -45,31 +45,29 @@ getItem(AsyncKeys.GET_USER_VOUCHERS).then(data => voucherData = data);
   */
 const Voucher: FC = () => {
   const dispatch = useDispatch();
- const { voucherData }: any = useSelector((state: RootState) => state.voucher);
+  const {voucherData}: any = useSelector((state: RootState) => state.voucher);
   const [state, setstate] = useState({
     code: '',
     loader: false,
   });
   useEffect(() => {
+    dispatch(getVoucherData());
+  }, []);
 
-    dispatch(getVoucherData())
-  }, [])
-
-console.log(voucherData , 'voucherData')
+  console.log(voucherData, 'voucherData');
   const addVouchers = () => {
-    setstate(old => ({ ...old, loader: true }));
+    setstate(old => ({...old, loader: true}));
     dispatch(
       addVoucher(state.code, success => {
-        setstate(old => ({ ...old, loader: false }));
-        success
+        setstate(old => ({...old, loader: false}));
+        success;
       }),
     );
   };
 
-
-  console.log(voucherData, 'aaaaaa')
+  console.log(voucherData, 'aaaaaa');
   return (
-    <Container style={{ backgroundColor: Colors.sacandAppBackgroundColor }}>
+    <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
       <Header title="Voucher" />
       <Content noPadding>
         <View style={styles.container}>
@@ -78,28 +76,28 @@ console.log(voucherData , 'voucherData')
             onPress={() => addVouchers()}
             options={{
               onChangeText: value => {
-                setstate(old => ({ ...old, code: value }));
-                console.log(state.code, 'input')
+                setstate(old => ({...old, code: value}));
+                console.log(state.code, 'input');
               },
               value: state.code,
               onSubmitEditing: addVouchers,
             }}
-
           />
         </View>
         <View style={styles.listContainer}>
-          {voucherData.length==0?null: voucherData.transaction.map((item, index) => (
-            <VoucherDetails
-              {...item}
-              key={index}
-              isLast={index === voucherData.transaction.length - 1}
-            />
-          ))}
+          {voucherData.length == 0
+            ? null
+            : voucherData.transaction.map((item, index) => (
+                <VoucherDetails
+                  {...item}
+                  key={index}
+                  isLast={index === voucherData.transaction.length - 1}
+                />
+              ))}
         </View>
       </Content>
     </Container>
   );
-
 };
 
 export default Voucher;

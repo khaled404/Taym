@@ -113,4 +113,6 @@ export default {
   'Your Identity Has Been Verified': 'تم التحقق من هويتك',
   'Set Your New Password': 'اضبط كلمة المرور الجديدة',
   'Confirm New Password': 'تأكيد كلمة المرور الجديدة',
+  'Coming Soon': 'قريبا',
+  'Go Back': 'رجوع',
 };

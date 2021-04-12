@@ -28,9 +28,20 @@ export const ForgetPhoneCode = register({
 });
 export const Category = register({loader: () => import('./Category')});
 export const Cart = register({loader: () => import('./Cart/Cart')});
-export const CartDetails = register({loader: () => import('./Cart/CartDetails')});
-export const CartAddress = register({loader: () => import('./Cart/CartAddress')});
-export const CartCheckout = register({loader: () => import('./Cart/CartCheckout')});
-export const ShopDetails = register({loader: () => import('../screens/shopDetails')});
-export const Notifications = register({loader: () => import('./Notifications')});
+export const CartDetails = register({
+  loader: () => import('./Cart/CartDetails'),
+});
+export const CartAddress = register({
+  loader: () => import('./Cart/CartAddress'),
+});
+export const CartCheckout = register({
+  loader: () => import('./Cart/CartCheckout'),
+});
+export const ShopDetails = register({
+  loader: () => import('../screens/shopDetails'),
+});
+export const Notifications = register({
+  loader: () => import('./Notifications'),
+});
 export const OrderOut = register({loader: () => import('./orderOut')});
+export const ComingSoon = register({loader: () => import('./ComingSoon')});

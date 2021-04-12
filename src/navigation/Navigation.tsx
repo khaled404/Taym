@@ -28,6 +28,7 @@ import {
   OrderDone,
   OrderOut,
   Notifications,
+  ComingSoon,
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -123,10 +124,10 @@ const Stacks: FC<any> = ({style}) => {
         }>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />
-        <Stack.Screen name="MyOrders" component={MyOrders} />
-        <Stack.Screen name="OrderDetails" component={OrderDetails} />
-        <Stack.Screen name="OrderDone" component={OrderDone} />
-        <Stack.Screen name="Favorite" component={Favorite} />
+        <Stack.Screen name="MyOrders" component={ComingSoon} />
+        <Stack.Screen name="OrderDetails" component={ComingSoon} />
+        <Stack.Screen name="OrderDone" component={ComingSoon} />
+        <Stack.Screen name="Favorite" component={ComingSoon} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
@@ -140,12 +141,12 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="MyAddresses" component={MyAddresses} />
         <Stack.Screen name="AddLocation" component={AddLocation} />
         <Stack.Screen name="AddressLocation" component={AddressLocation} />
-        <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="Category" component={ComingSoon} />
+        <Stack.Screen name="Cart" component={ComingSoon} />
         <Stack.Screen name="Language" component={Language} />
-        <Stack.Screen name="ShopDetails" component={ShopDetails} />
-        <Stack.Screen name="OrderOut" component={OrderOut} />
-        <Stack.Screen name="Notifications" component={Notifications} />
+        <Stack.Screen name="ShopDetails" component={ComingSoon} />
+        <Stack.Screen name="OrderOut" component={ComingSoon} />
+        <Stack.Screen name="Notifications" component={ComingSoon} />
       </Stack.Navigator>
     </Animated.View>
   );
