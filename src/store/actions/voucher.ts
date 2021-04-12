@@ -66,7 +66,11 @@ export const addVoucher = (code: string, cb: (success?: boolean) => void) => {
         type: ActionType.ADD_USER_VOUCHER,
         payload: data,
       });
-      console.log(data);
+      showMessage({
+        message: data.message,
+        type: 'success',
+      })
+      console.log(data , 'add voucher ...');
       cb(true);
     }
     } catch (error) {

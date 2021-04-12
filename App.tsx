@@ -9,10 +9,17 @@
  */
 
 import React, {FC, useEffect, useState} from 'react';
-import {I18nManager, Platform, StatusBar, StyleSheet, View} from 'react-native';
+import {
+  Button,
+  I18nManager,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import FlashMessage from 'react-native-flash-message';
+import FlashMessage, {showMessage} from 'react-native-flash-message';
 import ar from './src/localization/ar';
 import en from './src/localization/en';
 import {Colors, Fonts, ScreenOptions} from './src/constants/styleConstants';
@@ -20,9 +27,9 @@ import AppInitializer from './src/screens/AppInitializer';
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import {firebaseConfig} from './src/constants/Config';
 import {AsyncKeys, saveItem} from './src/constants/helpers';
-import {useDispatch, useSelector} from "react-redux";
-import {createUpdateDeviceApi} from "./src/store/actions/settings";
-import {RootState} from "./src/store/store";
+import {useDispatch, useSelector} from 'react-redux';
+import {createUpdateDeviceApi} from './src/store/actions/settings';
+import {RootState} from './src/store/store';
 import {getUniqueId} from 'react-native-device-info';
 
 const {isRTL, forceRTL, allowRTL} = I18nManager;
@@ -102,19 +109,23 @@ const App: FC = () => {
         backgroundColor={'transparent'}
         barStyle="dark-content"
       />
-      <AppInitializer/>
+      <AppInitializer />
 
       <FlashMessage
         position="top"
         hideOnPress={true}
-        style={{paddingTop: ScreenOptions.StatusBarHeight}}
+        style={{
+          paddingTop: Platform.OS !== 'ios' ? ScreenOptions.StatusBarHeight : 5,
+        }}
         titleStyle={{
           fontFamily: Fonts.medium,
-          paddingTop: ScreenOptions.StatusBarHeight,
+          paddingTop:
+            Platform.OS !== 'ios' ? ScreenOptions.StatusBarHeight : 10,
         }}
         textStyle={{
           fontFamily: Fonts.medium,
         }}
+        floating={Platform.OS === 'ios'}
       />
     </>
   );
