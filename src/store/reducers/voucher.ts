@@ -13,11 +13,12 @@ export default (state = initialState, {type, payload}: IReduser) => {
       return {
         ...state,
         transaction: payload.transaction,
+        voucherData:payload
       };
     case ActionType.ADD_USER_VOUCHER:
       return {
         ...state,
-        transaction:state.transaction.concat(payload),
+        transaction:payload.transaction,
       };
       case ActionType.ADD_USER_VOUCHER_ERROR:
         return {

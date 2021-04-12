@@ -76,14 +76,7 @@ const CartItem: FC<ICartItem> = ({
 
             </View>
           </View>
-        </View>
-      </View>
-
-      <View style={styles.cartItemOffer}>
-        <CartItemOfferIcon />
-        <Text style={styles.cartItemOfferText}>{offerValue}</Text>
-      </View>
-    </View>
+      
   );
 };
 

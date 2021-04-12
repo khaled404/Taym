@@ -35,6 +35,9 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   const {isLogin, userData}: any = useSelector(
     (state: RootState) => state.auth,
   );
+  const {voucherData}: any = useSelector(
+    (state: RootState) => state.voucher,
+  );
   const {t}: any = useTranslation();
 
   const getLetter = (st: string) => {
@@ -117,7 +120,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={VouchergIcon}
               title={t('Voucher')}
-              voucher="150 LE"
+              voucher={voucherData.user + ' LE'}
               onPress={() => {
                 navigation?.navigate('Voucher');
               }}

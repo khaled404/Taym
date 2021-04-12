@@ -45,7 +45,7 @@ getItem(AsyncKeys.GET_USER_VOUCHERS).then(data => voucherData = data);
   */
 const Voucher: FC = () => {
   const dispatch = useDispatch();
- const { transaction }: any = useSelector((state: RootState) => state.voucher);
+ const { transaction,voucherData }: any = useSelector((state: RootState) => state.voucher);
  const {userData}: any = useSelector(
   (state: RootState) => state.auth,
 );
@@ -67,25 +67,22 @@ const Voucher: FC = () => {
       }),
     );
   };
-console.log(transaction , 'ccc')
 
   return (
     <Container style={{ backgroundColor: Colors.sacandAppBackgroundColor }}>
       <Header title="Voucher" />
       <Content noPadding>
         <View style={styles.container}>
-          <Balance name={userData.name} value="150 LE" date="EX . 22 January 2021" />
+          <Balance name={userData.name} value={transaction.length==0?'0':voucherData.user} date="EX . 22 January 2021" />
           <ApplyInput
             onPress={() => addVouchers()}
             options={{
               onChangeText: value => {
                 setstate(old => ({ ...old, code: value }));
-                console.log(state.code, 'input')
               },
               value: state.code,
               onSubmitEditing: addVouchers,
             }}
-
           />
         </View>
         <View style={styles.listContainer}>

@@ -26,7 +26,8 @@ import {
   ForgetPhoneCode,
   ShopDetails,
   OrderDone,
-  OrderOut
+  OrderOut,
+  MyCards,
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -144,6 +145,7 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Language" component={Language} />
         <Stack.Screen name="ShopDetails" component={ShopDetails} />
         <Stack.Screen name="OrderOut" component={OrderOut} />
+        <Stack.Screen name="MyCards" component={MyCards} />
       </Stack.Navigator>
     </Animated.View>
   );
