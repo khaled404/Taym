@@ -73,7 +73,7 @@ const Voucher: FC = () => {
       <Header title="Voucher" />
       <Content noPadding>
         <View style={styles.container}>
-          <Balance name={userData.name} value={transaction.length==0?'0':voucherData.user} date="EX . 22 January 2021" />
+          <Balance name={userData.name}  value={transaction.length==0?'0':voucherData.user} date="EX . 22 January 2021" />
           <ApplyInput
             onPress={() => addVouchers()}
             options={{
