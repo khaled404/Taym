@@ -11,7 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		29DBDB5C261DF4D000D8B583 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29DBDB5B261DF4D000D8B583 /* GoogleService-Info.plist */; };
+		291DB87E2624C99300B6AAB7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 291DB87D2624C99200B6AAB7 /* GoogleService-Info.plist */; };
 		29DBDBB5261DF96600D8B583 /* Void.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBDBB4261DF96600D8B583 /* Void.swift */; };
 		29FCEFD1261E995F00A1F27E /* Tajawal-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FCEFBE261E995E00A1F27E /* Tajawal-Black.ttf */; };
 		29FCEFD2261E995F00A1F27E /* Cairo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29FCEFBF261E995E00A1F27E /* Cairo-ExtraLight.ttf */; };
@@ -61,7 +61,7 @@
 		1883EB055E4D4A43860F7BB6 /* Tajawal-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Tajawal-Black.ttf"; path = "../assets/fonts/Tajawal-Black.ttf"; sourceTree = "<group>"; };
 		1DE294269FE4F4034789F689 /* libPods-Taym.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Taym.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF09E64564C40829930A3A3 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
-		29DBDB5B261DF4D000D8B583 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		291DB87D2624C99200B6AAB7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29DBDBB3261DF96600D8B583 /* Taym-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Taym-Bridging-Header.h"; sourceTree = "<group>"; };
 		29DBDBB4261DF96600D8B583 /* Void.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Void.swift; sourceTree = "<group>"; };
 		29FCEFBE261E995E00A1F27E /* Tajawal-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Tajawal-Black.ttf"; path = "../../assets/fonts/Tajawal-Black.ttf"; sourceTree = "<group>"; };
@@ -147,8 +147,8 @@
 		13B07FAE1A68108700A75B9A /* Taym */ = {
 			isa = PBXGroup;
 			children = (
-				29DBDB5B261DF4D000D8B583 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				291DB87D2624C99200B6AAB7 /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -263,7 +263,6 @@
 				484C42F1DC36AA3F5CB8373A /* Pods-Taym-TaymTests.debug.xcconfig */,
 				43E9B3761683E7C70BCC970D /* Pods-Taym-TaymTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -375,7 +374,6 @@
 				29FCEFDF261E995F00A1F27E /* Tajawal-Regular.ttf in Resources */,
 				29FCEFD3261E995F00A1F27E /* Cairo-Black.ttf in Resources */,
 				29FCEFE1261E995F00A1F27E /* Roboto-Medium.ttf in Resources */,
-				29DBDB5C261DF4D000D8B583 /* GoogleService-Info.plist in Resources */,
 				29FCEFD9261E995F00A1F27E /* Cairo-Regular.ttf in Resources */,
 				29FCEFDB261E995F00A1F27E /* Cairo-SemiBold.ttf in Resources */,
 				29FCEFD5261E995F00A1F27E /* Tajawal-ExtraLight.ttf in Resources */,
@@ -384,6 +382,7 @@
 				29FCEFD2261E995F00A1F27E /* Cairo-ExtraLight.ttf in Resources */,
 				29FCEFE0261E995F00A1F27E /* Cairo-Bold.ttf in Resources */,
 				29FCEFDA261E995F00A1F27E /* Roboto-Black.ttf in Resources */,
+				291DB87E2624C99300B6AAB7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +636,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KKG9C6P9PN;
+				DEVELOPMENT_TEAM = 4Q4JQPNWWB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Taym/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -649,7 +648,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.taym;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taym.io;
 				PRODUCT_NAME = Taym;
 				SWIFT_OBJC_BRIDGING_HEADER = "Taym-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -665,7 +664,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KKG9C6P9PN;
+				DEVELOPMENT_TEAM = 4Q4JQPNWWB;
 				INFOPLIST_FILE = Taym/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,7 +675,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.taym;
+				PRODUCT_BUNDLE_IDENTIFIER = com.taym.io;
 				PRODUCT_NAME = Taym;
 				SWIFT_OBJC_BRIDGING_HEADER = "Taym-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
