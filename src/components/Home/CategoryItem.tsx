@@ -24,7 +24,9 @@ const CategoryItem: FC<ICategoryItem> = ({title, image, index}) => {
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={0.7} style={{width: categoryWidth, marginBottom: 5}}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={{width: categoryWidth, marginBottom: 5}}>
       <View
         style={[
           styles.imageContainer,
@@ -49,12 +51,13 @@ const styles = StyleSheet.create({
     ...commonStyles.boxShadow,
     marginTop: Pixel(15),
   },
+
   categoryTitle: {
     fontFamily: Fonts.black,
     fontSize: Pixel(35),
     color: Colors.dark,
     textAlign: 'center',
-    marginTop: Pixel(10),
+    marginTop: Pixel(15),
     textTransform: 'uppercase',
     width: '100%',
   },

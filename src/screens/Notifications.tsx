@@ -3,11 +3,10 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Container} from '../components/containers/Containers';
 import {Colors, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import Header from "../components/header/Header";
+import Header from '../components/header/Header';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import NotificationItem from "../components/Notification/NotificationItem";
-import {TrashIcon} from "../../assets/Icons/Icons";
-
+import NotificationItem from '../components/Notification/NotificationItem';
+import {TrashIcon} from '../../assets/Icons/Icons';
 
 const Notifications: FC = () => {
   const {t} = useTranslation();
@@ -19,9 +18,11 @@ const Notifications: FC = () => {
         id: i,
         key: `${i}`,
         title: t('Fresh Market Order 1247'),
-        content: t('Banana Item Is unfortunately Out Of Stock And We Suggest You Another Items Please Check It'),
+        content: t(
+          'Banana Item Is unfortunately Out Of Stock And We Suggest You Another Items Please Check It',
+        ),
         seen: false,
-      }))
+      })),
   );
 
   const deleteRow = (rowMap: {}, rowKey: number) => {
@@ -40,13 +41,12 @@ const Notifications: FC = () => {
     <View style={styles.rowBack}>
       <TouchableOpacity
         style={[styles.backRightBtn, styles.backRightBtnRight]}
-        onPress={() => deleteRow(rowMap, data.item.id)}
-      >
-        <TrashIcon/>
+        onPress={() => deleteRow(rowMap, data.item.id)}>
+        <TrashIcon />
       </TouchableOpacity>
     </View>
   );
-  const onRowDidOpen = (rowKey) => {
+  const onRowDidOpen = rowKey => {
     setRowSlideOpen(rowKey);
   };
   const onLeftActionStatusChange = rowKey => {
@@ -67,12 +67,17 @@ const Notifications: FC = () => {
 
   return (
     <Container style={styles.container}>
-      <Header title={t('Notifications')}/>
+      <Header title={t('Notifications')} />
       <SwipeListView
         data={listData}
         renderItem={(data, rowMap) => {
-          return (<NotificationItem {...data.item} slideOpen={rowSlideOpen == Number(data.item.id)}
-                                    isLast={data.index === listData.length - 1}/>)
+          return (
+            <NotificationItem
+              {...data.item}
+              slideOpen={rowSlideOpen == Number(data.item.id)}
+              isLast={data.index === listData.length - 1}
+            />
+          );
         }}
         renderHiddenItem={renderHiddenItem}
         leftOpenValue={75}
@@ -87,7 +92,6 @@ const Notifications: FC = () => {
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.sacandAppBackgroundColor,
@@ -96,21 +100,21 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     backgroundColor: Colors.sacandAppBackgroundColor,
-    paddingBottom: Pixel(50)
+    paddingBottom: Pixel(50),
   },
   backTextWhite: {
     color: '#FFF',
   },
   orderItemsList: {
     marginVertical: 5,
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   rowBack: {
     alignItems: 'center',
     backgroundColor: '#DDD',
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     paddingLeft: 15,
   },
   backRightBtn: {
