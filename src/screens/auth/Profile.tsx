@@ -18,9 +18,9 @@ const Profile: FC = () => {
     (state: RootState) => state.auth,
   );
 
-  const [username, setUsername] = useState('Yassin Ahmed Mohamed');
-  const [email, setEmail] = useState('Yassin124@Gmail.com');
-  const [phone, setPhone] = useState('0123456789');
+  const [username, setUsername] = useState(userData.name);
+  const [email, setEmail] = useState(userData.email);
+  const [phone, setPhone] = useState(userData.phone);
   const [password, setPassword] = useState('0123456789');
   const [birthdate, setBirthdate] = useState('3\\2\\1992');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -33,7 +33,7 @@ const Profile: FC = () => {
       </IconTouchableContainer>
     );
   };
-
+console.log(userData)
   return (
     <Container style={styles.container}>
       <Header title={t('Profile')} />
@@ -55,8 +55,8 @@ const Profile: FC = () => {
             />
           </TouchableOpacity>
           <View style={styles.userContent}>
-            <Text style={styles.userTitle}>Yassin Ahmed</Text>
-            <Text style={styles.userSupTitle}>0123456789</Text>
+            <Text style={styles.userTitle}>{userData.name}</Text>
+            <Text style={styles.userSupTitle}>{userData.phone}</Text>
           </View>
         </View>
 

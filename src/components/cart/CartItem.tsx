@@ -85,6 +85,7 @@ const CartItem: FC<ICartItem> = ({
               </TouchableOpacity>
             </View>
           </View>
+      
         </View>
       </View>
       <View style={styles.cartItemOffer}>
