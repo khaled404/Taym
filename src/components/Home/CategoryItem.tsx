@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     ...commonStyles.boxShadow,
     marginTop: Pixel(15),
   },
+
   categoryTitle: {
     fontFamily: Fonts.black,
     fontSize: Pixel(35),
