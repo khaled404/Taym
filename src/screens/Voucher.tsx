@@ -1,17 +1,17 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Container, Content } from '../components/containers/Containers';
+import React, {FC, useEffect, useState} from 'react';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
 import ApplyInput from '../components/Voucher/ApplyInput';
 import Balance from '../components/Voucher/Balance';
 import VoucherDetails from '../components/Voucher/VoucherDetails';
-import { Colors } from '../constants/styleConstants';
-import { commonStyles } from '../styles/styles';
-import { getVoucherData, addVoucher } from '../store/actions/voucher';
-import { axiosAPI } from '../constants/Config';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store'
-import {AsyncKeys, getItem} from "../constants/helpers";
+import {Colors} from '../constants/styleConstants';
+import {commonStyles} from '../styles/styles';
+import {getVoucherData, addVoucher} from '../store/actions/voucher';
+import {axiosAPI} from '../constants/Config';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store/store';
+import {AsyncKeys, getItem} from '../constants/helpers';
 
 const data = [
   {
@@ -43,42 +43,47 @@ const data = [
 /*  let voucherData:any;
 getItem(AsyncKeys.GET_USER_VOUCHERS).then(data => voucherData = data);
   */
+
 const Voucher: FC = () => {
   const dispatch = useDispatch();
- const { transaction,voucherData }: any = useSelector((state: RootState) => state.voucher);
- const {userData}: any = useSelector(
-  (state: RootState) => state.auth,
-);
+  const {transaction, voucherData}: any = useSelector(
+    (state: RootState) => state.voucher,
+  );
+  console.log('transactiontransactiontransaction', voucherData.transaction);
+  const {userData}: any = useSelector((state: RootState) => state.auth);
   const [state, setstate] = useState({
     code: '',
     loader: false,
   });
   useEffect(() => {
-
-    dispatch(getVoucherData())
-  }, [])
+    dispatch(getVoucherData());
+  }, []);
 
   const addVouchers = () => {
-    setstate(old => ({ ...old, loader: true }));
+    setstate(old => ({...old, loader: true}));
     dispatch(
       addVoucher(state.code, success => {
-        setstate(old => ({ ...old, loader: false, code:'' }));
-        success
+        setstate(old => ({...old, loader: false, code: ''}));
+        success;
       }),
     );
   };
 
   return (
-    <Container style={{ backgroundColor: Colors.sacandAppBackgroundColor }}>
+    <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
       <Header title="Voucher" />
       <Content noPadding>
         <View style={styles.container}>
-          <Balance name={userData.name} value={transaction.length==0?'0':voucherData.user} date="EX . 22 January 2021" />
+          <Balance
+            name={userData.name}
+            value={voucherData.transaction.length == 0 ? '0' : voucherData.user}
+            date="EX . 22 January 2021"
+          />
           <ApplyInput
             onPress={() => addVouchers()}
             options={{
               onChangeText: value => {
-                setstate(old => ({ ...old, code: value }));
+                setstate(old => ({...old, code: value}));
               },
               value: state.code,
               onSubmitEditing: addVouchers,
@@ -86,18 +91,19 @@ const Voucher: FC = () => {
           />
         </View>
         <View style={styles.listContainer}>
-          {!transaction?null:transaction.map((item, index) => (
-            <VoucherDetails
-              {...item}
-              key={index}
-              isLast={index === transaction.length - 1}
-            />
-          ))}
+          {!voucherData.transaction
+            ? null
+            : voucherData.transaction.map((item, index) => (
+                <VoucherDetails
+                  {...item}
+                  key={index}
+                  isLast={index === voucherData.transaction.length - 1}
+                />
+              ))}
         </View>
       </Content>
     </Container>
   );
-
 };
 
 export default Voucher;
