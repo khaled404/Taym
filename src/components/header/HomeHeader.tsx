@@ -100,7 +100,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
           contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
           textInputContainer={{
             textAlign: language === 'ar' ? 'right' : 'left',
-            paddingVertical: Pixel(35),
+            paddingVertical: Pixel(25),
           }}
           rightContent={() => <SearchSubmitBtn />}
           iconRightStyle={{top: 5}}

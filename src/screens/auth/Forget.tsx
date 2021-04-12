@@ -17,13 +17,11 @@ const Forget: FC = () => {
   });
   const dispatch = useDispatch();
   const submitHandler = () => {
-    console.log('success1');
     setstate(old => ({...old, loader: true}));
     dispatch(
       ForgetHandler(
         state.phone,
         success => {
-          console.log(success, '   ', state.phone, 'success');
           setstate(old => ({...old, loader: false}));
           success && navigate('ForgetPhoneCode');
         },

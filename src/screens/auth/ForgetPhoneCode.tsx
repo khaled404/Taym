@@ -49,7 +49,7 @@ const ForgetPhoneCode: FC = () => {
               onChangeText={text => {
                 setstate(old => ({...old, code: text}));
               }}
-              //numOfInputs={6}
+              arrayWidth={6}
             />
           </View>
           <View style={styles.submitContainer}>
