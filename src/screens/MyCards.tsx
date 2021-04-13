@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, FlatList, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
 import {Colors,Fonts,Pixel} from '../constants/styleConstants';
@@ -8,9 +8,12 @@ import Input from '../components/textInputs/Input'
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
-import {EditIcon, ArrowHeaderIcon, CheckedIcon} from '../../assets/Icons/Icons';
+import {CheckedIcon} from '../../assets/Icons/Icons';
 import Button from "../components/touchables/Button";
 import {commonStyles} from '../styles/styles';
+import VisaCard from '../components/myCards/VisaCard'
+
+
 
 const MyCards: FC = () => {
   const {t} = useTranslation();
@@ -67,132 +70,23 @@ const MyCards: FC = () => {
   return (
     <Container style={styles.container}>
       <Header navigate={navigate} title="My Cards" />
-      <View style={{
-        width:'100%',
-        height:Pixel(400),
-        alignItems:'center',
-        justifyContent:'center'
-      }} >
-        <View style={{
-          width:'70%',
-          height:Pixel(300),
-          borderRadius:10,
-          flexDirection:'column',
-          alignItems:'flex-start',
-          justifyContent:'flex-start',
-          paddingHorizontal:Pixel(40),
-          paddingVertical:Pixel(30),
-          backgroundColor:Colors.dark,
-        }} >
-
-          <View style={{
-            flexDirection:'row',
-            justifyContent:'space-between',
-            width:'100%',
-            alignItems:'center'
-          }} >
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(25),
-              fontFamily:Fonts.medium
-            }} >Credit Card</Text>
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(25),
-              fontFamily:Fonts.black
-            }} >Bank Name</Text>
-          </View>
-
-            {/***** */}
-
-          <View style={{
-            flexDirection:'row',
-            justifyContent:'space-between',
-            height:'35%',
-            width:'100%',
-            alignItems:'center'
-          }} >
-
-          </View>
-
-          {/********** */}
-
-          <View style={{
-            flexDirection:'row',
-            width:'100%',
-            alignItems:'center'
-          }} >
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(35),
-              fontFamily:Fonts.regular
-            }} >1234  5678  9107  4568</Text>
-          </View>
-
-          {/*********** */}
-
-          <View style={{
-            flexDirection:'row',
-            width:'100%',
-            justifyContent:'space-between',
-            alignItems:'flex-start',
-          }} >
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(20),
-              fontFamily:Fonts.medium
-            }} >0123</Text>
-            <View style={{
-              flexDirection:'row',
-              alignItems:'center',
-              paddingTop:Pixel(10)
-            }} >
-
-          <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(12),
-              fontFamily:Fonts.regular
-            }} >{'VALID'} {'\n'} {'THRU'}</Text>
-
-
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(20),
-              fontFamily:Fonts.regular,
-              
-            }} >01/08</Text>
-            </View>
-          </View>
-
-          {/********** */}
-          <View style={{
-            width:'100%',
-            justifyContent:'flex-start',
-          }} >
-            <Text style={{
-              color:Colors.white,
-              fontSize:Pixel(25),
-              fontFamily:Fonts.regular,
-              
-            }} t>Name Surname</Text>
-          </View>
-          
-
-        </View>
+     
+      <View style={styles.cardContainer} >
+        <FlatList
+          data={categoryHomeData}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({item,index}) => 
+              <VisaCard/>
+        }
+        />
+        
       </View>
       <Content >
       <View style={styles.inputContainer}>
-        <View style={{
-          width:'100%',
-          height:Pixel(100),
-          alignItems:'flex-start',
-          justifyContent:'center'
-        }} >
-          <Text style={{
-            fontSize:Pixel(50),
-            color:Colors.colorSacand,
-            fontFamily:Fonts.bold
-          }} >Add New Card</Text>
+        <View style={styles.addTextConatiner} >
+          <Text style={styles.addText} >Add New Card</Text>
         </View>
 
         {/***********Card Type******** */}
@@ -219,20 +113,14 @@ const MyCards: FC = () => {
                   setCardNumber(value);
                 },
                 value: cardNumber,
+                keyboardType:'numeric'
               }}
             />
 
-            <View style={{
-              width:'100%',
-              flexDirection:'row',
-              justifyContent:'space-between'
-            }} >
+            <View style={styles.inputRowContainer} >
 
             {/***********EX Date******** */}
-           <View style={{
-             flexDirection:'column',
-             width:'48%'
-           }} >
+           <View style={styles.inputColumnContainer} >
 
             <Text style={styles.inputLabel}>{t('EX Date')}</Text>
             <Input
@@ -251,11 +139,7 @@ const MyCards: FC = () => {
 
             {/***********CVV******** */}
 
-            <View style={{
-             flexDirection:'column',
-             width:'48%'
-
-           }} >
+            <View style={styles.inputColumnContainer} >
 
             <Text style={styles.inputLabel}>{t('CVV')}</Text>
             <Input
@@ -274,27 +158,16 @@ const MyCards: FC = () => {
           </View>
 
           {/********* */}
-          <View style={{
-            flexDirection:'row',
-            width:'100%',
-            justifyContent:'flex-start',
-            height:Pixel(150),
-            alignItems:'center'
-          }} >
+          <View style={styles.checkContainer} >
             <CheckedIcon/>
-            <Text style={{
-              color:Colors.lightGray,
-              fontSize:Pixel(30),
-              fontFamily:Fonts.bold,
-              marginLeft:Pixel(40)
-            }} >Set As Default Payment Card</Text>
+            <Text style={styles.checkText} >Set As Default Payment Card</Text>
           </View>
 
           {/*********** */}
           <Button
-                        style={{...commonStyles.boxShadow}}
-                        title={t('Save Card')}
-                    />
+               style={{...commonStyles.boxShadow}}
+              title={t('Save Card')}
+            />
           </View>
       </Content>
     </Container>
@@ -332,5 +205,44 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     padding: 0,
     paddingHorizontal: 15,
+  },
+  cardContainer:{
+    width:'100%',
+    height:Pixel(400),
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  addTextConatiner:{
+    width:'100%',
+    height:Pixel(100),
+    alignItems:'flex-start',
+    justifyContent:'center'
+  },
+  addText:{
+    fontSize:Pixel(50),
+    color:Colors.colorSacand,
+    fontFamily:Fonts.bold
+  },
+  inputRowContainer:{
+    width:'100%',
+    flexDirection:'row',
+    justifyContent:'space-between'
+  },
+  inputColumnContainer:{
+    flexDirection:'column',
+    width:'48%'
+  },
+  checkContainer:{
+    flexDirection:'row',
+    width:'100%',
+    justifyContent:'flex-start',
+    height:Pixel(150),
+    alignItems:'center'
+  },
+  checkText:{
+    color:Colors.lightGray,
+    fontSize:Pixel(30),
+    fontFamily:Fonts.bold,
+    marginLeft:Pixel(40)
   },
 });
