@@ -26,11 +26,14 @@ import {Colors, Fonts, ScreenOptions} from './src/constants/styleConstants';
 import AppInitializer from './src/screens/AppInitializer';
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import {firebaseConfig} from './src/constants/Config';
-import {AsyncKeys, saveItem} from './src/constants/helpers';
+import {AsyncKeys, getItem, saveItem} from './src/constants/helpers';
 import {useDispatch, useSelector} from 'react-redux';
 import {createUpdateDeviceApi} from './src/store/actions/settings';
 import {RootState} from './src/store/store';
 import {getUniqueId} from 'react-native-device-info';
+import {ActionType} from './src/store/actions/actions';
+import {getVoucherData} from './src/store/actions/voucher';
+import {getUserAddressApi} from './src/store/actions/address';
 
 const {isRTL, forceRTL, allowRTL} = I18nManager;
 
@@ -96,6 +99,23 @@ const App: FC = () => {
       dispatch(createUpdateDeviceApi(fcmToken, uuid));
     }
   }, [fcmToken]);
+  // const ass = async () => {
+  //   let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
+  //   if (userV !== null) {
+  //     dispatch({
+  //       type: ActionType.GET_USER_VOUCHERS,
+  //       payload: userV,
+  //     });
+  //   } else {
+  //     dispatch(getVoucherData());
+  //   }
+  //   console.log('userV', userV);
+  // };
+
+  useEffect(() => {
+    dispatch(getUserAddressApi());
+  }, []);
+
   return (
     <>
       <View

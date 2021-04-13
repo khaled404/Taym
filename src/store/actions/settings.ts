@@ -1,10 +1,11 @@
 import {Dispatch} from 'redux';
 import {ActionType} from './actions';
 import {I18nManager} from 'react-native';
-import {AsyncKeys, saveItem} from '../../constants/helpers';
+import {AsyncKeys, getItem, saveItem} from '../../constants/helpers';
 import RNRestart from 'react-native-restart';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
+import {getVoucherData} from './voucher';
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
 export const loadApp = () => ({
@@ -35,11 +36,25 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
+const updateUserVouchers = async () => {
+  let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
+  return (dispatch: Dispatch<any>) => {
+    if (userV !== null) {
+      dispatch({
+        type: ActionType.GET_USER_VOUCHERS,
+        payload: userV,
+      });
+    } else {
+      dispatch(getVoucherData());
+    }
+  };
+};
 export const initializApp = () => {
   return (dispatch: Dispatch<any>) => {
     try {
       allowRTL(true);
       dispatch(loadApp());
+      updateUserVouchers();
     } catch (error) {
       console.log('initializApp', error);
     }

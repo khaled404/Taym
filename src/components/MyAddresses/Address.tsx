@@ -16,7 +16,7 @@ import {RootState} from '../../store/store';
 
 interface IAddress {
   id: number;
-  title: string;
+  name: string;
   address: string;
   phone: string;
   onPress: () => void;
@@ -26,7 +26,7 @@ interface IAddress {
 
 const Address: FC<IAddress> = ({
   id,
-  title,
+  name,
   address,
   phone,
   onPress,
@@ -36,6 +36,8 @@ const Address: FC<IAddress> = ({
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   const {language}: any = useSelector((state: RootState) => state.settings);
+  console.log('name', name);
+
   const EditBtn = () => {
     return (
       <IconTouchableContainer
@@ -63,7 +65,7 @@ const Address: FC<IAddress> = ({
       <View style={styles.detailsContainer}>
         <View style={styles.checkBtn}>
           {selected ? <CheckedIcon /> : <UnCheckedIcon />}
-          <Text style={styles.addressTitle}>{title}</Text>
+          <Text style={styles.addressTitle}>{name}</Text>
         </View>
         <View style={{paddingLeft: Pixel(60)}}>
           <Text
