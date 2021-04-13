@@ -20,6 +20,7 @@ export const getVoucherData = () => {
         payload: {},
       });
       await saveItem(AsyncKeys.GET_USER_VOUCHERS, data);
+
       dispatch({
         type: ActionType.GET_USER_VOUCHERS,
         payload: data,
@@ -30,11 +31,13 @@ export const getVoucherData = () => {
         type: ActionType.GET_USER_VOUCHERS_ERROR,
         payload: error?.response.data.message,
       });
+
       showMessage({
         message: error?.response.data.message,
         type: 'danger',
       });
-      console.log(error?.response.data.message , 'erroe');
+
+      console.log(error?.response.data.message, 'erroe');
     }
   };
 };
@@ -51,28 +54,27 @@ export const addVoucher = (code: string, cb: (success?: boolean) => void) => {
       const {data} = await axiosAPI.post('user/add-user-voucher', {
         code,
       });
-{
-  data.message!=='Voucher Added'?
-  showMessage({
-    message: data.message,
-    type: 'danger',
-  })
-  :
-  /* dispatch({
+      {
+        data.message !== 'Voucher Added'
+          ? showMessage({
+              message: data.message,
+              type: 'danger',
+            })
+          : /* dispatch({
     type: ActionType.ADD_USER_VOUCHER_ERROR,
     payload: {},
       }); */
-      dispatch({
-        type: ActionType.ADD_USER_VOUCHER,
-        payload: data,
-      });
-      showMessage({
-        message: data.message,
-        type: 'success',
-      })
-      console.log(data , 'add voucher ...');
-      cb(true);
-    }
+            dispatch({
+              type: ActionType.ADD_USER_VOUCHER,
+              payload: data,
+            });
+        showMessage({
+          message: data.message,
+          type: 'success',
+        });
+        console.log(data, 'add voucher ...');
+        cb(true);
+      }
     } catch (error) {
       cb(false);
       dispatch({

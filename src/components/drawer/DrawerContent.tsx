@@ -35,14 +35,13 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   const {isLogin, userData}: any = useSelector(
     (state: RootState) => state.auth,
   );
-  const {voucherData}: any = useSelector(
-    (state: RootState) => state.voucher,
-  );
+  const {voucherData}: any = useSelector((state: RootState) => state.voucher);
   const {t}: any = useTranslation();
+  // console.log('voucherData.user', voucherData);
 
   const getLetter = (st: string) => {
     const fullName = st?.split(' ');
-    const letters = fullName.shift().charAt(0) 
+    const letters = fullName.shift().charAt(0);
     return letters.toUpperCase();
   };
 
