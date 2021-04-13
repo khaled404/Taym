@@ -79,7 +79,7 @@ const MyAddresses: FC = () => {
             style={{borderRadius: 10, ...commonStyles.boxShadow}}
             styleTitle={{fontSize: Pixel(30)}}
             title={t('Add A New One +')}
-            onPress={() => navigate('AddAddress')}
+            onPress={() => navigate('AddLocation')}
           />
         </View>
       </Content>

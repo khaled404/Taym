@@ -34,7 +34,13 @@ const Register: FC = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
       RegisterHandler(state.name, state.email, state.password, success => {
-        setstate(old => ({...old,name:'',email:'' , password:'',loader: false}));
+        setstate(old => ({
+          ...old,
+          name: '',
+          email: '',
+          password: '',
+          loader: false,
+        }));
         success && navigate('CompleteRegister');
       }),
     );

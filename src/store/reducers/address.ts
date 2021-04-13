@@ -8,6 +8,8 @@ export default (state = initialState, action: IReduser) => {
   switch (action.type) {
     case ActionType.SAVE_ADDRESSLIST:
       return {...state, addressList: action.payload};
+    case ActionType.DELETE_ADDRESS:
+      return {...state, addressList: action.payload};
   }
   return state;
 };

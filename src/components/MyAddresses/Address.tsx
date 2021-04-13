@@ -11,13 +11,19 @@ import {
 import {useTranslation} from 'react-i18next';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
+import {deleteAddressApi, saveAddressList} from '../../store/actions/address';
 
 interface IAddress {
   id: number;
   name: string;
-  address: string;
+  building_no: string;
+  floor_no: string;
+  street_name: string;
+  area_ar: string;
+  area_en: string;
+  apartment_no: string;
   phone: string;
   onPress: () => void;
   selected: boolean;
@@ -27,8 +33,13 @@ interface IAddress {
 const Address: FC<IAddress> = ({
   id,
   name,
-  address,
   phone,
+  building_no,
+  floor_no,
+  street_name,
+  area_ar,
+  area_en,
+  apartment_no,
   onPress,
   selected,
   inCart,
@@ -36,6 +47,8 @@ const Address: FC<IAddress> = ({
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   const {language}: any = useSelector((state: RootState) => state.settings);
+  const {addressList}: any = useSelector((state: RootState) => state.address);
+  const dispatch = useDispatch();
   console.log('name', name);
 
   const EditBtn = () => {
@@ -47,18 +60,30 @@ const Address: FC<IAddress> = ({
       </IconTouchableContainer>
     );
   };
-
+  const handleDeleteAddress = (addressId: number) => {
+    dispatch(
+      deleteAddressApi(addressId, success => {
+        if (success) {
+          let addressListFilter = addressList.filter(
+            address => address.id != addressId,
+          );
+          dispatch(saveAddressList(addressListFilter));
+        }
+      }),
+    );
+  };
   const DeleteBtn = () => {
     return (
       <IconTouchableContainer
         style={{marginTop: 5}}
         onPress={() => {
-          console.log('Delete Address!');
+          handleDeleteAddress(id);
         }}>
         <DeleteIcon />
       </IconTouchableContainer>
     );
   };
+  console.log('ididid', id);
 
   return (
     <TouchableOpacity style={[styles.container]} onPress={onPress}>
@@ -73,7 +98,9 @@ const Address: FC<IAddress> = ({
               styles.address,
               {textAlign: language === 'ar' ? 'left' : 'right'},
             ]}>
-            {address}
+            {language === 'ar' ? area_ar : area_en}{' '}
+            {street_name != undefined && t('st') + '.'} {street_name}{' '}
+            {building_no != undefined && ` - ` + t('Building')} {building_no}
           </Text>
           <Text style={styles.address}>
             {t('Mobile Number')} {phone}
