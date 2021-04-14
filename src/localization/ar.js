@@ -37,7 +37,7 @@ export default {
   'Street Number': 'رقم الشارع',
   'Add Location': 'إضافة موقع',
   Area: 'المنطقه',
-  'Building No': 'مبني رقم',
+  'Building No': 'عمارة رقم',
   Floor: 'الدور',
   Apartment: 'الشقه',
   Landmark: 'علامه مميزه',
@@ -122,6 +122,7 @@ export default {
   'Your Identity Has Been Verified': 'تم التحقق من هويتك',
   'Set Your New Password': 'اضبط كلمة المرور الجديدة',
   'Confirm New Password': 'تأكيد كلمة المرور الجديدة',
-  Building: 'مبنى',
+  Building: 'عمارة',
   st: 'شارع',
+  'Edit Location': 'تعديل العنوان',
 };

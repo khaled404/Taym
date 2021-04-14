@@ -42,38 +42,26 @@ const MyAddresses: FC = () => {
   }, []);
   const {navigate} = useNavigation();
 
-  const addressListMemo = useMemo(() => {
-    addressList.map((item, index) => {
-      console.log('addressListMemo', item);
-      return (
-        <Address
-          {...item}
-          onPress={() => setSelectedId(item.id)}
-          selected={selectedId === item.id}
-          key={index}
-        />
-      );
-    });
-  }, [addressList]);
+  const addressListMemo = useMemo(
+    () =>
+      addressList.map((item, index) => {
+        return (
+          <Address
+            {...item}
+            onPress={() => setSelectedId(item.id)}
+            selected={selectedId === item.id}
+            key={index}
+          />
+        );
+      }),
+    [addressList],
+  );
 
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
       <Header title={t('My Addresses')} />
       <Content noPadding>
-        {/* <View style={styles.listContainer}>{addressListMemo}</View> */}
-        <View style={styles.listContainer}>
-          {addressList.map((item, index) => {
-            console.log('addressListMemo', item);
-            return (
-              <Address
-                {...item}
-                onPress={() => setSelectedId(item.id)}
-                selected={selectedId === item.id}
-                key={index}
-              />
-            );
-          })}
-        </View>
+        <View style={styles.listContainer}>{addressListMemo}</View>
         <View style={styles.submitContainer}>
           <Button
             style={{borderRadius: 10, ...commonStyles.boxShadow}}

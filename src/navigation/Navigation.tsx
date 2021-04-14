@@ -29,6 +29,7 @@ import {
   OrderOut,
   MyCards,
   Notifications,
+  EditAddress,
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -140,15 +141,16 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="MyAddresses" component={MyAddresses} />
         <Stack.Screen name="AddLocation" component={AddLocation} />
+        <Stack.Screen name="EditAddress" component={EditAddress} />
         <Stack.Screen name="AddressLocation" component={AddressLocation} />
         <Stack.Screen name="Category" component={Category} />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Language" component={Language} />
         <Stack.Screen name="ShopDetails" component={ShopDetails} />
         <Stack.Screen name="OrderOut" component={OrderOut} />
-         <Stack.Screen name="MyCards" component={MyCards} />
-         <Stack.Screen name="Notifications" component={Notifications} />
-       </Stack.Navigator>
+        <Stack.Screen name="MyCards" component={MyCards} />
+        <Stack.Screen name="Notifications" component={Notifications} />
+      </Stack.Navigator>
     </Animated.View>
   );
 };
