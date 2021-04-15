@@ -36,9 +36,10 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
-const updateUserVouchers = async () => {
-  let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
-  return (dispatch: Dispatch<any>) => {
+const updateUserVouchers = () => {
+  return async (dispatch: Dispatch<any>) => {
+    let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
+    console.log('userV', userV);
     if (userV !== null) {
       dispatch({
         type: ActionType.GET_USER_VOUCHERS,
@@ -54,7 +55,7 @@ export const initializApp = () => {
     try {
       allowRTL(true);
       dispatch(loadApp());
-      updateUserVouchers();
+      dispatch(updateUserVouchers());
     } catch (error) {
       console.log('initializApp', error);
     }

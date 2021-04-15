@@ -14,6 +14,7 @@ export const getVoucherData = () => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const {data} = await axiosAPI.get('user/get-user-vouchers');
+      console.log('getVoucherData data', data);
 
       dispatch({
         type: ActionType.GET_USER_VOUCHERS_ERROR,
