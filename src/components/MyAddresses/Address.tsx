@@ -49,13 +49,25 @@ const Address: FC<IAddress> = ({
   const {language}: any = useSelector((state: RootState) => state.settings);
   const {addressList}: any = useSelector((state: RootState) => state.address);
   const dispatch = useDispatch();
-  console.log('name', name);
-
   const EditBtn = () => {
     return (
       <IconTouchableContainer
         style={{marginBottom: 5}}
-        onPress={() => navigate('EditAddress')}>
+        onPress={() =>
+          navigate('EditAddress', {
+            address: {
+              id,
+              name,
+              phone,
+              building_no,
+              floor_no,
+              street_name,
+              area_ar,
+              area_en,
+              apartment_no,
+            },
+          })
+        }>
         <InputEditIcon />
       </IconTouchableContainer>
     );
@@ -100,7 +112,7 @@ const Address: FC<IAddress> = ({
             ]}>
             {language === 'ar' ? area_ar : area_en}{' '}
             {street_name != undefined && t('st') + '.'} {street_name}{' '}
-            {building_no != undefined && ` - ` + t('Building')} {building_no}
+            {building_no != undefined && ` - ` + t('Building No')} {building_no}
           </Text>
           <Text style={styles.address}>
             {t('Mobile Number')} {phone}

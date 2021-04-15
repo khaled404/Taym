@@ -20,6 +20,7 @@ export const OrderDetails = register({loader: () => import('./OrderDetails')});
 export const Settings = register({loader: () => import('./Settings')});
 export const MyAddresses = register({loader: () => import('./MyAddresses')});
 export const AddLocation = register({loader: () => import('./AddLocation')});
+export const EditAddress = register({loader: () => import('./EditAddress')});
 export const AddressLocation = register({
   loader: () => import('./AddressLocation'),
 });
@@ -28,10 +29,20 @@ export const ForgetPhoneCode = register({
 });
 export const Category = register({loader: () => import('./Category')});
 export const Cart = register({loader: () => import('./Cart/Cart')});
-export const CartDetails = register({loader: () => import('./Cart/CartDetails')});
-export const CartAddress = register({loader: () => import('./Cart/CartAddress')});
-export const CartCheckout = register({loader: () => import('./Cart/CartCheckout')});
-export const ShopDetails = register({loader: () => import('../screens/shopDetails')});
-export const Notifications = register({loader: () => import('./Notifications')});
+export const CartDetails = register({
+  loader: () => import('./Cart/CartDetails'),
+});
+export const CartAddress = register({
+  loader: () => import('./Cart/CartAddress'),
+});
+export const CartCheckout = register({
+  loader: () => import('./Cart/CartCheckout'),
+});
+export const ShopDetails = register({
+  loader: () => import('../screens/shopDetails'),
+});
+export const Notifications = register({
+  loader: () => import('./Notifications'),
+});
 export const OrderOut = register({loader: () => import('./orderOut')});
 export const MyCards = register({loader: () => import('./MyCards')});

@@ -43,3 +43,51 @@ export const deleteAddressApi = (
     }
   };
 };
+
+interface IAddress {
+  name: string;
+  phone: string;
+  area_id: string;
+  street_name: string;
+  building_no: string;
+  floor_no: string;
+  apartment_no: string;
+  latitude: number;
+  longitude: number;
+}
+export const addAddressApi = (
+  addressData: IAddress,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post(
+        `user/user-add-new-address`,
+        addressData,
+      );
+      console.log('addAddressApiApi data', data);
+      cb(true);
+    } catch (error) {
+      console.log('addAddressApiError', error?.response);
+    }
+  };
+};
+
+export const editAddressApi = (
+  addressId: string,
+  addressData: IAddress,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post(
+        `user/edit-user-address/${addressId}`,
+        addressData,
+      );
+      console.log('editAddressApi data', data);
+      cb(true);
+    } catch (error) {
+      console.log('editAddressApiError', error?.response);
+    }
+  };
+};

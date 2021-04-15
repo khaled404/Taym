@@ -9,27 +9,37 @@ import {commonStyles} from '../styles/styles';
 import Button from '../components/touchables/Button';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import {addAddressApi, saveAddressList} from '../store/actions/address';
+import {
+  addAddressApi,
+  editAddressApi,
+  saveAddressList,
+} from '../store/actions/address';
 import {RootState} from '../store/store';
+import {useRoute} from '@react-navigation/native';
 
-const AddLocation: FC = () => {
+const EditAddress: FC = () => {
+  const route = useRoute();
+  const {address} = route.params;
   const {language}: any = useSelector((state: RootState) => state.settings);
   const {addressList}: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
-  const [name, setName] = useState('22 عنوان جديييد');
-  const [phone, setPhone] = useState('0104577288');
-  const [street, setStreet] = useState('55');
-  const [area, setArea] = useState('4');
-  const [buildingNumber, setBuildingNumber] = useState('4');
-  const [floor, setFloor] = useState('1');
-  const [apartment, setApartment] = useState('2');
+  const [name, setName] = useState(address.name);
+  const [phone, setPhone] = useState(address.phone);
+  const [street, setStreet] = useState(address.street_name);
+  const [area, setArea] = useState(address.area_en);
+  const [buildingNumber, setBuildingNumber] = useState(address.building_no);
+  const [floor, setFloor] = useState(address.floor_no);
+  const [apartment, setApartment] = useState(address.apartment_no);
   const [landmark, setLandmark] = useState('0');
+
+  console.log('route.params.address', address);
+
   const handlSubmit = () => {
     setLoader(true);
     const addressData = {
       name: name,
       phone: phone,
-      area_id: area,
+      area_id: '4',
       street_name: street,
       building_no: buildingNumber,
       floor_no: floor,
@@ -41,12 +51,12 @@ const AddLocation: FC = () => {
     console.log('new addressList', aa);
 
     dispatch(
-      addAddressApi(addressData, success => {
+      editAddressApi(address.id, addressData, success => {
         setLoader(false);
         if (success) {
           // let newAddressList = [...addressList, addressData];
           // dispatch(saveAddressList(newAddressList));
-          navigate('Home');
+          // navigate('Home');
         }
       }),
     );
@@ -56,7 +66,7 @@ const AddLocation: FC = () => {
   const {t} = useTranslation();
   return (
     <Container style={styles.container}>
-      <Header title={t('Add Location')} />
+      <Header title={t('Edit Location')} />
       <Content
         noPadding
         style={styles.contentContainer}
@@ -264,4 +274,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddLocation;
+export default EditAddress;
