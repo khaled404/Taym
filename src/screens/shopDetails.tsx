@@ -1,4 +1,4 @@
-import React, {FC,useState} from 'react';
+import React, {FC,useState,useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -28,9 +28,11 @@ import FavoriteItem from '../components/Home/FavoriteItem';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const heightHeader=(Dimensions.get('window').height)/4
+const HEADER_MIN_HEIGHT = Pixel(150);
+const HEADER_SCROLL_DISTANCE = heightHeader - HEADER_MIN_HEIGHT;
 const ShopDetails: FC = () => {
   const {t} = useTranslation();
-  const animatedValue=useState(new Animated.Value(0))[0]
+  const animatedValue=useRef(new Animated.Value(0)).current;
 
   const translateY = animatedValue.interpolate({
     inputRange: [0, heightHeader/1.7],
@@ -39,8 +41,15 @@ const ShopDetails: FC = () => {
   });
 
   const imageWidth = animatedValue.interpolate({
-    inputRange: [-1, 250],
-    outputRange: [1, -1],
+    inputRange: [0, heightHeader/2,heightHeader],
+    outputRange: [1,.5, 0],
+    extrapolate: 'clamp',
+  });
+
+  const imageTranslateY = animatedValue.interpolate({
+    inputRange: [0,heightHeader/2,heightHeader],
+    outputRange: [1,.5,0],
+    extrapolate: 'clamp',
   });
 
 
@@ -82,6 +91,36 @@ const ShopDetails: FC = () => {
       title: t('Vegetables'),
       image: 'Voucher 12457',
     },
+    {
+      id: 7,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+    {
+      id: 8,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+    {
+      id: 9,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+    {
+      id: 10,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+    {
+      id: 11,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+    {
+      id: 12,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    }
   ];
 
   const SearchSubmitBtn: FC = () => {
@@ -119,13 +158,14 @@ const ShopDetails: FC = () => {
       </ImageBackground>
       <Animated.View style={[styles.content, {transform: [{translateY}]}]}>
         <Animated.View
-          style={{
+          style={[{
             width: '100%',
             alignItems: 'center',
             height: 50,
-          }}>
+          },{transform: [{ scaleY: imageTranslateY }]}]}>
           <Animated.View style={[styles.imageContainer ,{
             opacity:imageWidth,
+            
           }]}>
             <Animated.Image 
             source={Images.marketLogo} 

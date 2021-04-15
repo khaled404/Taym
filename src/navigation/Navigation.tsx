@@ -121,7 +121,7 @@ const Stacks: FC<any> = ({style}) => {
       <Stack.Navigator
         screenOptions={{headerShown: false, ...navigationTransition} as any}
         initialRouteName={
-          language === null ? 'Language' : isLogin ? 'MyCards' : 'Login'
+          language === null ? 'Language' : isLogin ? 'Category' : 'Login'
         }>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />

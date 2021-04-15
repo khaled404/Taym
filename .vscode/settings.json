@@ -1,7 +1,7 @@
 {
   "workbench.iconTheme": "material-icon-theme",
   "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[javascriptreact]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

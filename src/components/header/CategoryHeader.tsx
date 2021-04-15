@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   Animated,
   Platform,
@@ -10,9 +10,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Colors, Fonts, Pixel, ScreenOptions,} from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
-import {NavigationProps} from '../../constants/interfaces';
+import { Colors, Fonts, Pixel, ScreenOptions, } from '../../constants/styleConstants';
+import { commonStyles } from '../../styles/styles';
+import { NavigationProps } from '../../constants/interfaces';
 import {
   ArrowHeaderIcon,
   CartIcon,
@@ -23,8 +23,9 @@ import {
   SearchIcon,
 } from '../../../assets/Icons/Icons';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Input from '../textInputs/Input';
+import { transform } from '@babel/core';
 
 interface ICategoryHeader {
   title: string;
@@ -32,105 +33,114 @@ interface ICategoryHeader {
   titleStyle?: StyleProp<TextStyle>;
   toggleHeader: Boolean;
   handleToggleHeader: () => void;
-  fadeAnim: Animated.Value;
+  opacity?: Animated.Value;
+  translateY?: Animated.Value;
+  reverseOpacity?: Animated.Value;
+  translatex?: Animated.Value;
 }
 
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17}/>
+      <SearchIcon width={17} height={17} />
     </IconTouchableContainer>
   );
 };
 
 const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
-                                                                 navigate,
-                                                                 goBack,
-                                                                 name,
-                                                                 title,
-                                                                 containerStyle,
-                                                                 titleStyle,
-                                                                 toggleHeader,
-                                                                 handleToggleHeader,
-                                                                 fadeAnim
-                                                               }) => {
-  const {t} = useTranslation();
-  console.log('fadeAnim', fadeAnim)
+  navigate,
+  goBack,
+  name,
+  title,
+  containerStyle,
+  titleStyle,
+  toggleHeader,
+  handleToggleHeader,
+  opacity,
+  translateY,
+  reverseOpacity,
+  translatex
+}) => {
+  const { t } = useTranslation();
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
         <View style={styles.right}>
           <Animated.View style={[styles.titleConatiner, {
-            opacity: fadeAnim,
-            visibility: hidden,
-            transform: [{
-              translateY: fadeAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [-150, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-              }),
-            }]
+            opacity: opacity,
+            visibility: 'hidden',
+
+
           }]}>
-            <LogoIcon width={56} height={30}/>
+            <LogoIcon width={56} height={30} />
           </Animated.View>
           <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
-            <MenuIcon/>
+            <MenuIcon />
           </IconTouchableContainer>
         </View>
 
         <View style={styles.centerContainer}>
-            <Animated.View style={{opacity: fadeAnim}}>
-              <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}>
-                <Text style={styles.addressText}>Alexandria - Miami</Text>
-                <ArrowHeaderIcon/>
-              </TouchableOpacity>
-            </Animated.View>
-          {toggleHeader && (
-            <View style={[styles.titleConatiner, {marginLeft: 0}]}>
-              <Text
-                style={[styles.title, titleStyle]}
-                ellipsizeMode="tail"
-                numberOfLines={1}>
-                {title ? title : ''}
-              </Text>
-            </View>
-          )}
+          <Animated.View style={{ opacity: opacity, }}>
+            <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
+            <TouchableOpacity
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}>
+              <Text style={styles.addressText}>Alexandria - Miami</Text>
+              <ArrowHeaderIcon />
+            </TouchableOpacity>
+          </Animated.View>
+
+          <Animated.View style={[styles.titleConatiner,
+          {
+            marginLeft: 0,
+            opacity: reverseOpacity,
+            transform: [{ translateY }]
+          }]}>
+            <Text
+              style={[styles.title, titleStyle]}
+              ellipsizeMode="tail"
+              numberOfLines={1}>
+              {title ? title : ''}
+            </Text>
+          </Animated.View>
+
         </View>
 
         <View style={styles.leftContainer}>
 
-          {!toggleHeader ? (
-            <IconTouchableContainer onPress={() => navigate('Cart')}>
-              <CartIcon/>
-            </IconTouchableContainer>
-          ) : (
+          <Animated.View style={[{ opacity: reverseOpacity }, {
+            transform: [{ translateX: translatex }]
+          }]}>
+
             <IconTouchableContainer onPress={handleToggleHeader}>
-              <HeaderSearchIcon/>
+              <HeaderSearchIcon />
             </IconTouchableContainer>
-          )}
+          </Animated.View>
+
+          <Animated.View style={[{ opacity: opacity }, {
+            transform: [{ translateY }]
+          }]} >
+
+            <IconTouchableContainer onPress={() => navigate('Cart')}>
+              <CartIcon />
+            </IconTouchableContainer>
+          </Animated.View>
+
+
+
 
           <IconTouchableContainer>
-            <NotificationIcon/>
+            <NotificationIcon />
           </IconTouchableContainer>
         </View>
       </View>
 
-      {!toggleHeader && (<View style={styles.searchInputContainer}>
-        <Input
-          options={{
-            placeholder: t('What You Are Looking For ?'),
-            placeholderTextColor: '#949494',
-          }}
-          contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
-          rightContent={() => <SearchSubmitBtn/>}
-          iconRightStyle={{top: 5}}
-        />
-      </View>)}
+
+
+
 
     </View>
   );
@@ -147,6 +157,7 @@ const styles = StyleSheet.create({
         : 64 + ScreenOptions.StatusBarHeight,
     paddingHorizontal: 15,
     zIndex: 200,
+    width: '100%',
     // paddingBottom: Pixel(30),
   },
   rowConatiner: {
@@ -190,6 +201,7 @@ const styles = StyleSheet.create({
     // marginRight: 'auto',
     // flexDirection: 'row',
     // alignItems: 'center',
+    height: Pixel(70)
   },
   addressTitle: {
     textAlign: 'center',
