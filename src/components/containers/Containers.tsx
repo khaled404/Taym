@@ -5,6 +5,7 @@ import {
   StyleProp,
   View,
   ViewStyle,
+  Animated
 } from 'react-native';
 import {Colors} from '../../constants/styleConstants';
 
@@ -20,6 +21,7 @@ interface contentProps {
   paddingVertical?: boolean;
   children?: JSX.Element[] | JSX.Element;
   options?: ScrollViewProps;
+  onScroll?:any
 }
 
 export const Container: FC<containerProps> = ({children, style}) => {
@@ -37,9 +39,11 @@ export const Content: FC<contentProps> = ({
   contentContainerStyle,
   paddingVertical,
   options,
+  onScroll,
 }) => {
+  const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
   return (
-    <ScrollView
+    <AnimatedScrollView
       style={style}
       contentContainerStyle={[
         paddingVertical && {paddingVertical: 30},
@@ -47,10 +51,12 @@ export const Content: FC<contentProps> = ({
       ]}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
+      //scrollEventThrottle={16}
+      onScroll={onScroll}
       {...options}>
       <View style={{paddingHorizontal: noPadding ? undefined : 20}}>
         {children}
       </View>
-    </ScrollView>
+    </AnimatedScrollView>
   );
 };
