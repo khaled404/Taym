@@ -1,4 +1,4 @@
-import React, {FC,useState,useRef} from 'react';
+import React, { FC, useState, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,50 +10,61 @@ import {
   Animated,
   Dimensions
 } from 'react-native';
-import {Container, Content} from '../components/containers/Containers';
+import { Container, Content } from '../components/containers/Containers';
 import HomeHeader from '../components/header/HomeHeader';
-import {Colors, Images, Pixel, Fonts} from '../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
+import { Colors, Images, Pixel, Fonts } from '../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
 import CategoryList from '../components/Home/CategoryList';
 import OfferSlider from '../components/Home/OfferSlider';
 import FavoriteList from '../components/Home/FavoriteList';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../store/store';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { useNavigation } from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {SearchIcon,CartIcon,ArrowLeftSmIcon,DeliveryIcon} from '../../assets/Icons/Icons';
+import { SearchIcon, CartIcon, ArrowLeftSmIcon, DeliveryIcon } from '../../assets/Icons/Icons';
 import FavoriteItem from '../components/Home/FavoriteItem';
 
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-const heightHeader=(Dimensions.get('window').height)/4
+const heightHeader = (Dimensions.get('window').height) / 4
 const HEADER_MIN_HEIGHT = Pixel(150);
 const HEADER_SCROLL_DISTANCE = heightHeader - HEADER_MIN_HEIGHT;
 const ShopDetails: FC = () => {
-  const {t} = useTranslation();
-  const animatedValue=useRef(new Animated.Value(0)).current;
+  const { t } = useTranslation();
+  const animatedValue = useRef(new Animated.Value(0)).current;
 
-  const translateY = animatedValue.interpolate({
-    inputRange: [0, heightHeader/1.7],
-    outputRange: [0, -heightHeader/1.7],
+  const translateContent = animatedValue.interpolate({
+    inputRange: [0, Pixel(220)],
+    outputRange: [0, Pixel(-220)],
     extrapolate: 'clamp',
   });
 
-  const imageWidth = animatedValue.interpolate({
-    inputRange: [0, heightHeader/2,heightHeader],
-    outputRange: [1,.5, 0],
+  const opacity = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
+    outputRange: [1, .5, 0],
     extrapolate: 'clamp',
   });
 
   const imageTranslateY = animatedValue.interpolate({
-    inputRange: [0,heightHeader/2,heightHeader],
-    outputRange: [1,.5,0],
+    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
+    outputRange: [1, .5, 0],
     extrapolate: 'clamp',
   });
 
+  const translateList = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
+    outputRange: [0, Pixel(50), Pixel(120)],
+    extrapolate: 'clamp',
+  })
+  const translateHeader = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 1.7],
+    outputRange: [0, Pixel(-60)],
+    extrapolate: 'clamp',
+  })
 
-  
+
+
 
   const categoryHomeData = [
     {
@@ -136,49 +147,49 @@ const ShopDetails: FC = () => {
         source={Images.supermarket}
         style={styles.header}
         imageStyle={{}}
-        >
+      >
         <View style={styles.overlay}>
-        <View style={{
-          height:heightHeader/2,
-          paddingHorizontal:Pixel(50),
-          flexDirection:'row',
-          justifyContent:'space-between',
-          alignItems:'center',
-          position:'relative',
-        }} >
-        
+          <View style={{
+            height: heightHeader / 2,
+            paddingHorizontal: Pixel(50),
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            position: 'relative',
+          }} >
 
-          <ArrowLeftSmIcon/>
-          
-          <CartIcon/>
 
-        </View>
+            <ArrowLeftSmIcon />
+
+            <CartIcon />
+
+          </View>
 
         </View>
       </ImageBackground>
-      <Animated.View style={[styles.content, {transform: [{translateY}]}]}>
+      <Animated.View style={[styles.content, { transform: [{ translateY: translateContent }] }]}>
         <Animated.View
           style={[{
             width: '100%',
             alignItems: 'center',
             height: 50,
-          },{transform: [{ scaleY: imageTranslateY }]}]}>
-          <Animated.View style={[styles.imageContainer ,{
-            opacity:imageWidth,
-            
+          }, { transform: [{ scaleY: imageTranslateY }] }]}>
+          <Animated.View style={[styles.imageContainer, {
+            opacity: opacity,
+
           }]}>
-            <Animated.Image 
-            source={Images.marketLogo} 
-            resizeMode={'contain'} 
-            style={[{width: Pixel(180), height: Pixel(180)},{
-              opacity:imageWidth,
-            }]} />
+            <Animated.Image
+              source={Images.marketLogo}
+              resizeMode={'contain'}
+              style={[{ width: Pixel(180), height: Pixel(180) }, {
+                opacity: opacity,
+              }]} />
           </Animated.View>
         </Animated.View>
 
-        <View
-          style={{
-            width: '95%',
+        <Animated.View
+          style={[{
+            width: '100%',
             height: Pixel(100),
             borderBottomColor: '#707070',
             borderBottomWidth: 1,
@@ -186,41 +197,45 @@ const ShopDetails: FC = () => {
             justifyContent: 'space-between',
             alignItems: 'flex-start',
             //marginTop: 20,
-          }}>
-            <View style={{
-            flexDirection:'row',
-            alignItems:'center',
-            justifyContent:'center',
-            height:'100%'
+          }, {
+            transform: [{ translateY: translateHeader }]
+          }]}>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
           }} >
 
-          <Text
-            style={{
-              fontSize: Pixel(45),
-              fontFamily: Fonts.black,
-            }}>
-            Refresh Supermarket
-          </Text>
-              </View>
-          <View style={{
-            flexDirection:'row',
-            alignItems:'center',
-            justifyContent:'center',
-            height:'100%'
-          }} >
-            <DeliveryIcon/>
-          <Text
-            style={{
-              fontSize: Pixel(30),
-              fontFamily: Fonts.medium,
-              paddingLeft:Pixel(15)
-            }}>
-            30 Min
+            <Text
+              style={{
+                fontSize: Pixel(45),
+                fontFamily: Fonts.black,
+              }}>
+              Refresh Supermarket
           </Text>
           </View>
-        </View>
+          <View style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
+          }} >
+            <DeliveryIcon />
+            <Text
+              style={{
+                fontSize: Pixel(30),
+                fontFamily: Fonts.medium,
+                paddingLeft: Pixel(15)
+              }}>
+              30 Min
+          </Text>
+          </View>
+        </Animated.View>
 
-        <View style={styles.searchInputContainer}>
+        <Animated.View style={[styles.searchInputContainer, {
+          opacity: opacity
+        }]}>
           <Input
             options={{
               placeholder: t('What You Are Looking For ?'),
@@ -232,25 +247,30 @@ const ShopDetails: FC = () => {
               padding: 0,
             }}
             rightContent={() => <SearchSubmitBtn />}
-            iconRightStyle={{top: 5}}
+            iconRightStyle={{ top: 5 }}
           />
-        </View>
-        <AnimatedFlatList
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: animatedValue}}}],
-          {useNativeDriver: true} // <-- Add this
-        )}
-        scrollEventThrottle={16}
-          data={categoryHomeData}
-          numColumns={2}
-          horizontal={false}
-          showsVerticalScrollIndicator={false}
-          columnWrapperStyle={{justifyContent: 'space-between'}}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({item, index}) => (
-            <FavoriteItem {...item} key={index} index={index} />
-          )}
-        />
+        </Animated.View>
+
+        <Animated.View style={[{ transform: [{ translateY: translateList }] }]} >
+
+          <AnimatedFlatList
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: animatedValue } } }],
+              { useNativeDriver: true } // <-- Add this
+            )}
+            scrollEventThrottle={16}
+            //style={[{ transform: [{ translateY: translateList }] }]}
+            data={categoryHomeData}
+            numColumns={2}
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            columnWrapperStyle={{ justifyContent: 'space-between' }}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({ item, index }) => (
+              <FavoriteItem {...item} key={index} index={index} />
+            )}
+          />
+        </Animated.View>
       </Animated.View>
     </Container>
   );
@@ -260,30 +280,31 @@ export default ShopDetails;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.minColor,
   },
   header: {
-    height:heightHeader,
-    zIndex:1,
-    position:'relative',
-    justifyContent:'flex-start'
+    height: heightHeader,
+    zIndex: 1,
+    position: 'relative',
+    justifyContent: 'flex-start'
   },
   overlay: {
     width: '100%',
     height: '100%',
     backgroundColor: 'rgba(250,250,250,0.7)',
-    zIndex:1,
-    position:'relative'
+    zIndex: 1,
+    position: 'relative'
   },
   content: {
-    flex: 4,
+    //flex: 4,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    zIndex:1000,
-    position:'relative',
-    marginTop:-50,
-    paddingHorizontal:Pixel(30)
+    zIndex: 1000,
+    position: 'relative',
+    marginTop: -50,
+    paddingHorizontal: Pixel(30),
+    alignItems: 'center'
   },
   imageContainer: {
     width: 110,

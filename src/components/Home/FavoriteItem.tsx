@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {commonStyles} from '../../styles/styles';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {AddCartIcon, FavoriteIcon} from '../../../assets/Icons/Icons';
-import {useTranslation} from 'react-i18next';
+import React, { FC } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { commonStyles } from '../../styles/styles';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { AddCartIcon, FavoriteIcon } from '../../../assets/Icons/Icons';
+import { useTranslation } from 'react-i18next';
 
 interface IFavoriteItem {
   title: string;
@@ -11,8 +11,8 @@ interface IFavoriteItem {
   index: number;
 }
 
-const FavoriteItem: FC<IFavoriteItem> = ({title, image, index}) => {
-  const {t} = useTranslation();
+const FavoriteItem: FC<IFavoriteItem> = ({ title, image, index }) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity style={styles.itemContainer}>
       <TouchableOpacity style={styles.favoriteBtn}>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     height: Pixel(230),
     elevation: 3,
     shadowColor: '#fff',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     shadowRadius: 1,
     justifyContent: 'center',
