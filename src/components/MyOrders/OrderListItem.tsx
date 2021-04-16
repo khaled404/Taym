@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
-import {CartOrderIcon, StatusOrderIcon} from "../../../assets/Icons/Icons";
-import {useNavigation} from "@react-navigation/native";
+import React, { FC } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { commonStyles } from '../../styles/styles';
+import { CartOrderIcon, StatusOrderIcon } from "../../../assets/Icons/Icons";
+import { useNavigation } from "@react-navigation/native";
 
 interface IOrderListItem {
     orderId: string;
@@ -15,20 +15,22 @@ interface IOrderListItem {
     status: string;
     store: string;
     note: string | null;
+    source?: string
 }
 
 const OrderListItem: FC<IOrderListItem> = ({
-                                               orderId,
-                                               note,
-                                               price,
-                                               date,
-                                               time,
-                                               details,
-                                               status,
-                                               store,
-                                               footerBtnTitle
-                                           }) => {
-    const {navigate} = useNavigation();
+    orderId,
+    note,
+    price,
+    date,
+    time,
+    details,
+    status,
+    store,
+    footerBtnTitle,
+    source
+}) => {
+    const { navigate } = useNavigation();
     return (
         <View
             style={[styles.container]}>
@@ -38,33 +40,44 @@ const OrderListItem: FC<IOrderListItem> = ({
             </View>
             <Text style={styles.orderDate}>{date} {time}</Text>
             <View style={[styles.box, styles.orderDetailsBox]}>
-                <CartOrderIcon/>
+                <CartOrderIcon />
                 <Text style={styles.orderDetails}>{details}
                     <TouchableOpacity style={styles.moreBtn}
-                                      onPress={() => navigate('OrderDetails', {orderId: orderId})}>
+                        onPress={() => navigate('OrderDetails', { orderId: orderId })}>
                         <Text style={styles.moreBtnText}>{'More Details ...'}</Text>
                     </TouchableOpacity>
                 </Text>
             </View>
-            <View style={styles.box}>
-                <View style={{...commonStyles.rowBox}}>
-                    <StatusOrderIcon/>
-                    <Text style={styles.orderStatus}>{status}</Text>
-                </View>
-                <Text style={styles.orderStore}>
-                    {store}
-                </Text>
-            </View>
-            <View style={[styles.box, styles.orderDetailsFooter, {
-                justifyContent: !note ? 'flex-end' : 'space-between'
-            }]}>
-                {!!note && <Text style={styles.orderNote}>{note}</Text>}
-                <TouchableOpacity style={{}}  onPress={() => navigate('OrderDetails', {orderId: orderId})}>
-                    <Text style={styles.trackBtnText}>
-                        {footerBtnTitle}
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            {
+                source != 'tracking' ?
+                    <View style={styles.box}>
+                        <View style={{ ...commonStyles.rowBox }}>
+                            <StatusOrderIcon />
+                            <Text style={styles.orderStatus}>{status}</Text>
+                        </View>
+                        <Text style={styles.orderStore}>
+                            {store}
+                        </Text>
+                    </View>
+                    :
+                    null
+            }
+
+            {
+                source != 'tracking' ?
+                    <View style={[styles.box, styles.orderDetailsFooter, {
+                        justifyContent: !note ? 'flex-end' : 'space-between'
+                    }]}>
+                        {!!note && <Text style={styles.orderNote}>{note}</Text>}
+                        <TouchableOpacity style={{}} onPress={() => navigate('OrderDetails', { orderId: orderId })}>
+                            <Text style={styles.trackBtnText}>
+                                {footerBtnTitle}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    :
+                    null
+            }
         </View>
     );
 };
@@ -119,13 +132,13 @@ const styles = StyleSheet.create({
     orderDetailsBox: {
         paddingVertical: 5,
         marginTop: 6,
-        paddingRight: 10
+        paddingRight: 10,
     },
     orderDetails: {
         fontFamily: Fonts.medium,
         color: '#4D4D4D',
         fontSize: Pixel(26),
-        marginLeft: 7
+        marginLeft: 7,
     },
     orderDetailsFooter: {
         borderTopWidth: 1,

@@ -1,6 +1,6 @@
 import React from 'react';
-import Svg, {Circle, G, Path, SvgProps,LinearGradient,Defs,Stop} from 'react-native-svg';
-import {Colors, Fonts, Pixel} from '../../src/constants/styleConstants';
+import Svg, { Circle, G, Path, SvgProps, LinearGradient, Defs, Stop } from 'react-native-svg';
+import { Colors, Fonts, Pixel } from '../../src/constants/styleConstants';
 
 export const LogoIcon = (props?: SvgProps) => (
     <Svg
@@ -91,45 +91,45 @@ export const LogoIcon = (props?: SvgProps) => (
     </Svg>
 );
 export const TrashIcon = (props?: SvgProps) => (
-  <Svg
-    width={24.071}
-    height={26.361}
-    viewBox="0 0 24.071 26.361"
-    {...props}
-  >
-      <Path
-        data-name="Path 1445"
-        d="M3.761 6.991v-.94A2.821 2.821 0 016.582 3.23H3.761A2.821 2.821 0 00.94 6.051v.94a2.821 2.821 0 002.821 2.821h2.821a2.821 2.821 0 01-2.821-2.821z"
-        fill="#deb6f1"
-      />
-      <Path
-        data-name="Path 1446"
-        d="M20.31 10.753H3.761A3.765 3.765 0 010 6.99v-.94a3.765 3.765 0 013.761-3.76H20.31a3.765 3.765 0 013.761 3.761v.939a3.765 3.765 0 01-3.761 3.763zM3.761 4.171a1.883 1.883 0 00-1.88 1.88v.939a1.883 1.883 0 001.88 1.882H20.31a1.883 1.883 0 001.881-1.882v-.94a1.883 1.883 0 00-1.881-1.879zm18.9 16.549v-7.147a.94.94 0 10-1.881 0v7.147a3.765 3.765 0 01-3.761 3.761H7.052a3.765 3.765 0 01-3.761-3.761v-7.147a.94.94 0 10-1.881 0v7.147a5.648 5.648 0 005.642 5.642h9.967a5.648 5.648 0 005.642-5.642z"
-        fill="#622a7b"
-      />
-      <Path
-        data-name="Path 1447"
-        d="M15.157 3.442H8.914a1.42 1.42 0 01-1.419-1.418v-.355A1.42 1.42 0 018.914.25h6.243a1.42 1.42 0 011.419 1.419v.355a1.42 1.42 0 01-1.419 1.418zM8.914.959a.71.71 0 00-.709.709v.355a.71.71 0 00.709.709h6.243a.71.71 0 00.709-.709v-.354a.71.71 0 00-.709-.71z"
-        fill="#622a7b"
-        stroke="#622a7b"
-        strokeWidth={0.5}
-      />
-      <Path
-        data-name="Path 1448"
-        d="M17.262 15.478H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
-        fill="#ffde00"
-      />
-      <Path
-        data-name="Path 1449"
-        d="M17.262 18.936H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
-        fill="#ffde00"
-      />
-      <Path
-        data-name="Path 1450"
-        d="M17.262 22.394H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
-        fill="#ffde00"
-      />
-  </Svg>
+    <Svg
+        width={24.071}
+        height={26.361}
+        viewBox="0 0 24.071 26.361"
+        {...props}
+    >
+        <Path
+            data-name="Path 1445"
+            d="M3.761 6.991v-.94A2.821 2.821 0 016.582 3.23H3.761A2.821 2.821 0 00.94 6.051v.94a2.821 2.821 0 002.821 2.821h2.821a2.821 2.821 0 01-2.821-2.821z"
+            fill="#deb6f1"
+        />
+        <Path
+            data-name="Path 1446"
+            d="M20.31 10.753H3.761A3.765 3.765 0 010 6.99v-.94a3.765 3.765 0 013.761-3.76H20.31a3.765 3.765 0 013.761 3.761v.939a3.765 3.765 0 01-3.761 3.763zM3.761 4.171a1.883 1.883 0 00-1.88 1.88v.939a1.883 1.883 0 001.88 1.882H20.31a1.883 1.883 0 001.881-1.882v-.94a1.883 1.883 0 00-1.881-1.879zm18.9 16.549v-7.147a.94.94 0 10-1.881 0v7.147a3.765 3.765 0 01-3.761 3.761H7.052a3.765 3.765 0 01-3.761-3.761v-7.147a.94.94 0 10-1.881 0v7.147a5.648 5.648 0 005.642 5.642h9.967a5.648 5.648 0 005.642-5.642z"
+            fill="#622a7b"
+        />
+        <Path
+            data-name="Path 1447"
+            d="M15.157 3.442H8.914a1.42 1.42 0 01-1.419-1.418v-.355A1.42 1.42 0 018.914.25h6.243a1.42 1.42 0 011.419 1.419v.355a1.42 1.42 0 01-1.419 1.418zM8.914.959a.71.71 0 00-.709.709v.355a.71.71 0 00.709.709h6.243a.71.71 0 00.709-.709v-.354a.71.71 0 00-.709-.71z"
+            fill="#622a7b"
+            stroke="#622a7b"
+            strokeWidth={0.5}
+        />
+        <Path
+            data-name="Path 1448"
+            d="M17.262 15.478H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+            fill="#ffde00"
+        />
+        <Path
+            data-name="Path 1449"
+            d="M17.262 18.936H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+            fill="#ffde00"
+        />
+        <Path
+            data-name="Path 1450"
+            d="M17.262 22.394H6.81a.94.94 0 110-1.881h10.452a.94.94 0 010 1.881z"
+            fill="#ffde00"
+        />
+    </Svg>
 );
 
 export const CartIcon = (props?: SvgProps) => (
@@ -158,14 +158,14 @@ export const CartIcon = (props?: SvgProps) => (
 );
 
 export const NotificationItemIcon = (props?: SvgProps) => (
-  <Svg
-    width={6}
-    height={6}
-    viewBox="0 0 6 6"
-    {...props}
-  >
-      <Circle data-name="Ellipse 51" cx={3} cy={3} r={3} fill="#622a7b" />
-  </Svg>
+    <Svg
+        width={6}
+        height={6}
+        viewBox="0 0 6 6"
+        {...props}
+    >
+        <Circle data-name="Ellipse 51" cx={3} cy={3} r={3} fill="#622a7b" />
+    </Svg>
 );
 
 export const VisaIcon = (props?: SvgProps) => (
@@ -272,7 +272,7 @@ export const StatusOrderIcon = (props?: SvgProps) => (
     >
         <G data-name="Group 389" fill="#622a7b">
             <Path
-                d="M2.639 7.915a.369.369 0 01-.262-.108L.109 5.538a.37.37 0 01.524-.524l2.006 2.007 4.274-4.274a.37.37 0 11.524.524L2.9 7.806a.369.369 0 01-.262.108zm0 0"/>
+                d="M2.639 7.915a.369.369 0 01-.262-.108L.109 5.538a.37.37 0 01.524-.524l2.006 2.007 4.274-4.274a.37.37 0 11.524.524L2.9 7.806a.369.369 0 01-.262.108zm0 0" />
             <Path
                 data-name="check"
                 d="M2.639 5.277a.369.369 0 01-.262-.108L.109 2.9a.37.37 0 01.524-.524l2.006 2.007L6.913.109a.37.37 0 11.524.524L2.9 5.168a.369.369 0 01-.262.108zm0 0"
@@ -317,7 +317,7 @@ export const MinusIcon = (props?: SvgProps) => (
         viewBox="0 0 7.066 1.646"
         {...props}
     >
-        <Path data-name="Path 1439" d="M7.066 0v1.646H0V0z" fill="#f9f9f9"/>
+        <Path data-name="Path 1439" d="M7.066 0v1.646H0V0z" fill="#f9f9f9" />
     </Svg>
 );
 
@@ -495,8 +495,8 @@ export const HomeIcon = (props?: SvgProps) => (
 export const MenuIcon = (props?: SvgProps) => (
     <Svg width={23.271} height={20.884} viewBox="0 0 23.271 20.884" {...props}>
         <G fill="#622a7b">
-            <Path d="M21.779 2.983H1.492a1.492 1.492 0 110-2.983h20.287a1.492 1.492 0 010 2.983z"/>
-            <Path d="M13.425 11.933H1.492a1.492 1.492 0 110-2.983h11.933a1.492 1.492 0 110 2.983z"/>
+            <Path d="M21.779 2.983H1.492a1.492 1.492 0 110-2.983h20.287a1.492 1.492 0 010 2.983z" />
+            <Path d="M13.425 11.933H1.492a1.492 1.492 0 110-2.983h11.933a1.492 1.492 0 110 2.983z" />
         </G>
         <Path
             d="M21.778 11.933h-2.387a1.492 1.492 0 110-2.983h2.387a1.492 1.492 0 010 2.983z"
@@ -509,22 +509,22 @@ export const MenuIcon = (props?: SvgProps) => (
     </Svg>
 );
 
-export const HeartIcon = ({props,color}) => (
+export const HeartIcon = ({ props, color }) => (
     <Svg width={20.599} height={20.6} viewBox="0 0 20.599 20.6" {...props}>
         <Path
             data-name="Path 1373"
             d="M3.32 10.393A9.527 9.527 0 0111.566.887a9.731 9.731 0 00-1.261-.082 9.521 9.521 0 00-9.5 9.588v9.4l.157-.157a4.417 4.417 0 012.357-1.228z"
-            fill={color!=undefined?Colors.lock:"#deb6f1"}
+            fill={color != undefined ? Colors.lock : "#deb6f1"}
         />
         <Path
             data-name="Path 1374"
             d="M.8 20.6a.8.8 0 01-.8-.8v-9.4A10.325 10.325 0 0110.3 0a10.271 10.271 0 0110.3 10.4 10.309 10.309 0 01-10.338 10.2h-.01a10.175 10.175 0 01-4.6-1.081 3.565 3.565 0 00-4.12.688l-.157.157A.8.8 0 01.8 20.6zm3.27-3.064a5.12 5.12 0 012.3.544 8.581 8.581 0 003.88.91h.008a8.735 8.735 0 008.729-8.6A8.68 8.68 0 004.133 4.192a8.627 8.627 0 00-2.523 6.193v7.776a5.185 5.185 0 012.465-.625z"
-            fill={color!=undefined?Colors.lock:"#622a7b"}
+            fill={color != undefined ? Colors.lock : "#622a7b"}
         />
         <Path
             data-name="Path 1375"
             d="M10.3 14.602a2.55 2.55 0 01-1.53-.506 6.3 6.3 0 01-2.9-4.82V9.26a2.614 2.614 0 014.426-1.891 2.614 2.614 0 014.426 1.891v.016a6.3 6.3 0 01-2.9 4.821 2.551 2.551 0 01-1.522.505zm-2.816-5.35a4.924 4.924 0 002.251 3.556.948.948 0 001.131 0 4.924 4.924 0 002.251-3.556 1.006 1.006 0 00-2.012 0 .804.804 0 01-1.609 0 1.006 1.006 0 00-2.012 0z"
-            fill={color!=undefined?Colors.lock:"#622a7b"}
+            fill={color != undefined ? Colors.lock : "#622a7b"}
         />
     </Svg>
 );
@@ -593,8 +593,8 @@ export const UnCheckedIcon = (props?: SvgProps) => (
         {...props}
     >
         <G data-name="Ellipse 48" fill="#fff" stroke="#622a7b">
-            <Circle cx={8} cy={8} r={8} stroke="none"/>
-            <Circle cx={8} cy={8} r={7.5} fill="none"/>
+            <Circle cx={8} cy={8} r={8} stroke="none" />
+            <Circle cx={8} cy={8} r={7.5} fill="none" />
         </G>
     </Svg>
 );
@@ -607,8 +607,8 @@ export const CheckedIcon = (props?: SvgProps) => (
         {...props}
     >
         <G data-name="Ellipse 48" fill="#fff" stroke="#622a7b">
-            <Circle cx={8} cy={8} r={8} stroke="none"/>
-            <Circle cx={8} cy={8} r={7.5} fill="none"/>
+            <Circle cx={8} cy={8} r={8} stroke="none" />
+            <Circle cx={8} cy={8} r={7.5} fill="none" />
         </G>
         <Circle
             data-name="Ellipse 51"
@@ -868,28 +868,28 @@ export const AuthLogo = (props?: SvgProps) => (
     </Svg>
 );
 
-export const VouchergIcon = ({props,color}) => (
+export const VouchergIcon = ({ props, color }) => (
     <Svg width={19.751} height={16.356} viewBox="0 0 19.751 16.356" {...props}>
         <G data-name="testing">
             <Path
                 data-name="Path 1465"
                 d="M4.627 3.086h10.5a3.851 3.851 0 013.852 3.847V4.591A3.858 3.858 0 0015.121.733H4.629A3.858 3.858 0 00.771 4.591v2.342a3.851 3.851 0 013.856-3.847z"
-                fill={color!=undefined?Colors.lock:"#deb6f1"}
+                fill={color != undefined ? Colors.lock : "#deb6f1"}
             />
             <Path
                 data-name="Path 1466"
                 d="M0 11.727v-7.1A4.634 4.634 0 014.629 0h10.493a4.634 4.634 0 014.629 4.629v7.1a4.634 4.634 0 01-4.629 4.629H4.629A4.634 4.634 0 010 11.727zm18.208-7.1a3.09 3.09 0 00-3.086-3.086H4.629a3.09 3.09 0 00-3.086 3.086v7.1a3.09 3.09 0 003.086 3.086h10.493a3.09 3.09 0 003.086-3.086z"
-                fill={color!=undefined?Colors.lock:"#622a7b"}
+                fill={color != undefined ? Colors.lock : "#622a7b"}
             />
             <Path
                 data-name="Path 1467"
                 d="M13.169 11.766V5.247a.771.771 0 011.543 0v6.519a.771.771 0 11-1.543 0z"
-                fill={color!=undefined?Colors.lock:"#622a7b"}
+                fill={color != undefined ? Colors.lock : "#622a7b"}
             />
             <Path
                 data-name="Path 2506"
                 d="M5.129 5.905a.8.8 0 11-.8.8.8.8 0 01.8-.8zm2.679 4.4a.8.8 0 10.8-.8.8.8 0 00-.8.8zm-2.348.6l3.769-3.92a.638.638 0 10-.924-.88l-3.766 3.922a.638.638 0 00.921.884z"
-                fill={color!=undefined?Colors.lock:"#622a7b"}
+                fill={color != undefined ? Colors.lock : "#622a7b"}
             />
         </G>
     </Svg>
@@ -958,28 +958,28 @@ export const SuccessIcon = (props?: SvgProps) => (
                 stroke="#ffde00"
                 strokeWidth={10}
             >
-                <Circle cx={58} cy={58} r={58} stroke="none"/>
-                <Circle cx={58} cy={58} r={53}/>
+                <Circle cx={58} cy={58} r={58} stroke="none" />
+                <Circle cx={58} cy={58} r={53} />
             </G>
         </G>
     </Svg>
 );
-export const ListIcon = ({props, color}) => (
+export const ListIcon = ({ props, color }) => (
     <Svg width={18.897} height={22.819} viewBox="0 0 18.897 22.819"  {...props}>
         <Path
             data-name="Path 1465"
             d="M3.566 17.473V5.347A4.45 4.45 0 018.01.892H5.304A4.457 4.457 0 00.847 5.349v12.123a4.457 4.457 0 004.457 4.457H8.01a4.45 4.45 0 01-4.444-4.455z"
-            fill={color!=undefined?Colors.lock:"#deb6f1"}
+            fill={color != undefined ? Colors.lock : "#deb6f1"}
         />
         <Path
             data-name="Path 1466"
             d="M13.549 22.819h-8.2A5.354 5.354 0 010 17.471V5.348A5.354 5.354 0 015.348 0h8.2A5.354 5.354 0 0118.9 5.348v12.123a5.354 5.354 0 01-5.351 5.348zm-8.2-21.037a3.57 3.57 0 00-3.566 3.566v12.123a3.57 3.57 0 003.566 3.566h8.2a3.57 3.57 0 003.566-3.566V5.348a3.57 3.57 0 00-3.566-3.566zm8.914 2.585a.891.891 0 10-1.783 0A1.339 1.339 0 0111.142 5.7H7.755a1.339 1.339 0 01-1.337-1.337.891.891 0 00-1.783 0 3.123 3.123 0 003.12 3.12h3.387a3.123 3.123 0 003.12-3.115z"
-            fill={color!=undefined?Colors.lock:"#622a7b"}
+            fill={color != undefined ? Colors.lock : "#622a7b"}
         />
         <Path
             data-name="Path 1467"
             d="M13.593 17.605H6.061a.891.891 0 010-1.783h7.532a.891.891 0 110 1.783zm.891-4.323a.891.891 0 00-.891-.891h-1.738a.891.891 0 000 1.783h1.738a.891.891 0 00.892-.888zm-5.937.358l1.712-1.726a.891.891 0 10-1.266-1.255l-1.712 1.726a.017.017 0 01-.026 0l-.829-.836a.891.891 0 00-1.266 1.255l.829.836a1.8 1.8 0 002.559 0z"
-            fill={color!=undefined?Colors.lock:"#622a7b"}
+            fill={color != undefined ? Colors.lock : "#622a7b"}
         />
     </Svg>
 );
@@ -1064,86 +1064,86 @@ export const EditIcon = (props?: SvgProps) => (
 
 export const BlackLine = (props?: SvgProps) => (
     <Svg
-      width={500} height={200}      
-      viewBox="0 0 429 263"
-      {...props}
+        width={500} height={200}
+        viewBox="0 0 429 263"
+        {...props}
     >
-      <Defs>
-        <LinearGradient
-          id="prefix__a"
-          x1={171.02}
-          y1={116.3}
-          x2={242.06}
-          y2={218.92}
-          gradientUnits="userSpaceOnUse"
-        >
-          <Stop offset={0} />
-          <Stop offset={0.57} stopColor="#363636" />
-          <Stop offset={1} />
-        </LinearGradient>
-      </Defs>
-      <Path fill="url(#prefix__a)" d="M46.97 163.31h327.36v20.48H46.97z" />
+        <Defs>
+            <LinearGradient
+                id="prefix__a"
+                x1={171.02}
+                y1={116.3}
+                x2={242.06}
+                y2={218.92}
+                gradientUnits="userSpaceOnUse"
+            >
+                <Stop offset={0} />
+                <Stop offset={0.57} stopColor="#363636" />
+                <Stop offset={1} />
+            </LinearGradient>
+        </Defs>
+        <Path fill="url(#prefix__a)" d="M46.97 163.31h327.36v20.48H46.97z" />
     </Svg>
 );
 
 export const LogOut = (props?: SvgProps) => (
-        <Svg
-            //xmlns="http://www.w3.org/2000/svg"
-            width={20.605}
-            height={20.603}
-            viewBox="0 0 20.605 20.603"
-            {...props}
-        >
-            <G data-name="Group 360" fill="#622a7b">
-                <Path d="M14.525 15.772v1.609a3.222 3.222 0 01-3.219 3.219H3.219A3.222 3.222 0 010 17.382V3.219A3.222 3.222 0 013.219 0h8.087a3.222 3.222 0 013.219 3.219v1.609a.804.804 0 01-1.609 0V3.219a1.611 1.611 0 00-1.609-1.609H3.219a1.611 1.611 0 00-1.61 1.609v14.163a1.611 1.611 0 001.609 1.609h8.087a1.611 1.611 0 001.609-1.609v-1.61a.804.804 0 011.609 0z" />
-                <Path
-                    data-name="exit"
-                    d="M20.011 8.918l-1.8-1.8a.805.805 0 00-1.138 1.138l1.282 1.282H8.691a.804.804 0 100 1.609h9.662l-1.282 1.282a.805.805 0 101.138 1.138l1.8-1.8a2.014 2.014 0 000-2.845zm0 0"
-                />
-            </G>
-        </Svg>
-    );
-
-    export const Done = (props?: SvgProps) => (
-        <Svg
-      data-name="Component 1 \u2013 1"
-      //xmlns="http://www.w3.org/2000/svg"
-      width={62}
-      height={62}
-      viewBox="0 0 62 62"
-      {...props}
+    <Svg
+        //xmlns="http://www.w3.org/2000/svg"
+        width={20.605}
+        height={20.603}
+        viewBox="0 0 20.605 20.603"
+        {...props}
     >
-      <G data-name="Ellipse 133" fill="#fff" stroke="#622a7b">
-        <Circle cx={31} cy={31} r={31} stroke="none" />
-        <Circle cx={31} cy={31} r={30.5} fill="none" />
-      </G>
-      <Path
-        d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
-        fill="#622a7b"
-        stroke="#622a7b"
-        strokeWidth={2}
-      />
+        <G data-name="Group 360" fill="#622a7b">
+            <Path d="M14.525 15.772v1.609a3.222 3.222 0 01-3.219 3.219H3.219A3.222 3.222 0 010 17.382V3.219A3.222 3.222 0 013.219 0h8.087a3.222 3.222 0 013.219 3.219v1.609a.804.804 0 01-1.609 0V3.219a1.611 1.611 0 00-1.609-1.609H3.219a1.611 1.611 0 00-1.61 1.609v14.163a1.611 1.611 0 001.609 1.609h8.087a1.611 1.611 0 001.609-1.609v-1.61a.804.804 0 011.609 0z" />
+            <Path
+                data-name="exit"
+                d="M20.011 8.918l-1.8-1.8a.805.805 0 00-1.138 1.138l1.282 1.282H8.691a.804.804 0 100 1.609h9.662l-1.282 1.282a.805.805 0 101.138 1.138l1.8-1.8a2.014 2.014 0 000-2.845zm0 0"
+            />
+        </G>
     </Svg>
-    );
+);
 
-    export const SolidDone = (props?: SvgProps) => (
-        <Svg
-      data-name="Component 1 \u2013 1"
-      //xmlns="http://www.w3.org/2000/svg"
-      width={35}
-      height={35}
-      viewBox="0 0 62 62"
-      {...props}
+export const Done = (props?: SvgProps) => (
+    <Svg
+        data-name="Component 1 \u2013 1"
+        //xmlns="http://www.w3.org/2000/svg"
+        width={62}
+        height={62}
+        viewBox="0 0 62 62"
+        {...props}
     >
-      <G data-name="Ellipse 133" fill="#FFDE00" stroke="#FFDE00">
-        <Circle cx={31} cy={31} r={31} stroke="none" />
-        <Circle cx={31} cy={31} r={30.5} fill="none" />
-      </G>
-      <Path
-        d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
-        fill="#622a7b"
-        stroke="#622a7b"
-        strokeWidth={4}
-      />
+        <G data-name="Ellipse 133" fill="#fff" stroke="#622a7b">
+            <Circle cx={31} cy={31} r={31} stroke="none" />
+            <Circle cx={31} cy={31} r={30.5} fill="none" />
+        </G>
+        <Path
+            d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
+            fill="#622a7b"
+            stroke="#622a7b"
+            strokeWidth={2}
+        />
     </Svg>
-    );
+);
+
+export const SolidDone = (props?: SvgProps) => (
+    <Svg
+        data-name="Component 1 \u2013 1"
+        //xmlns="http://www.w3.org/2000/svg"
+        width={35}
+        height={35}
+        viewBox="0 0 62 62"
+        {...props}
+    >
+        <G data-name="Ellipse 133" >
+            <Circle cx={31} cy={31} r={31} stroke="none" />
+            <Circle cx={31} cy={31} r={30.5} fill="none" />
+        </G>
+        <Path
+            d="M25.3 45.101a1.931 1.931 0 01-1.369-.567L12.068 32.671a1.937 1.937 0 012.739-2.739L25.3 40.426l22.357-22.357a1.938 1.938 0 012.743 2.739L26.67 44.534a1.932 1.932 0 01-1.37.567zm0 0"
+            fill="#622a7b"
+            stroke="#622a7b"
+            strokeWidth={4}
+        />
+    </Svg>
+);
