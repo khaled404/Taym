@@ -1,7 +1,7 @@
-import {Dimensions, I18nManager, NativeModules} from 'react-native';
+import { Dimensions, I18nManager, NativeModules } from 'react-native';
 
-const {isRTL} = I18nManager;
-const {width, height} = Dimensions.get('screen');
+const { isRTL } = I18nManager;
+const { width, height } = Dimensions.get('screen');
 
 export enum Colors {
     minColor = '#FFDE00',
@@ -25,9 +25,9 @@ export enum Colors {
     snapchat = '#fffc00',
     instagram = '#405de6',
     whatsapp = '#128c7e',
-    lock='#989898',
-    lightGray='#4D4D4D',
-    CommonBorderColor='#DCDCDC'
+    lock = '#989898',
+    lightGray = '#4D4D4D',
+    CommonBorderColor = '#DCDCDC'
 }
 
 export enum Fonts {
@@ -53,7 +53,8 @@ export enum Images {
     defAvatar = require('../../assets/images/def-avatar.png'),
     voucherBackground = require('../../assets/images/voucher-background.png'),
     supermarket = require('../../assets/images/superMarket.jpg'),
-    marketLogo=require('../../assets/images/storelogo-1.png')
+    marketLogo = require('../../assets/images/storelogo-1.png'),
+    product = require('../../assets/images/product-2.jpg')
 }
 
 export enum ScreenOptions {
@@ -71,7 +72,7 @@ export enum ScreenOptions {
  * @param designSize uor psd or xd workflow size
  * @returns function to use in PixelPerfect
  */
-export const createPerfectPixel = (designSize = {width: 750, height: 1624}) => {
+export const createPerfectPixel = (designSize = { width: 750, height: 1624 }) => {
     if (
         !designSize ||
         !designSize.width ||

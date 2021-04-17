@@ -47,3 +47,4 @@ export const Notifications = register({
 export const OrderOut = register({loader: () => import('./orderOut')});
 export const MyCards = register({loader: () => import('./MyCards')});
 export const TrackingOrder = register({loader: () => import('./TrackingOrder')});
+export const ProductPage = register({loader: () => import('./ProductPage')});
