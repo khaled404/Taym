@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
     height: '100%'
   },
   titleConatiner: {
