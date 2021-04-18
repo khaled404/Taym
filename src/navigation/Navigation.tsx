@@ -34,6 +34,7 @@ import {
   ProductPage,
   CallNow,
   Support,
+  Offers
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
@@ -125,7 +126,7 @@ const Stacks: FC<any> = ({ style }) => {
       <Stack.Navigator
         screenOptions={{ headerShown: false, ...navigationTransition } as any}
         initialRouteName={
-          language === null ? 'Language' : isLogin ? 'Support' : 'Login'
+          language === null ? 'Language' : isLogin ? 'Offers' : 'Login'
         }>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />
@@ -158,6 +159,7 @@ const Stacks: FC<any> = ({ style }) => {
         <Stack.Screen name="ProductPage" component={ProductPage} />
         <Stack.Screen name="CallNow" component={CallNow} />
         <Stack.Screen name="Support" component={Support} />
+        <Stack.Screen name="Offers" component={Offers} />
       </Stack.Navigator>
     </Animated.View>
   );

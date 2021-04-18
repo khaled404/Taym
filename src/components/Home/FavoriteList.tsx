@@ -1,32 +1,32 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Touchable from '../touchables/Touchable';
-import React, {FC} from 'react';
-import {useTranslation} from 'react-i18next';
-import {commonStyles} from '../../styles/styles';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { commonStyles } from '../../styles/styles';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
 import FavoriteItem from './FavoriteItem';
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 interface IFavoriteList {
     data: Array<{ title: string; image: string }>;
     inHome?: Boolean;
 }
 
-const FavoriteList: FC<IFavoriteList> = ({data, inHome}) => {
-    const {t} = useTranslation();
-    const {navigate} = useNavigation();
+const FavoriteList: FC<IFavoriteList> = ({ data, inHome }) => {
+    const { t } = useTranslation();
+    const { navigate } = useNavigation();
     return (
         <>
             {inHome && <View style={styles.sectionTitleContainer}>
                 <Text style={styles.sectionTitle}>{t('Favorite')}</Text>
-                <Touchable onPress={()=>navigate('Favorite')}>
+                <Touchable onPress={() => navigate('Favorite')}>
                     <Text style={styles.viewAllBtnText}>{t('View All')}</Text>
                 </Touchable>
             </View>}
             <View style={styles.listContainer}>
                 {data.map((item, index) => {
                     if (index <= 5) {
-                        return <FavoriteItem {...item} key={index} index={index}/>;
+                        return <FavoriteItem {...item} key={index} index={index} />;
                     }
                 })}
             </View>
