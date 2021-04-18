@@ -35,8 +35,9 @@ import {
   CallNow,
   Support,
   Offers,
+  ComingSoon,
   RegisterLocation
- } from '../screens/index';
+} from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
 import { I18nManager, StyleSheet } from 'react-native';

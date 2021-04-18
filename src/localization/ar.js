@@ -107,6 +107,8 @@ export default {
   Addresses: 'العناوين',
   'Check Out  >': 'إستعراض >',
   Language: 'اللغه',
+  'Coming Soon': 'قريبا',
+  'Go Back': 'رجوع',
   'Get OTP': 'إرسال الرمز',
   'Enter Mobile Number': 'قم بإدخال رقم الهاتف',
   'My Addresses': 'العنوان',
