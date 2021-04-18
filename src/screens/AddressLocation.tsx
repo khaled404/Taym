@@ -1,34 +1,34 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
-import {Container} from '../components/containers/Containers';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+import { Container } from '../components/containers/Containers';
 import Header from '../components/header/Header';
-import {Colors} from '../constants/styleConstants';
-import {commonStyles} from '../styles/styles';
-import MapView, {AnimatedRegion, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import {useTranslation} from 'react-i18next';
+import { Colors } from '../constants/styleConstants';
+import { commonStyles } from '../styles/styles';
+import MapView, { AnimatedRegion, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { useTranslation } from 'react-i18next';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import GooglePlacesInput from "../components/MyAddresses/GooglePlacesInput";
-import {showMessage} from "react-native-flash-message";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigation} from "@react-navigation/native";
+import { showMessage } from "react-native-flash-message";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import Button from "../components/touchables/Button";
-import {MAP_API_KEY} from "../constants/Config";
-import {RootState} from "../store/store";
-import {saveNewAddress} from "../store/actions/address";
+import { MAP_API_KEY } from "../constants/Config";
+import { RootState } from "../store/store";
+import { saveNewAddress } from "../store/actions/address";
 
 
 const AddressLocation: FC = () => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
+  const { language }: any = useSelector((state: RootState) => state.settings);
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const {navigate} = useNavigation();
+  const { navigate } = useNavigation();
   const _map = useRef(null);
   const _marker = useRef(null);
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = 0.0421;
-  Geocoder.init(MAP_API_KEY, {language: language});
+  Geocoder.init(MAP_API_KEY, { language: language });
   //local state handler
   const [state, setstate] = useState({
     loader: false,
@@ -80,29 +80,26 @@ const AddressLocation: FC = () => {
       })
       .catch(error => console.warn(error));
   }
-  console.log('_marker',_marker)
+  console.log('_marker', _marker)
   const animateMap = (element: any, n_region: any) => {
-    setstate(old => ({...old, loader: true}));
+    setstate(old => ({ ...old, loader: true }));
     const DURATION: number = 500;
     if (Platform.OS === 'android') {
       if (_marker) {
         _marker.current.animateMarkerToCoordinate(n_region, 500);
-        setstate(old => ({...old, loader: false}));
+        setstate(old => ({ ...old, loader: false }));
       }
     } else {
       element
-        .timing({...n_region, duration: DURATION, useNativeDriver: false})
+        .timing({ ...n_region, duration: DURATION, useNativeDriver: false })
         .start();
 
-      setstate(old => ({...old, loader: false}));
+      setstate(old => ({ ...old, loader: false }));
     }
     getLocationDetails(n_region.latitude, n_region.longitude);
 
   }
-//   AboElela
-// sayed.aboelela96@gmail.com
-//   Sayed@123
-  //   01066116426
+
   const handleRegionChange = (n_region: any, areaName: string = '') => {
     console.log('n_region', n_region)
     console.log('areaName', areaName)
@@ -120,12 +117,12 @@ const AddressLocation: FC = () => {
 
   //save location handler
   const submitHandler = () => {
-    setstate(old => ({...old, loader: true}));
+    setstate(old => ({ ...old, loader: true }));
     if (state.newLocationObj !== null && Object.keys(state.newLocationObj).length > 0) {
       dispatch(saveNewAddress(state.newLocationObj));
       navigate('AddLocation');
     } else {
-      setstate(old => ({...old, loader: false}));
+      setstate(old => ({ ...old, loader: false }));
       showMessage({
         message: t("Couldn't save your location please try agian!"),
       });
@@ -134,10 +131,10 @@ const AddressLocation: FC = () => {
 
   console.log('state.newLocationObj', state.newLocationObj)
   return (
-    <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Current Location')}/>
+    <Container style={{ backgroundColor: Colors.sacandAppBackgroundColor }}>
+      <Header title={t('Current Location')} />
       <View style={[styles.autoCompleteContainer]}>
-        <GooglePlacesInput onSelectResult={handleRegionChange}/>
+        <GooglePlacesInput onSelectResult={handleRegionChange} />
       </View>
 
       <MapView.Animated
@@ -147,7 +144,7 @@ const AddressLocation: FC = () => {
         initialRegion={state.region}
         onRegionChangeComplete={handleRegionChange}
       >
-        <Marker.Animated ref={_marker} coordinate={state.region}/>
+        <Marker.Animated ref={_marker} coordinate={state.region} />
       </MapView.Animated>
 
       <View style={styles.submitBtnContainer}>
