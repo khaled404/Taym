@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import {
   StyleSheet,
   View,
@@ -14,18 +14,18 @@ import {
   Pixel,
   ScreenOptions,
 } from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
-import {ArrowLeftSmIcon} from '../../../assets/Icons/Icons';
+import { commonStyles } from '../../styles/styles';
+import { ArrowLeftSmIcon } from '../../../assets/Icons/Icons';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 interface IHeader {
   title?: string;
   containerStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
 }
-const Header: FC<IHeader> = ({title, containerStyle, titleStyle}) => {
-  const {goBack} = useNavigation();
+const Header: FC<IHeader> = ({ title, containerStyle, titleStyle }) => {
+  const { goBack } = useNavigation();
   return (
     <View style={[styles.conatiner, containerStyle]}>
       <View style={styles.right}>
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   },
   left: {
     alignItems: 'flex-start',
+
   },
   center: {
     alignItems: 'center',
@@ -73,12 +74,15 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     flexDirection: 'row-reverse',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red',
+    height: '100%'
   },
   titleConatiner: {
     ...commonStyles.rowBox,
-    height: 28,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    //height: 28,
+    //alignSelf: 'center',
+    //justifyContent: 'center',
   },
   title: {
     fontSize: Pixel(35),
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     marginLeft: 5,
     marginRight: 'auto',
-    marginTop: 5,
+    //marginTop: 5,
   },
 
   icons: {
