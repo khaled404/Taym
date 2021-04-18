@@ -12,6 +12,7 @@ export const Register = register({loader: () => import('./auth/Register')});
 export const RegisterLocation = register({
   loader: () => import('./auth/RegisterLocation'),
 });
+
 export const CompleteRegister = register({
   loader: () => import('./auth/CompleteRegister'),
 });
