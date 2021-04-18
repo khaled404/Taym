@@ -8,33 +8,34 @@ import {
   Cart,
   Category,
   CompleteRegister,
+  EditAddress,
   Favorite,
   Forget,
   Forget2,
   Forget3,
+  ForgetPhoneCode,
   Home,
   Language,
   Login,
   MyAddresses,
+  MyCards,
   MyOrders,
+  Notifications,
   OrderDetails,
+  OrderDone,
+  OrderOut,
   PhoneCode,
   Profile,
   Register,
+  RegisterLocation,
   Settings,
-  Voucher,
-  ForgetPhoneCode,
   ShopDetails,
-  OrderDone,
-  OrderOut,
-  MyCards,
-  Notifications,
-  EditAddress,
+  Voucher,
 } from '../screens/index';
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
 import {I18nManager, StyleSheet} from 'react-native';
-import {shallowEqual, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 
 const {isRTL} = I18nManager;
@@ -54,24 +55,24 @@ const navigationTransition = {
           {
             translateX: next
               ? next.progress.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [
-                    0,
-                    isRTL
-                      ? layouts.screen.width / 7
-                      : -layouts.screen.width / 7,
-                  ],
-                })
+                inputRange: [0, 1],
+                outputRange: [
+                  0,
+                  isRTL
+                    ? layouts.screen.width / 7
+                    : -layouts.screen.width / 7,
+                ],
+              })
               : current.progress.interpolate({
-                  inputRange: [0, 0.5, 1],
-                  outputRange: [
-                    isRTL ? -layouts.screen.width : layouts.screen.width,
-                    isRTL
-                      ? -layouts.screen.width / 2
-                      : layouts.screen.width / 2,
-                    0,
-                  ],
-                }),
+                inputRange: [0, 0.5, 1],
+                outputRange: [
+                  isRTL ? -layouts.screen.width : layouts.screen.width,
+                  isRTL
+                    ? -layouts.screen.width / 2
+                    : layouts.screen.width / 2,
+                  0,
+                ],
+              }),
           },
         ],
       },
@@ -101,9 +102,9 @@ const navigationSlideToTop = {
           {
             scale: next
               ? next.progress.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0.93],
-                })
+                inputRange: [0, 1],
+                outputRange: [1, 0.93],
+              })
               : 1,
           },
         ],
@@ -121,35 +122,36 @@ const Stacks: FC<any> = ({style}) => {
       <Stack.Navigator
         screenOptions={{headerShown: false, ...navigationTransition} as any}
         initialRouteName={
-          language === null ? 'Language' : isLogin ? 'Category' : 'Login'
+          language === null ? 'Language' : isLogin ? 'Home' : 'Login'
         }>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Voucher" component={Voucher} />
-        <Stack.Screen name="MyOrders" component={MyOrders} />
-        <Stack.Screen name="OrderDetails" component={OrderDetails} />
-        <Stack.Screen name="OrderDone" component={OrderDone} />
-        <Stack.Screen name="Favorite" component={Favorite} />
-        <Stack.Screen name="Profile" component={Profile} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="CompleteRegister" component={CompleteRegister} />
-        <Stack.Screen name="Forget" component={Forget} />
-        <Stack.Screen name="Forget2" component={Forget2} />
-        <Stack.Screen name="Forget3" component={Forget3} />
-        <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode} />
-        <Stack.Screen name="PhoneCode" component={PhoneCode} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="MyAddresses" component={MyAddresses} />
-        <Stack.Screen name="AddLocation" component={AddLocation} />
-        <Stack.Screen name="EditAddress" component={EditAddress} />
-        <Stack.Screen name="AddressLocation" component={AddressLocation} />
-        <Stack.Screen name="Category" component={Category} />
-        <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="Language" component={Language} />
-        <Stack.Screen name="ShopDetails" component={ShopDetails} />
-        <Stack.Screen name="OrderOut" component={OrderOut} />
-        <Stack.Screen name="MyCards" component={MyCards} />
-        <Stack.Screen name="Notifications" component={Notifications} />
+        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Voucher" component={Voucher}/>
+        <Stack.Screen name="MyOrders" component={MyOrders}/>
+        <Stack.Screen name="OrderDetails" component={OrderDetails}/>
+        <Stack.Screen name="OrderDone" component={OrderDone}/>
+        <Stack.Screen name="Favorite" component={Favorite}/>
+        <Stack.Screen name="Profile" component={Profile}/>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Register" component={Register}/>
+        <Stack.Screen name="CompleteRegister" component={CompleteRegister}/>
+        <Stack.Screen name="Forget" component={Forget}/>
+        <Stack.Screen name="Forget2" component={Forget2}/>
+        <Stack.Screen name="Forget3" component={Forget3}/>
+        <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode}/>
+        <Stack.Screen name="PhoneCode" component={PhoneCode}/>
+        <Stack.Screen name="RegisterLocation" component={RegisterLocation}/>
+        <Stack.Screen name="Settings" component={Settings}/>
+        <Stack.Screen name="MyAddresses" component={MyAddresses}/>
+        <Stack.Screen name="AddLocation" component={AddLocation}/>
+        <Stack.Screen name="EditAddress" component={EditAddress}/>
+        <Stack.Screen name="AddressLocation" component={AddressLocation}/>
+        <Stack.Screen name="Category" component={Category}/>
+        <Stack.Screen name="Cart" component={Cart}/>
+        <Stack.Screen name="Language" component={Language}/>
+        <Stack.Screen name="ShopDetails" component={ShopDetails}/>
+        <Stack.Screen name="OrderOut" component={OrderOut}/>
+        <Stack.Screen name="MyCards" component={MyCards}/>
+        <Stack.Screen name="Notifications" component={Notifications}/>
       </Stack.Navigator>
     </Animated.View>
   );
@@ -191,7 +193,7 @@ const initNavgtion: FC = () => {
         }}>
         <Drawer.Screen
           name="Stacks"
-          component={() => <Stacks style={animatedStyle} />}
+          component={() => <Stacks style={animatedStyle}/>}
         />
       </Drawer.Navigator>
     </NavigationContainer>

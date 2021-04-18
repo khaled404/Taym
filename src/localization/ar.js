@@ -125,4 +125,9 @@ export default {
   Building: 'عمارة',
   st: 'شارع',
   'Edit Location': 'تعديل العنوان',
+  'Login Or Sign up': 'تسجيل جديد او الدخول',
+  'Save Location': 'تأكيد الموقع',
+  'Find your location': 'ابحث عن موقعك',
+  "Couldn't save your location please try agian!":
+    'لم يتم تأكيد عنوانك برجاء المحاولة مرة اخرى',
 };
