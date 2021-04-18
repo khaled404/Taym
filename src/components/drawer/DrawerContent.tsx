@@ -1,4 +1,4 @@
-import React, {FC, useState, useEffect} from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
-import {ScreenProps} from '../../constants/interfaces';
+import { Colors, Fonts, Images, Pixel } from '../../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
+import { ScreenProps } from '../../constants/interfaces';
 import DrawerItem from './DrawerItem';
 import FastImage from 'react-native-fast-image';
-import {commonStyles} from '../../styles/styles';
-import {ScrollView} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {LogoutHandler} from '../../store/actions/auth';
+import { commonStyles } from '../../styles/styles';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { LogoutHandler } from '../../store/actions/auth';
 import {
   HomeIcon,
   HeartIcon,
@@ -29,14 +29,14 @@ import {
   LogOut,
 } from '../../../assets/Icons/Icons';
 
-const {height, width} = Dimensions.get('window');
-const DrawerContent: FC<ScreenProps> = ({navigation}) => {
+const { height, width } = Dimensions.get('window');
+const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch();
-  const {isLogin, userData}: any = useSelector(
+  const { isLogin, userData }: any = useSelector(
     (state: RootState) => state.auth,
   );
-  const {voucherData}: any = useSelector((state: RootState) => state.voucher);
-  const {t}: any = useTranslation();
+  const { voucherData }: any = useSelector((state: RootState) => state.voucher);
+  const { t }: any = useTranslation();
   // console.log('voucherData.user', voucherData);
 
   const getLetter = (st: string) => {
@@ -87,7 +87,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
-              {!isLogin ? 'Login Or Sign up' : userData.name}
+              {!isLogin ? t('Login Or Sign up') : userData.name}
               {/* {isLogin ? userData.name : t('Login')} */}
             </Text>
             {isLogin ? (

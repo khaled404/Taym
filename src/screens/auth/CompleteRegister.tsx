@@ -1,41 +1,42 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Container, Content} from '../../components/containers/Containers';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
+import React, { FC, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Container, Content } from '../../components/containers/Containers';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
 import Input from '../../components/textInputs/Input';
 import AuthHeader from '../../components/header/AuthHeader';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {InputErorrHandler} from '../../constants/helpers';
-import {RegisterPhoneHandler} from '../../store/actions/auth';
-import {showMessage} from 'react-native-flash-message';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { InputErorrHandler } from '../../constants/helpers';
+import { RegisterPhoneHandler } from '../../store/actions/auth';
+import { showMessage } from 'react-native-flash-message';
 
 const CompleteRegister: FC = () => {
+
   const [state, setstate] = useState({
     phone: '',
     loader: false,
   });
-  const {registerErorrs} = useSelector(
+  const { registerErorrs } = useSelector(
     (state: RootState) => state.auth,
     shallowEqual,
   );
   const dispatch = useDispatch();
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
+  const { t } = useTranslation();
+  const { navigate } = useNavigation();
   const submitHandler = () => {
-    setstate(old => ({...old, loader: true}));
+    setstate(old => ({ ...old, loader: true }));
     if (state.phone.length === 11) {
       dispatch(
         RegisterPhoneHandler(state.phone, success => {
-          setstate(old => ({...old, loader: false}));
+          setstate(old => ({ ...old, loader: false }));
           success && navigate('PhoneCode');
-        },()=>navigate("PhoneCode")),
+        }, () => navigate("PhoneCode")),
       );
     } else {
-      setstate(old => ({...old, loader: false}));
+      setstate(old => ({ ...old, loader: false }));
       showMessage({
         message: t('Please enter a valid mobile number'),
       });
@@ -45,7 +46,7 @@ const CompleteRegister: FC = () => {
   return (
     <Container style={styles.container}>
       <AuthHeader />
-      <Content noPadding style={styles.contentContainer}>
+      <Content noPadding contentContainerStyle={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.mainTitle}>{t('Enter Mobile Number')}</Text>
           <Text style={styles.sectionTitle}>
@@ -60,7 +61,7 @@ const CompleteRegister: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({...old, phone: value}));
+                  setstate(old => ({ ...old, phone: value }));
                 },
                 value: state.phone,
                 keyboardType: 'number-pad',
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(40),
     marginVertical: Pixel(20),
+    textAlign: 'left'
   },
   submitContainer: {
     marginVertical: Pixel(80),
@@ -115,6 +117,7 @@ const styles = StyleSheet.create({
     color: '#4D4D4D',
     fontFamily: Fonts.medium,
     marginBottom: Pixel(17),
+    textAlign: 'left'
   },
   textInput: {
     height: Pixel(100),
@@ -136,6 +139,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     color: '#4D4D4D',
     marginLeft: 10,
+    textAlign: 'left'
   },
 });
 
