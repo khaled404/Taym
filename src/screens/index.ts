@@ -51,3 +51,4 @@ export const ProductPage = register({loader: () => import('./ProductPage')});
 export const CallNow = register({loader: () => import('./CallNow')});
 export const Support = register({loader: () => import('./Support')});
 export const Offers = register({loader: () => import('./Offers')});
+export const MinusQuantity = register({loader: () => import('./MinusQuantity')});
