@@ -1,27 +1,27 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Container, Content} from '../components/containers/Containers';
-import {Colors, Fonts, Pixel} from '../constants/styleConstants';
-import {useTranslation} from 'react-i18next';
+import React, { FC, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Container, Content } from '../components/containers/Containers';
+import { Colors, Fonts, Pixel } from '../constants/styleConstants';
+import { useTranslation } from 'react-i18next';
 import Header from '../components/header/Header';
 import Input from '../components/textInputs/Input';
-import {commonStyles} from '../styles/styles';
+import { commonStyles } from '../styles/styles';
 import Button from '../components/touchables/Button';
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import {
   addAddressApi,
   editAddressApi,
   saveAddressList,
 } from '../store/actions/address';
-import {RootState} from '../store/store';
-import {useRoute} from '@react-navigation/native';
+import { RootState } from '../store/store';
+import { useRoute } from '@react-navigation/native';
 
 const EditAddress: FC = () => {
   const route = useRoute();
-  const {address} = route.params;
-  const {language}: any = useSelector((state: RootState) => state.settings);
-  const {addressList}: any = useSelector((state: RootState) => state.address);
+  const { address } = route.params;
+  const { language }: any = useSelector((state: RootState) => state.settings);
+  const { addressList }: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState(address.name);
   const [phone, setPhone] = useState(address.phone);
@@ -54,30 +54,28 @@ const EditAddress: FC = () => {
       editAddressApi(address.id, addressData, success => {
         setLoader(false);
         if (success) {
-          // let newAddressList = [...addressList, addressData];
-          // dispatch(saveAddressList(newAddressList));
-          // navigate('Home');
+          navigate('MyAddresses');
         }
       }),
     );
   };
-  const {navigate} = useNavigation();
+  const { navigate } = useNavigation();
   const dispatch = useDispatch();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <Container style={styles.container}>
       <Header title={t('Edit Location')} />
       <Content
         noPadding
         style={styles.contentContainer}
-        contentContainerStyle={{paddingHorizontal: 25}}>
+        contentContainerStyle={{ paddingHorizontal: 25 }}>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Name')}</Text>
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -94,7 +92,7 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -112,7 +110,7 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -130,7 +128,7 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -148,7 +146,7 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -162,12 +160,12 @@ const EditAddress: FC = () => {
           </View>
 
           <View style={styles.box}>
-            <View style={[styles.inputContainer, {flex: 0.47}]}>
+            <View style={[styles.inputContainer, { flex: 0.47 }]}>
               <Text style={styles.inputLabel}>{t('Floor')}</Text>
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  {textAlign: language === 'ar' ? 'right' : 'left'},
+                  { textAlign: language === 'ar' ? 'right' : 'left' },
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -180,12 +178,12 @@ const EditAddress: FC = () => {
               />
             </View>
 
-            <View style={[styles.inputContainer, {flex: 0.47}]}>
+            <View style={[styles.inputContainer, { flex: 0.47 }]}>
               <Text style={styles.inputLabel}>{t('Apartment')}</Text>
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  {textAlign: language === 'ar' ? 'right' : 'left'},
+                  { textAlign: language === 'ar' ? 'right' : 'left' },
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -203,7 +201,7 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
+                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -218,7 +216,7 @@ const EditAddress: FC = () => {
 
         <View style={styles.submitContainer}>
           <Button
-            style={{...commonStyles.boxShadow}}
+            style={{ ...commonStyles.boxShadow }}
             title={t('Save Address')}
             onPress={handlSubmit}
             loader={loader}

@@ -1,19 +1,19 @@
-import React, {FC} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {commonStyles} from '../../styles/styles';
+import React, { FC } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
+import { commonStyles } from '../../styles/styles';
 import {
   CheckedIcon,
   DeleteIcon,
   InputEditIcon,
   UnCheckedIcon,
 } from '../../../assets/Icons/Icons';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
-import {deleteAddressApi, saveAddressList} from '../../store/actions/address';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { deleteAddressApi, saveAddressList } from '../../store/actions/address';
 
 interface IAddress {
   id: number;
@@ -44,15 +44,15 @@ const Address: FC<IAddress> = ({
   selected,
   inCart,
 }) => {
-  const {t} = useTranslation();
-  const {navigate} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
-  const {addressList}: any = useSelector((state: RootState) => state.address);
+  const { t } = useTranslation();
+  const { navigate } = useNavigation();
+  const { language }: any = useSelector((state: RootState) => state.settings);
+  const { addressList }: any = useSelector((state: RootState) => state.address);
   const dispatch = useDispatch();
   const EditBtn = () => {
     return (
       <IconTouchableContainer
-        style={{marginBottom: 5}}
+        style={{ marginBottom: 5 }}
         onPress={() =>
           navigate('EditAddress', {
             address: {
@@ -76,10 +76,7 @@ const Address: FC<IAddress> = ({
     dispatch(
       deleteAddressApi(addressId, success => {
         if (success) {
-          let addressListFilter = addressList.filter(
-            address => address.id != addressId,
-          );
-          dispatch(saveAddressList(addressListFilter));
+          console.log('success');
         }
       }),
     );
@@ -87,7 +84,7 @@ const Address: FC<IAddress> = ({
   const DeleteBtn = () => {
     return (
       <IconTouchableContainer
-        style={{marginTop: 5}}
+        style={{ marginTop: 5 }}
         onPress={() => {
           handleDeleteAddress(id);
         }}>
@@ -104,11 +101,11 @@ const Address: FC<IAddress> = ({
           {selected ? <CheckedIcon /> : <UnCheckedIcon />}
           <Text style={styles.addressTitle}>{name}</Text>
         </View>
-        <View style={{paddingLeft: Pixel(60)}}>
+        <View style={{ paddingLeft: Pixel(60) }}>
           <Text
             style={[
               styles.address,
-              {textAlign: language === 'ar' ? 'left' : 'right'},
+              { textAlign: language === 'ar' ? 'left' : 'right' },
             ]}>
             {language === 'ar' ? area_ar : area_en}{' '}
             {street_name != undefined && t('st') + '.'} {street_name}{' '}

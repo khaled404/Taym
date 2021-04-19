@@ -5,9 +5,14 @@ import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import {showMessage} from 'react-native-flash-message';
 
 export const saveAddressList = (payload: []) => ({
   type: ActionType.SAVE_ADDRESSLIST,
+  payload,
+});
+export const saveNewAddress = (payload: {}) => ({
+  type: ActionType.SAVE_NEW_LOCATION_OBJ,
   payload,
 });
 
@@ -36,9 +41,18 @@ export const deleteAddressApi = (
       const {data} = await axiosAPI.post(
         `user/delete-user-address/${addressId}`,
       );
-      console.log('deleteAddressApi data', data);
+      dispatch(saveAddressList(data.data.addresses));
+      showMessage({
+        message: data.data.message,
+        type: 'success',
+      });
       cb(true);
     } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.error[0],
+        type: 'danger',
+      });
       console.log('deleteAddressApiError', error?.response);
     }
   };
@@ -65,9 +79,18 @@ export const addAddressApi = (
         `user/user-add-new-address`,
         addressData,
       );
-      console.log('addAddressApiApi data', data);
+      dispatch(saveAddressList(data.data.addresses));
+      showMessage({
+        message: data.data.message,
+        type: 'success',
+      });
       cb(true);
     } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.error[0],
+        type: 'danger',
+      });
       console.log('addAddressApiError', error?.response);
     }
   };
@@ -84,9 +107,18 @@ export const editAddressApi = (
         `user/edit-user-address/${addressId}`,
         addressData,
       );
-      console.log('editAddressApi data', data);
+      dispatch(saveAddressList(data.data.addresses));
+      showMessage({
+        message: data.data.message,
+        type: 'success',
+      });
       cb(true);
     } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.error[0],
+        type: 'danger',
+      });
       console.log('editAddressApiError', error?.response);
     }
   };

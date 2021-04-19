@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../constants/styleConstants';
@@ -9,21 +9,29 @@ import {commonStyles} from '../styles/styles';
 import Button from '../components/touchables/Button';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import {addAddressApi, saveAddressList} from '../store/actions/address';
+import {addAddressApi} from '../store/actions/address';
 import {RootState} from '../store/store';
+import {showMessage} from "react-native-flash-message";
 
 const AddLocation: FC = () => {
   const {language}: any = useSelector((state: RootState) => state.settings);
-  const {addressList}: any = useSelector((state: RootState) => state.address);
+  const {addressList, newLocationObj}: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
-  const [name, setName] = useState('22 عنوان جديييد');
-  const [phone, setPhone] = useState('0104577288');
-  const [street, setStreet] = useState('55');
-  const [area, setArea] = useState('4');
-  const [buildingNumber, setBuildingNumber] = useState('4');
-  const [floor, setFloor] = useState('1');
-  const [apartment, setApartment] = useState('2');
-  const [landmark, setLandmark] = useState('0');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [street, setStreet] = useState('');
+  const [area, setArea] = useState('');
+  const [buildingNumber, setBuildingNumber] = useState('');
+  const [floor, setFloor] = useState('');
+  const [apartment, setApartment] = useState('');
+  const [landmark, setLandmark] = useState('');
+
+  useEffect(() => {
+    if (newLocationObj !== null && Object.keys(newLocationObj).length > 0) {
+      setArea(newLocationObj.areaName);
+    }
+  }, [newLocationObj]);
+
   const handlSubmit = () => {
     setLoader(true);
     const addressData = {
@@ -34,29 +42,31 @@ const AddLocation: FC = () => {
       building_no: buildingNumber,
       floor_no: floor,
       apartment_no: apartment,
-      latitude: 875856,
-      longitude: 7867687,
+      latitude: newLocationObj.latitude,
+      longitude: newLocationObj.longitude,
     };
-    let aa = [...addressList, addressData];
-    console.log('new addressList', aa);
-
-    dispatch(
-      addAddressApi(addressData, success => {
-        setLoader(false);
-        if (success) {
-          // let newAddressList = [...addressList, addressData];
-          // dispatch(saveAddressList(newAddressList));
-          navigate('Home');
-        }
-      }),
-    );
+    if (area !== '') {
+      dispatch(
+        addAddressApi(addressData, success => {
+          setLoader(false);
+          if (success) {
+            navigate('MyAddresses');
+          }
+        }),
+      );
+    } else {
+      setLoader(false);
+      showMessage({
+        message: t("Couldn't find your area please try again!"),
+      });
+    }
   };
   const {navigate} = useNavigation();
   const dispatch = useDispatch();
   const {t} = useTranslation();
   return (
     <Container style={styles.container}>
-      <Header title={t('Add Location')} />
+      <Header title={t('Add Location')}/>
       <Content
         noPadding
         style={styles.contentContainer}

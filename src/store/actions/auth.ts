@@ -106,9 +106,9 @@ export const VerifyPhoneCodeHandler = (
         message: data.message,
         type: 'info',
       });
-      dispatch({
-        type: ActionType.SAVE_USER_DATA_STEP_3,
-      });
+      // dispatch({
+      //   type: ActionType.SAVE_USER_DATA_STEP_3,
+      // });
 
       cb(true);
     } catch (error) {
@@ -118,6 +118,45 @@ export const VerifyPhoneCodeHandler = (
         type: 'danger',
       });
       console.log(error?.response);
+    }
+  };
+};
+
+/**
+ * Register user step 4
+ * @param coords user current location
+ * @param cb callback function with success is true or false
+ */
+export const VerifyUserLocationHandler = (
+  // coords: {latitude: string; longitude: string},
+  latitude: number,
+  longitude: number,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/register-first-address', {
+        latitude,
+        longitude,
+      });
+      console.log('VerifyUserLocationHandler', data);
+      showMessage({
+        message: data.message,
+        type: 'info',
+      });
+
+      // dispatch({
+      //   type: ActionType.SAVE_USER_DATA_STEP_3,
+      // });
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      console.log('VerifyUserLocationHandler', error?.response);
+      // showMessage({
+      //   message: error?.response.data,
+      //   type: 'danger',
+      // });
     }
   };
 };
@@ -162,12 +201,12 @@ export const LoginHandler = (
         payload: error?.response.data.message,
       });
       {
-        error.response.data.error?
-        showMessage({
-          message: error?.response.data.error,
-          type: 'danger',
-        })
-        :null
+        error.response.data.error
+          ? showMessage({
+              message: error?.response.data.error,
+              type: 'danger',
+            })
+          : null;
       }
       console.log('Loginerorr', error?.response);
     }
@@ -199,7 +238,7 @@ export const ForgetHandler = (
       });
       await saveItem(AsyncKeys.USER_DATA, data.user);
       cb(true);
-      navigate('ForgetPhoneCode')
+      navigate('ForgetPhoneCode');
     } catch (error) {
       cb(false);
       showMessage({
