@@ -4,6 +4,7 @@ import {persistStore, persistReducer} from 'redux-persist';
 import settings from '../store/reducers/settings';
 import {PersistConfig} from '../constants/helpers';
 import auth from './reducers/auth';
+import categories from './reducers/categories';
 import voucher from './reducers/voucher';
 import address from './reducers/address';
 const authConfig: any = new PersistConfig('auth', 'userData', 'isLogin');
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   auth: persistReducer(authConfig, auth),
   voucher: persistReducer(voucherConfig, voucher),
   address: persistReducer(addressConfig, address),
+  categories: categories,
 });
 
 export const store = createStore(rootReducer, compose(applyMiddleware(thunk)));

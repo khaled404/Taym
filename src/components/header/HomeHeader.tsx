@@ -97,13 +97,13 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
             placeholder: t('What You Are Looking For ?'),
             placeholderTextColor: '#949494',
           }}
-          contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: 0}}
+          contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
           textInputContainer={{
             textAlign: language === 'ar' ? 'right' : 'left',
-            paddingVertical: Pixel(25),
+            // paddingVertical: Pixel(33),
           }}
           rightContent={() => <SearchSubmitBtn />}
-          iconRightStyle={{top: 5}}
+          iconRightStyle={{top: 4.5}}
         />
       </View>
     </View>

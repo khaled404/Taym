@@ -35,7 +35,7 @@ import {
   CallNow,
   Support,
   Offers,
-RegisterLocation,
+  RegisterLocation,
   MinusQuantity
 } from '../screens/index';
 

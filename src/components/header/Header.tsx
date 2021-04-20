@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     marginLeft: 5,
     marginRight: 'auto',
-    //marginTop: 5,
+    marginTop: 5,
   },
 
   icons: {

@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import HomeHeader from '../components/header/HomeHeader';
 import {Colors} from '../constants/styleConstants';
@@ -81,17 +81,24 @@ const Home: FC = () => {
 
   const dispatch = useDispatch();
   const {isRTL}: any = useSelector((state: RootState) => state.settings);
+  const {categories}: any = useSelector((state: RootState) => state.categories);
   const {navigate} = useNavigation();
+
+  useEffect(() => {
+    console.log('categories', categories)
+  }, []);
+
   return (
     <Container style={styles.container}>
-      <HomeHeader navigate={navigate} title="Home" />
+      <HomeHeader navigate={navigate} title={t('Home')}/>
       <Content noPadding>
+
+        {categories.length > 0 && <View style={styles.contentContainer}>
+          <CategoryList data={categories}/>
+        </View>}
+        <OfferSlider data={carouselItems}/>
         <View style={styles.contentContainer}>
-          <CategoryList data={categoryHomeData} />
-        </View>
-        <OfferSlider data={carouselItems} />
-        <View style={styles.contentContainer}>
-          <FavoriteList inHome data={categoryHomeData} />
+          <FavoriteList inHome data={categoryHomeData}/>
         </View>
       </Content>
     </Container>

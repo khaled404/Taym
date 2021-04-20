@@ -7,7 +7,13 @@ import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useNavigation} from '@react-navigation/native';
 
 interface ICategoryList {
-  data: Array<{title: string; image: string}>;
+  data: Array<{
+    id: number;
+    name_ar: string;
+    name_en: string;
+    icon: string;
+    is_active: boolean;
+  }>;
 }
 
 const CategoryList: FC<ICategoryList> = ({data}) => {
@@ -27,7 +33,7 @@ const CategoryList: FC<ICategoryList> = ({data}) => {
       <View style={styles.listContainer}>
         {data.map((item, index) => {
           if (index <= 5) {
-            return <CategoryItem {...item} key={index} index={index} />;
+            return <CategoryItem {...item} key={index} index={index}/>;
           }
         })}
       </View>

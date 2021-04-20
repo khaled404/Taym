@@ -1,11 +1,13 @@
 import {Dispatch} from 'redux';
 import {ActionType} from './actions';
 import {I18nManager} from 'react-native';
-import {AsyncKeys, getItem, saveItem} from '../../constants/helpers';
+import {AsyncKeys, getItem} from '../../constants/helpers';
 import RNRestart from 'react-native-restart';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {getVoucherData} from './voucher';
+import {saveCategories} from "./categories";
+
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
 export const loadApp = () => ({
@@ -36,14 +38,26 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
+
+export const userHomeApi = () => {
+  return async (dispatch: Dispatch<any>) => {
+    try {
+      const {data} = await axiosAPI.post(`guest/user-home`);
+      dispatch(saveCategories(data.data.categories));
+    } catch (error) {
+      console.log('userHomeApiError', error?.response);
+    }
+  };
+};
+
 const updateUserVouchers = () => {
   return async (dispatch: Dispatch<any>) => {
-    let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
-    console.log('userV', userV);
-    if (userV !== null) {
+    let userVouchers = await getItem(AsyncKeys.GET_USER_VOUCHERS);
+    console.log('userV', userVouchers);
+    if (userVouchers !== null) {
       dispatch({
         type: ActionType.GET_USER_VOUCHERS,
-        payload: userV,
+        payload: userVouchers,
       });
     } else {
       dispatch(getVoucherData());
@@ -54,8 +68,9 @@ export const initializApp = () => {
   return (dispatch: Dispatch<any>) => {
     try {
       allowRTL(true);
-      dispatch(loadApp());
       dispatch(updateUserVouchers());
+      dispatch(userHomeApi());
+      dispatch(loadApp());
     } catch (error) {
       console.log('initializApp', error);
     }
