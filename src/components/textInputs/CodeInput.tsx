@@ -3,9 +3,9 @@ import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
 import { Colors, Fonts } from '../../constants/styleConstants';
 interface ICodeInput {
   onChangeText?: (text: string) => void;
-  arrayWidth?:number
+  arrayWidth?: number
 }
-const CodeInput: FC<ICodeInput> = ({ onChangeText,arrayWidth }) => {
+const CodeInput: FC<ICodeInput> = ({ onChangeText, arrayWidth }) => {
   const [state, setstate] = useState<any>({
     inputRefs: {} as any,
     inputValues: {} as any,

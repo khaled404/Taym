@@ -1,11 +1,13 @@
 import React, {FC, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Splash from './Splash';
 import Navigation from '../navigation/Navigation';
 import {RootState} from '../store/store';
-import {initializApp} from '../store/actions/settings';
+import {initializApp, userHomeApi} from '../store/actions/settings';
+
 const AppInitializer: FC = () => {
   const {appLoaded} = useSelector((state: RootState) => state.settings);
+  const {isLogin} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!appLoaded) {
@@ -13,13 +15,11 @@ const AppInitializer: FC = () => {
     }
   }, []);
   if (appLoaded) {
-    return <Navigation />;
+    return <Navigation/>;
   } else {
-    return <Splash />;
+    return <Splash/>;
   }
 };
-
-
 
 
 export default AppInitializer;

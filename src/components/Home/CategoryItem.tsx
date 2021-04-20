@@ -1,16 +1,22 @@
 import React, {FC, useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import FastImage from 'react-native-fast-image';
+import {useSelector} from "react-redux";
+import {RootState} from "../../store/store";
 
 interface ICategoryItem {
-  title: string;
-  image: string;
+  id: number;
   index: number;
+  name_ar: string;
+  name_en: string;
+  icon: string;
+  is_active: boolean;
 }
 
-const CategoryItem: FC<ICategoryItem> = ({title, image, index}) => {
+const CategoryItem: FC<ICategoryItem> = ({id, name_ar, name_en, icon, is_active, index}) => {
+  const {language}: any = useSelector((state: RootState) => state.settings);
   const [categoryWidth, setCategoryWidth] = useState('100%');
 
   useEffect(() => {
@@ -33,12 +39,12 @@ const CategoryItem: FC<ICategoryItem> = ({title, image, index}) => {
           {height: index == 0 ? Pixel(240) : Pixel(210)},
         ]}>
         <FastImage
-          source={Images.homeBanner}
+          source={{uri: icon}}
           style={commonStyles.image}
           resizeMode="cover"
         />
       </View>
-      <Text style={styles.categoryTitle}>{title}</Text>
+      <Text style={styles.categoryTitle}>{language === 'en' ? name_en : name_ar}</Text>
     </TouchableOpacity>
   );
 };
