@@ -25,7 +25,7 @@ const CategoryList: FC<ICategoryList> = ({data}) => {
         <Text style={styles.sectionTitle}>{t('Explore Category')}</Text>
         <TouchableOpacity
           onPress={() => {
-            // navigate('Category')
+            navigate('Category')
           }}>
           <Text style={styles.viewAllBtnText}>{t('View All')}</Text>
         </TouchableOpacity>

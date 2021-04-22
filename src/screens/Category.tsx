@@ -1,49 +1,63 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
-import {
-  Animated, FlatList, StyleSheet, Text, TouchableOpacity, View, Platform,
-} from 'react-native';
-import { Container, Content } from '../components/containers/Containers';
-import { Colors, Fonts, Images, Pixel, ScreenOptions } from '../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
+import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
+import {Animated, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {Container, Content} from '../components/containers/Containers';
+import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
 import CategoryHeader from "../components/header/CategoryHeader";
 import FastImage from "react-native-fast-image";
-import { commonStyles } from "../styles/styles";
+import {commonStyles} from "../styles/styles";
 import CategoryStoresList from "../components/Category/CategoryStoresList";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import Input from '../components/textInputs/Input';
-import {
-  SearchIcon,
-} from '../../assets/Icons/Icons';
+import {SearchIcon,} from '../../assets/Icons/Icons';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
+import {useSelector} from "react-redux";
+import {RootState} from "../store/store";
 
 
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17} />
+      <SearchIcon width={17} height={17}/>
     </IconTouchableContainer>
   );
 };
-const Item = ({ item, selectedCategory, handleSelectedCategory }) => (
-  <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>
-    <View
-      style={[
-        styles.imageContainer,
-      ]}>
-      <FastImage
-        source={Images.offerSlider}
-        style={commonStyles.image}
-        resizeMode="cover"
-      />
-    </View>
-    <Text
-      style={[styles.categoryTitle, { color: selectedCategory === item.title ? Colors.colorSacand : Colors.dark }]}>{item.title}</Text>
-  </TouchableOpacity>
-);
 
 
 const Category: FC = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
+
+  const {navigate} = useNavigation();
+  // const [contentOffsetY, setContentOffsetY] = useState(0);
+  const {language}: any = useSelector((state: RootState) => state.settings);
+  const [toggleHeader, setToggleHeader] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+  const slideInOut = useRef(new Animated.Value(0)).current;
+  const [active, setActive] = useState(true);
+  const [scrollValue, setScrollValue] = useState(0);
+  const _scrollRef = useRef<ScrollView>();
+  const inputTextAlign = language === 'ar' ? 'right' : 'left';
+  const textAlign = language === 'ar' ? 'left' : 'right';
+
+  const Item = ({item, selectedCategory, handleSelectedCategory}) => (
+    <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>
+      <View
+        style={[
+          styles.imageContainer,
+        ]}>
+        <FastImage
+          source={Images.offerSlider}
+          style={commonStyles.image}
+          resizeMode="cover"
+        />
+      </View>
+      <Text
+        style={[styles.categoryTitle, {
+          color: selectedCategory === item.title ? Colors.colorSacand : Colors.dark,
+        }]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
 
   const DATA = [
     {
@@ -157,15 +171,6 @@ const Category: FC = () => {
     },
   ];
 
-  const { navigate } = useNavigation();
-  // const [contentOffsetY, setContentOffsetY] = useState(0);
-  const [toggleHeader, setToggleHeader] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
-  const slideInOut = useRef(new Animated.Value(0)).current;
-  const [active, setActive] = useState(true);
-  const [scrollValue, setScrollValue] = useState(0);
-
   const toggleActive = useCallback(() => {
     setActive((e) => !e);
     // onValueChange && onValueChange(active);
@@ -187,20 +192,33 @@ const Category: FC = () => {
   };
 
   const opacity = slideInOut.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
+    inputRange: [0, .5, 1],
+    outputRange: [1, .5, 0],
     extrapolate: 'clamp',
   });
 
   const reverseOpacity = slideInOut.interpolate({
-    inputRange: [0, Pixel(150), Pixel(320)],
-    outputRange: [0, .5, 1],
+    inputRange: [0, Pixel(40), Pixel(80)],
+    outputRange: [0, .7, 1],
     extrapolate: 'clamp',
   });
 
   const translate1 = slideInOut.interpolate({
-    inputRange: [0, Pixel(60), Pixel(120)],
-    outputRange: [0, Pixel(-60), Pixel(-120)],
+    inputRange: [0, Pixel(40), Pixel(80)],
+    outputRange: [0, Pixel(-40), Pixel(-120)],
+    extrapolate: 'clamp',
+  });
+
+  const translateCategoryTitleContainer = slideInOut.interpolate({
+    inputRange: [-120, -60, 120],
+    outputRange: [-100, -60, -20],
+    // inputRange: [Pixel(-100), Pixel(-60), 0],
+    // outputRange: [-50, 20, 50],
+    extrapolate: 'clamp',
+  });
+  const translateCategoryTitle = slideInOut.interpolate({
+    inputRange: [Pixel(-150), 0],
+    outputRange: [Pixel(-500), 0],
     extrapolate: 'clamp',
   });
 
@@ -221,21 +239,35 @@ const Category: FC = () => {
     outputRange: [0, Pixel(70)],
     extrapolate: 'clamp',
   });
-
-  const handleOnScroll = (event: Object) => {
-    setScrollValue(event.nativeEvent.contentOffset.y)
-    if (event.nativeEvent.contentOffset.y >= 40) {
-      setToggleHeader(true);
-      toggleActive();
-
-    } else {
-      setToggleHeader(false);
-      toggleActive();
-    }
-  }
+  const translateXLeftContainer = slideInOut.interpolate({
+    inputRange: [0, Pixel(40), Pixel(80)],
+    outputRange: [0, -20, -30],
+    extrapolate: 'clamp',
+  });
+  // const handleOnScroll = (event: Object) => {
+  //   console.log('handleOnScroll opacity ', opacity)
+  //   console.log('handleOnScroll reverseOpacity', reverseOpacity)
+  //   console.log('handleOnScroll translate1', translate1)
+  //   console.log('handleOnScroll translate2', translate2)
+  //   console.log('handleOnScroll translate3', translate3)
+  //   console.log('handleOnScroll translatex', translatex)
+  //   console.log('handleOnScroll slideInOut', slideInOut)
+  //   console.log('nativeEvent.contentOffset.y', event.nativeEvent.contentOffset.y)
+  //   setScrollValue(event.nativeEvent.contentOffset.y)
+  //   if (event.nativeEvent.contentOffset.y >= 40) {
+  //   console.log('event.nativeEvent', 'true')
+  //   setToggleHeader(true);
+  //   toggleActive();
+  //   } else {
+  //     console.log('event.nativeEvent', 'false')
+  //   setToggleHeader(false);
+  //   toggleActive();
+  //   }
+  // }
 
   const handleToggleHeader = () => {
     setToggleHeader(!toggleHeader);
+    _scrollRef.current.scrollTo({y: 0, animated: true})
   }
 
   const handleSelectedCategory = (category: string) => {
@@ -250,49 +282,70 @@ const Category: FC = () => {
     setFilteredData(data);
   }, []);
 
+  // useEffect(() => {
+  //   console.log('useEffect slideInOut', slideInOut)
+  // }, [slideInOut]);
+
   return (
     <Container style={styles.container}>
       <CategoryHeader
         navigate={navigate}
         handleToggleHeader={handleToggleHeader}
         translateY={translate3}
-        translatex={translatex}
+        translateX={translatex}
+        translateCategoryTitleContainer={translateCategoryTitleContainer}
+        translateCategoryTitle={translateCategoryTitle}
+        translateXLeftContainer={translateXLeftContainer}
         reverseOpacity={reverseOpacity}
         opacity={opacity}
         toggleHeader={toggleHeader}
-        title={selectedCategory} />
-      <Animated.View style={[styles.headerCategoryList, { transform: [{ translateY: translate1 }] }]}>
-        <Animated.View style={[styles.searchInputContainer, { transform: [{ translateY: translate2 }] }]}>
+        title={selectedCategory}/>
+      <Animated.View style={[styles.headerCategoryList, {transform: [{translateY: translate1}]}]}>
+        <Animated.View style={[styles.searchInputContainer, {transform: [{translateY: translate2}]}]}>
           <Input
             options={{
               placeholder: t('What You Are Looking For ?'),
               placeholderTextColor: '#949494',
             }}
-            contentContainerStyle={{ borderRadius: 22, borderWidth: 0, padding: 0 }}
-            rightContent={() => <SearchSubmitBtn />}
-            iconRightStyle={{ top: 5 }}
+            contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
+            textInputContainer={{
+              textAlign: inputTextAlign,
+              // paddingVertical: Pixel(33),
+            }}
+            rightContent={() => <SearchSubmitBtn/>}
+            iconRightStyle={{top: 4.5}}
           />
         </Animated.View>
         <FlatList
           data={DATA}
-          renderItem={({ item, index }) => <Item
+          style={{paddingBottom: 10}}
+          renderItem={({item, index}) => <Item
             selectedCategory={selectedCategory}
-            handleSelectedCategory={(title) => handleSelectedCategory(title)} item={item} />}
+            handleSelectedCategory={(title) => handleSelectedCategory(title)} item={item}/>}
           keyExtractor={(item) => item.id}
           horizontal
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         />
         <Content noPadding
-          style={styles.contentContainer}
-
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: slideInOut } } }],
-            { useNativeDriver: true }
-          )}
+                 contentContainerStyle={styles.contentContainer}
+                 ref={_scrollRef}
+          // onScroll={Animated.event(
+          //   [{nativeEvent: {contentOffset: {y: slideInOut}}}],
+          //   {useNativeDriver: true}
+          // )}
+                 onScroll={Animated.event(
+                   [{nativeEvent: {contentOffset: {y: slideInOut}}}],
+                   {
+                     // listener: (event) => handleOnScroll(event),
+                     useNativeDriver: true
+                   }
+                 )}
+                 options={{scrollEventThrottle: 16}}
         >
-          <Text style={styles.sectionTitle}>{selectedCategory}</Text>
-          <CategoryStoresList data={filteredData} />
+          <Text
+            style={[styles.sectionTitle, {textAlign: language === 'ar' ? 'left' : 'right'}]}>{selectedCategory}</Text>
+          <CategoryStoresList data={filteredData}/>
         </Content>
       </Animated.View>
 
@@ -305,9 +358,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.sacandAppBackgroundColor,
   },
   contentContainer: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-
+    paddingHorizontal: Pixel(20),
+    paddingVertical: Pixel(20),
   },
   headerCategoryList: {
     // paddingHorizontal: 20,
@@ -345,9 +397,10 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.black,
     fontSize: Pixel(47),
     color: Colors.colorSacand,
+    marginTop: 5
   },
   searchInputContainer: {
-    marginTop: Pixel(20),
+    marginTop: 0,
     paddingBottom: Pixel(20),
   },
   submitSearchBtn: {
