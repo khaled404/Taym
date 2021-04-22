@@ -1,58 +1,35 @@
-import React, {FC, useRef} from 'react';
-import {Animated, Dimensions, FlatList, ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {Container, Content} from '../components/containers/Containers';
+import React, {FC, useRef, useState} from 'react';
+import {
+  Animated,
+  Dimensions,
+  FlatList,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/store';
-import Input from '../components/textInputs/Input';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {ArrowLeftSmIcon, CartIcon, DeliveryIcon, SearchIcon} from '../../assets/Icons/Icons';
+import {ArrowLeftSmIcon, CartIcon, DeliveryIcon, FavoriteIcon, SearchIcon} from '../../assets/Icons/Icons';
 import {commonStyles} from "../styles/styles";
 import {useNavigation} from "@react-navigation/native";
 import ProductsList from "../components/products/ProductsList";
+import Input from "../components/textInputs/Input";
 
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 const heightHeader = (Dimensions.get('window').height) / 4
 const HEADER_MIN_HEIGHT = Pixel(150);
 const HEADER_SCROLL_DISTANCE = heightHeader - HEADER_MIN_HEIGHT;
 const ShopDetails: FC = () => {
   const {t} = useTranslation();
-  const {goBack} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
-  const animatedValue = useRef(new Animated.Value(0)).current;
-  const inputTextAlign = language === 'ar' ? 'right' : 'left';
-  const translateContent = animatedValue.interpolate({
-    inputRange: [0, Pixel(220)],
-    outputRange: [0, Pixel(-220)],
-    extrapolate: 'clamp',
-  });
-
-  const opacity = animatedValue.interpolate({
-    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
-    outputRange: [1, .5, 0],
-    extrapolate: 'clamp',
-  });
-
-  const imageTranslateY = animatedValue.interpolate({
-    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
-    outputRange: [1, .5, 0],
-    extrapolate: 'clamp',
-  });
-
-  const translateList = animatedValue.interpolate({
-    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
-    outputRange: [0, Pixel(50), Pixel(120)],
-    extrapolate: 'clamp',
-  })
-  const translateHeader = animatedValue.interpolate({
-    inputRange: [0, heightHeader / 1.7],
-    outputRange: [0, Pixel(-60)],
-    extrapolate: 'clamp',
-  })
-
   const categoryHomeData = [
     {
       id: 1,
@@ -144,7 +121,137 @@ const ShopDetails: FC = () => {
       image: 'Voucher 12457',
     }
   ];
+  const DATA = [
+    {
+      id: 1,
+      title: t('Supermarket'),
+      image: 'Voucher 12457',
+    },
 
+    {
+      id: 2,
+      title: t('Beef'),
+      image: 'Voucher 12457',
+    },
+
+    {
+      id: 3,
+      title: t('Chicken'),
+      image: 'Voucher 12457',
+    },
+
+    {
+      id: 4,
+      title: t('Fish'),
+      image: 'Voucher 12457',
+    },
+
+    {
+      id: 5,
+      title: t('Fruit'),
+      image: 'Voucher 12457',
+    },
+
+    {
+      id: 6,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+
+    {
+      id: 7,
+      title: t('Vegetables'),
+      image: 'Voucher 12457',
+    },
+  ];
+  const {goBack} = useNavigation();
+  const {language}: any = useSelector((state: RootState) => state.settings);
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const inputTextAlign = language === 'ar' ? 'right' : 'left';
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const Item = ({item, selectedCategory, handleSelectedCategory}) => (
+    <TouchableOpacity onPress={() => handleSelectedCategory(item.title)}
+                      style={[styles.headerCategoryListItem,
+                        selectedCategory === item.title && {
+                          borderWidth: 2,
+                          borderColor: Colors.colorSacand,
+                          borderRadius: 7,
+                          padding: 5
+
+                        }
+                      ]}>
+      <Text
+        style={[styles.categoryTitle, {
+          color: selectedCategory === item.title ? Colors.colorSacand : Colors.dark,
+        }]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+  const SubCategoryItem = ({item, selectedCategory, handleSelectedCategory}) => (
+    <TouchableOpacity onPress={() => handleSelectedCategory(item.title)}
+                      style={[styles.headerCategoryListItem,
+                        selectedCategory === item.title && {
+                          borderBottomWidth: 1,
+                          borderColor: Colors.colorSacand,
+                        }
+                      ]}>
+      <Text
+        style={[styles.subCategoryTitle, {
+          color: selectedCategory === item.title ? Colors.colorSacand : Colors.dark,
+        }]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+  const translateContent = animatedValue.interpolate({
+    inputRange: [0, Pixel(220)],
+    outputRange: [0, Pixel(-220)],
+    extrapolate: 'clamp',
+  });
+
+  const opacity = animatedValue.interpolate({
+    inputRange: [0, Pixel(40), Pixel(80)],
+    outputRange: [1, .7, 0],
+    extrapolate: 'clamp',
+  });
+
+  const imageTranslateY = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
+    outputRange: [1, .5, 0],
+    extrapolate: 'clamp',
+  });
+
+  const translateList = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 2, heightHeader / 1.7],
+    outputRange: [0, Pixel(50), Pixel(120)],
+    extrapolate: 'clamp',
+  })
+
+  const translateHeader = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 1.7],
+    outputRange: [0, Pixel(-60)],
+    extrapolate: 'clamp',
+  })
+
+  const translateCategorySection = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 5],
+    outputRange: [0, Pixel(-190)],
+    extrapolate: 'clamp',
+  })
+
+  const translateHeaderDetails = animatedValue.interpolate({
+    inputRange: [0, heightHeader / 1.7],
+    outputRange: [0, Pixel(-60)],
+    extrapolate: 'clamp',
+  })
+  const translateHeaderActions = animatedValue.interpolate({
+    inputRange: [Pixel(-30), Pixel(130)],
+    outputRange: [0, Pixel(-180)],
+    extrapolate: 'clamp',
+  })
+  const reverseOpacity = animatedValue.interpolate({
+    inputRange: [0, Pixel(50), Pixel(80), Pixel(100)],
+    outputRange: [0, .2, .5, 1],
+    extrapolate: 'clamp',
+  });
   const SearchSubmitBtn: FC = () => {
     return (
       <IconTouchableContainer style={styles.submitSearchBtn}>
@@ -152,8 +259,11 @@ const ShopDetails: FC = () => {
       </IconTouchableContainer>
     );
   };
+  const handleSelectedCategory = (category: string) => {
+    setSelectedCategory(category);
+  }
   return (
-    <Container style={styles.container}>
+    <View style={styles.container}>
       <ImageBackground
         source={Images.supermarket}
         style={styles.header}
@@ -175,7 +285,7 @@ const ShopDetails: FC = () => {
           </View>
         </View>
       </ImageBackground>
-      <Animated.View style={[styles.content, {transform: [{translateY: translateContent}]}]}>
+      <View style={[styles.content]}>
         <Animated.View
           style={[{
             width: '100%',
@@ -194,73 +304,112 @@ const ShopDetails: FC = () => {
           </Animated.View>
         </Animated.View>
 
-        <Animated.View style={[{transform: [{translateY: translateHeader}], paddingHorizontal: 20,width:'100%'}]}>
-          <View style={[styles.storeDetail]}>
+
+        <Animated.View style={[{transform: [{translateY: translateHeader}], paddingHorizontal: 20, width: '100%',}]}>
+          <View style={[styles.storeDetail, {overflow: 'hidden'}]}>
             <Text
               style={[styles.storeTitle, {textAlign: language === 'ar' ? 'left' : 'right'}]}>{t('Supermarket')}</Text>
-            <View style={styles.storeDeliveryDetails}>
-              <DeliveryIcon/>
-              <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
+            <View style={{...commonStyles.rowBox}}>
+              <Animated.View style={[styles.storeDeliveryDetails, {
+                transform: [{translateX: translateHeaderActions}],
+                opacity: reverseOpacity
+              }]}>
+                <IconTouchableContainer style={styles.submitSearchBtn}>
+                  <SearchIcon width={17} height={17}/>
+                </IconTouchableContainer>
+                <IconTouchableContainer style={styles.submitSearchBtn}>
+                  <FavoriteIcon width={20} height={20}/>
+                </IconTouchableContainer>
+              </Animated.View>
+
+              <Animated.View style={[styles.storeDeliveryDetails, {
+                transform: [{translateY: translateHeaderDetails}],
+                opacity: opacity,
+              }]}>
+                <DeliveryIcon/>
+                <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
+              </Animated.View>
             </View>
           </View>
         </Animated.View>
 
 
-        <Animated.View style={[styles.searchInputContainer, {
-          opacity: opacity
-        }]}>
-          <Input
-            options={{
-              placeholder: t('What You Are Looking For ?'),
-              placeholderTextColor: '#949494',
-            }}
-            contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
-            textInputContainer={{
-              textAlign: inputTextAlign,
-              // paddingVertical: Pixel(33),
-            }}
-            rightContent={() => <SearchSubmitBtn/>}
-            iconRightStyle={{top: 4.5}}
-          />
+        <View style={{width: '100%', overflow: "hidden"}}>
+          <Animated.View style={[styles.searchInputContainer, {
+            transform: [{translateY: translateCategorySection}],
+            opacity: opacity
+          }]}>
+            <Input
+              options={{
+                placeholder: t('What You Are Looking For ?'),
+                placeholderTextColor: '#949494',
+              }}
+              contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
+              textInputContainer={{
+                textAlign: inputTextAlign,
+                // paddingVertical: Pixel(33),
+              }}
+              rightContent={() => <SearchSubmitBtn/>}
+              iconRightStyle={{top: 4.5}}
+            />
+          </Animated.View>
+        </View>
+
+        <Animated.View style={[{transform: [{translateY: translateCategorySection}]}]}>
+          <View style={[{
+            height: 35,
+            marginTop: 10,
+            marginBottom: 5,
+            paddingLeft: 20
+          }]}>
+            <FlatList
+              data={DATA}
+              contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
+              renderItem={({item, index}) => <Item
+                selectedCategory={selectedCategory}
+                handleSelectedCategory={(title) => handleSelectedCategory(title)} item={item}/>}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View style={[{
+            height: 35,
+            marginBottom: 10,
+            paddingLeft: 20
+            // marginVertical: 10
+          }]}>
+            <FlatList
+              data={DATA}
+              contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
+              renderItem={({item, index}) => <SubCategoryItem
+                selectedCategory={selectedCategory}
+                handleSelectedCategory={(title) => handleSelectedCategory(title)} item={item}/>}
+              keyExtractor={(item) => item.id}
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
         </Animated.View>
 
-        {/*<Animated.View style={[{transform: [{translateY: translateList}], padding: 0}]}>*/}
+        <AnimatedScrollView
+          style={{flex: 1}}
+          contentContainerStyle={styles.contentContainer}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: animatedValue}}}],
+            {
+              useNativeDriver: true
+            }
+          )}
+          scrollEventThrottle={16}
+        >
+          <ProductsList data={categoryHomeData}/>
+        </AnimatedScrollView>
 
-          {/*<AnimatedFlatList*/}
-          {/*  onScroll={Animated.event(*/}
-          {/*    [{nativeEvent: {contentOffset: {y: animatedValue}}}],*/}
-          {/*    {useNativeDriver: true} // <-- Add this*/}
-          {/*  )}*/}
-          {/*  scrollEventThrottle={16}*/}
-          {/*  //style={[{ transform: [{ translateY: translateList }] }]}*/}
-          {/*  data={categoryHomeData}*/}
-          {/*  numColumns={2}*/}
-          {/*  horizontal={false}*/}
-          {/*  showsVerticalScrollIndicator={false}*/}
-          {/*  */}
-          {/*  columnWrapperStyle={{justifyContent: 'space-between', backgroundColor: 'red',}}*/}
-          {/*  keyExtractor={item => item.id.toString()}*/}
-          {/*  renderItem={({item, index}) => (*/}
-          {/*    <FavoriteItem {...item} key={index} index={index}/>*/}
-          {/*  )}*/}
-          {/*/>*/}
-          <Content noPadding
-                   contentContainerStyle={styles.contentContainer}
-                   onScroll={Animated.event(
-                     [{nativeEvent: {contentOffset: {y: animatedValue}}}],
-                     {
-                       // listener: (event) => handleOnScroll(event),
-                       useNativeDriver: true
-                     }
-                   )}
-                   options={{scrollEventThrottle: 16}}
-          >
-            <ProductsList data={categoryHomeData}/>
-          </Content>
-        {/*</Animated.View>*/}
-
-      </Animated.View>
-    </Container>
+      </View>
+    </View>
   );
 };
 
@@ -268,8 +417,8 @@ export default ShopDetails;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.minColor,
-
+    backgroundColor: Colors.white,
+    flex: 1
   },
   contentContainer: {
     paddingHorizontal: 20,
@@ -288,13 +437,13 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   content: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     zIndex: 1000,
     position: 'relative',
-    marginTop: -50,
+    // marginTop: -50,
     alignItems: 'center'
   },
   imageContainer: {
@@ -342,7 +491,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderColor: '#707070',
-    paddingBottom:10
+    paddingBottom: 10
     // paddingHorizontal: 20,
   },
   storeTitle: {
@@ -358,5 +507,27 @@ const styles = StyleSheet.create({
   },
   storeDeliveryDetails: {
     ...commonStyles.rowBox,
+  },
+  headerCategoryListItem: {
+    // paddingHorizontal: 20,
+    // marginBottom: Pixel(20),
+    marginRight: Pixel(20),
+    // alignItems: 'center'
+  },
+  categoryTitle: {
+    fontFamily: Fonts.black,
+    fontSize: Pixel(30),
+    color: Colors.dark,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    width: '100%',
+  },
+  subCategoryTitle: {
+    fontFamily: Fonts.regular,
+    fontSize: Pixel(25),
+    color: Colors.dark,
+    textAlign: 'center',
+    textTransform: 'capitalize',
+    width: '100%',
   },
 });
