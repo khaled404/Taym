@@ -456,7 +456,6 @@ const styles = StyleSheet.create({
     ...commonStyles.boxShadow,
     // overflow: 'hidden',
     top: -70,
-
   },
   searchInputContainer: {
     marginTop: Pixel(30),
