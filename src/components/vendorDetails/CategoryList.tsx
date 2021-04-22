@@ -4,11 +4,12 @@ import {StyleSheet, View} from "react-native";
 import CategoryStoreItem from "./CategoryStoreItem";
 import {Pixel} from "../../constants/styleConstants";
 
-interface ICategoryStoresList {
+interface ICategoryList {
   data: Array<{ id: string; title: string; image: string; }>;
+  selectedCategory:string;
 }
 
-const CategoryStoresList: FC<ICategoryStoresList> = ({data}) => {
+const CategoryList: FC<ICategoryList> = ({data}) => {
 
   const {t} = useTranslation();
   const categoryStoresMemo = useMemo(
@@ -32,4 +33,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CategoryStoresList;
+export default CategoryList;

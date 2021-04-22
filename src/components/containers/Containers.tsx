@@ -1,13 +1,6 @@
-import React, { FC } from 'react';
-import {
-  ScrollView,
-  ScrollViewProps,
-  StyleProp,
-  View,
-  ViewStyle,
-  Animated
-} from 'react-native';
-import { Colors } from '../../constants/styleConstants';
+import React, {FC, forwardRef} from 'react';
+import {Animated, ScrollView, ScrollViewProps, StyleProp, View, ViewStyle} from 'react-native';
+import {Colors} from '../../constants/styleConstants';
 
 interface containerProps {
   children?: JSX.Element[] | JSX.Element;
@@ -22,41 +15,42 @@ interface contentProps {
   children?: JSX.Element[] | JSX.Element;
   options?: ScrollViewProps;
   onScroll?: any
+  ref?: any
 }
 
-export const Container: FC<containerProps> = ({ children, style }) => {
+export const Container: FC<containerProps> = ({children, style}) => {
   return (
     <View
-      style={[{ flex: 1, backgroundColor: Colors.appBackgroundColor }, style]}>
+      style={[{flex: 1, backgroundColor: Colors.appBackgroundColor}, style]}>
       {children}
     </View>
   );
 };
-export const Content: FC<contentProps> = ({
-  children,
-  noPadding,
-  style,
-  contentContainerStyle,
-  paddingVertical,
-  options,
-  onScroll,
-}) => {
+export const Content: FC<contentProps> = forwardRef(({
+                                                       children,
+                                                       noPadding,
+                                                       style,
+                                                       contentContainerStyle,
+                                                       paddingVertical,
+                                                       options,
+                                                       onScroll,
+                                                     }, ref) => {
   const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
   return (
     <AnimatedScrollView
+      ref={ref}
       style={style}
       contentContainerStyle={[
-        paddingVertical && { paddingVertical: 30 },
+        paddingVertical && {paddingVertical: 30},
         contentContainerStyle,
       ]}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-      //scrollEventThrottle={16}
       onScroll={onScroll}
       {...options}>
-      <View style={{ paddingHorizontal: noPadding ? undefined : 20 }}>
+      <View style={{paddingHorizontal: noPadding ? undefined : 20}}>
         {children}
       </View>
     </AnimatedScrollView>
   );
-};
+})

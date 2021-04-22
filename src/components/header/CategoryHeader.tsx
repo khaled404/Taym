@@ -24,6 +24,8 @@ import {
 } from '../../../assets/Icons/Icons';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useTranslation} from 'react-i18next';
+import {useSelector} from "react-redux";
+import {RootState} from "../../store/store";
 
 interface ICategoryHeader {
   title: string;
@@ -31,10 +33,13 @@ interface ICategoryHeader {
   titleStyle?: StyleProp<TextStyle>;
   toggleHeader: Boolean;
   handleToggleHeader: () => void;
-  opacity?: Animated.Value;
-  translateY?: Animated.Value;
-  reverseOpacity?: Animated.Value;
-  translatex?: Animated.Value;
+  opacity: Animated.Value;
+  translateY: Animated.Value;
+  reverseOpacity: Animated.Value;
+  translateX: Animated.Value;
+  translateCategoryTitleContainer: Animated.Value;
+  translateCategoryTitle: Animated.Value;
+  translateXLeftContainer: Animated.Value;
 }
 
 const SearchSubmitBtn: FC = () => {
@@ -57,9 +62,13 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
                                                                  opacity,
                                                                  translateY,
                                                                  reverseOpacity,
-                                                                 translatex
+                                                                 translateX,
+                                                                 translateCategoryTitleContainer,
+                                                                 translateXLeftContainer,
+                                                                 translateCategoryTitle
                                                                }) => {
   const {t} = useTranslation();
+  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
@@ -67,8 +76,6 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
           <Animated.View style={[styles.titleConatiner, {
             opacity: opacity,
             visibility: 'hidden',
-
-
           }]}>
             <LogoIcon width={56} height={30}/>
           </Animated.View>
@@ -78,6 +85,7 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
         </View>
 
         <View style={styles.centerContainer}>
+
           <Animated.View style={{opacity: opacity,}}>
             <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
             <TouchableOpacity
@@ -91,47 +99,46 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
             </TouchableOpacity>
           </Animated.View>
 
-          <Animated.View style={[styles.titleConatiner,
-            {
-              marginLeft: 0,
-              opacity: reverseOpacity,
-              transform: [{translateY}]
-            }]}>
-            <Text
-              style={[styles.title, titleStyle]}
-              ellipsizeMode="tail"
-              numberOfLines={1}>
-              {title ? title : ''}
-            </Text>
+          <Animated.View style={{transform: [{translateY: translateCategoryTitleContainer}]}}>
+            <Animated.View style={[styles.titleConatiner]}>
+              <Text
+                style={[styles.title, titleStyle]}
+                ellipsizeMode="tail"
+                numberOfLines={1}>
+                {title ? title : ''}
+              </Text>
+            </Animated.View>
           </Animated.View>
-
         </View>
 
-        <View style={styles.leftContainer}>
+        <Animated.View style={[styles.leftContainer, {
+          transform: [{translateX: translateXLeftContainer}]
+        }]}>
 
-          <Animated.View style={[{opacity: reverseOpacity}, {
-            transform: [{translateX: translatex}]
-          }]}>
-
+          <Animated.View style={[{opacity: reverseOpacity}]}>
             <IconTouchableContainer onPress={handleToggleHeader}>
               <HeaderSearchIcon/>
             </IconTouchableContainer>
           </Animated.View>
 
-          <Animated.View style={[{opacity: opacity}, {
-            transform: [{translateY}]
-          }]}>
+          {/*<Animated.View style={[{opacity: opacity}, {*/}
+          {/*  transform: [{translateY}]*/}
+          {/*}]}>*/}
 
-            <IconTouchableContainer onPress={() => navigate('Cart')}>
-              <CartIcon/>
+          <IconTouchableContainer onPress={() => navigate('Cart')}>
+            <CartIcon/>
+          </IconTouchableContainer>
+          {/*</Animated.View>*/}
+
+          <Animated.View style={[{
+            opacity: opacity,
+            transform: [{translateX: translateXLeftContainer}]
+          }]}>
+            <IconTouchableContainer>
+              <NotificationIcon/>
             </IconTouchableContainer>
           </Animated.View>
-
-
-          <IconTouchableContainer>
-            <NotificationIcon/>
-          </IconTouchableContainer>
-        </View>
+        </Animated.View>
       </View>
 
 
@@ -171,7 +178,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     alignSelf: 'center',
     justifyContent: 'center',
-    marginBottom: Pixel(10),
+    // marginBottom: Pixel(10),
   },
   title: {
     color: Colors.colorSacand,
@@ -194,7 +201,8 @@ const styles = StyleSheet.create({
     // marginRight: 'auto',
     // flexDirection: 'row',
     // alignItems: 'center',
-    height: Pixel(70)
+    height: Pixel(70),
+    overflow: 'hidden'
   },
   addressTitle: {
     textAlign: 'center',
