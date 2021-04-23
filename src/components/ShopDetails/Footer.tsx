@@ -1,14 +1,24 @@
 import React, {FC, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View,Text} from 'react-native';
 import {Colors , Fonts,Pixel } from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-
+import {CartIcon} from '../../../assets/Icons/Icons'
+import Button from '../touchables/Button'
 
 const Footer: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <View style={styles.container} ></View>
+    <View style={styles.container} >
+      <CartIcon width={Pixel(60)} height={Pixel(60)} />
+      <View style={styles.mid} >
+      <Text style={styles.text1} >{t('30 LE To Reach Min Order')}</Text>
+      <Text style={styles.text2} >120 LE</Text>
+      </View>
+      <Button 
+      style={styles.button}
+      title={t('View Cart')} />
+    </View>
   );
 };
 
@@ -21,11 +31,30 @@ const styles = StyleSheet.create({
     height:84,
     flexDirection:'row',
     justifyContent:'space-between',
-    paddingHorizontal:Pixel(40),
+    paddingHorizontal:Pixel(50),
     position:'absolute',
-    
+    bottom:0,
+    alignItems:'center'
+
   },
-  contentContainer: {
-    paddingHorizontal: 20,
+  mid:{
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'flex-start'
+  },
+  text1:{
+    fontSize:8,
+    fontFamily:Fonts.bold,
+    color:Colors.warning
+  },
+  text2:{
+    fontSize:20,
+    fontFamily:Fonts.black,
+    color:Colors.dark
+  },
+  button:{
+    backgroundColor:Colors.white,
+    width:Pixel(300),
+    height:Pixel(85)
   },
 });
