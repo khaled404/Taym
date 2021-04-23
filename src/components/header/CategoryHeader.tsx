@@ -10,7 +10,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Colors, Fonts, Pixel, ScreenOptions,} from '../../constants/styleConstants';
+import {
+  Colors,
+  Fonts,
+  Pixel,
+  ScreenOptions,
+} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {NavigationProps} from '../../constants/interfaces';
 import {
@@ -24,8 +29,8 @@ import {
 } from '../../../assets/Icons/Icons';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useTranslation} from 'react-i18next';
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/store";
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
 
 interface ICategoryHeader {
   title: string;
@@ -45,47 +50,50 @@ interface ICategoryHeader {
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17}/>
+      <SearchIcon width={17} height={17} />
     </IconTouchableContainer>
   );
 };
 
 const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
-                                                                 navigate,
-                                                                 goBack,
-                                                                 name,
-                                                                 title,
-                                                                 containerStyle,
-                                                                 titleStyle,
-                                                                 toggleHeader,
-                                                                 handleToggleHeader,
-                                                                 opacity,
-                                                                 translateY,
-                                                                 reverseOpacity,
-                                                                 translateX,
-                                                                 translateCategoryTitleContainer,
-                                                                 translateXLeftContainer,
-                                                                 translateCategoryTitle
-                                                               }) => {
+  navigate,
+  goBack,
+  name,
+  title,
+  containerStyle,
+  titleStyle,
+  toggleHeader,
+  handleToggleHeader,
+  opacity,
+  translateY,
+  reverseOpacity,
+  translateX,
+  translateCategoryTitleContainer,
+  translateXLeftContainer,
+  translateCategoryTitle,
+}) => {
   const {t} = useTranslation();
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
         <View style={styles.right}>
-          <Animated.View style={[styles.titleConatiner, {
-            opacity: opacity,
-            visibility: 'hidden',
-          }]}>
-            <LogoIcon width={56} height={30}/>
+          <Animated.View
+            style={[
+              styles.titleConatiner,
+              {
+                opacity: opacity,
+                visibility: 'hidden',
+              },
+            ]}>
+            <LogoIcon width={56} height={30} />
           </Animated.View>
           <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
-            <MenuIcon/>
+            <MenuIcon />
           </IconTouchableContainer>
         </View>
 
         <View style={styles.centerContainer}>
-
-          <Animated.View style={{opacity: opacity,}}>
+          <Animated.View style={{opacity: opacity}}>
             <Text style={styles.addressTitle}>{t('Deliver To')}</Text>
             <TouchableOpacity
               style={{
@@ -94,11 +102,14 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
                 justifyContent: 'space-between',
               }}>
               <Text style={styles.addressText}>Alexandria - Miami</Text>
-              <ArrowHeaderIcon/>
+              <ArrowHeaderIcon />
             </TouchableOpacity>
           </Animated.View>
 
-          <Animated.View style={{transform: [{translateY: translateCategoryTitleContainer}]}}>
+          <Animated.View
+            style={{
+              transform: [{translateY: translateCategoryTitleContainer}],
+            }}>
             <Animated.View style={[styles.titleConatiner]}>
               <Text
                 style={[styles.title, titleStyle]}
@@ -110,13 +121,16 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
           </Animated.View>
         </View>
 
-        <Animated.View style={[styles.leftContainer, {
-          transform: [{translateX: translateXLeftContainer}]
-        }]}>
-
+        <Animated.View
+          style={[
+            styles.leftContainer,
+            {
+              transform: [{translateX: translateXLeftContainer}],
+            },
+          ]}>
           <Animated.View style={[{opacity: reverseOpacity}]}>
             <IconTouchableContainer onPress={handleToggleHeader}>
-              <HeaderSearchIcon/>
+              <HeaderSearchIcon />
             </IconTouchableContainer>
           </Animated.View>
 
@@ -125,26 +139,26 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
           {/*}]}>*/}
 
           <IconTouchableContainer onPress={() => navigate('Cart')}>
-            <CartIcon/>
+            <CartIcon />
           </IconTouchableContainer>
           {/*</Animated.View>*/}
 
-          <Animated.View style={[{
-            opacity: opacity,
-            transform: [{translateX: translateXLeftContainer}]
-          }]}>
-            <IconTouchableContainer>
-              <NotificationIcon/>
+          <Animated.View
+            style={[
+              {
+                opacity: opacity,
+                transform: [{translateX: translateXLeftContainer}],
+              },
+            ]}>
+            <IconTouchableContainer onPress={() => navigate('Notifications')}>
+              <NotificationIcon />
             </IconTouchableContainer>
           </Animated.View>
         </Animated.View>
       </View>
-
-
     </View>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -201,7 +215,7 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // alignItems: 'center',
     height: Pixel(70),
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   addressTitle: {
     textAlign: 'center',

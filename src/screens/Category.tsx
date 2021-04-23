@@ -1,24 +1,32 @@
 import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {Animated, FlatList, I18nManager, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {
+  Animated,
+  FlatList,
+  I18nManager,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import CategoryHeader from "../components/header/CategoryHeader";
-import FastImage from "react-native-fast-image";
-import {commonStyles} from "../styles/styles";
-import CategoryStoresList from "../components/Category/CategoryStoresList";
-import {useNavigation} from "@react-navigation/native";
+import CategoryHeader from '../components/header/CategoryHeader';
+import FastImage from 'react-native-fast-image';
+import {commonStyles} from '../styles/styles';
+import CategoryStoresList from '../components/Category/CategoryStoresList';
+import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
-import {SearchIcon,} from '../../assets/Icons/Icons';
+import {SearchIcon} from '../../assets/Icons/Icons';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {useSelector} from "react-redux";
-import {RootState} from "../store/store";
-
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/store';
 
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17}/>
+      <SearchIcon width={17} height={17} />
     </IconTouchableContainer>
   );
 };
@@ -38,11 +46,10 @@ const Category: FC = () => {
   const _scrollRef = useRef<ScrollView>();
 
   const Item = ({item, selectedCategory, handleSelectedCategory}) => (
-    <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>
-      <View
-        style={[
-          styles.imageContainer,
-        ]}>
+    <TouchableOpacity
+      onPress={() => handleSelectedCategory(item.title)}
+      style={[styles.headerCategoryListItem]}>
+      <View style={[styles.imageContainer]}>
         <FastImage
           source={Images.offerSlider}
           style={commonStyles.image}
@@ -50,9 +57,17 @@ const Category: FC = () => {
         />
       </View>
       <Text
-        style={[styles.categoryTitle, {
-          color: selectedCategory === item.title ? Colors.colorSacand : Colors.dark,
-        }]}>{item.title}</Text>
+        style={[
+          styles.categoryTitle,
+          {
+            color:
+              selectedCategory === item.title
+                ? Colors.colorSacand
+                : Colors.dark,
+          },
+        ]}>
+        {item.title}
+      </Text>
     </TouchableOpacity>
   );
 
@@ -101,75 +116,75 @@ const Category: FC = () => {
   ];
   const STORES_DATA = [
     {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: t('Refresh Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "3ac682afc-c605-48d3-a4f8-fbd91aa97f63",
+      id: '3ac682afc-c605-48d3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Beef')
+      category: t('Beef'),
     },
     {
-      id: "3ac682afc-c605-48dw3-a4f8-fbd91aa97f63",
+      id: '3ac682afc-c605-48dw3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Chicken')
+      category: t('Chicken'),
     },
     {
-      id: "3ac68afc-c60s5-48d3-a4f8-fbd91aa97f63",
+      id: '3ac68afc-c60s5-48d3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "3ac68afc-c605-48df3-a4f8-fbd91aa97f63",
+      id: '3ac68afc-c605-48df3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "3ac68afc-c60asd5-48d3-a4f8-fbd91aa97f63",
+      id: '3ac68afc-c60asd5-48d3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "3ac68dsaafc-c605-48d3-a4f8-fbd91aa97f63",
+      id: '3ac68dsaafc-c605-48d3-a4f8-fbd91aa97f63',
       title: t('Smile Market'),
       image: 'Text 1',
-      category: t('Supermarket')
+      category: t('Supermarket'),
     },
     {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: t('Restaurant Market'),
       image: 'Text 1',
-      category: t('Fruit')
+      category: t('Fruit'),
     },
     {
-      id: "58694a0f-3da1-471f-bsd96-145571e29d72",
+      id: '58694a0f-3da1-471f-bsd96-145571e29d72',
       title: t('Refresh Market'),
       image: 'Text 1',
-      category: t('Fish')
+      category: t('Fish'),
     },
     {
-      id: "58694a0f-3da1-471f-bsdad96-145571e29d72",
+      id: '58694a0f-3da1-471f-bsdad96-145571e29d72',
       title: t('Restaurant Market'),
       image: 'Text 1',
-      category: t('Vegetables')
+      category: t('Vegetables'),
     },
   ];
 
   const toggleActive = useCallback(() => {
-    setActive((e) => !e);
+    setActive(e => !e);
     // onValueChange && onValueChange(active);
     Animated.timing(slideInOut, {
       toValue: active ? 0 : 1,
@@ -189,14 +204,14 @@ const Category: FC = () => {
   };
 
   const opacity = slideInOut.interpolate({
-    inputRange: [0, .5, 1],
-    outputRange: [1, .5, 0],
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0.5, 0],
     extrapolate: 'clamp',
   });
 
   const reverseOpacity = slideInOut.interpolate({
     inputRange: [0, Pixel(40), Pixel(80)],
-    outputRange: [0, .7, 1],
+    outputRange: [0, 0.7, 1],
     extrapolate: 'clamp',
   });
 
@@ -269,14 +284,14 @@ const Category: FC = () => {
 
   const handleToggleHeader = () => {
     setToggleHeader(!toggleHeader);
-    _scrollRef.current.scrollTo({y: 0, animated: true})
-  }
+    _scrollRef.current.scrollTo({y: 0, animated: true});
+  };
 
   const handleSelectedCategory = (category: string) => {
     setSelectedCategory(category);
     let data = STORES_DATA.filter(store => store.category === category);
     setFilteredData(data);
-  }
+  };
 
   useEffect(() => {
     setSelectedCategory(t('Supermarket'));
@@ -297,60 +312,77 @@ const Category: FC = () => {
         translateX={translatex}
         translateCategoryTitleContainer={translateCategoryTitleContainer}
         translateCategoryTitle={translateCategoryTitle}
-        translateXLeftContainer={isRTL ? translateXLeftContainer : translateXLeftContainerReverse}
+        translateXLeftContainer={
+          isRTL ? translateXLeftContainer : translateXLeftContainerReverse
+        }
         reverseOpacity={reverseOpacity}
         opacity={opacity}
         toggleHeader={toggleHeader}
-        title={selectedCategory}/>
-      <Animated.View style={[styles.headerCategoryList, {transform: [{translateY: translate1}]}]}>
-        <Animated.View style={[styles.searchInputContainer, {transform: [{translateY: translate2}]}]}>
+        title={selectedCategory}
+      />
+      <Animated.View
+        style={[
+          styles.headerCategoryList,
+          {transform: [{translateY: translate1}]},
+        ]}>
+        <Animated.View
+          style={[
+            styles.searchInputContainer,
+            {transform: [{translateY: translate2}]},
+          ]}>
           <Input
             options={{
               placeholder: t('What You Are Looking For ?'),
               placeholderTextColor: '#949494',
             }}
-            contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
+            contentContainerStyle={{
+              borderRadius: 22,
+              borderWidth: 0,
+              padding: Pixel(33),
+            }}
             textInputContainer={{
-              alignSelf:'flex-start'
+              alignSelf: 'flex-start',
               // paddingVertical: Pixel(33),
             }}
-            rightContent={() => <SearchSubmitBtn/>}
+            rightContent={() => <SearchSubmitBtn />}
             iconRightStyle={{top: 4.5}}
           />
         </Animated.View>
         <FlatList
           data={DATA}
           style={{paddingBottom: 10}}
-          renderItem={({item, index}) => <Item
-            selectedCategory={selectedCategory}
-            handleSelectedCategory={(title) => handleSelectedCategory(title)} item={item}/>}
-          keyExtractor={(item) => item.id}
+          renderItem={({item, index}) => (
+            <Item
+              selectedCategory={selectedCategory}
+              handleSelectedCategory={title => handleSelectedCategory(title)}
+              item={item}
+            />
+          )}
+          keyExtractor={item => item.id}
           horizontal
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         />
-        <Content noPadding
-                 contentContainerStyle={styles.contentContainer}
-                 ref={_scrollRef}
+        <Content
+          noPadding
+          contentContainerStyle={styles.contentContainer}
+          ref={_scrollRef}
           // onScroll={Animated.event(
           //   [{nativeEvent: {contentOffset: {y: slideInOut}}}],
           //   {useNativeDriver: true}
           // )}
-                 onScroll={Animated.event(
-                   [{nativeEvent: {contentOffset: {y: slideInOut}}}],
-                   {
-                     // listener: (event) => handleOnScroll(event),
-                     useNativeDriver: true
-                   }
-                 )}
-                 options={{scrollEventThrottle: 16}}
-        >
-          <Text
-            style={[styles.sectionTitle]}>{selectedCategory}</Text>
-          <CategoryStoresList data={filteredData}/>
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: slideInOut}}}],
+            {
+              // listener: (event) => handleOnScroll(event),
+              useNativeDriver: true,
+            },
+          )}
+          options={{scrollEventThrottle: 16}}>
+          <Text style={[styles.sectionTitle]}>{selectedCategory}</Text>
+          <CategoryStoresList data={filteredData} />
         </Content>
       </Animated.View>
-
     </Container>
   );
 };
@@ -376,7 +408,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 20,
     marginBottom: Pixel(20),
     marginRight: Pixel(20),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   imageContainer: {
     borderRadius: 8,
@@ -400,7 +432,7 @@ const styles = StyleSheet.create({
     fontSize: Pixel(47),
     color: Colors.colorSacand,
     marginTop: 5,
-    alignSelf:'flex-start'
+    alignSelf: 'flex-start',
   },
   searchInputContainer: {
     marginTop: 0,
