@@ -29,7 +29,6 @@ import Footer from '../components/ShopDetails/Footer';
 import FavoriteItem from '../components/Home/FavoriteItem';
 
 const {isRTL} = I18nManager;
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 const heightHeader = Dimensions.get('window').height / 4;

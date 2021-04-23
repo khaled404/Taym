@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,18 +14,18 @@ import {
   Pixel,
   ScreenOptions,
 } from '../../constants/styleConstants';
-import { commonStyles } from '../../styles/styles';
-import { ArrowLeftSmIcon } from '../../../assets/Icons/Icons';
+import {commonStyles} from '../../styles/styles';
+import {ArrowLeftSmIcon} from '../../../assets/Icons/Icons';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 interface IHeader {
   title?: string;
   containerStyle?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
 }
-const Header: FC<IHeader> = ({ title, containerStyle, titleStyle }) => {
-  const { goBack } = useNavigation();
+const Header: FC<IHeader> = ({title, containerStyle, titleStyle}) => {
+  const {goBack} = useNavigation();
   return (
     <View style={[styles.conatiner, containerStyle]}>
       <View style={styles.right}>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     height:
       Platform.OS === 'android'
         ? 56 + ScreenOptions.StatusBarHeight
-        : 64 + ScreenOptions.StatusBarHeight,
+        : 56 + ScreenOptions.StatusBarHeight,
     paddingHorizontal: 15,
     justifyContent: 'center',
     ...commonStyles.rowBox,
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   },
   left: {
     alignItems: 'flex-start',
-
   },
   center: {
     alignItems: 'center',
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%'
+    height: '100%',
   },
   titleConatiner: {
     ...commonStyles.rowBox,
