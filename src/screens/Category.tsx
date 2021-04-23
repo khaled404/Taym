@@ -1,5 +1,5 @@
 import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {Animated, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {Animated, FlatList, I18nManager, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
@@ -23,13 +23,12 @@ const SearchSubmitBtn: FC = () => {
   );
 };
 
-
+const {isRTL} = I18nManager;
 const Category: FC = () => {
   const {t} = useTranslation();
 
   const {navigate} = useNavigation();
   // const [contentOffsetY, setContentOffsetY] = useState(0);
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const [toggleHeader, setToggleHeader] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [filteredData, setFilteredData] = useState([]);
@@ -37,8 +36,6 @@ const Category: FC = () => {
   const [active, setActive] = useState(true);
   const [scrollValue, setScrollValue] = useState(0);
   const _scrollRef = useRef<ScrollView>();
-  const inputTextAlign = language === 'ar' ? 'right' : 'left';
-  const textAlign = language === 'ar' ? 'left' : 'right';
 
   const Item = ({item, selectedCategory, handleSelectedCategory}) => (
     <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>
@@ -210,8 +207,8 @@ const Category: FC = () => {
   });
 
   const translateCategoryTitleContainer = slideInOut.interpolate({
-    inputRange: [-120, -60, 120],
-    outputRange: [-100, -60, -20],
+    inputRange: [-70, -20, 120],
+    outputRange: [-120, -60, -20],
     // inputRange: [Pixel(-100), Pixel(-60), 0],
     // outputRange: [-50, 20, 50],
     extrapolate: 'clamp',
@@ -242,6 +239,11 @@ const Category: FC = () => {
   const translateXLeftContainer = slideInOut.interpolate({
     inputRange: [0, Pixel(40), Pixel(80)],
     outputRange: [0, -20, -30],
+    extrapolate: 'clamp',
+  });
+  const translateXLeftContainerReverse = slideInOut.interpolate({
+    inputRange: [Pixel(80), Pixel(90), Pixel(180)],
+    outputRange: [0, 20, 30],
     extrapolate: 'clamp',
   });
   // const handleOnScroll = (event: Object) => {
@@ -295,7 +297,7 @@ const Category: FC = () => {
         translateX={translatex}
         translateCategoryTitleContainer={translateCategoryTitleContainer}
         translateCategoryTitle={translateCategoryTitle}
-        translateXLeftContainer={translateXLeftContainer}
+        translateXLeftContainer={isRTL ? translateXLeftContainer : translateXLeftContainerReverse}
         reverseOpacity={reverseOpacity}
         opacity={opacity}
         toggleHeader={toggleHeader}
@@ -309,7 +311,7 @@ const Category: FC = () => {
             }}
             contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
             textInputContainer={{
-              textAlign: inputTextAlign,
+              alignSelf:'flex-start'
               // paddingVertical: Pixel(33),
             }}
             rightContent={() => <SearchSubmitBtn/>}
@@ -344,7 +346,7 @@ const Category: FC = () => {
                  options={{scrollEventThrottle: 16}}
         >
           <Text
-            style={[styles.sectionTitle, {textAlign: language === 'ar' ? 'left' : 'right'}]}>{selectedCategory}</Text>
+            style={[styles.sectionTitle]}>{selectedCategory}</Text>
           <CategoryStoresList data={filteredData}/>
         </Content>
       </Animated.View>
@@ -397,7 +399,8 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.black,
     fontSize: Pixel(47),
     color: Colors.colorSacand,
-    marginTop: 5
+    marginTop: 5,
+    alignSelf:'flex-start'
   },
   searchInputContainer: {
     marginTop: 0,

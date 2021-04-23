@@ -34,7 +34,7 @@ const NotificationItem: FC<INotificationItem> = ({
           slideOpen && {
             backgroundColor: '#fff',
             ...commonStyles.boxShadow,
-            marginBottom: 2,
+            // marginBottom: 2,
           },
         ]}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
