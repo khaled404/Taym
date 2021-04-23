@@ -20,6 +20,7 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
 import Footer from '../components/ShopDetails/Footer';
+import FavoriteItem from '../components/Home/FavoriteItem';
 
 const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -306,19 +307,34 @@ const ShopDetails: FC = () => {
                 dark
                 onPress={goBack}
                 style={styles.headerBackBtn}>
+
                 <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate}/>
+
+                <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
+
               </IconTouchableContainer>
               <IconTouchableContainer
                 onPress={() => {
                   navigate('Cart');
                 }}>
+
                 <CartIcon/>
+
+                <CartIcon />
+
               </IconTouchableContainer>
             </View>
           </View>
         </ImageBackground>
         <Animated.View
+
           style={[styles.content, {transform: [{translateY: translateContent}]}]}>
+
+          style={[
+            styles.content,
+            {transform: [{translateY: translateContent}]},
+          ]}>
+
           <Animated.View
             style={[
               {
@@ -376,10 +392,17 @@ const ShopDetails: FC = () => {
                     },
                   ]}>
                   <IconTouchableContainer style={styles.submitSearchBtn}>
+
                     <SearchIcon width={17} height={17}/>
                   </IconTouchableContainer>
                   <IconTouchableContainer style={styles.submitSearchBtn}>
                     <FavoriteIcon width={20} height={20}/>
+
+                    <SearchIcon width={17} height={17} />
+                  </IconTouchableContainer>
+                  <IconTouchableContainer style={styles.submitSearchBtn}>
+                    <FavoriteIcon width={20} height={20} />
+
                   </IconTouchableContainer>
                 </Animated.View>
 
@@ -391,7 +414,11 @@ const ShopDetails: FC = () => {
                       opacity: opacity,
                     },
                   ]}>
+
                   <DeliveryIcon/>
+
+                  <DeliveryIcon />
+
                   <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
                 </Animated.View>
               </View>
@@ -424,10 +451,17 @@ const ShopDetails: FC = () => {
                   padding: Pixel(33),
                 }}
                 textInputContainer={{
+
                   alignSelf: 'flex-start'
                   // paddingVertical: Pixel(33),
                 }}
                 rightContent={() => <SearchSubmitBtn/>}
+
+                  alignSelf: 'flex-start',
+                  // paddingVertical: Pixel(33),
+                }}
+                rightContent={() => <SearchSubmitBtn />}
+
                 iconRightStyle={{top: 4.5}}
               />
             </Animated.View>
@@ -490,9 +524,15 @@ const ShopDetails: FC = () => {
                 }}
                 renderItem={({item, index}) => (
                   <SubCategoryItem
+
                     selectedSubCategory={selectedSubCategory}
                     handleSelectedSubCategory={(title: any) =>
                       handleSelectedSubCategory(title)
+
+                    selectedCategory={selectedCategory}
+                    handleSelectedCategory={(title: any) =>
+                      handleSelectedCategory(title)
+
                     }
                     item={item}
                   />
@@ -529,7 +569,11 @@ const ShopDetails: FC = () => {
           }}
           renderItem={({item, index}) => ( */}
             {categoryHomeData.map((item, index) => (
+
               <ProductListItem {...item} key={index} index={index}/>
+
+              <FavoriteItem {...item} key={index} index={index} />
+
             ))}
             {/* )}
         /> */}
@@ -537,7 +581,11 @@ const ShopDetails: FC = () => {
           </AnimatedScrollView>
         </Animated.View>
       </View>
+
       <Footer/>
+
+      <Footer />
+
     </>
   );
 };
@@ -576,7 +624,7 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 150,
-    marginBottom: -100,
+    marginBottom: -60,
     flex: 1,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
