@@ -14,7 +14,10 @@ import {Container, Content} from '../components/containers/Containers';
 import Input from '../components/textInputs/Input';
 import {Colors, Images, Pixel, Fonts} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import {
+ import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
+import {useNavigation} from '@react-navigation/native';
+import {commonStyles} from '../styles/styles';
+ import {
   UnCheckedIcon,
   CartIcon,
   ArrowLeftSmIcon,
@@ -28,7 +31,8 @@ const heightHeader = Dimensions.get('window').height / 4;
 
 const ProductPage: FC = () => {
   const {t} = useTranslation();
-
+   const {goBack, navigate} = useNavigation();
+ 
   return (
     <Container style={styles.container}>
       <ImageBackground
@@ -39,15 +43,19 @@ const ProductPage: FC = () => {
           <View
             style={{
               height: heightHeader / 2,
-              paddingHorizontal: Pixel(50),
-              flexDirection: 'row',
+               paddingHorizontal: Pixel(30),
+               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
               position: 'relative',
             }}>
-            <ArrowLeftSmIcon />
+            <IconTouchableContainer dark onPress={goBack}>
+              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
+            </IconTouchableContainer>
+            <IconTouchableContainer onPress={() => navigate('Cart')}>
+              <CartIcon />
+            </IconTouchableContainer>
 
-            <CartIcon />
           </View>
         </View>
       </ImageBackground>
@@ -57,7 +65,7 @@ const ProductPage: FC = () => {
         <Content noPadding style={styles.headerContent}>
           <View>
             <View style={styles.contentHead1}>
-              <Text style={[styles.headText]}>American Strawberry</Text>
+              <Text style={[styles.headText]}>{t('American Strawberry')}</Text>
               <FavoriteIcon width={Pixel(50)} height={Pixel(50)} />
             </View>
             <View style={styles.contentHead2}>
@@ -76,18 +84,17 @@ const ProductPage: FC = () => {
                   fontFamily: Fonts.regular,
                   color: Colors.dark,
                 }}>
-                Fresh Market
+                {t('Fresh Market')}
               </Text>
             </View>
           </View>
-
           <View
             style={{
               borderBottomColor: Colors.CommonBorderColor,
               borderBottomWidth: 1,
               paddingVertical: Pixel(40),
             }}>
-            <Text style={styles.desc}>
+            <Text>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy reod tempor invidunt ut labore et dolore ma aliquyam , sed
               diam voluptua. At eos et accusam et justodolores et ea rebum. Stet
@@ -97,7 +104,7 @@ const ProductPage: FC = () => {
           </View>
 
           <View style={styles.sizeContainer}>
-            <Text style={styles.sizeText}>Sizes</Text>
+            <Text style={styles.sizeText}>{t('Sizes')}</Text>
             <View style={styles.optionsContainer}>
               <View style={styles.option}>
                 <Text style={styles.optionText}>1 kg</Text>
@@ -111,9 +118,8 @@ const ProductPage: FC = () => {
             </View>
           </View>
 
-          {/**************notes***************** */}
           <View style={styles.sizeContainer}>
-            <Text style={styles.sizeText}>Add Notes</Text>
+            <Text style={styles.sizeText}>{t('Add Notes')}</Text>
             <View
               style={{
                 width: '100%',
@@ -167,11 +173,10 @@ const ProductPage: FC = () => {
                 width: Pixel(350),
               }}
               styleTitle={{
-                fontFamily: Fonts.black,
-                fontSize: Pixel(40),
+                fontFamily: Fonts.bold,
+                fontSize: Pixel(35),
               }}
-              onPress={() => {}}
-              title={'Add To Cart'}
+              title={t('Add To Cart')}
             />
           </View>
         </Content>
@@ -272,7 +277,7 @@ const styles = StyleSheet.create({
   optionText: {
     fontFamily: Fonts.regular,
     fontSize: Pixel(30),
-    paddingRight: Pixel(20),
+    paddingHorizontal: Pixel(20),
   },
   contentContainerStyle: {
     borderRadius: 14,
