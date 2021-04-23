@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC , useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { commonStyles } from '../../styles/styles';
 import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { AddCartIcon, FavoriteIcon } from '../../../assets/Icons/Icons';
+import { AddCartIcon, FavoriteIcon,  MinusIcon,PlusIcon, } from '../../../assets/Icons/Icons';
 import { useTranslation } from 'react-i18next';
 
 interface IFavoriteItem {
@@ -13,12 +13,57 @@ interface IFavoriteItem {
 
 const FavoriteItem: FC<IFavoriteItem> = ({ title, image, index }) => {
   const { t } = useTranslation();
+  const [quantity , setQuantity] = useState(0)
+  const [showQuantity , setShowQuantity] = useState(false)
   return (
     <TouchableOpacity style={styles.itemContainer}>
       <TouchableOpacity style={styles.favoriteBtn}>
         <FavoriteIcon />
       </TouchableOpacity>
       <View style={styles.productImageContainer}>
+        {showQuantity&&<View style={{
+          position:'absolute',
+          top:0,
+          height:Pixel(230),
+          width:'100%',
+          backgroundColor:'rgba(0,0,0,0.3)',
+          zIndex:100,
+          borderRadius: 15,
+          alignItems:'center',
+          justifyContent:'center',
+          flexDirection:'row'
+        }} >
+          <TouchableOpacity
+                onPress={() => setQuantity(quantity-1)}
+                style={[
+                  styles.cartItemActionBtn,
+                  {
+                    marginRight:20,
+                    backgroundColor: Colors.warning,
+                  },
+                ]}>
+                <MinusIcon width={Pixel(25)} height={Pixel(25)} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setQuantity(quantity+1)}
+                style={[
+                  styles.cartItemActionBtn,
+                  {
+                    backgroundColor: Colors.success,
+                  },
+                ]}>
+                  {
+                    quantity<=0?
+                    <PlusIcon width={Pixel(25)} height={Pixel(25)} />
+                    :
+                    <Text style={{
+                      color:Colors.white,
+                      fontSize:Pixel(40),
+                      fontFamily:Fonts.medium
+                    }} >{quantity}</Text>
+                  }
+              </TouchableOpacity>
+        </View>}
         <Image
           resizeMode={'contain'}
           source={require('../../../assets/images/product-1.png')}
@@ -29,7 +74,9 @@ const FavoriteItem: FC<IFavoriteItem> = ({ title, image, index }) => {
           <Text style={styles.productTitle}>{t('Green Apple')}</Text>
           <Text style={styles.productPrice}>12 LE</Text>
         </View>
-        <TouchableOpacity style={styles.productActions}>
+        <TouchableOpacity 
+        onPress={() => setShowQuantity(!showQuantity) }
+        style={styles.productActions}>
           <AddCartIcon />
         </TouchableOpacity>
       </View>
@@ -106,8 +153,22 @@ const styles = StyleSheet.create({
     right: Pixel(15),
     top: Pixel(15),
     backgroundColor: '#C9C9C9',
-    zIndex: 200,
+    zIndex: 1,
     elevation: 3,
+  },
+  cartItemActionBtn: {
+    width:31,
+    height:32,
+    backgroundColor: '#989898',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: Pixel(10),
+    marginLeft: Pixel(15),
+    marginTop:10
+  },
+  cartItemActionBtnText: {
+    fontSize: Pixel(25),
+    color: Colors.sacandAppBackgroundColor,
   },
 });
 

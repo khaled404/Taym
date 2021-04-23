@@ -27,6 +27,7 @@ import {useNavigation} from '@react-navigation/native';
 import ProductsList from '../components/products/ProductsList';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
+import Footer from '../components/ShopDetails/Footer'
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);

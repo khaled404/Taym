@@ -27,7 +27,7 @@
     "editor.cursorSmoothCaretAnimation": true,
     "editor.cursorStyle": "line",
     "editor.fontSize": 15,
-    "editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
+    //"editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
     "editor.fontLigatures": true,
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,
@@ -49,5 +49,4 @@
     },
     "gitlens.defaultDateFormat": null,
     "gitlens.defaultDateShortFormat": null,
-  
-  }
+}
