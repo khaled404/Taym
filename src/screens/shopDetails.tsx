@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/store';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
 import {
   ArrowLeftSmIcon,
@@ -166,17 +164,17 @@ const ShopDetails: FC = () => {
       title: t('Vegetables'),
       image: 'Voucher 12457',
     },
-
-    {
-      id: 7,
-      title: t('Vegetables'),
-      image: 'Voucher 12457',
-    },
   ];
   const {goBack, navigate} = useNavigation();
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [selectedCategory, setSelectedCategory] = useState('');
-
+  const [selectedSubCategory, setSelectedSubCategory] = useState('');
+  const handleSelectedCategory = (category: string) => {
+    setSelectedCategory(category);
+  };
+  const handleSelectedSubCategory = (subCategory: string) => {
+    setSelectedSubCategory(subCategory);
+  };
   const Item = ({item, selectedCategory, handleSelectedCategory}) => (
     <TouchableOpacity
       onPress={() => handleSelectedCategory(item.title)}
@@ -203,16 +201,17 @@ const ShopDetails: FC = () => {
       </Text>
     </TouchableOpacity>
   );
+
   const SubCategoryItem = ({
     item,
-    selectedCategory,
-    handleSelectedCategory,
+    selectedSubCategory,
+    handleSelectedSubCategory,
   }) => (
     <TouchableOpacity
-      onPress={() => handleSelectedCategory(item.title)}
+      onPress={() => handleSelectedSubCategory(item.title)}
       style={[
         styles.headerCategoryListItem,
-        selectedCategory === item.title && {
+        selectedSubCategory === item.title && {
           borderBottomWidth: 1,
           borderColor: Colors.colorSacand,
         },
@@ -222,7 +221,7 @@ const ShopDetails: FC = () => {
           styles.subCategoryTitle,
           {
             color:
-              selectedCategory === item.title
+              selectedSubCategory === item.title
                 ? Colors.colorSacand
                 : Colors.dark,
           },
@@ -295,9 +294,7 @@ const ShopDetails: FC = () => {
       </IconTouchableContainer>
     );
   };
-  const handleSelectedCategory = (category: string) => {
-    setSelectedCategory(category);
-  };
+
   return (
     <>
       <View style={styles.container}>
@@ -503,10 +500,10 @@ const ShopDetails: FC = () => {
                 }}
                 renderItem={({item, index}) => (
                   <SubCategoryItem
-                    selectedCategory={selectedCategory}
-                    handleSelectedCategory={(title: any) =>
-                      handleSelectedCategory(title)
-                    }
+                     selectedSubCategory={selectedSubCategory}
+                    handleSelectedSubCategory={(title: any) =>
+                      handleSelectedSubCategory(title)
+                     }
                     item={item}
                   />
                 )}
@@ -542,8 +539,8 @@ const ShopDetails: FC = () => {
           }}
           renderItem={({item, index}) => ( */}
             {categoryHomeData.map((item, index) => (
-              <FavoriteItem {...item} key={index} index={index} />
-            ))}
+               <ProductListItem {...item} key={index} index={index} />
+             ))}
             {/* )}
         /> */}
             {/* <ProductsList data={} /> */}

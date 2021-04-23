@@ -83,11 +83,10 @@ const Offers: FC = () => {
   const [displayShop, setDisplayShop] = useState('flex');
   const [displayOffer, setDisplayOffer] = useState('none');
   const dispatch = useDispatch();
-  const {isRTL}: any = useSelector((state: RootState) => state.settings);
   const {navigate} = useNavigation();
   return (
     <Container style={styles.container}>
-      <Header title="Offers" />
+      <Header title={t('Offers')} />
       <View
         style={{
           width: '100%',

@@ -30,6 +30,8 @@ export default {
   'Order Number': 'رقم الطلب',
   'Product Name': 'اسم المنتج',
   '1 KG': '1 كيلو',
+  'Shops': 'المحلات',
+  'Products': 'المنتجات',
   password: 'كلمة المرور',
   Password: 'كلمة المرور',
   Phone: 'رقم الهاتف',
