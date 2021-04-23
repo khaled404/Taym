@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, {FC, useState, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,12 @@ import {
   Image,
   FlatList,
   Animated,
-  Dimensions
+  Dimensions,
 } from 'react-native';
-import { Container, Content } from '../components/containers/Containers';
-import Input from '../components/textInputs/Input'
-import { Colors, Images, Pixel, Fonts } from '../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
+import {Container, Content} from '../components/containers/Containers';
+import Input from '../components/textInputs/Input';
+import {Colors, Images, Pixel, Fonts} from '../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
 import {
   UnCheckedIcon,
   CartIcon,
@@ -24,98 +24,102 @@ import {
 } from '../../assets/Icons/Icons';
 import Button from '../components/touchables/Button';
 
-
-const heightHeader = (Dimensions.get('window').height) / 4
+const heightHeader = Dimensions.get('window').height / 4;
 
 const ProductPage: FC = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   return (
     <Container style={styles.container}>
       <ImageBackground
         source={Images.product}
         style={styles.header}
-        imageStyle={{}}
-      >
+        imageStyle={{}}>
         <View style={styles.overlay}>
-          <View style={{
-            height: heightHeader / 2,
-            paddingHorizontal: Pixel(50),
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            position: 'relative',
-          }} >
-
-
+          <View
+            style={{
+              height: heightHeader / 2,
+              paddingHorizontal: Pixel(50),
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              position: 'relative',
+            }}>
             <ArrowLeftSmIcon />
 
             <CartIcon />
-
           </View>
-
         </View>
       </ImageBackground>
 
       <View style={styles.content}>
         {/********headerConent********** */}
-        <Content noPadding style={styles.headerContent}  >
-
-          <View  >
-            <View style={styles.contentHead1} >
-              <Text style={[styles.headText]} >American Strawberry</Text>
+        <Content noPadding style={styles.headerContent}>
+          <View>
+            <View style={styles.contentHead1}>
+              <Text style={[styles.headText]}>American Strawberry</Text>
               <FavoriteIcon width={Pixel(50)} height={Pixel(50)} />
             </View>
-            <View style={styles.contentHead2} >
-              <Text style={[styles.headText, {
-                color: Colors.colorSacand
-              }]} >14 LE</Text>
-              <Text style={{
-                fontSize: Pixel(20),
-                fontFamily: Fonts.regular,
-                color: Colors.dark
-              }} >Fresh Market</Text>
+            <View style={styles.contentHead2}>
+              <Text
+                style={[
+                  styles.headText,
+                  {
+                    color: Colors.colorSacand,
+                  },
+                ]}>
+                14 LE
+              </Text>
+              <Text
+                style={{
+                  fontSize: Pixel(20),
+                  fontFamily: Fonts.regular,
+                  color: Colors.dark,
+                }}>
+                Fresh Market
+              </Text>
             </View>
           </View>
 
-          {/*********desc********* */}
-          <View style={{
-            borderBottomColor: Colors.CommonBorderColor,
-            borderBottomWidth: 1,
-            paddingVertical: Pixel(40)
-          }} >
-            <Text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy reod tempor invidunt ut labore et dolore ma aliquyam ,
-            sed diam voluptua. At eos et accusam et justodolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanct est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet.</Text>
+          <View
+            style={{
+              borderBottomColor: Colors.CommonBorderColor,
+              borderBottomWidth: 1,
+              paddingVertical: Pixel(40),
+            }}>
+            <Text style={styles.desc}>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy reod tempor invidunt ut labore et dolore ma aliquyam , sed
+              diam voluptua. At eos et accusam et justodolores et ea rebum. Stet
+              clita kasd gubergren, no sea takimata sanct est Lorem ipsum dolor
+              sit amet. Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet.
+            </Text>
           </View>
 
-          {/***********size************** */}
-          <View style={styles.sizeContainer} >
-            <Text style={styles.sizeText} >Sizes</Text>
-            <View style={styles.optionsContainer} >
-              <View style={styles.option} >
-                <Text style={styles.optionText} >1 kg</Text>
+          <View style={styles.sizeContainer}>
+            <Text style={styles.sizeText}>Sizes</Text>
+            <View style={styles.optionsContainer}>
+              <View style={styles.option}>
+                <Text style={styles.optionText}>1 kg</Text>
                 <UnCheckedIcon height={Pixel(30)} width={Pixel(30)} />
               </View>
 
-              <View style={styles.option} >
-                <Text style={styles.optionText} >3 kg</Text>
+              <View style={styles.option}>
+                <Text style={styles.optionText}>3 kg</Text>
                 <UnCheckedIcon height={Pixel(30)} width={Pixel(30)} />
               </View>
             </View>
           </View>
-
 
           {/**************notes***************** */}
-          <View style={styles.sizeContainer} >
-            <Text style={styles.sizeText} >Add Notes</Text>
-            <View style={{
-              width: '100%',
-              height: Pixel(250),
-              marginTop: Pixel(30)
-            }} >
+          <View style={styles.sizeContainer}>
+            <Text style={styles.sizeText}>Add Notes</Text>
+            <View
+              style={{
+                width: '100%',
+                height: Pixel(250),
+                marginTop: Pixel(30),
+              }}>
               <Input
                 contentContainerStyle={styles.contentContainerStyle}
                 textInputContainer={styles.textInput}
@@ -127,8 +131,7 @@ const ProductPage: FC = () => {
             </View>
           </View>
 
-          {/******************* */}
-          <View style={styles.footer} >
+          <View style={styles.footer}>
             <View style={styles.cartItemActions}>
               <TouchableOpacity
                 style={[
@@ -151,28 +154,25 @@ const ProductPage: FC = () => {
               </TouchableOpacity>
             </View>
 
-
-            <Text style={{
-              fontFamily: Fonts.black,
-              fontSize: Pixel(30)
-            }} >28 LE</Text>
-
-
-
-
+            <Text
+              style={{
+                fontFamily: Fonts.black,
+                fontSize: Pixel(30),
+              }}>
+              28 LE
+            </Text>
 
             <Button
               style={{
-                width: Pixel(350)
+                width: Pixel(350),
               }}
               styleTitle={{
                 fontFamily: Fonts.black,
-                fontSize: Pixel(40)
+                fontSize: Pixel(40),
               }}
-              title={'Add To Cart'} />
-
-
-
+              onPress={() => {}}
+              title={'Add To Cart'}
+            />
           </View>
         </Content>
       </View>
@@ -190,14 +190,14 @@ const styles = StyleSheet.create({
     height: heightHeader,
     zIndex: 1,
     position: 'relative',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   overlay: {
     width: '100%',
     height: '100%',
 
     zIndex: 1,
-    position: 'relative'
+    position: 'relative',
   },
   content: {
     flex: 4,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginTop: -50,
     paddingHorizontal: Pixel(40),
-    alignItems: 'center'
+    alignItems: 'center',
   },
   imageContainer: {
     width: 110,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: Pixel(50),
     borderBottomWidth: 1,
-    borderBottomColor: Colors.CommonBorderColor
+    borderBottomColor: Colors.CommonBorderColor,
   },
   contentHead1: {
     flexDirection: 'row',
@@ -239,22 +239,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    paddingVertical: Pixel(20)
+    paddingVertical: Pixel(20),
   },
   headText: {
     fontSize: Pixel(40),
-    fontFamily: Fonts.black
+    fontFamily: Fonts.black,
   },
   sizeContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'center',
     width: '100%',
-    paddingTop: Pixel(20)
+    paddingTop: Pixel(20),
   },
   sizeText: {
     fontSize: Pixel(40),
-    fontFamily: Fonts.bold
+    fontFamily: Fonts.bold,
   },
   optionsContainer: {
     flexDirection: 'row',
@@ -272,14 +272,14 @@ const styles = StyleSheet.create({
   optionText: {
     fontFamily: Fonts.regular,
     fontSize: Pixel(30),
-    paddingRight: Pixel(20)
+    paddingRight: Pixel(20),
   },
   contentContainerStyle: {
     borderRadius: 14,
     borderWidth: 0,
     padding: 0,
     paddingHorizontal: 15,
-    height: '100%'
+    height: '100%',
   },
   textInput: {
     height: Pixel(100),
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: '100%'
+    height: '100%',
   },
   cartItemOffer: {
     color: '#fff',
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     color: Colors.dark,
     fontFamily: Fonts.bold,
     paddingHorizontal: Pixel(20),
-    fontSize: Pixel(30)
+    fontSize: Pixel(30),
   },
   buttonContent: {
     alignItems: 'center',
@@ -337,5 +337,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: Pixel(200),
+  },
+  desc: {
+    fontFamily: Fonts.regular,
+    fontSize: Pixel(23),
+    color: '#070707',
   },
 });
