@@ -292,6 +292,7 @@ const ShopDetails: FC = () => {
     setSelectedCategory(category);
   };
   return (
+    <>
     <View style={styles.container}>
       <ImageBackground source={Images.supermarket} style={styles.header}>
         <View style={styles.overlay}>
@@ -528,6 +529,8 @@ const ShopDetails: FC = () => {
         </AnimatedScrollView>
       </Animated.View>
     </View>
+      <Footer/>
+    </>
   );
 };
 

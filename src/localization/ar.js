@@ -130,4 +130,6 @@ export default {
   'Find your location': 'ابحث عن موقعك',
   "Couldn't save your location please try agian!":
     'لم يتم تأكيد عنوانك برجاء المحاولة مرة اخرى',
+  "View Cart":"السله",
+  "30 LE To Reach Min Order":"متبقي لديك 30LE للوصول للحد الادني"
 };
