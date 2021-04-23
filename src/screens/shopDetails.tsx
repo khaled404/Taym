@@ -21,6 +21,7 @@ import {commonStyles} from '../styles/styles';
 import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
+import Footer from '../components/ShopDetails/Footer'
 
 const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
