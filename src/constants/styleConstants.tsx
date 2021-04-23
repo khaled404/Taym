@@ -30,13 +30,13 @@ export enum Colors {
     CommonBorderColor = '#DCDCDC'
 }
 
-export enum Fonts {
-    medium = !isRTL ? 'Roboto-Medium' : 'Tajawal-Medium',
-    regular = !isRTL ? 'Roboto-Regular' : 'Tajawal-Regular',
-    black = !isRTL ? 'Roboto-Black' : 'Tajawal-Black',
-    bold = !isRTL ? 'Roboto-Bold' : 'Tajawal-Bold',
-    extraLight = !isRTL ? 'Roboto-Thin' : 'Tajawal-ExtraLight',
-    light = !isRTL ? 'Roboto-Light' : 'Tajawal-Light',
+export const Fonts = {
+    medium: !isRTL ? 'Roboto-Medium' : 'Tajawal-Medium',
+    regular: !isRTL ? 'Roboto-Regular' : 'Tajawal-Regular',
+    black: !isRTL ? 'Roboto-Black' : 'Tajawal-Black',
+    bold: !isRTL ? 'Roboto-Bold' : 'Tajawal-Bold',
+    extraLight: !isRTL ? 'Roboto-Thin' : 'Tajawal-ExtraLight',
+    light: !isRTL ? 'Roboto-Light' : 'Tajawal-Light',
 }
 
 export enum Images {

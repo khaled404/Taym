@@ -1,34 +1,34 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Container, Content } from '../../components/containers/Containers';
-import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {Container, Content} from '../../components/containers/Containers';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
 import AuthHeader from '../../components/header/AuthHeader';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import CodeInput from '../../components/textInputs/CodeInput';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { VerifyPhoneCodeHandler } from '../../store/actions/auth';
+import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {VerifyPhoneCodeHandler} from '../../store/actions/auth';
 
 const PhoneCode: FC = () => {
   const [state, setstate] = useState({
-    code: '',
     loader: false,
   });
+  const code = useRef<string>('');
 
   const dispatch = useDispatch();
-  const { userData }: any = useSelector(
+  const {userData}: any = useSelector(
     (state: RootState) => state.auth,
     shallowEqual,
   );
-  const { t } = useTranslation();
-  const { navigate } = useNavigation();
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
   const submitHandler = () => {
-    setstate(old => ({ ...old, loader: true }));
+    setstate(old => ({...old, loader: true}));
     dispatch(
-      VerifyPhoneCodeHandler(state.code, success => {
-        setstate(old => ({ ...old, loader: false }));
+      VerifyPhoneCodeHandler(code.current, success => {
+        setstate(old => ({...old, loader: false}));
         success && navigate('RegisterLocation');
       }),
     );
@@ -48,7 +48,7 @@ const PhoneCode: FC = () => {
           <View style={styles.inputContainer}>
             <CodeInput
               onChangeText={text => {
-                setstate(old => ({ ...old, code: text }));
+                code.current = text;
               }}
               arrayWidth={4}
             />

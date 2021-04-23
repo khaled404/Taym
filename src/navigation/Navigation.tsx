@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, {FC, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator, TransitionSpecs} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {
   AddLocation,
   AddressLocation,
@@ -36,16 +36,16 @@ import {
   Support,
   Offers,
   RegisterLocation,
-  MinusQuantity
+  MinusQuantity,
 } from '../screens/index';
 
 import Animated from 'react-native-reanimated';
 import DrawerContent from '../components/drawer/DrawerContent';
-import { I18nManager, StyleSheet } from 'react-native';
-import { shallowEqual, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
+import {I18nManager, StyleSheet} from 'react-native';
+import {shallowEqual, useSelector} from 'react-redux';
+import {RootState} from '../store/store';
 
-const { isRTL } = I18nManager;
+const {isRTL} = I18nManager;
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -55,31 +55,31 @@ const navigationTransition = {
     open: TransitionSpecs.TransitionIOSSpec,
     close: TransitionSpecs.TransitionIOSSpec,
   },
-  cardStyleInterpolator: ({ current, next, layouts }: any) => {
+  cardStyleInterpolator: ({current, next, layouts}: any) => {
     return {
       cardStyle: {
         transform: [
           {
             translateX: next
               ? next.progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [
-                  0,
-                  isRTL
-                    ? layouts.screen.width / 7
-                    : -layouts.screen.width / 7,
-                ],
-              })
+                  inputRange: [0, 1],
+                  outputRange: [
+                    0,
+                    isRTL
+                      ? layouts.screen.width / 7
+                      : -layouts.screen.width / 7,
+                  ],
+                })
               : current.progress.interpolate({
-                inputRange: [0, 0.5, 1],
-                outputRange: [
-                  isRTL ? -layouts.screen.width : layouts.screen.width,
-                  isRTL
-                    ? -layouts.screen.width / 2
-                    : layouts.screen.width / 2,
-                  0,
-                ],
-              }),
+                  inputRange: [0, 0.5, 1],
+                  outputRange: [
+                    isRTL ? -layouts.screen.width : layouts.screen.width,
+                    isRTL
+                      ? -layouts.screen.width / 2
+                      : layouts.screen.width / 2,
+                    0,
+                  ],
+                }),
           },
         ],
       },
@@ -96,7 +96,7 @@ const navigationSlideToTop = {
     open: TransitionSpecs.TransitionIOSSpec,
     close: TransitionSpecs.TransitionIOSSpec,
   },
-  cardStyleInterpolator: ({ current, next, layouts }: any) => {
+  cardStyleInterpolator: ({current, next, layouts}: any) => {
     return {
       cardStyle: {
         transform: [
@@ -109,9 +109,9 @@ const navigationSlideToTop = {
           {
             scale: next
               ? next.progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0.93],
-              })
+                  inputRange: [0, 1],
+                  outputRange: [1, 0.93],
+                })
               : 1,
           },
         ],
@@ -120,14 +120,14 @@ const navigationSlideToTop = {
   },
 };
 
-const Stacks: FC<any> = ({ style }) => {
-  const { isLogin } = useSelector((state: RootState) => state.auth);
-  const { language } = useSelector((state: RootState) => state.settings);
+const Stacks: FC<any> = ({style}) => {
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
+  const language = useSelector((state: RootState) => state.settings.language);
 
   return (
     <Animated.View style={[styles.stacksStyles, style]}>
       <Stack.Navigator
-        screenOptions={{ headerShown: false, ...navigationTransition } as any}
+        screenOptions={{headerShown: false, ...navigationTransition} as any}
         initialRouteName={
           language === null ? 'Language' : isLogin ? 'Home' : 'Login'
         }>
@@ -183,7 +183,7 @@ const initNavgtion: FC = () => {
 
   const animatedStyle = {
     borderRadius,
-    transform: [{ scale }],
+    transform: [{scale}],
   };
 
   return (
@@ -191,13 +191,13 @@ const initNavgtion: FC = () => {
       <Drawer.Navigator
         drawerType="slide"
         overlayColor="transparent"
-        sceneContainerStyle={{ backgroundColor: 'transparent' }}
+        sceneContainerStyle={{backgroundColor: 'transparent'}}
         drawerContentOptions={{
           activeBackgroundColor: 'transparent',
           activeTintColor: 'transparent',
           inactiveTintColor: 'transparent',
         }}
-        drawerStyle={{ backgroundColor: 'transparent' }}
+        drawerStyle={{backgroundColor: 'transparent'}}
         lazy
         drawerContent={props => {
           setProgress(props.progress as any);

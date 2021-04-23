@@ -6,8 +6,7 @@ import {RootState} from '../store/store';
 import {initializApp, userHomeApi} from '../store/actions/settings';
 
 const AppInitializer: FC = () => {
-  const {appLoaded} = useSelector((state: RootState) => state.settings);
-  const {isLogin} = useSelector((state: RootState) => state.auth);
+  const appLoaded = useSelector((state: RootState) => state.settings.appLoaded);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!appLoaded) {
@@ -15,11 +14,10 @@ const AppInitializer: FC = () => {
     }
   }, []);
   if (appLoaded) {
-    return <Navigation/>;
+    return <Navigation />;
   } else {
-    return <Splash/>;
+    return <Splash />;
   }
 };
-
 
 export default AppInitializer;

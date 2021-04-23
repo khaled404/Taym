@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState, useEffect} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -21,10 +21,12 @@ const Login: FC = () => {
   const {loginErorrs} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [state, setstate] = useState({
-    email: '',
-    password: '',
     secureTextEntry: true,
     loader: false,
+  });
+  const formData = useRef<{email: string; password: string}>({
+    email: '',
+    password: '',
   });
   const PasswordIcon = () => {
     return (
@@ -38,12 +40,16 @@ const Login: FC = () => {
   };
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
-    console.log( state , ' state' )
+    console.log(state, ' state');
     dispatch(
-      LoginHandler(state.email, state.password, success => {
-        setstate(old => ({...old,email:'',password:'', loader: false}));
-        success && navigate('Home');
-      }),
+      LoginHandler(
+        formData.current.email,
+        formData.current.password,
+        success => {
+          setstate(old => ({...old, loader: false}));
+          success && navigate('Home');
+        },
+      ),
     );
   };
   return (
@@ -60,13 +66,9 @@ const Login: FC = () => {
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
-                onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    email: value,
-                  }));
+                onChangeText: (value: string) => {
+                  formData.current.email = value;
                 },
-                value: state.email,
                 keyboardType: 'email-address',
               }}
               erorrMessage={InputErorrHandler(loginErorrs, 'email')}
@@ -82,12 +84,8 @@ const Login: FC = () => {
               iconRightStyle={{top: 10}}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    password: value,
-                  }));
+                  formData.current.password = value;
                 },
-                value: state.password,
                 secureTextEntry: state.secureTextEntry,
                 onSubmitEditing: submitHandler,
               }}

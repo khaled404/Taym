@@ -1,52 +1,53 @@
 {
-  "workbench.iconTheme": "material-icon-theme",
-  "[typescriptreact]": {
-      "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[javascriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.semanticHighlighting.enabled": false,
-  "synthwave84.disableGlow": true,
-  "emmet.includeLanguages": {
-      "javascript": "javascriptreact",
-      "typescript": "typescriptreact"
-  },
-  "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "editor.formatOnSave": true,
-  "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "tabnine.experimentalAutoImports": true,
-  "editor.autoIndent": "full",
-  "editor.cursorBlinking": "solid",
-  "editor.cursorSmoothCaretAnimation": true,
-  "editor.cursorStyle": "line",
-//   "editor.fontSize": 15,
-//   "editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
-  "editor.fontLigatures": true,
-  "editor.formatOnPaste": false,
-  "editor.formatOnType": false,
-  "editor.lineHeight": 25,
-//   "editor.multiCursorModifier": "ctrlCmd",
-  "editor.suggestSelection": "first",
-  "editor.tabCompletion": "on",
-  "editor.tabSize": 2,
-  "editor.wordWrap": "off",
-  "search.showLineNumbers": true,
-  "workbench.colorCustomizations": {},
-  "zenMode.centerLayout": false,
-  "files.exclude": {
-      "**/.svn": false
-  },
-  "typescript.updateImportsOnFileMove.enabled": "never",
-  "[json]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "gitlens.defaultDateFormat": null,
-  "gitlens.defaultDateShortFormat": null,
-
-}
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Tokyo Night",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.semanticHighlighting.enabled": false,
+    "synthwave84.disableGlow": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "tabnine.experimentalAutoImports": true,
+    "editor.autoIndent": "full",
+    "editor.cursorBlinking": "solid",
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorStyle": "line",
+    "editor.fontSize": 15,
+    "editor.fontFamily": "Dank Mono, Fira Code, Inconsolata",
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+    "editor.lineHeight": 25,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "on",
+    "editor.tabSize": 2,
+    "editor.wordWrap": "off",
+    "search.showLineNumbers": true,
+    "workbench.colorCustomizations": {},
+    "zenMode.centerLayout": false,
+    "files.exclude": {
+        "**/.svn": false
+    },
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "gitlens.defaultDateFormat": null,
+    "gitlens.defaultDateShortFormat": null,
+  
+  }

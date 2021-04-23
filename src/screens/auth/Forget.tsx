@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -12,15 +12,15 @@ import {ForgetHandler} from '../../store/actions/auth';
 
 const Forget: FC = () => {
   const [state, setstate] = useState({
-    phone: '',
     loader: false,
   });
+  const phone = useRef<string>('');
   const dispatch = useDispatch();
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
       ForgetHandler(
-        state.phone,
+        phone.current,
         success => {
           setstate(old => ({...old, loader: false}));
           success && navigate('ForgetPhoneCode');
@@ -51,18 +51,18 @@ const Forget: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    phone: value,
-                  }));
+                  phone.current = value;
                 },
-                value: state.phone,
                 onSubmitEditing: submitHandler,
               }}
             />
           </View>
           <View style={styles.submitContainer}>
-            <Button title={t('Next')} onPress={submitHandler} loader={state.loader} />
+            <Button
+              title={t('Next')}
+              onPress={submitHandler}
+              loader={state.loader}
+            />
           </View>
         </View>
       </Content>

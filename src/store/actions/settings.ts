@@ -6,7 +6,7 @@ import RNRestart from 'react-native-restart';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {getVoucherData} from './voucher';
-import {saveCategories} from "./categories";
+import {saveCategories} from './categories';
 
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
@@ -38,7 +38,6 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
-
 export const userHomeApi = () => {
   return async (dispatch: Dispatch<any>) => {
     try {
@@ -67,7 +66,6 @@ const updateUserVouchers = () => {
 export const initializApp = () => {
   return (dispatch: Dispatch<any>) => {
     try {
-      allowRTL(true);
       dispatch(updateUserVouchers());
       dispatch(userHomeApi());
       dispatch(loadApp());
