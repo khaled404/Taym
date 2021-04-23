@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -10,6 +10,7 @@ import PaymentCardsList from '../../components/cart/PaymentCardsList';
 import {commonStyles} from '../../styles/styles';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
+const {isRTL} = I18nManager;
 
 const DATA = [
   {
@@ -37,7 +38,6 @@ const DATA = [
 
 const CartCheckout: FC = () => {
   const [selectedId, setSelectedId] = useState(null);
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const {t} = useTranslation();
 
   const data = [
@@ -81,7 +81,6 @@ const CartCheckout: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Cart Total')}
             </Text>
@@ -96,7 +95,6 @@ const CartCheckout: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Services Charge')}
             </Text>
@@ -111,7 +109,6 @@ const CartCheckout: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Discount')}
             </Text>
@@ -129,7 +126,6 @@ const CartCheckout: FC = () => {
                 styles.orderDetailsText,
                 {
                   color: '#622A7B',
-                  textAlign: language === 'ar' ? 'left' : 'right',
                 },
               ]}>
               {t('Total Amount')}
@@ -207,6 +203,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     flex: 0.7,
     color: Colors.dark,
+    alignSelf:'flex-start'
   },
   textCenter: {
     flex: 0.7,

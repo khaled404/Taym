@@ -14,7 +14,6 @@ import {RootState} from '../../store/store';
 
 const CartAddress: FC = () => {
   const [selectedId, setSelectedId] = useState(null);
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const {t} = useTranslation();
 
   const data = [
@@ -49,7 +48,6 @@ const CartAddress: FC = () => {
           textInputContainer={[
             styles.locationInput,
             {
-              textAlign: language === 'ar' ? 'right' : 'left',
               paddingVertical: Pixel(35),
             },
           ]}
@@ -130,6 +128,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     color: '#989898',
     fontSize: Pixel(30),
+    alignSelf:'flex-start'
   },
   iconLeftStyle: {
     paddingLeft: 20,

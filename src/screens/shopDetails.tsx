@@ -415,7 +415,7 @@ const ShopDetails: FC = () => {
                 padding: Pixel(33),
               }}
               textInputContainer={{
-                textAlign: 'right',
+                alignSelf:'flex-start'
                 // paddingVertical: Pixel(33),
               }}
               rightContent={() => <SearchSubmitBtn/>}

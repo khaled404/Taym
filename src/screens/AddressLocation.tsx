@@ -1,29 +1,23 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
+import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
+import {I18nManager, Platform, StyleSheet, View} from 'react-native';
 import {Container} from '../components/containers/Containers';
 import Header from '../components/header/Header';
 import {Colors} from '../constants/styleConstants';
 import {commonStyles} from '../styles/styles';
-import MapView, {
-  AnimatedRegion,
-  Marker,
-  PROVIDER_GOOGLE,
-} from 'react-native-maps';
+import MapView, {AnimatedRegion, Marker, PROVIDER_GOOGLE,} from 'react-native-maps';
 import {useTranslation} from 'react-i18next';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import GooglePlacesInput from '../components/MyAddresses/GooglePlacesInput';
 import {showMessage} from 'react-native-flash-message';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../components/touchables/Button';
 import {MAP_API_KEY} from '../constants/Config';
-import {RootState} from '../store/store';
 import {saveNewAddress} from '../store/actions/address';
-import {useMemo} from 'react';
 
+const {isRTL} = I18nManager;
 const AddressLocation: FC = () => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
 
   const {t} = useTranslation();
   const dispatch = useDispatch();
@@ -32,7 +26,7 @@ const AddressLocation: FC = () => {
   const _marker = useRef(null);
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = 0.0421;
-  Geocoder.init(MAP_API_KEY, {language: language});
+  Geocoder.init(MAP_API_KEY, {language: isRTL ? 'ar' : 'en'});
   //local state handler
   const [state, setstate] = useState({
     loader: false,
@@ -143,16 +137,16 @@ const AddressLocation: FC = () => {
         style={styles.map}
         initialRegion={state.region}
         onRegionChangeComplete={handleRegionChange}>
-        <Marker.Animated ref={_marker} coordinate={state.region} />
+        <Marker.Animated ref={_marker} coordinate={state.region}/>
       </MapView.Animated>
     ),
     [state.region],
   );
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Current Location')} />
+      <Header title={t('Current Location')}/>
       <View style={[styles.autoCompleteContainer]}>
-        <GooglePlacesInput onSelectResult={handleRegionChange} />
+        <GooglePlacesInput onSelectResult={handleRegionChange}/>
       </View>
 
       {renderMap}

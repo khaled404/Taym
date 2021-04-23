@@ -14,7 +14,6 @@ interface IApplyInput {
 }
 
 const ApplyInput: FC<IApplyInput> = ({onPress, options}) => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const {t} = useTranslation();
   return (
     <View style={styles.container}>
@@ -22,7 +21,6 @@ const ApplyInput: FC<IApplyInput> = ({onPress, options}) => {
         <TextInput
           style={[
             styles.textInput,
-            {textAlign: language === 'ar' ? 'right' : 'left'},
           ]}
           placeholder={t('Add Voucher')}
           {...options}
@@ -73,5 +71,6 @@ const styles = StyleSheet.create({
   textInput: {
     fontFamily: Fonts.bold,
     fontSize: Pixel(25),
+    alignSelf:'flex-start'
   },
 });

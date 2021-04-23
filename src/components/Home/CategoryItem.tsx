@@ -1,10 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import FastImage from 'react-native-fast-image';
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
+
+const {isRTL} = I18nManager;
 
 interface ICategoryItem {
   id: number;
@@ -16,7 +18,6 @@ interface ICategoryItem {
 }
 
 const CategoryItem: FC<ICategoryItem> = ({id, name_ar, name_en, icon, is_active, index}) => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const [categoryWidth, setCategoryWidth] = useState('100%');
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const CategoryItem: FC<ICategoryItem> = ({id, name_ar, name_en, icon, is_active,
           resizeMode="cover"
         />
       </View>
-      <Text style={styles.categoryTitle}>{language === 'en' ? name_en : name_ar}</Text>
+      <Text style={styles.categoryTitle}>{isRTL ? name_ar : name_en}</Text>
     </TouchableOpacity>
   );
 };

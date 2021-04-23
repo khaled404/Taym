@@ -54,7 +54,6 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
   titleStyle,
 }) => {
   const {t} = useTranslation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
@@ -99,8 +98,9 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
           }}
           contentContainerStyle={{borderRadius: 22, borderWidth: 0, padding: Pixel(33)}}
           textInputContainer={{
-            textAlign: language === 'ar' ? 'right' : 'left',
+            // textAlign: language === 'ar' ? 'right' : 'left',
             // paddingVertical: Pixel(33),
+            alignSelf:'flex-start'
           }}
           rightContent={() => <SearchSubmitBtn />}
           iconRightStyle={{top: 4.5}}

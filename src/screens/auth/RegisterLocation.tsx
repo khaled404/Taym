@@ -1,5 +1,5 @@
 import React, {FC, useRef, useEffect, useState, useMemo} from 'react';
-import {Platform, StyleSheet, View} from 'react-native';
+import {I18nManager, Platform, StyleSheet, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import Header from '../../components/header/Header';
 import {Colors} from '../../constants/styleConstants';
@@ -20,8 +20,8 @@ import {VerifyUserLocationHandler} from '../../store/actions/auth';
 import GooglePlacesInput from '../../components/MyAddresses/GooglePlacesInput';
 import {MAP_API_KEY} from '../../constants/Config';
 import {RootState} from '../../store/store';
+const {isRTL} = I18nManager;
 const RegisterLocation: FC = () => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
 
   const {t} = useTranslation();
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const RegisterLocation: FC = () => {
   const _marker = useRef(null);
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = 0.0421;
-  Geocoder.init(MAP_API_KEY, {language: language});
+  Geocoder.init(MAP_API_KEY, {language: isRTL ? 'ar' : 'en'});
   //local state handler
   const [state, setstate] = useState({
     loader: false,
