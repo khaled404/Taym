@@ -127,7 +127,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={ListIcon}
               title={t('My Orders')}
-              onPress={() => {
+               onPress={() => {
                 navigation?.navigate('MyOrders');
               }}
               isLogin={isLogin}
