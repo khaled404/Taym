@@ -1,24 +1,23 @@
 import React, {FC} from 'react';
-import {StyleSheet} from 'react-native';
+import {I18nManager, StyleSheet} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
+import {useDispatch} from 'react-redux';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {MAP_API_KEY} from '../../constants/Config';
 import {Colors, Fonts, Pixel} from "../../constants/styleConstants";
 
+const {isRTL} = I18nManager;
 navigator.geolocation = require('@react-native-community/geolocation');
 
 interface IAutoSearchMap {
-  onSelectResult: (newRegion: any,areaName:string) => void;
+  onSelectResult: (newRegion: any, areaName: string) => void;
 }
 
 const GooglePlacesInput: FC<IAutoSearchMap> = ({onSelectResult}) => {
 
   const {t} = useTranslation();
   const {navigate} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const LATITUDE_DELTA: number = 0.0922;
   const LONGITUDE_DELTA: number = 0.0421;
@@ -38,7 +37,7 @@ const GooglePlacesInput: FC<IAutoSearchMap> = ({onSelectResult}) => {
   return (
     <GooglePlacesAutocomplete
       styles={{
-        textInput: {...styles.inputStyle, textAlign: language === 'en' ? 'left' : 'right'},
+        textInput: {...styles.inputStyle, textAlign: isRTL ? 'right' : 'left'},
         predefinedPlacesDescription: {
           fontFamily: Fonts.bold,
           fontSize: Pixel(25),
@@ -51,7 +50,7 @@ const GooglePlacesInput: FC<IAutoSearchMap> = ({onSelectResult}) => {
       }}
       query={{
         key: MAP_API_KEY,
-        language: language,
+        language: isRTL ? 'ar' : 'en',
       }}
       currentLocation={true}
       currentLocationLabel={t('Current Location')}

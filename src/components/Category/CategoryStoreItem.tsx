@@ -26,7 +26,6 @@ const CategoryStoreItem: FC<ICategoryStoreItem> = ({
 }) => {
   const {t} = useTranslation();
   const {navigate} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <TouchableOpacity
       onPress={() => navigate('ShopDetails')}

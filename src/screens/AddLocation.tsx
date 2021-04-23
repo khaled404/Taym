@@ -14,8 +14,7 @@ import {RootState} from '../store/store';
 import {showMessage} from "react-native-flash-message";
 
 const AddLocation: FC = () => {
-  const {language}: any = useSelector((state: RootState) => state.settings);
-  const {addressList, newLocationObj}: any = useSelector((state: RootState) => state.address);
+  const {newLocationObj}: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -77,7 +76,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -94,7 +92,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -112,7 +109,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -130,7 +126,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -148,7 +143,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -167,7 +161,6 @@ const AddLocation: FC = () => {
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  {textAlign: language === 'ar' ? 'right' : 'left'},
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -185,7 +178,6 @@ const AddLocation: FC = () => {
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  {textAlign: language === 'ar' ? 'right' : 'left'},
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -203,7 +195,6 @@ const AddLocation: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                {textAlign: language === 'ar' ? 'right' : 'left'},
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -265,6 +256,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(33),
     color: '#070707',
+    alignSelf:'flex-start'
   },
   contentContainerStyle: {
     borderRadius: 14,

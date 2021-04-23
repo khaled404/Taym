@@ -17,7 +17,6 @@ interface ICategoryStoreItem {
 const CategoryListItem: FC = ({item, selectedCategory, handleSelectedCategory}) => {
   const {t} = useTranslation();
   const {navigate} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     (
       <TouchableOpacity onPress={() => handleSelectedCategory(item.title)} style={[styles.headerCategoryListItem]}>

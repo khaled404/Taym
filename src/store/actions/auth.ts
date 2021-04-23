@@ -145,9 +145,9 @@ export const VerifyUserLocationHandler = (
         type: 'info',
       });
 
-      // dispatch({
-      //   type: ActionType.SAVE_USER_DATA_STEP_3,
-      // });
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_STEP_3,
+      });
 
       cb(true);
     } catch (error) {

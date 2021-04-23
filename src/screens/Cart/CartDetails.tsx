@@ -12,7 +12,6 @@ import {useSelector} from 'react-redux';
 
 const CartDetails: FC = () => {
   const {t} = useTranslation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const data = [
     {
       id: 1,
@@ -56,7 +55,6 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Cart Total')}
             </Text>
@@ -71,7 +69,6 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Services Charge')}
             </Text>
@@ -86,7 +83,6 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
               ]}>
               {t('Discount')}
             </Text>
@@ -104,7 +100,6 @@ const CartDetails: FC = () => {
                 styles.orderDetailsText,
                 {
                   color: '#622A7B',
-                  textAlign: language === 'ar' ? 'left' : 'right',
                 },
               ]}>
               {t('Total Amount')}
@@ -188,6 +183,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     flex: 0.7,
     color: Colors.dark,
+    alignSelf:'flex-start'
     // textAlign: "left",
   },
   textCenter: {

@@ -1,19 +1,16 @@
-import React, { FC } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Colors, Fonts, Pixel } from '../../constants/styleConstants';
-import { commonStyles } from '../../styles/styles';
-import {
-  CheckedIcon,
-  DeleteIcon,
-  InputEditIcon,
-  UnCheckedIcon,
-} from '../../../assets/Icons/Icons';
-import { useTranslation } from 'react-i18next';
+import React, {FC} from 'react';
+import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
+import {commonStyles} from '../../styles/styles';
+import {CheckedIcon, DeleteIcon, InputEditIcon, UnCheckedIcon,} from '../../../assets/Icons/Icons';
+import {useTranslation} from 'react-i18next';
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { deleteAddressApi, saveAddressList } from '../../store/actions/address';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {deleteAddressApi} from '../../store/actions/address';
+
+const {isRTL} = I18nManager;
 
 interface IAddress {
   id: number;
@@ -31,28 +28,26 @@ interface IAddress {
 }
 
 const Address: FC<IAddress> = ({
-  id,
-  name,
-  phone,
-  building_no,
-  floor_no,
-  street_name,
-  area_ar,
-  area_en,
-  apartment_no,
-  onPress,
-  selected,
-  inCart,
-}) => {
-  const { t } = useTranslation();
-  const { navigate } = useNavigation();
-  const { language }: any = useSelector((state: RootState) => state.settings);
-  const { addressList }: any = useSelector((state: RootState) => state.address);
+                                 id,
+                                 name,
+                                 phone,
+                                 building_no,
+                                 floor_no,
+                                 street_name,
+                                 area_ar,
+                                 area_en,
+                                 apartment_no,
+                                 onPress,
+                                 selected,
+                                 inCart,
+                               }) => {
+  const {t} = useTranslation();
+  const {navigate} = useNavigation();
   const dispatch = useDispatch();
   const EditBtn = () => {
     return (
       <IconTouchableContainer
-        style={{ marginBottom: 5 }}
+        style={{marginBottom: 5}}
         onPress={() =>
           navigate('EditAddress', {
             address: {
@@ -68,7 +63,7 @@ const Address: FC<IAddress> = ({
             },
           })
         }>
-        <InputEditIcon />
+        <InputEditIcon/>
       </IconTouchableContainer>
     );
   };
@@ -84,11 +79,11 @@ const Address: FC<IAddress> = ({
   const DeleteBtn = () => {
     return (
       <IconTouchableContainer
-        style={{ marginTop: 5 }}
+        style={{marginTop: 5}}
         onPress={() => {
           handleDeleteAddress(id);
         }}>
-        <DeleteIcon />
+        <DeleteIcon/>
       </IconTouchableContainer>
     );
   };
@@ -98,16 +93,15 @@ const Address: FC<IAddress> = ({
     <TouchableOpacity style={[styles.container]} onPress={onPress}>
       <View style={styles.detailsContainer}>
         <View style={styles.checkBtn}>
-          {selected ? <CheckedIcon /> : <UnCheckedIcon />}
+          {selected ? <CheckedIcon/> : <UnCheckedIcon/>}
           <Text style={styles.addressTitle}>{name}</Text>
         </View>
-        <View style={{ paddingLeft: Pixel(60) }}>
+        <View style={{paddingLeft: Pixel(60)}}>
           <Text
             style={[
               styles.address,
-              { textAlign: language === 'ar' ? 'left' : 'right' },
             ]}>
-            {language === 'ar' ? area_ar : area_en}{' '}
+            {isRTL ? area_ar : area_en}{' '}
             {street_name != undefined && t('st') + '.'} {street_name}{' '}
             {building_no != undefined && ` - ` + t('Building No')} {building_no}
           </Text>
@@ -119,8 +113,8 @@ const Address: FC<IAddress> = ({
       <View style={styles.actionsContainer}>
         {!inCart && (
           <>
-            <EditBtn />
-            <DeleteBtn />
+            <EditBtn/>
+            <DeleteBtn/>
           </>
         )}
       </View>
@@ -163,6 +157,7 @@ const styles = StyleSheet.create({
     fontSize: Pixel(25),
     color: '#4D4D4D',
     marginBottom: Pixel(10),
+    alignSelf: 'flex-start'
   },
   actionsContainer: {
     justifyContent: 'space-between',

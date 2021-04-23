@@ -14,11 +14,7 @@ import { Attache, Send } from '../../assets/Icons/Icons'
 
 const Support: FC = () => {
   const { t } = useTranslation();
-  const { language }: any = useSelector((state: RootState) => state.settings);
-
-
   const dispatch = useDispatch();
-  const { isRTL }: any = useSelector((state: RootState) => state.settings);
   const { navigate } = useNavigation();
   return (
     <Container style={styles.container}>
@@ -38,7 +34,6 @@ const Support: FC = () => {
         <Input
           textInputContainer={[
             styles.textInput,
-            { textAlign: language === 'ar' ? 'right' : 'left' },
           ]}
           leftContent={() => <Attache width={Pixel(40)} height={Pixel(40)} />}
           rightContent={() => <Send width={Pixel(60)} height={Pixel(60)} />}
@@ -67,6 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     fontSize: Pixel(30),
     color: Colors.lock,
+    alignSelf:'flex-start'
   },
   contentContainerStyle: {
     width: '95%',

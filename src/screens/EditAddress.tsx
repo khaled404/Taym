@@ -20,7 +20,6 @@ import { useRoute } from '@react-navigation/native';
 const EditAddress: FC = () => {
   const route = useRoute();
   const { address } = route.params;
-  const { language }: any = useSelector((state: RootState) => state.settings);
   const { addressList }: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState(address.name);
@@ -75,7 +74,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -92,7 +90,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -110,7 +107,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -128,7 +124,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -146,7 +141,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -165,7 +159,6 @@ const EditAddress: FC = () => {
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  { textAlign: language === 'ar' ? 'right' : 'left' },
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -183,7 +176,6 @@ const EditAddress: FC = () => {
               <Input
                 textInputContainer={[
                   styles.textInput,
-                  { textAlign: language === 'ar' ? 'right' : 'left' },
                 ]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
@@ -201,7 +193,6 @@ const EditAddress: FC = () => {
             <Input
               textInputContainer={[
                 styles.textInput,
-                { textAlign: language === 'ar' ? 'right' : 'left' },
               ]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
@@ -263,6 +254,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(33),
     color: '#070707',
+    alignSelf:'flex-start'
   },
   contentContainerStyle: {
     borderRadius: 14,
