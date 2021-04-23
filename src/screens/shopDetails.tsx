@@ -26,6 +26,7 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
 import Footer from '../components/ShopDetails/Footer';
+import FavoriteItem from '../components/Home/FavoriteItem';
 
 const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -499,10 +500,10 @@ const ShopDetails: FC = () => {
                 }}
                 renderItem={({item, index}) => (
                   <SubCategoryItem
-                    selectedSubCategory={selectedSubCategory}
+                     selectedSubCategory={selectedSubCategory}
                     handleSelectedSubCategory={(title: any) =>
                       handleSelectedSubCategory(title)
-                    }
+                     }
                     item={item}
                   />
                 )}
@@ -538,8 +539,8 @@ const ShopDetails: FC = () => {
           }}
           renderItem={({item, index}) => ( */}
             {categoryHomeData.map((item, index) => (
-              <ProductListItem {...item} key={index} index={index} />
-            ))}
+               <ProductListItem {...item} key={index} index={index} />
+             ))}
             {/* )}
         /> */}
             {/* <ProductsList data={} /> */}
@@ -585,7 +586,7 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 150,
-    marginBottom: -100,
+    marginBottom: -60,
     flex: 1,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
