@@ -1,19 +1,19 @@
-import React, { FC, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Container, Content } from '../components/containers/Containers';
+import React, {FC, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
-import { Colors, Pixel, Fonts } from '../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
+import {Colors, Pixel, Fonts} from '../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
 import CategoryList from '../components/Home/CategoryList';
 import OfferSlider from '../components/Home/OfferSlider';
 import FavoriteList from '../components/Home/FavoriteList';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { useNavigation } from '@react-navigation/native';
-import { commonStyles } from '../styles/styles';
-import CategoryStoresList from '../components/Category/CategoryStoresList'
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store/store';
+import {useNavigation} from '@react-navigation/native';
+import {commonStyles} from '../styles/styles';
+import CategoryStoresList from '../components/Category/CategoryStoresList';
 const Offers: FC = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   const categoryHomeData = [
     {
@@ -83,24 +83,24 @@ const Offers: FC = () => {
   const [displayShop, setDisplayShop] = useState('flex');
   const [displayOffer, setDisplayOffer] = useState('none');
   const dispatch = useDispatch();
-  const { isRTL }: any = useSelector((state: RootState) => state.settings);
-  const { navigate } = useNavigation();
+  const {isRTL}: any = useSelector((state: RootState) => state.settings);
+  const {navigate} = useNavigation();
   return (
     <Container style={styles.container}>
       <Header title="Offers" />
-      {/*******tabs********* */}
-      <View style={{
-        width: '100%',
-        height: Pixel(150),
-        alignItems: 'center',
-        justifyContent: 'center',
-      }} >
+      <View
+        style={{
+          width: '100%',
+          height: Pixel(150),
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <View style={styles.langBtnsContainer}>
           <TouchableOpacity
             onPress={() => {
               setToggle(false);
-              setDisplayShop('flex')
-              setDisplayOffer('none')
+              setDisplayShop('flex');
+              setDisplayOffer('none');
             }}
             style={[
               styles.langBtn,
@@ -114,30 +114,32 @@ const Offers: FC = () => {
           <TouchableOpacity
             onPress={() => {
               setToggle(true);
-              setDisplayShop('none')
-              setDisplayOffer('flex')
+              setDisplayShop('none');
+              setDisplayOffer('flex');
             }}
             style={[
               styles.langBtn,
               {
                 backgroundColor: toggle ? Colors.minColor : 'white',
-                borderRadius: toggle ? Pixel(17) : 0
+                borderRadius: toggle ? Pixel(17) : 0,
               },
             ]}>
             <Text style={styles.langBtnText}>{t('Products')}</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <Content style={styles.contentContainer} >
-        <View style={{
-          display: displayShop
-        }} >
+      <Content style={styles.contentContainer}>
+        <View
+          style={{
+            display: displayShop,
+          }}>
           <CategoryStoresList data={carouselItems} />
         </View>
 
-        <View style={{
-          display: displayOffer
-        }} >
+        <View
+          style={{
+            display: displayOffer,
+          }}>
           <FavoriteList data={categoryHomeData} />
         </View>
       </Content>
@@ -151,8 +153,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.sacandAppBackgroundColor,
   },
-  contentContainer: {
-  },
+  contentContainer: {},
   langBtnsContainer: {
     ...commonStyles.rowBox,
     width: '90%',
@@ -160,7 +161,6 @@ const styles = StyleSheet.create({
     borderRadius: Pixel(20),
     backgroundColor: Colors.white,
     ...commonStyles.boxShadow,
-
   },
   langBtn: {
     paddingVertical: Pixel(14),

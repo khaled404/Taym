@@ -3,11 +3,11 @@ import React, {FC, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {commonStyles} from '../../styles/styles';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {useNavigation} from "@react-navigation/native";
-import ProductListItem from "./ProductListItem";
+import {useNavigation} from '@react-navigation/native';
+import ProductListItem from './ProductListItem';
 
 interface IProductsList {
-  data: Array<{ title: string; image: string }>;
+  data: Array<{title: string; image: string}>;
 }
 
 const ProductsList: FC<IProductsList> = ({data}) => {
@@ -16,15 +16,13 @@ const ProductsList: FC<IProductsList> = ({data}) => {
   const productsListMemo = useMemo(
     () =>
       data.map((item, index) => {
-        return <ProductListItem {...item} key={index} index={index}/>;
+        return <ProductListItem {...item} key={index} index={index} />;
       }),
     [data],
   );
   return (
     <>
-      <View style={styles.listContainer}>
-        {productsListMemo}
-      </View>
+      <View style={styles.listContainer}>{productsListMemo}</View>
     </>
   );
 };

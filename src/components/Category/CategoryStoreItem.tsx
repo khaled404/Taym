@@ -1,13 +1,13 @@
-import React, {FC} from "react";
-import {useTranslation} from "react-i18next";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import {Colors, Fonts, Images, Pixel} from "../../constants/styleConstants";
-import {commonStyles} from "../../styles/styles";
-import FastImage from "react-native-fast-image";
-import {DeliveryIcon} from "../../../assets/Icons/Icons";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store/store";
-import {useNavigation} from "@react-navigation/native";
+import React, {FC} from 'react';
+import {useTranslation} from 'react-i18next';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
+import {commonStyles} from '../../styles/styles';
+import FastImage from 'react-native-fast-image';
+import {DeliveryIcon} from '../../../assets/Icons/Icons';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {useNavigation} from '@react-navigation/native';
 
 interface ICategoryStoreItem {
   index: number;
@@ -17,19 +17,22 @@ interface ICategoryStoreItem {
   isLast: Boolean;
 }
 
-const CategoryStoreItem: FC<ICategoryStoreItem> = ({index, id, title, image, isLast}) => {
+const CategoryStoreItem: FC<ICategoryStoreItem> = ({
+  index,
+  id,
+  title,
+  image,
+  isLast,
+}) => {
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <TouchableOpacity
-      onPress={()=>navigate('ShopDetails')}
+      onPress={() => navigate('ShopDetails')}
       style={[styles.categoryStoreItem, {borderBottomWidth: isLast ? 0 : 1}]}>
       <View
-        style={[
-          styles.imageContainer,
-          {height: Pixel(215), width: '100%'}
-        ]}>
+        style={[styles.imageContainer, {height: Pixel(215), width: '100%'}]}>
         <FastImage
           source={Images.offerSlider}
           style={commonStyles.image}
@@ -44,9 +47,9 @@ const CategoryStoreItem: FC<ICategoryStoreItem> = ({index, id, title, image, isL
         </View>
       </View>
       <View style={styles.storeDetail}>
-        <Text style={[styles.storeTitle, {textAlign: language === 'ar' ? 'left' : 'right'}]}>{title}</Text>
+        <Text style={[styles.storeTitle]}>{title}</Text>
         <View style={styles.storeDeliveryDetails}>
-          <DeliveryIcon/>
+          <DeliveryIcon />
           <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
         </View>
       </View>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     borderColor: '#707070',
     width: '100%',
     marginBottom: Pixel(35),
-    paddingBottom: 15
+    paddingBottom: 15,
   },
   imageContainer: {
     borderRadius: 13,
@@ -69,17 +72,17 @@ const styles = StyleSheet.create({
     // height: Pixel(75),
     // width: Pixel(140),
     marginBottom: Pixel(5),
-    position: "relative",
+    position: 'relative',
   },
   storeDetail: {
     width: '100%',
     ...commonStyles.rowBox,
     marginTop: Pixel(20),
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   storeTitle: {
     fontFamily: Fonts.black,
-    fontSize: Pixel(35),
+    fontSize: Pixel(30),
     color: Colors.dark,
   },
   storeDeliveryPeriod: {
@@ -101,10 +104,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.minColor,
     ...commonStyles.boxShadow,
-    position: "absolute",
+    position: 'absolute',
     zIndex: 100,
-    left: 0
-  }
+    left: 0,
+  },
 });
 
 export default CategoryStoreItem;

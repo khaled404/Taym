@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -17,12 +17,15 @@ import {InputErorrHandler} from '../../constants/helpers';
 
 const Register: FC = () => {
   const [state, setstate] = useState({
-    name: '',
-    email: '',
-    password: '',
     secureTextEntry: true,
     loader: false,
   });
+  const formData = useRef<{email: string; password: string; name: string}>({
+    name: '',
+    email: '',
+    password: '',
+  });
+
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   const dispatch = useDispatch();
@@ -33,16 +36,18 @@ const Register: FC = () => {
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
-      RegisterHandler(state.name, state.email, state.password, success => {
-        setstate(old => ({
-          ...old,
-          name: '',
-          email: '',
-          password: '',
-          loader: false,
-        }));
-        success && navigate('CompleteRegister');
-      }),
+      RegisterHandler(
+        formData.current.name,
+        formData.current.email,
+        formData.current.password,
+        success => {
+          setstate(old => ({
+            ...old,
+            loader: false,
+          }));
+          success && navigate('CompleteRegister');
+        },
+      ),
     );
   };
   const PasswordIcon = () => {
@@ -70,9 +75,8 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({...old, name: value}));
+                  formData.current.name = value;
                 },
-                value: state.name,
               }}
               erorrMessage={InputErorrHandler(registerErorrs, 'name')}
             />
@@ -85,9 +89,8 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({...old, email: value}));
+                  formData.current.email = value;
                 },
-                value: state.email,
                 keyboardType: 'email-address',
               }}
               erorrMessage={InputErorrHandler(registerErorrs, 'email')}
@@ -103,9 +106,8 @@ const Register: FC = () => {
               iconRightStyle={{top: 10}}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({...old, password: value}));
+                  formData.current.password = value;
                 },
-                value: state.password,
                 secureTextEntry: state.secureTextEntry,
                 onSubmitEditing: submitHandler,
               }}

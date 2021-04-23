@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import { Colors, Fonts, Images, Pixel } from '../../constants/styleConstants';
-import { useTranslation } from 'react-i18next';
-import { ScreenProps } from '../../constants/interfaces';
+import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
+import {useTranslation} from 'react-i18next';
+import {ScreenProps} from '../../constants/interfaces';
 import DrawerItem from './DrawerItem';
 import FastImage from 'react-native-fast-image';
-import { commonStyles } from '../../styles/styles';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { LogoutHandler } from '../../store/actions/auth';
+import {commonStyles} from '../../styles/styles';
+import {ScrollView} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../store/store';
+import {LogoutHandler} from '../../store/actions/auth';
 import {
   HomeIcon,
   HeartIcon,
@@ -29,14 +29,13 @@ import {
   LogOut,
 } from '../../../assets/Icons/Icons';
 
-const { height, width } = Dimensions.get('window');
-const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
+const {height, width} = Dimensions.get('window');
+const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   const dispatch = useDispatch();
-  const { isLogin, userData }: any = useSelector(
-    (state: RootState) => state.auth,
-  );
-  const { voucherData }: any = useSelector((state: RootState) => state.voucher);
-  const { t }: any = useTranslation();
+  const userData = useSelector((state: RootState) => state.auth.userData);
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
+  const {voucherData}: any = useSelector((state: RootState) => state.voucher);
+  const {t}: any = useTranslation();
   // console.log('voucherData.user', voucherData);
 
   const getLetter = (st: string) => {
@@ -137,7 +136,7 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
               Icon={OffersIcon}
               title={t('Offers')}
               onPress={() => {
-                navigation?.navigate('Home');
+                navigation?.navigate('Offers');
               }}
               isLogin={true}
             />
@@ -153,7 +152,7 @@ const DrawerContent: FC<ScreenProps> = ({ navigation }) => {
               Icon={TelephoneIcon}
               title={t('Suport')}
               onPress={() => {
-                navigation?.navigate('Home');
+                navigation?.navigate('Support');
               }}
               isLogin={true}
             />

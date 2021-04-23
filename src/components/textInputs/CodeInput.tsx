@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
-import { Colors, Fonts } from '../../constants/styleConstants';
+import React, {FC, useEffect, useState} from 'react';
+import {StyleSheet, TextInput, View, Keyboard} from 'react-native';
+import {Colors, Fonts} from '../../constants/styleConstants';
 interface ICodeInput {
   onChangeText?: (text: string) => void;
-  arrayWidth?: number
+  arrayWidth?: number;
 }
-const CodeInput: FC<ICodeInput> = ({ onChangeText, arrayWidth }) => {
+const CodeInput: FC<ICodeInput> = ({onChangeText, arrayWidth}) => {
   const [state, setstate] = useState<any>({
     inputRefs: {} as any,
     inputValues: {} as any,
@@ -71,7 +71,7 @@ const CodeInput: FC<ICodeInput> = ({ onChangeText, arrayWidth }) => {
             onChangeText={text => {
               setstate((old: any) => ({
                 ...old,
-                inputValues: { ...old.inputValues, [`input_${index}`]: text },
+                inputValues: {...old.inputValues, [`input_${index}`]: text},
               }));
               if (text.length != 0 && index !== 5) {
                 state.inputRefs[`input_${index + 1}`]?.focus();
@@ -80,7 +80,7 @@ const CodeInput: FC<ICodeInput> = ({ onChangeText, arrayWidth }) => {
               }
             }}
             onFocus={() => {
-              setstate((old: any) => ({ ...old, active: index }));
+              setstate((old: any) => ({...old, active: index}));
             }}
           />
         </View>

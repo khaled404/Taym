@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -15,12 +15,13 @@ import {EyeIcon} from '../../../assets/Icons/Icons';
 
 const Forget2: FC = () => {
   const [state, setstate] = useState({
+    secureTextEntry: true,
+    loader: false,
+  });
+  const formData = useRef<{confirmPassword: string; password: string}>({
     confirmPassword: '',
     password: '',
-    secureTextEntry: true,
-    loader:false
   });
-
   const PasswordIcon = () => {
     return (
       <IconTouchableContainer
@@ -31,7 +32,6 @@ const Forget2: FC = () => {
       </IconTouchableContainer>
     );
   };
-
 
   const {t} = useTranslation();
   const {navigate} = useNavigation();
@@ -45,16 +45,9 @@ const Forget2: FC = () => {
     dispatch(
       NewPasswordHandler(
         phoneNumber,
-        state.password,
-        state.confirmPassword,
+        formData.current.password,
+        formData.current.confirmPassword,
         success => {
-          console.log(
-            phoneNumber,
-            state.password,
-            state.confirmPassword,
-            success,
-            'succ',
-          );
           setstate(old => ({...old, loader: false}));
           success && navigate('Forget3');
         },
@@ -82,12 +75,9 @@ const Forget2: FC = () => {
               rightContent={PasswordIcon}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    password: value,
-                  }));
+                  formData.current.password = value;
                 },
-                value: state.password,
+
                 secureTextEntry: state.secureTextEntry,
               }}
             />
@@ -100,12 +90,8 @@ const Forget2: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setstate(old => ({
-                    ...old,
-                    confirmPassword: value,
-                  }));
+                  formData.current.confirmPassword = value;
                 },
-                value: state.confirmPassword,
                 secureTextEntry: state.secureTextEntry,
               }}
             />

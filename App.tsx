@@ -56,9 +56,8 @@ i18n.use(initReactI18next).init({
 const App: FC = () => {
   const dispatch = useDispatch();
 
-  const {isRTL}: any = useSelector((state: RootState) => state.settings);
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
-  const [fcmToken, setFcmToken] = useState<string>('');
+  const [fcmToken, setFcmToken] = useState('');
   const requestUserPermission = async () => {
     try {
       const authStatus = await messaging().requestPermission();

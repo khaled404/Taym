@@ -14,9 +14,7 @@ import IconTouchableContainer from '../../components/touchables/IconTouchableCon
 
 const Profile: FC = () => {
   const {t} = useTranslation();
-  const {isLogin, userData}: any = useSelector(
-    (state: RootState) => state.auth,
-  );
+  const userData = useSelector((state: RootState) => state.auth.userData);
 
   const [username, setUsername] = useState(userData.name);
   const [email, setEmail] = useState(userData.email);
@@ -33,7 +31,6 @@ const Profile: FC = () => {
       </IconTouchableContainer>
     );
   };
-console.log(userData)
   return (
     <Container style={styles.container}>
       <Header title={t('Profile')} />
@@ -68,6 +65,7 @@ console.log(userData)
               contentContainerStyle={styles.contentContainerStyle}
               rightContent={() => <InputEditIcon />}
               options={{
+                editable: false,
                 onChangeText: value => {
                   setUsername(value);
                 },
@@ -83,6 +81,7 @@ console.log(userData)
               contentContainerStyle={styles.contentContainerStyle}
               rightContent={() => <InputEditIcon />}
               options={{
+                editable: false,
                 onChangeText: value => {
                   setEmail(value);
                 },
@@ -99,6 +98,7 @@ console.log(userData)
               contentContainerStyle={styles.contentContainerStyle}
               rightContent={() => <InputEditIcon />}
               options={{
+                editable: false,
                 onChangeText: value => {
                   setPhone(value);
                 },
@@ -116,6 +116,7 @@ console.log(userData)
               rightContent={PasswordIcon}
               iconRightStyle={{top: 9}}
               options={{
+                editable: false,
                 onChangeText: value => {
                   setPassword(value);
                 },
@@ -132,6 +133,7 @@ console.log(userData)
               contentContainerStyle={styles.contentContainerStyle}
               rightContent={() => <InputEditIcon />}
               options={{
+                editable: false,
                 onChangeText: value => {
                   setBirthdate(value);
                 },

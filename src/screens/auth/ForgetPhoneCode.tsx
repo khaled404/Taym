@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -13,9 +13,9 @@ import {VerifyPhoneForgetHandler} from '../../store/actions/auth';
 
 const ForgetPhoneCode: FC = () => {
   const [state, setstate] = useState({
-    code: '',
     loader: false,
   });
+  const code = useRef<string>('');
 
   const dispatch = useDispatch();
   const {phoneNumber}: any = useSelector(
@@ -27,7 +27,7 @@ const ForgetPhoneCode: FC = () => {
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
-      VerifyPhoneForgetHandler(state.code, success => {
+      VerifyPhoneForgetHandler(code.current, success => {
         setstate(old => ({...old, loader: false}));
         success && navigate('Forget2');
       }),
@@ -47,7 +47,7 @@ const ForgetPhoneCode: FC = () => {
           <View style={styles.inputContainer}>
             <CodeInput
               onChangeText={text => {
-                setstate(old => ({...old, code: text}));
+                code.current = text;
               }}
               arrayWidth={6}
             />
