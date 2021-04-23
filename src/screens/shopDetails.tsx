@@ -28,6 +28,7 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
 import Footer from '../components/ShopDetails/Footer';
+import FavoriteItem from '../components/Home/FavoriteItem';
 
 const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -299,233 +300,236 @@ const ShopDetails: FC = () => {
   };
   return (
     <>
-    <View style={styles.container}>
-      <ImageBackground source={Images.supermarket} style={styles.header}>
-        <View style={styles.overlay}>
-          <View
-            style={{
-              height: heightHeader / 2,
-              paddingHorizontal: Pixel(50),
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              position: 'relative',
-            }}>
-            <IconTouchableContainer
-              dark
-              onPress={goBack}
-              style={styles.headerBackBtn}>
-              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
-            </IconTouchableContainer>
-            <IconTouchableContainer
-              onPress={() => {
-                navigate('Cart');
+      <View style={styles.container}>
+        <ImageBackground source={Images.supermarket} style={styles.header}>
+          <View style={styles.overlay}>
+            <View
+              style={{
+                height: heightHeader / 2,
+                paddingHorizontal: Pixel(50),
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                position: 'relative',
               }}>
-              <CartIcon />
-            </IconTouchableContainer>
+              <IconTouchableContainer
+                dark
+                onPress={goBack}
+                style={styles.headerBackBtn}>
+                <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
+              </IconTouchableContainer>
+              <IconTouchableContainer
+                onPress={() => {
+                  navigate('Cart');
+                }}>
+                <CartIcon />
+              </IconTouchableContainer>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-      <Animated.View
-        style={[styles.content, {transform: [{translateY: translateContent}]}]}>
+        </ImageBackground>
         <Animated.View
           style={[
-            {
-              width: '100%',
-              alignItems: 'center',
-              height: 50,
-            },
-            {transform: [{scaleY: imageTranslateY}]},
+            styles.content,
+            {transform: [{translateY: translateContent}]},
           ]}>
           <Animated.View
             style={[
-              styles.imageContainer,
               {
-                opacity: opacity,
+                width: '100%',
+                alignItems: 'center',
+                height: 50,
               },
+              {transform: [{scaleY: imageTranslateY}]},
             ]}>
-            <Animated.Image
-              source={Images.marketLogo}
-              resizeMode={'contain'}
+            <Animated.View
               style={[
-                {width: Pixel(180), height: Pixel(180)},
+                styles.imageContainer,
                 {
                   opacity: opacity,
                 },
-              ]}
-            />
-          </Animated.View>
-        </Animated.View>
-
-        <Animated.View
-          style={[
-            {
-              transform: [{translateY: translateHeader}],
-              paddingHorizontal: 20,
-              width: '100%',
-            },
-          ]}>
-          <View style={[styles.storeDetail, {overflow: 'hidden'}]}>
-            <Text style={[styles.storeTitle, {textAlign: 'right'}]}>
-              {t('Supermarket')}
-            </Text>
-            <View style={{...commonStyles.rowBox}}>
-              <Animated.View
+              ]}>
+              <Animated.Image
+                source={Images.marketLogo}
+                resizeMode={'contain'}
                 style={[
-                  styles.storeDeliveryDetails,
+                  {width: Pixel(180), height: Pixel(180)},
                   {
-                    transform: [
-                      {
-                        translateX: isRTL
-                          ? translateHeaderActions
-                          : translateHeaderActionsReverse,
-                      },
-                    ],
-                    opacity: reverseOpacity,
-                  },
-                ]}>
-                <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <SearchIcon width={17} height={17} />
-                </IconTouchableContainer>
-                <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <FavoriteIcon width={20} height={20} />
-                </IconTouchableContainer>
-              </Animated.View>
-
-              <Animated.View
-                style={[
-                  styles.storeDeliveryDetails,
-                  {
-                    transform: [{translateY: translateHeaderDetails}],
                     opacity: opacity,
                   },
-                ]}>
-                <DeliveryIcon />
-                <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
-              </Animated.View>
-            </View>
-          </View>
-        </Animated.View>
+                ]}
+              />
+            </Animated.View>
+          </Animated.View>
 
-        <View
-          style={{
-            width: '100%',
-            overflow: 'hidden',
-            position: 'absolute',
-            top: 123,
-          }}>
           <Animated.View
             style={[
-              styles.searchInputContainer,
+              {
+                transform: [{translateY: translateHeader}],
+                paddingHorizontal: 20,
+                width: '100%',
+              },
+            ]}>
+            <View style={[styles.storeDetail, {overflow: 'hidden'}]}>
+              <Text style={[styles.storeTitle, {textAlign: 'right'}]}>
+                {t('Supermarket')}
+              </Text>
+              <View style={{...commonStyles.rowBox}}>
+                <Animated.View
+                  style={[
+                    styles.storeDeliveryDetails,
+                    {
+                      transform: [
+                        {
+                          translateX: isRTL
+                            ? translateHeaderActions
+                            : translateHeaderActionsReverse,
+                        },
+                      ],
+                      opacity: reverseOpacity,
+                    },
+                  ]}>
+                  <IconTouchableContainer style={styles.submitSearchBtn}>
+                    <SearchIcon width={17} height={17} />
+                  </IconTouchableContainer>
+                  <IconTouchableContainer style={styles.submitSearchBtn}>
+                    <FavoriteIcon width={20} height={20} />
+                  </IconTouchableContainer>
+                </Animated.View>
+
+                <Animated.View
+                  style={[
+                    styles.storeDeliveryDetails,
+                    {
+                      transform: [{translateY: translateHeaderDetails}],
+                      opacity: opacity,
+                    },
+                  ]}>
+                  <DeliveryIcon />
+                  <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
+                </Animated.View>
+              </View>
+            </View>
+          </Animated.View>
+
+          <View
+            style={{
+              width: '100%',
+              overflow: 'hidden',
+              position: 'absolute',
+              top: 123,
+            }}>
+            <Animated.View
+              style={[
+                styles.searchInputContainer,
+                {
+                  transform: [{translateY: translateCategorySection}],
+                  opacity: opacity,
+                },
+              ]}>
+              <Input
+                options={{
+                  placeholder: t('What You Are Looking For ?'),
+                  placeholderTextColor: '#949494',
+                }}
+                contentContainerStyle={{
+                  borderRadius: 22,
+                  borderWidth: 0,
+                  padding: Pixel(33),
+                }}
+                textInputContainer={{
+                  alignSelf: 'flex-start',
+                  // paddingVertical: Pixel(33),
+                }}
+                rightContent={() => <SearchSubmitBtn />}
+                iconRightStyle={{top: 4.5}}
+              />
+            </Animated.View>
+          </View>
+
+          <Animated.View
+            style={[
               {
                 transform: [{translateY: translateCategorySection}],
-                opacity: opacity,
+                position: 'absolute',
+                top: 200,
+                zIndex: 200,
+                backgroundColor: Colors.white,
               },
             ]}>
-            <Input
-              options={{
-                placeholder: t('What You Are Looking For ?'),
-                placeholderTextColor: '#949494',
-              }}
-              contentContainerStyle={{
-                borderRadius: 22,
-                borderWidth: 0,
-                padding: Pixel(33),
-              }}
-              textInputContainer={{
-                alignSelf:'flex-start'
-                // paddingVertical: Pixel(33),
-              }}
-              rightContent={() => <SearchSubmitBtn />}
-              iconRightStyle={{top: 4.5}}
-            />
+            <View
+              style={[
+                {
+                  height: 35,
+                  marginTop: 10,
+                  marginBottom: 5,
+                  paddingLeft: 20,
+                },
+              ]}>
+              <FlatList
+                data={DATA}
+                contentContainerStyle={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                renderItem={({item, index}) => (
+                  <Item
+                    selectedCategory={selectedCategory}
+                    handleSelectedCategory={title =>
+                      handleSelectedCategory(title)
+                    }
+                    item={item}
+                  />
+                )}
+                keyExtractor={item => item.id}
+                horizontal
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+              />
+            </View>
+            <View
+              style={[
+                {
+                  height: 35,
+                  marginBottom: 10,
+                  paddingLeft: 20,
+                  // marginVertical: 10
+                },
+              ]}>
+              <FlatList
+                data={DATA}
+                contentContainerStyle={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                renderItem={({item, index}) => (
+                  <SubCategoryItem
+                    selectedCategory={selectedCategory}
+                    handleSelectedCategory={(title: any) =>
+                      handleSelectedCategory(title)
+                    }
+                    item={item}
+                  />
+                )}
+                keyExtractor={item => item.id}
+                horizontal
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+              />
+            </View>
           </Animated.View>
-        </View>
 
-        <Animated.View
-          style={[
-            {
-              transform: [{translateY: translateCategorySection}],
-              position: 'absolute',
-              top: 200,
-              zIndex: 200,
-              backgroundColor: Colors.white,
-            },
-          ]}>
-          <View
-            style={[
+          <AnimatedScrollView
+            style={{flex: 1}}
+            contentContainerStyle={styles.contentContainer}
+            showsVerticalScrollIndicator={false}
+            onScroll={Animated.event(
+              [{nativeEvent: {contentOffset: {y: animatedValue}}}],
               {
-                height: 35,
-                marginTop: 10,
-                marginBottom: 5,
-                paddingLeft: 20,
+                useNativeDriver: true,
               },
-            ]}>
-            <FlatList
-              data={DATA}
-              contentContainerStyle={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              renderItem={({item, index}) => (
-                <Item
-                  selectedCategory={selectedCategory}
-                  handleSelectedCategory={title =>
-                    handleSelectedCategory(title)
-                  }
-                  item={item}
-                />
-              )}
-              keyExtractor={item => item.id}
-              horizontal
-              showsVerticalScrollIndicator={false}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-          <View
-            style={[
-              {
-                height: 35,
-                marginBottom: 10,
-                paddingLeft: 20,
-                // marginVertical: 10
-              },
-            ]}>
-            <FlatList
-              data={DATA}
-              contentContainerStyle={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              renderItem={({item, index}) => (
-                <SubCategoryItem
-                  selectedCategory={selectedCategory}
-                  handleSelectedCategory={(title: any) =>
-                    handleSelectedCategory(title)
-                  }
-                  item={item}
-                />
-              )}
-              keyExtractor={item => item.id}
-              horizontal
-              showsVerticalScrollIndicator={false}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-        </Animated.View>
-
-        <AnimatedScrollView
-          style={{flex: 1}}
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: animatedValue}}}],
-            {
-              useNativeDriver: true,
-            },
-          )}
-          scrollEventThrottle={16}>
-          {/* <FlatList
+            )}
+            scrollEventThrottle={16}>
+            {/* <FlatList
           data={categoryHomeData}
           numColumns={2}
           contentContainerStyle={{
@@ -537,16 +541,16 @@ const ShopDetails: FC = () => {
             // paddingBottom: 15,
           }}
           renderItem={({item, index}) => ( */}
-          {categoryHomeData.map((item, index) => (
-            <ProductListItem {...item} key={index} index={index} />
-          ))}
-          {/* )}
+            {categoryHomeData.map((item, index) => (
+              <FavoriteItem {...item} key={index} index={index} />
+            ))}
+            {/* )}
         /> */}
-          {/* <ProductsList data={} /> */}
-        </AnimatedScrollView>
-      </Animated.View>
-    </View>
-      <Footer/>
+            {/* <ProductsList data={} /> */}
+          </AnimatedScrollView>
+        </Animated.View>
+      </View>
+      <Footer />
     </>
   );
 };
@@ -585,7 +589,7 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 150,
-    marginBottom: -100,
+    marginBottom: -60,
     flex: 1,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,
