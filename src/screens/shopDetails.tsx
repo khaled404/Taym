@@ -167,9 +167,7 @@ const ShopDetails: FC = () => {
     },
   ];
   const {goBack} = useNavigation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   const animatedValue = useRef(new Animated.Value(0)).current;
-  const inputTextAlign = language === 'ar' ? 'right' : 'left';
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const Item = ({item, selectedCategory, handleSelectedCategory}) => (
@@ -282,6 +280,7 @@ const ShopDetails: FC = () => {
     outputRange: [0, 0.2, 0.5, 1],
     extrapolate: 'clamp',
   });
+
   const SearchSubmitBtn: FC = () => {
     return (
       <IconTouchableContainer style={styles.submitSearchBtn}>
@@ -315,7 +314,8 @@ const ShopDetails: FC = () => {
           </View>
         </View>
       </ImageBackground>
-      <View style={[styles.content]}>
+      <Animated.View
+        style={[styles.content, {transform: [{translateY: translateContent}]}]}>
         <Animated.View
           style={[
             {
@@ -354,11 +354,7 @@ const ShopDetails: FC = () => {
             },
           ]}>
           <View style={[styles.storeDetail, {overflow: 'hidden'}]}>
-            <Text
-              style={[
-                styles.storeTitle,
-                {textAlign: language === 'ar' ? 'left' : 'right'},
-              ]}>
+            <Text style={[styles.storeTitle, {textAlign: 'right'}]}>
               {t('Supermarket')}
             </Text>
             <View style={{...commonStyles.rowBox}}>
@@ -393,7 +389,13 @@ const ShopDetails: FC = () => {
           </View>
         </Animated.View>
 
-        <View style={{width: '100%', overflow: 'hidden'}}>
+        <View
+          style={{
+            width: '100%',
+            overflow: 'hidden',
+            position: 'absolute',
+            top: 123,
+          }}>
           <Animated.View
             style={[
               styles.searchInputContainer,
@@ -413,7 +415,7 @@ const ShopDetails: FC = () => {
                 padding: Pixel(33),
               }}
               textInputContainer={{
-                textAlign: inputTextAlign,
+                textAlign: 'right',
                 // paddingVertical: Pixel(33),
               }}
               rightContent={() => <SearchSubmitBtn/>}
@@ -423,7 +425,15 @@ const ShopDetails: FC = () => {
         </View>
 
         <Animated.View
-          style={[{transform: [{translateY: translateCategorySection}]}]}>
+          style={[
+            {
+              transform: [{translateY: translateCategorySection}],
+              position: 'absolute',
+              top: 200,
+              zIndex: 200,
+              backgroundColor: Colors.white,
+            },
+          ]}>
           <View
             style={[
               {
@@ -489,6 +499,7 @@ const ShopDetails: FC = () => {
         <AnimatedScrollView
           style={{flex: 1}}
           contentContainerStyle={styles.contentContainer}
+          showsVerticalScrollIndicator={false}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: animatedValue}}}],
             {
@@ -515,7 +526,7 @@ const ShopDetails: FC = () => {
         /> */}
           {/* <ProductsList data={} /> */}
         </AnimatedScrollView>
-      </View>
+      </Animated.View>
     </View>
   );
 };
@@ -528,12 +539,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
+    paddingTop: 200,
+
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     marginTop: 7,
-    paddingBottom: 15,
+    paddingBottom: 50,
   },
   header: {
     height: heightHeader,
@@ -552,6 +565,7 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 150,
+    marginBottom: -100,
     flex: 1,
     backgroundColor: Colors.white,
     borderTopLeftRadius: 30,

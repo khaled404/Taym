@@ -26,7 +26,7 @@ const DrawerItem: FC<Props> = ({
       styles.container,
       active && {backgroundColor: `${Colors.white}30`},
     ]}>
-    <Touchable onPress={isLogin ? onPress : null}>
+    <Touchable onPress={() => (isLogin ? onPress() : null)}>
       <View style={styles.list}>
         <View style={styles.listIcon}>
           {Icon && (
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     backgroundColor: Colors.colorSacand,
     borderRadius: 7,
+    overflow: 'hidden',
     paddingHorizontal: Pixel(20),
     paddingVertical: Pixel(10),
     color: Colors.white,
