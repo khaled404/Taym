@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors,Fonts,Pixel} from '../../constants/styleConstants';
+import {StyleSheet, Text, ImageBackground, View} from 'react-native';
+import {Colors,Fonts,Images,Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
@@ -8,14 +8,15 @@ import {useNavigation} from '@react-navigation/native';
 import { DeleteIcon} from '../../../assets/Icons/Icons';
 import {commonStyles} from '../../styles/styles';
 import LinearGradient from 'react-native-linear-gradient';
-
-const VisaCard: FC = () => {
+interface IVisaCard {
+  image?: any;
+}
+const VisaCard: FC<IVisaCard> = ({image}) => {
   const {t} = useTranslation();
 return(
 
-      <LinearGradient 
-      colors={['#5E5E5E','#414141','#292929','#171717','#0A0A0A','#020202','#000000']}
-      start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+      <ImageBackground 
+      source={image}
       style={styles.container} 
       >
 
@@ -59,7 +60,7 @@ return(
         </View>
         
 
-      </LinearGradient>
+      </ImageBackground>
 )
   };
   export default VisaCard

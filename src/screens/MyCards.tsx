@@ -2,13 +2,13 @@ import React, {FC, useState} from 'react';
 import {StyleSheet, Text, FlatList, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
-import {Colors,Fonts,Pixel} from '../constants/styleConstants';
+import {Colors,Fonts,Pixel,Images} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import Input from '../components/textInputs/Input'
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
-import {CheckedIcon} from '../../assets/Icons/Icons';
+import {CheckedIcon, Visa,PikerArrow} from '../../assets/Icons/Icons';
 import Button from "../components/touchables/Button";
 import {commonStyles} from '../styles/styles';
 import VisaCard from '../components/myCards/VisaCard'
@@ -30,38 +30,22 @@ const MyCards: FC = () => {
     {
       id: 1,
       title: t('Supermarket'),
-      image: 'Voucher 12457',
+      image: Images.card1,
     },
 
     {
       id: 2,
       title: t('Beef'),
-      image: 'Voucher 12457',
+      image: Images.card2,
     },
 
     {
       id: 3,
       title: t('Chicken'),
-      image: 'Voucher 12457',
+      image: Images.card3,
     },
 
-    {
-      id: 4,
-      title: t('Fish'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 5,
-      title: t('Fruit'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 6,
-      title: t('Vegetables'),
-      image: 'Voucher 12457',
-    },
+    
   ];
 
   const dispatch = useDispatch();
@@ -78,7 +62,9 @@ const MyCards: FC = () => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({item,index}) => 
-              <VisaCard/>
+              <VisaCard 
+                image={item.image}
+              />
         }
         />
         
@@ -86,22 +72,22 @@ const MyCards: FC = () => {
       <Content >
       <View style={styles.inputContainer}>
         <View style={styles.addTextConatiner} >
-          <Text style={styles.addText} >Add New Card</Text>
+          <Text style={styles.addText} >{t('Add New Card')}</Text>
         </View>
 
         {/***********Card Type******** */}
             <Text style={styles.inputLabel}>{t('Card Type')}</Text>
-            <Input
-              textInputContainer={styles.textInput}
-              contentContainerStyle={styles.contentContainerStyle}
-              //rightContent={() => <ArrowHeaderIcon width={Pixel(30)} height={Pixel(30)} />}
-              options={{
-                onChangeText: value => {
-                  setCardType(value);
-                },
-                value: cardType,
-              }}
-            />
+            <View style={[styles.textInput,{
+              backgroundColor:Colors.inputBackground,
+              borderRadius: 14,
+              paddingHorizontal:20,
+              alignItems:'center',
+              flexDirection:'row',
+              justifyContent:'space-between'
+            }]} >
+              <Visa/>
+              <PikerArrow width={Pixel(30)} height={Pixel(30)} />
+            </View>
 
              {/***********Card Number******** */}
              <Text style={styles.inputLabel}>{t('Card Number')}</Text>
@@ -160,7 +146,7 @@ const MyCards: FC = () => {
           {/********* */}
           <View style={styles.checkContainer} >
             <CheckedIcon/>
-            <Text style={styles.checkText} >Set As Default Payment Card</Text>
+            <Text style={styles.checkText} >{t('Set As Default Payment Card')}</Text>
           </View>
 
           {/*********** */}

@@ -131,5 +131,17 @@ export default {
   "Couldn't save your location please try agian!":
     'لم يتم تأكيد عنوانك برجاء المحاولة مرة اخرى',
   "View Cart":"السله",
-  "30 LE To Reach Min Order":"متبقي لديك 30LE للوصول للحد الادني"
+  "30 LE To Reach Min Order":"متبقي لديك 30LE للوصول للحد الادني",
+  "Card Number":"رقم الكارت",
+  "Card Type":"نوع الكارت",
+  "Ex Date":"تاريخ الانتهاء",
+  "Add New Card":"اضافة كارت جديد",
+  "Set As Default Payment Card":"استخدام كارت اساسي",
+  "Save Card":"حفظ",
+  "American Strawberry":"فراولة امريكية",
+  "Fresh Market":"فريش ماركت",
+  "Sizes":"الحجم",
+  "Add Notes":"اكتب ملاحظاتك",
+  "Write Your Notes Here":"اكتب ملاحظاتك",
+  "Add To Cart":"اضف الي السله"
 };
