@@ -16,12 +16,18 @@ import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {ArrowLeftSmIcon, CartIcon, DeliveryIcon, FavoriteIcon, SearchIcon,} from '../../assets/Icons/Icons';
+import {
+  ArrowLeftSmIcon,
+  CartIcon,
+  DeliveryIcon,
+  FavoriteIcon,
+  SearchIcon,
+} from '../../assets/Icons/Icons';
 import {commonStyles} from '../styles/styles';
 import {useNavigation} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
-import Footer from '../components/ShopDetails/Footer'
+import Footer from '../components/ShopDetails/Footer';
 
 const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
@@ -166,7 +172,7 @@ const ShopDetails: FC = () => {
       image: 'Voucher 12457',
     },
   ];
-  const {goBack} = useNavigation();
+  const {goBack, navigate} = useNavigation();
   const animatedValue = useRef(new Animated.Value(0)).current;
   const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -197,10 +203,10 @@ const ShopDetails: FC = () => {
     </TouchableOpacity>
   );
   const SubCategoryItem = ({
-                             item,
-                             selectedCategory,
-                             handleSelectedCategory,
-                           }) => (
+    item,
+    selectedCategory,
+    handleSelectedCategory,
+  }) => (
     <TouchableOpacity
       onPress={() => handleSelectedCategory(item.title)}
       style={[
@@ -284,7 +290,7 @@ const ShopDetails: FC = () => {
   const SearchSubmitBtn: FC = () => {
     return (
       <IconTouchableContainer style={styles.submitSearchBtn}>
-        <SearchIcon width={17} height={17}/>
+        <SearchIcon width={17} height={17} />
       </IconTouchableContainer>
     );
   };
@@ -308,9 +314,14 @@ const ShopDetails: FC = () => {
               dark
               onPress={goBack}
               style={styles.headerBackBtn}>
-              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate}/>
+              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
             </IconTouchableContainer>
-            <CartIcon/>
+            <IconTouchableContainer
+              onPress={() => {
+                navigate('Cart');
+              }}>
+              <CartIcon />
+            </IconTouchableContainer>
           </View>
         </View>
       </ImageBackground>
@@ -362,15 +373,21 @@ const ShopDetails: FC = () => {
                 style={[
                   styles.storeDeliveryDetails,
                   {
-                    transform: [{translateX: isRTL ? translateHeaderActions : translateHeaderActionsReverse}],
+                    transform: [
+                      {
+                        translateX: isRTL
+                          ? translateHeaderActions
+                          : translateHeaderActionsReverse,
+                      },
+                    ],
                     opacity: reverseOpacity,
                   },
                 ]}>
                 <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <SearchIcon width={17} height={17}/>
+                  <SearchIcon width={17} height={17} />
                 </IconTouchableContainer>
                 <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <FavoriteIcon width={20} height={20}/>
+                  <FavoriteIcon width={20} height={20} />
                 </IconTouchableContainer>
               </Animated.View>
 
@@ -382,7 +399,7 @@ const ShopDetails: FC = () => {
                     opacity: opacity,
                   },
                 ]}>
-                <DeliveryIcon/>
+                <DeliveryIcon />
                 <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
               </Animated.View>
             </View>
@@ -418,7 +435,7 @@ const ShopDetails: FC = () => {
                 textAlign: 'right',
                 // paddingVertical: Pixel(33),
               }}
-              rightContent={() => <SearchSubmitBtn/>}
+              rightContent={() => <SearchSubmitBtn />}
               iconRightStyle={{top: 4.5}}
             />
           </Animated.View>
@@ -520,7 +537,7 @@ const ShopDetails: FC = () => {
           }}
           renderItem={({item, index}) => ( */}
           {categoryHomeData.map((item, index) => (
-            <ProductListItem {...item} key={index} index={index}/>
+            <ProductListItem {...item} key={index} index={index} />
           ))}
           {/* )}
         /> */}
