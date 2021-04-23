@@ -93,9 +93,16 @@ const ProductPage: FC = () => {
             style={{
               borderBottomColor: Colors.CommonBorderColor,
               borderBottomWidth: 1,
+              borderTopColor: Colors.CommonBorderColor,
+              borderTopWidth: 1,
               paddingVertical: Pixel(40),
             }}>
-            <Text>
+            <Text
+              style={{
+                fontSize: 10,
+                fontWeight: Fonts.regular,
+                color: Colors.dark,
+              }}>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy reod tempor invidunt ut labore et dolore ma aliquyam , sed
               diam voluptua. At eos et accusam et justodolores et ea rebum. Stet
