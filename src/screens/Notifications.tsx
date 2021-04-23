@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {I18nManager, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Container} from '../components/containers/Containers';
 import {Colors, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
@@ -8,6 +8,7 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import NotificationItem from '../components/Notification/NotificationItem';
 import {TrashIcon} from '../../assets/Icons/Icons';
 
+const {isRTL} = I18nManager;
 const Notifications: FC = () => {
   const {t} = useTranslation();
   const [rowSlideOpen, setRowSlideOpen] = useState(0);
@@ -42,7 +43,7 @@ const Notifications: FC = () => {
       <TouchableOpacity
         style={[styles.backRightBtn, styles.backRightBtnRight]}
         onPress={() => deleteRow(rowMap, data.item.id)}>
-        <TrashIcon />
+        <TrashIcon/>
       </TouchableOpacity>
     </View>
   );
@@ -67,7 +68,7 @@ const Notifications: FC = () => {
 
   return (
     <Container style={styles.container}>
-      <Header title={t('Notifications')} />
+      <Header title={t('Notifications')}/>
       <SwipeListView
         data={listData}
         renderItem={(data, rowMap) => {
@@ -80,8 +81,8 @@ const Notifications: FC = () => {
           );
         }}
         renderHiddenItem={renderHiddenItem}
-        leftOpenValue={75}
-        rightOpenValue={-75}
+        leftOpenValue={isRTL ? 75 : 0}
+        rightOpenValue={isRTL ? 0 : -75}
         onRowDidOpen={onRowDidOpen}
         onLeftAction={onLeftAction}
         onRightAction={onRightAction}

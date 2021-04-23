@@ -68,7 +68,6 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
                                                                  translateCategoryTitle
                                                                }) => {
   const {t} = useTranslation();
-  const {language}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
