@@ -3,6 +3,7 @@ import {
   Animated,
   Dimensions,
   FlatList,
+  I18nManager,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -15,19 +16,13 @@ import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {
-  ArrowLeftSmIcon,
-  CartIcon,
-  DeliveryIcon,
-  FavoriteIcon,
-  SearchIcon,
-} from '../../assets/Icons/Icons';
+import {ArrowLeftSmIcon, CartIcon, DeliveryIcon, FavoriteIcon, SearchIcon,} from '../../assets/Icons/Icons';
 import {commonStyles} from '../styles/styles';
 import {useNavigation} from '@react-navigation/native';
-import ProductsList from '../components/products/ProductsList';
 import Input from '../components/textInputs/Input';
 import ProductListItem from '../components/products/ProductListItem';
 
+const {isRTL} = I18nManager;
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
@@ -203,10 +198,10 @@ const ShopDetails: FC = () => {
     </TouchableOpacity>
   );
   const SubCategoryItem = ({
-    item,
-    selectedCategory,
-    handleSelectedCategory,
-  }) => (
+                             item,
+                             selectedCategory,
+                             handleSelectedCategory,
+                           }) => (
     <TouchableOpacity
       onPress={() => handleSelectedCategory(item.title)}
       style={[
@@ -276,6 +271,11 @@ const ShopDetails: FC = () => {
     outputRange: [0, Pixel(-180)],
     extrapolate: 'clamp',
   });
+  const translateHeaderActionsReverse = animatedValue.interpolate({
+    inputRange: [Pixel(50), Pixel(90), Pixel(180)],
+    outputRange: [0, 20, 80],
+    extrapolate: 'clamp',
+  });
   const reverseOpacity = animatedValue.interpolate({
     inputRange: [0, Pixel(50), Pixel(80), Pixel(100)],
     outputRange: [0, 0.2, 0.5, 1],
@@ -284,7 +284,7 @@ const ShopDetails: FC = () => {
   const SearchSubmitBtn: FC = () => {
     return (
       <IconTouchableContainer style={styles.submitSearchBtn}>
-        <SearchIcon width={17} height={17} />
+        <SearchIcon width={17} height={17}/>
       </IconTouchableContainer>
     );
   };
@@ -308,9 +308,9 @@ const ShopDetails: FC = () => {
               dark
               onPress={goBack}
               style={styles.headerBackBtn}>
-              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate} />
+              <ArrowLeftSmIcon width={20} style={commonStyles.rtlRotate}/>
             </IconTouchableContainer>
-            <CartIcon />
+            <CartIcon/>
           </View>
         </View>
       </ImageBackground>
@@ -365,15 +365,15 @@ const ShopDetails: FC = () => {
                 style={[
                   styles.storeDeliveryDetails,
                   {
-                    transform: [{translateX: translateHeaderActions}],
+                    transform: [{translateX: isRTL ? translateHeaderActions : translateHeaderActionsReverse}],
                     opacity: reverseOpacity,
                   },
                 ]}>
                 <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <SearchIcon width={17} height={17} />
+                  <SearchIcon width={17} height={17}/>
                 </IconTouchableContainer>
                 <IconTouchableContainer style={styles.submitSearchBtn}>
-                  <FavoriteIcon width={20} height={20} />
+                  <FavoriteIcon width={20} height={20}/>
                 </IconTouchableContainer>
               </Animated.View>
 
@@ -385,7 +385,7 @@ const ShopDetails: FC = () => {
                     opacity: opacity,
                   },
                 ]}>
-                <DeliveryIcon />
+                <DeliveryIcon/>
                 <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
               </Animated.View>
             </View>
@@ -415,7 +415,7 @@ const ShopDetails: FC = () => {
                 textAlign: inputTextAlign,
                 // paddingVertical: Pixel(33),
               }}
-              rightContent={() => <SearchSubmitBtn />}
+              rightContent={() => <SearchSubmitBtn/>}
               iconRightStyle={{top: 4.5}}
             />
           </Animated.View>
@@ -508,7 +508,7 @@ const ShopDetails: FC = () => {
           }}
           renderItem={({item, index}) => ( */}
           {categoryHomeData.map((item, index) => (
-            <ProductListItem {...item} key={index} index={index} />
+            <ProductListItem {...item} key={index} index={index}/>
           ))}
           {/* )}
         /> */}

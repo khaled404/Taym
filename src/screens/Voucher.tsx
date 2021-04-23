@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {StyleSheet, View, ActivityIndicator} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import Header from '../components/header/Header';
 import ApplyInput from '../components/Voucher/ApplyInput';
@@ -7,11 +7,9 @@ import Balance from '../components/Voucher/Balance';
 import VoucherDetails from '../components/Voucher/VoucherDetails';
 import {Colors} from '../constants/styleConstants';
 import {commonStyles} from '../styles/styles';
-import {getVoucherData, addVoucher} from '../store/actions/voucher';
-import {axiosAPI} from '../constants/Config';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {addVoucher, getVoucherData} from '../store/actions/voucher';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
-import {AsyncKeys, getItem} from '../constants/helpers';
 import {useTranslation} from 'react-i18next';
 
 /*  let voucherData:any;
@@ -44,7 +42,7 @@ const Voucher: FC = () => {
 
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Voucher')} />
+      <Header title={t('Voucher')}/>
       <Content noPadding>
         <View style={styles.container}>
           <Balance
@@ -63,17 +61,17 @@ const Voucher: FC = () => {
             }}
           />
         </View>
-        <View style={styles.listContainer}>
-          {!transaction
-            ? null
-            : transaction.map((item, index) => (
-                <VoucherDetails
-                  {...item}
-                  key={index}
-                  isLast={index === transaction.length - 1}
-                />
-              ))}
-        </View>
+        {transaction.length <= 0
+          ? null
+          : <View style={styles.listContainer}>
+            {transaction.map((item, index) => (
+              <VoucherDetails
+                {...item}
+                key={index}
+                isLast={index === transaction.length - 1}
+              />
+            ))}
+          </View>}
       </Content>
     </Container>
   );
