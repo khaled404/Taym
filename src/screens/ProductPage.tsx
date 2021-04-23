@@ -14,10 +14,10 @@ import {Container, Content} from '../components/containers/Containers';
 import Input from '../components/textInputs/Input';
 import {Colors, Images, Pixel, Fonts} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
+ import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
 import {useNavigation} from '@react-navigation/native';
 import {commonStyles} from '../styles/styles';
-import {
+ import {
   UnCheckedIcon,
   CartIcon,
   ArrowLeftSmIcon,
@@ -31,8 +31,8 @@ const heightHeader = Dimensions.get('window').height / 4;
 
 const ProductPage: FC = () => {
   const {t} = useTranslation();
-  const {goBack, navigate} = useNavigation();
-
+   const {goBack, navigate} = useNavigation();
+ 
   return (
     <Container style={styles.container}>
       <ImageBackground
@@ -43,8 +43,8 @@ const ProductPage: FC = () => {
           <View
             style={{
               height: heightHeader / 2,
-              paddingHorizontal: Pixel(30),
-              flexDirection: 'row',
+               paddingHorizontal: Pixel(30),
+               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
               position: 'relative',
@@ -55,6 +55,7 @@ const ProductPage: FC = () => {
             <IconTouchableContainer onPress={() => navigate('Cart')}>
               <CartIcon />
             </IconTouchableContainer>
+
           </View>
         </View>
       </ImageBackground>
@@ -87,8 +88,6 @@ const ProductPage: FC = () => {
               </Text>
             </View>
           </View>
-
-          {/*********desc********* */}
           <View
             style={{
               borderBottomColor: Colors.CommonBorderColor,
@@ -111,7 +110,6 @@ const ProductPage: FC = () => {
             </Text>
           </View>
 
-          {/***********size************** */}
           <View style={styles.sizeContainer}>
             <Text style={styles.sizeText}>{t('Sizes')}</Text>
             <View style={styles.optionsContainer}>
@@ -127,7 +125,6 @@ const ProductPage: FC = () => {
             </View>
           </View>
 
-          {/**************notes***************** */}
           <View style={styles.sizeContainer}>
             <Text style={styles.sizeText}>{t('Add Notes')}</Text>
             <View
@@ -147,7 +144,6 @@ const ProductPage: FC = () => {
             </View>
           </View>
 
-          {/******************* */}
           <View style={styles.footer}>
             <View style={styles.cartItemActions}>
               <TouchableOpacity
@@ -353,5 +349,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: Pixel(200),
+  },
+  desc: {
+    fontFamily: Fonts.regular,
+    fontSize: Pixel(23),
+    color: '#070707',
   },
 });
