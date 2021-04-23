@@ -1,16 +1,12 @@
 import React, {FC} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
-import {
-  CartItemOfferIcon,
-  MinusIcon,
-  PlusIcon,
-} from '../../../assets/Icons/Icons';
+import {CartItemOfferIcon, MinusIcon, PlusIcon,} from '../../../assets/Icons/Icons';
 import {useNavigation} from '@react-navigation/native';
 import FastImage from 'react-native-fast-image';
-import {RootState} from '../../store/store';
-import {useSelector} from 'react-redux';
+import {useTranslation} from "react-i18next";
+const {isRTL} = I18nManager;
 
 interface ICartItem {
   id: number;
@@ -23,20 +19,21 @@ interface ICartItem {
 }
 
 const CartItem: FC<ICartItem> = ({
-  id,
-  title,
-  price,
-  specifications,
-  offerValue,
-  quantity,
-  image,
-}) => {
+                                   id,
+                                   title,
+                                   price,
+                                   specifications,
+                                   offerValue,
+                                   quantity,
+                                   image,
+                                 }) => {
   const {navigate} = useNavigation();
+  const {t} = useTranslation();
   return (
     <View style={styles.cartItemContainer}>
       <View style={styles.cartItemDetail}>
         <View style={styles.cartItemImage}>
-          <FastImage source={image} style={[commonStyles.image]} />
+          <FastImage source={image} style={[commonStyles.image]}/>
         </View>
         <View
           style={{
@@ -45,14 +42,14 @@ const CartItem: FC<ICartItem> = ({
             paddingLeft: Pixel(7),
           }}>
           <Text style={[styles.cartItemTitle, {textAlign: 'left'}]}>
-            {title}
+            {t('Product Name')}
           </Text>
           <Text
             style={[
               styles.cartItemSpecifications,
               {marginTop: Pixel(20), textAlign: 'left'},
             ]}>
-            {specifications}
+            {t('1 KG')}
           </Text>
           <View
             style={{
@@ -62,7 +59,7 @@ const CartItem: FC<ICartItem> = ({
               marginTop: Pixel(15),
             }}>
             <Text style={styles.cartItemPrice}>{price}</Text>
-            <View style={styles.cartItemActions}>
+            <View style={[styles.cartItemActions, {flexDirection: isRTL ? 'row-reverse' : 'row',}]}>
               <TouchableOpacity
                 style={[
                   styles.cartItemActionBtn,
@@ -71,7 +68,7 @@ const CartItem: FC<ICartItem> = ({
                     backgroundColor: Colors.warning,
                   },
                 ]}>
-                <MinusIcon />
+                <MinusIcon/>
               </TouchableOpacity>
               <Text style={styles.cartItemQuantity}>{quantity}</Text>
               <TouchableOpacity
@@ -81,15 +78,15 @@ const CartItem: FC<ICartItem> = ({
                     backgroundColor: Colors.success,
                   },
                 ]}>
-                <PlusIcon />
+                <PlusIcon/>
               </TouchableOpacity>
             </View>
           </View>
-      
+
         </View>
       </View>
       <View style={styles.cartItemOffer}>
-        <CartItemOfferIcon />
+        <CartItemOfferIcon/>
         <Text style={styles.cartItemOfferText}>{offerValue}</Text>
       </View>
     </View>
@@ -139,7 +136,7 @@ const styles = StyleSheet.create({
     color: Colors.colorSacand,
   },
   cartItemActions: {
-    flexDirection: 'row',
+
     justifyContent: 'space-between',
   },
   cartItemOffer: {

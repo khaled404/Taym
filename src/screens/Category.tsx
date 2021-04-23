@@ -30,6 +30,7 @@ const SearchSubmitBtn: FC = () => {
     </IconTouchableContainer>
   );
 };
+const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
 const {isRTL} = I18nManager;
 const Category: FC = () => {
@@ -392,8 +393,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.sacandAppBackgroundColor,
   },
   contentContainer: {
-    paddingHorizontal: Pixel(20),
     paddingVertical: Pixel(20),
+    paddingBottom: 200,
   },
   headerCategoryList: {
     // paddingHorizontal: 20,

@@ -13,8 +13,7 @@ const data = [
         price: '150 LE',
         date: 'Today 03 January 2021',
         time: '02:30 PM',
-        details: 'KitKat Ruby Cocoa Beans 120ml (5) , Banana 1kg , Water\n' +
-            'Bottle Small (1)',
+        details: 'KitKat Ruby Cocoa Beans 120ml (5) , Banana 1kg',
         status: 'Out For Delivery',
         store: 'Fresh Market',
         note: 'Order Will Delivered Within 30 Min',
