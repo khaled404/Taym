@@ -55,6 +55,7 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
+                {textAlign: "left"}
               ]}>
               {t('Cart Total')}
             </Text>
@@ -69,6 +70,7 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
+                {textAlign: "left"}
               ]}>
               {t('Services Charge')}
             </Text>
@@ -83,6 +85,7 @@ const CartDetails: FC = () => {
             <Text
               style={[
                 styles.orderDetailsText,
+                {textAlign: "left"}
               ]}>
               {t('Discount')}
             </Text>
@@ -100,6 +103,7 @@ const CartDetails: FC = () => {
                 styles.orderDetailsText,
                 {
                   color: '#622A7B',
+                  textAlign: "left"
                 },
               ]}>
               {t('Total Amount')}
@@ -183,7 +187,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.medium,
     flex: 0.7,
     color: Colors.dark,
-    alignSelf:'flex-start'
+    // alignSelf:'flex-start'
     // textAlign: "left",
   },
   textCenter: {
