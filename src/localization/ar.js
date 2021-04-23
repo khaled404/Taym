@@ -16,8 +16,20 @@ export default {
   'Skip >>': 'تخطي >>',
   "Don't Have An Account ?": 'ليس لدي حساب !',
   Save: 'حفظ',
+  'More Details': 'عرض المزيد',
+  'Order #5478': 'طلب رقم 12457',
+  'KitKat Ruby Cocoa Beans 120ml (5) , Banana 1kg': 'شيكولاته كيت كات ( 5 ) , موز 1 كيلو , زجاجة مياه',
   Logout: 'تسجل الخروج',
+  'Fresh Market': 'فريش ماركت',
+  'Out For Delivery': 'جاري التوصيل',
   Home: 'الرئيسية',
+  'See Details': 'التفاصيل',
+  'Order Will Delivered Within 30 Min': 'الطلب سوف يصل في خلال 30 دقيقه',
+  'Market Name': 'اسم المحل',
+  Date: 'التاريخ',
+  'Order Number': 'رقم الطلب',
+  'Product Name': 'اسم المنتج',
+  '1 KG': '1 كيلو',
   password: 'كلمة المرور',
   Password: 'كلمة المرور',
   Phone: 'رقم الهاتف',
@@ -130,6 +142,6 @@ export default {
   'Find your location': 'ابحث عن موقعك',
   "Couldn't save your location please try agian!":
     'لم يتم تأكيد عنوانك برجاء المحاولة مرة اخرى',
-  "View Cart":"السله",
-  "30 LE To Reach Min Order":"متبقي لديك 30LE للوصول للحد الادني"
+  "View Cart": "السله",
+  "30 LE To Reach Min Order": "متبقي لديك 30LE للوصول للحد الادني"
 };
