@@ -111,10 +111,6 @@ const App: FC = () => {
   //   console.log('userV', userV);
   // };
 
-  useEffect(() => {
-    dispatch(getUserAddressApi());
-  }, []);
-
   return (
     <>
       <View
