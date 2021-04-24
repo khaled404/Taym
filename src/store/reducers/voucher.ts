@@ -5,6 +5,7 @@ const initialState = {
   voucherData: {},
   voucherError: {},
   transaction: [],
+  user: '',
 };
 export default (state = initialState, {type, payload}: IReduser) => {
   switch (type) {
@@ -13,11 +14,13 @@ export default (state = initialState, {type, payload}: IReduser) => {
         ...state,
         transaction: payload.transaction,
         voucherData: payload,
+        user: payload.user,
       };
     case ActionType.ADD_USER_VOUCHER:
       return {
         ...state,
         transaction: payload.transaction,
+        user: payload.user,
       };
     case ActionType.ADD_USER_VOUCHER_ERROR:
       return {

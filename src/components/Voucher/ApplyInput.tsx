@@ -19,9 +19,7 @@ const ApplyInput: FC<IApplyInput> = ({onPress, options}) => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-          style={[
-            styles.textInput,
-          ]}
+          style={[styles.textInput]}
           placeholder={t('Add Voucher')}
           {...options}
         />
@@ -71,6 +69,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontFamily: Fonts.bold,
     fontSize: Pixel(25),
-    alignSelf:'flex-start'
+    alignSelf: 'flex-start',
+    width: '100%',
   },
 });

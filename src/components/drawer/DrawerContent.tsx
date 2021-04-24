@@ -34,7 +34,9 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: RootState) => state.auth.userData);
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
-  const {voucherData}: any = useSelector((state: RootState) => state.voucher);
+  const {voucherData, user}: any = useSelector(
+    (state: RootState) => state.voucher,
+  );
   const {t}: any = useTranslation();
   // console.log('voucherData.user', voucherData);
 
@@ -118,7 +120,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={VouchergIcon}
               title={t('Voucher')}
-              voucher={voucherData.user + ' LE'}
+              voucher={user + ' LE'}
               onPress={() => {
                 navigation?.navigate('Voucher');
               }}
@@ -127,7 +129,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={ListIcon}
               title={t('My Orders')}
-               onPress={() => {
+              onPress={() => {
                 navigation?.navigate('MyOrders');
               }}
               isLogin={isLogin}
