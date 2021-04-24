@@ -23,8 +23,6 @@ const Login: FC = () => {
   const [state, setstate] = useState({
     secureTextEntry: true,
     loader: false,
-  });
-  const formData = useRef<{email: string; password: string}>({
     email: '',
     password: '',
   });
@@ -42,14 +40,10 @@ const Login: FC = () => {
     setstate(old => ({...old, loader: true}));
     console.log(state, ' state');
     dispatch(
-      LoginHandler(
-        formData.current.email,
-        formData.current.password,
-        success => {
-          setstate(old => ({...old, loader: false}));
-          success && navigate('Home');
-        },
-      ),
+      LoginHandler(state.email, state.password, success => {
+        setstate(old => ({...old, loader: false}));
+        success && navigate('Home');
+      }),
     );
   };
   return (
@@ -67,8 +61,10 @@ const Login: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: (value: string) => {
-                  formData.current.email = value;
+                  setstate(old => ({...old, email: value}));
                 },
+                value: state.email,
+
                 keyboardType: 'email-address',
               }}
               erorrMessage={InputErorrHandler(loginErorrs, 'email')}
@@ -83,8 +79,9 @@ const Login: FC = () => {
               rightContent={PasswordIcon}
               iconRightStyle={{top: 10}}
               options={{
+                value: state.password,
                 onChangeText: value => {
-                  formData.current.password = value;
+                  setstate(old => ({...old, password: value}));
                 },
                 secureTextEntry: state.secureTextEntry,
                 onSubmitEditing: submitHandler,

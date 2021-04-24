@@ -364,8 +364,7 @@ const Category: FC = () => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         />
-        <Content
-          noPadding
+        <AnimatedScrollView
           contentContainerStyle={styles.contentContainer}
           ref={_scrollRef}
           // onScroll={Animated.event(
@@ -379,10 +378,14 @@ const Category: FC = () => {
               useNativeDriver: true,
             },
           )}
-          options={{scrollEventThrottle: 16}}>
-          <Text style={[styles.sectionTitle]}>{selectedCategory}</Text>
-          <CategoryStoresList data={filteredData} />
-        </Content>
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16}>
+          <View>
+            <Text style={[styles.sectionTitle]}>{selectedCategory}</Text>
+            <CategoryStoresList data={filteredData} />
+          </View>
+        </AnimatedScrollView>
       </Animated.View>
     </Container>
   );
