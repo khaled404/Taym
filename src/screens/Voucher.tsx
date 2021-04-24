@@ -18,7 +18,7 @@ getItem(AsyncKeys.GET_USER_VOUCHERS).then(data => voucherData = data);
 const Voucher: FC = () => {
   const dispatch = useDispatch();
   const {t}: any = useTranslation();
-  const {transaction, voucherData}: any = useSelector(
+  const {transaction, voucherData, user}: any = useSelector(
     (state: RootState) => state.voucher,
   );
   const {userData}: any = useSelector((state: RootState) => state.auth);
@@ -42,12 +42,12 @@ const Voucher: FC = () => {
 
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Voucher')}/>
+      <Header title={t('Voucher')} />
       <Content noPadding>
         <View style={styles.container}>
           <Balance
             name={userData.name}
-            value={transaction.length == 0 ? '0' : voucherData.user}
+            value={transaction.length == 0 ? '0' : user}
             date="EX . 22 January 2021"
           />
           <ApplyInput
@@ -61,9 +61,8 @@ const Voucher: FC = () => {
             }}
           />
         </View>
-        {transaction.length <= 0
-          ? null
-          : <View style={styles.listContainer}>
+        {transaction.length <= 0 ? null : (
+          <View style={styles.listContainer}>
             {transaction.map((item, index) => (
               <VoucherDetails
                 {...item}
@@ -71,7 +70,8 @@ const Voucher: FC = () => {
                 isLast={index === transaction.length - 1}
               />
             ))}
-          </View>}
+          </View>
+        )}
       </Content>
     </Container>
   );

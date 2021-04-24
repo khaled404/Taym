@@ -13,11 +13,23 @@ interface IBalance {
 }
 const Balance: FC<IBalance> = ({date, value, name}) => {
   const {t} = useTranslation();
-  const dat = new Date()
+  const dat = new Date();
   const month = dat.getMonth();
-  const mon = ['Jan.', 'Feb.','Mar.','Apr.' , 'May.' , 'Jun.' , 'Jul.' , 'Aug.' , 'Sep.' , 'Oct.', 'Nov.' , 'Dec.']
+  const mon = [
+    'Jan.',
+    'Feb.',
+    'Mar.',
+    'Apr.',
+    'May.',
+    'Jun.',
+    'Jul.',
+    'Aug.',
+    'Sep.',
+    'Oct.',
+    'Nov.',
+    'Dec.',
+  ];
   const day = dat.getDate();
-  console.log(dat ,'===>' ,mon[month] , '====> ' ,   '====> ' , day)
   return (
     <ImageBackground source={Images.voucherBackground} style={styles.container}>
       <View
@@ -51,17 +63,21 @@ const Balance: FC<IBalance> = ({date, value, name}) => {
           paddingHorizontal: 20,
         }}>
         <Text style={styles.date}>{t(name)}</Text>
-        <View style={{
-          flexDirection:'row',
-          alignItems:'center'
-        }} >
-        <View style={{
-          flexDirection:'column'
-        }} >
-          <Text style={styles.date1} >VALID</Text>
-          <Text style={styles.date1} >THRU</Text>
-        </View>
-        <Text style={styles.date2}>{day} {mon[month]}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              flexDirection: 'column',
+            }}>
+            <Text style={styles.date1}>VALID</Text>
+            <Text style={styles.date1}>THRU</Text>
+          </View>
+          <Text style={styles.date2}>
+            {day} {mon[month]}
+          </Text>
         </View>
       </View>
     </ImageBackground>
@@ -94,7 +110,7 @@ const styles = StyleSheet.create({
   date2: {
     fontFamily: Fonts.medium,
     fontSize: Pixel(20),
-    paddingLeft:Pixel(13)
+    paddingLeft: Pixel(13),
   },
   date1: {
     fontFamily: Fonts.medium,
