@@ -72,7 +72,6 @@ export const addVoucher = (code: string, cb: (success?: boolean) => void) => {
             type: 'success',
           });
           console.log(data, 'add voucher ...');
-          getVoucherData();
           cb(true);
         }
       }
