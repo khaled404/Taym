@@ -17,8 +17,6 @@ const Forget2: FC = () => {
   const [state, setstate] = useState({
     secureTextEntry: true,
     loader: false,
-  });
-  const formData = useRef<{confirmPassword: string; password: string}>({
     confirmPassword: '',
     password: '',
   });
@@ -45,8 +43,8 @@ const Forget2: FC = () => {
     dispatch(
       NewPasswordHandler(
         phoneNumber,
-        formData.current.password,
-        formData.current.confirmPassword,
+        state.password,
+        state.confirmPassword,
         success => {
           setstate(old => ({...old, loader: false}));
           success && navigate('Forget3');
@@ -75,7 +73,7 @@ const Forget2: FC = () => {
               rightContent={PasswordIcon}
               options={{
                 onChangeText: value => {
-                  formData.current.password = value;
+                  setstate(old => ({...old, password: value}));
                 },
 
                 secureTextEntry: state.secureTextEntry,
@@ -90,7 +88,7 @@ const Forget2: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  formData.current.confirmPassword = value;
+                  setstate(old => ({...old, confirmPassword: value}));
                 },
                 secureTextEntry: state.secureTextEntry,
               }}

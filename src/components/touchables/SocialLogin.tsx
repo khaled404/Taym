@@ -1,8 +1,8 @@
-import React, { FC, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { FacebookIcon, GoogleIcon } from '../../../assets/Icons/Icons';
-import { Fonts, Pixel } from '../../constants/styleConstants';
-import { commonStyles } from '../../styles/styles';
+import React, {FC, useEffect} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FacebookIcon, GoogleIcon} from '../../../assets/Icons/Icons';
+import {Fonts, Pixel} from '../../constants/styleConstants';
+import {commonStyles} from '../../styles/styles';
 import {
   GoogleSignin,
   statusCodes,
@@ -14,16 +14,16 @@ import {
   GraphRequest,
   Settings,
 } from 'react-native-fbsdk-next';
-import { useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { SocialLoginHandler } from '../../store/actions/auth';
+import {useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import {SocialLoginHandler} from '../../store/actions/auth';
 
 interface ISocialLogin {
   title: string;
 }
-const SocialLogin: FC<ISocialLogin> = ({ title }) => {
+const SocialLogin: FC<ISocialLogin> = ({title}) => {
   const dispatch = useDispatch();
-  const { navigate } = useNavigation();
+  const {navigate} = useNavigation();
   useEffect(() => {
     Settings.initializeSDK();
 
@@ -99,7 +99,7 @@ const SocialLogin: FC<ISocialLogin> = ({ title }) => {
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       (result: {
         isCancelled: any;
-        grantedPermissions: { toString: () => string };
+        grantedPermissions: {toString: () => string};
       }) => {
         console.log(result);
         if (result.isCancelled) {
@@ -107,7 +107,7 @@ const SocialLogin: FC<ISocialLogin> = ({ title }) => {
         } else {
           console.log(
             'Login success with permissions: ' +
-            result.grantedPermissions.toString(),
+              result.grantedPermissions.toString(),
           );
 
           AccessToken.getCurrentAccessToken().then(() => {

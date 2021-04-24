@@ -19,8 +19,6 @@ const Register: FC = () => {
   const [state, setstate] = useState({
     secureTextEntry: true,
     loader: false,
-  });
-  const formData = useRef<{email: string; password: string; name: string}>({
     name: '',
     email: '',
     password: '',
@@ -36,18 +34,13 @@ const Register: FC = () => {
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
-      RegisterHandler(
-        formData.current.name,
-        formData.current.email,
-        formData.current.password,
-        success => {
-          setstate(old => ({
-            ...old,
-            loader: false,
-          }));
-          success && navigate('CompleteRegister');
-        },
-      ),
+      RegisterHandler(state.name, state.email, state.password, success => {
+        setstate(old => ({
+          ...old,
+          loader: false,
+        }));
+        success && navigate('CompleteRegister');
+      }),
     );
   };
   const PasswordIcon = () => {
@@ -75,7 +68,7 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  formData.current.name = value;
+                  setstate(old => ({...old, name: value}));
                 },
               }}
               erorrMessage={InputErorrHandler(registerErorrs, 'name')}
@@ -89,7 +82,7 @@ const Register: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  formData.current.email = value;
+                  setstate(old => ({...old, email: value}));
                 },
                 keyboardType: 'email-address',
               }}
@@ -106,7 +99,7 @@ const Register: FC = () => {
               iconRightStyle={{top: 10}}
               options={{
                 onChangeText: value => {
-                  formData.current.password = value;
+                  setstate(old => ({...old, password: value}));
                 },
                 secureTextEntry: state.secureTextEntry,
                 onSubmitEditing: submitHandler,
