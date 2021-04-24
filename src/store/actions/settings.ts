@@ -7,6 +7,7 @@ import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {getVoucherData} from './voucher';
 import {saveCategories} from './categories';
+import {getUserAddressApi} from './address';
 
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
@@ -64,9 +65,13 @@ const updateUserVouchers = () => {
   };
 };
 export const initializApp = () => {
-  return (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<any>) => {
     try {
-      dispatch(updateUserVouchers());
+      const userData = await getItem(AsyncKeys.USER_DATA);
+      if (userData !== null) {
+        dispatch(getUserAddressApi());
+        dispatch(updateUserVouchers());
+      }
       dispatch(userHomeApi());
       dispatch(loadApp());
     } catch (error) {
