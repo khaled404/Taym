@@ -12,7 +12,7 @@ interface IVoucherDetails {
   ex: string;
   voucher_name: string | null;
   isLast: boolean;
-  status: boolean;
+  status: string;
 }
 
 const VoucherDetails: FC<IVoucherDetails> = ({
@@ -35,8 +35,9 @@ const VoucherDetails: FC<IVoucherDetails> = ({
       </View>
       <View style={styles.box}>
         <Text style={styles.price}>{total_amount + ' LE'}</Text>
-        <Text style={[styles.ex, status && {color: Colors.success}]}>
-          {'EX. ' + switchStatus.toString().slice(0,15)}
+        <Text style={[styles.ex]}>
+          {getDateHandler(date)}
+          {/*{'EX. ' + switchStatus.toString().slice(0,15)}*/}
         </Text>
       </View>
       {!!voucher_name && <Text style={styles.note}>{voucher_name}</Text>}

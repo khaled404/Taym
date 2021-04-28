@@ -39,16 +39,16 @@ const Voucher: FC = () => {
       }),
     );
   };
-
+  console.log('transaction', transaction)
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Voucher')} />
+      <Header title={t('Voucher')}/>
       <Content noPadding>
         <View style={styles.container}>
           <Balance
             name={userData.name}
-            value={transaction.length == 0 ? '0' : user}
-            date="EX . 22 January 2021"
+            value={(transaction === undefined || transaction.length === 0) ? '0' : user}
+            date={transaction !== undefined ? transaction.slice(-1).pop().date : ''}
           />
           <ApplyInput
             onPress={() => addVouchers()}

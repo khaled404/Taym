@@ -1,29 +1,33 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import FastImage from 'react-native-fast-image';
 import {DeliveryIcon} from '../../../assets/Icons/Icons';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store/store';
 import {useNavigation} from '@react-navigation/native';
-
+const {isRTL} = I18nManager;
 interface ICategoryStoreItem {
   index: number;
   id: string;
-  title: string;
-  image: string;
+  name_en: string;
+  name_ar: string;
+  logo: string;
+  cover: string;
+  delivery_time: string;
   isLast: Boolean;
 }
 
 const CategoryStoreItem: FC<ICategoryStoreItem> = ({
-  index,
-  id,
-  title,
-  image,
-  isLast,
-}) => {
+                                                     index,
+                                                     id,
+                                                     name_en,
+                                                     name_ar,
+                                                     logo,
+                                                     cover,
+                                                     delivery_time,
+                                                     isLast,
+                                                   }) => {
   const {t} = useTranslation();
   const {navigate} = useNavigation();
   return (
@@ -33,23 +37,23 @@ const CategoryStoreItem: FC<ICategoryStoreItem> = ({
       <View
         style={[styles.imageContainer, {height: Pixel(215), width: '100%'}]}>
         <FastImage
-          source={Images.offerSlider}
+          source={{uri:cover}}
           style={commonStyles.image}
           resizeMode="cover"
         />
         <View style={styles.storeLogoContainer}>
           <FastImage
-            source={Images.storelogo1}
+            source={{uri:logo}}
             style={commonStyles.image}
             resizeMode="contain"
           />
         </View>
       </View>
       <View style={styles.storeDetail}>
-        <Text style={[styles.storeTitle]}>{title}</Text>
+        <Text style={[styles.storeTitle]}>{isRTL ? name_ar : name_en}</Text>
         <View style={styles.storeDeliveryDetails}>
-          <DeliveryIcon />
-          <Text style={styles.storeDeliveryPeriod}>30{t(' Min')}</Text>
+          <DeliveryIcon/>
+          <Text style={styles.storeDeliveryPeriod}>{delivery_time}{t(' Min')}</Text>
         </View>
       </View>
     </TouchableOpacity>

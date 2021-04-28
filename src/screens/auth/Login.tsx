@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState, useEffect} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -32,7 +32,7 @@ const Login: FC = () => {
         onPress={() => {
           setstate(old => ({...old, secureTextEntry: !old.secureTextEntry}));
         }}>
-        <EyeIcon />
+        <EyeIcon/>
       </IconTouchableContainer>
     );
   };
@@ -43,12 +43,12 @@ const Login: FC = () => {
       LoginHandler(state.email, state.password, success => {
         setstate(old => ({...old, loader: false}));
         success && navigate('Home');
-      }),
+      }, () => navigate("PhoneCode")),
     );
   };
   return (
     <Container style={styles.container}>
-      <AuthHeader />
+      <AuthHeader/>
       <Content style={styles.contentContainer}>
         <Text style={styles.mainTitle}>{t('Sign In')}</Text>
         <View style={styles.inputsContainer}>
@@ -110,7 +110,7 @@ const Login: FC = () => {
               loader={state.loader}
             />
           </View>
-          <SocialLogin title={t('Or Sign In With')} />
+          <SocialLogin title={t('Or Sign In With')}/>
 
           <TouchableOpacity
             style={{

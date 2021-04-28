@@ -1,50 +1,44 @@
-import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
-import {
-  Animated,
-  FlatList,
-  I18nManager,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {Container, Content} from '../components/containers/Containers';
-import {Colors, Fonts, Images, Pixel} from '../constants/styleConstants';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import {Animated, FlatList, I18nManager, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {Container} from '../components/containers/Containers';
+import {Colors, Fonts, Pixel} from '../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import CategoryHeader from '../components/header/CategoryHeader';
 import FastImage from 'react-native-fast-image';
 import {commonStyles} from '../styles/styles';
 import CategoryStoresList from '../components/Category/CategoryStoresList';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import Input from '../components/textInputs/Input';
 import {SearchIcon} from '../../assets/Icons/Icons';
 import IconTouchableContainer from '../components/touchables/IconTouchableContainer';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/store';
+import {getCategoryVendors} from "../store/actions/vendors";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store/store";
+
+const {isRTL} = I18nManager;
 
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17} />
+      <SearchIcon width={17} height={17}/>
     </IconTouchableContainer>
   );
 };
 const AnimatedScrollView = Animated.createAnimatedComponent(ScrollView);
 
-const {isRTL} = I18nManager;
-const Category: FC = () => {
-  const {t} = useTranslation();
 
+const Category: FC = () => {
+
+  const {t} = useTranslation();
   const {navigate} = useNavigation();
-  // const [contentOffsetY, setContentOffsetY] = useState(0);
+  const route = useRoute();
+  const dispatch = useDispatch();
   const [toggleHeader, setToggleHeader] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
   const slideInOut = useRef(new Animated.Value(0)).current;
-  const [active, setActive] = useState(true);
-  const [scrollValue, setScrollValue] = useState(0);
   const _scrollRef = useRef<ScrollView>();
+  const {categories}: any = useSelector((state: RootState) => state.categories);
+  const {vendors}: any = useSelector((state: RootState) => state.vendors);
 
   const Item = ({item, selectedCategory, handleSelectedCategory}) => (
     <TouchableOpacity
@@ -52,7 +46,7 @@ const Category: FC = () => {
       style={[styles.headerCategoryListItem]}>
       <View style={[styles.imageContainer]}>
         <FastImage
-          source={Images.offerSlider}
+          source={{uri: item.icon}}
           style={commonStyles.image}
           resizeMode="cover"
         />
@@ -62,147 +56,15 @@ const Category: FC = () => {
           styles.categoryTitle,
           {
             color:
-              selectedCategory === item.title
+              selectedCategory
                 ? Colors.colorSacand
                 : Colors.dark,
           },
         ]}>
-        {item.title}
+        {isRTL ? item.name_ar : item.name_en}
       </Text>
     </TouchableOpacity>
   );
-
-  const DATA = [
-    {
-      id: 1,
-      title: t('Supermarket'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 2,
-      title: t('Beef'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 3,
-      title: t('Chicken'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 4,
-      title: t('Fish'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 5,
-      title: t('Fruit'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 6,
-      title: t('Vegetables'),
-      image: 'Voucher 12457',
-    },
-
-    {
-      id: 7,
-      title: t('Vegetables'),
-      image: 'Voucher 12457',
-    },
-  ];
-  const STORES_DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: t('Refresh Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '3ac682afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Beef'),
-    },
-    {
-      id: '3ac682afc-c605-48dw3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Chicken'),
-    },
-    {
-      id: '3ac68afc-c60s5-48d3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '3ac68afc-c605-48df3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '3ac68afc-c60asd5-48d3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '3ac68dsaafc-c605-48d3-a4f8-fbd91aa97f63',
-      title: t('Smile Market'),
-      image: 'Text 1',
-      category: t('Supermarket'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: t('Restaurant Market'),
-      image: 'Text 1',
-      category: t('Fruit'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bsd96-145571e29d72',
-      title: t('Refresh Market'),
-      image: 'Text 1',
-      category: t('Fish'),
-    },
-    {
-      id: '58694a0f-3da1-471f-bsdad96-145571e29d72',
-      title: t('Restaurant Market'),
-      image: 'Text 1',
-      category: t('Vegetables'),
-    },
-  ];
-
-  const toggleActive = useCallback(() => {
-    setActive(e => !e);
-    // onValueChange && onValueChange(active);
-    Animated.timing(slideInOut, {
-      toValue: active ? 0 : 1,
-      useNativeDriver: true,
-    }).start();
-  }, [active]);
-
-  const translate = {
-    transform: [
-      {
-        translateX: slideInOut.interpolate({
-          inputRange: [0, 1],
-          outputRange: [0, 18.5],
-        }),
-      },
-    ],
-  };
 
   const opacity = slideInOut.interpolate({
     inputRange: [0, 0.5, 1],
@@ -262,47 +124,27 @@ const Category: FC = () => {
     outputRange: [0, 20, 30],
     extrapolate: 'clamp',
   });
-  // const handleOnScroll = (event: Object) => {
-  //   console.log('handleOnScroll opacity ', opacity)
-  //   console.log('handleOnScroll reverseOpacity', reverseOpacity)
-  //   console.log('handleOnScroll translate1', translate1)
-  //   console.log('handleOnScroll translate2', translate2)
-  //   console.log('handleOnScroll translate3', translate3)
-  //   console.log('handleOnScroll translatex', translatex)
-  //   console.log('handleOnScroll slideInOut', slideInOut)
-  //   console.log('nativeEvent.contentOffset.y', event.nativeEvent.contentOffset.y)
-  //   setScrollValue(event.nativeEvent.contentOffset.y)
-  //   if (event.nativeEvent.contentOffset.y >= 40) {
-  //   console.log('event.nativeEvent', 'true')
-  //   setToggleHeader(true);
-  //   toggleActive();
-  //   } else {
-  //     console.log('event.nativeEvent', 'false')
-  //   setToggleHeader(false);
-  //   toggleActive();
-  //   }
-  // }
+
+  useEffect(() => {
+    if (route.params.categoryId !== undefined && route.params.categoryName !== undefined) {
+      setSelectedCategory(route.params.categoryName);
+      dispatch(getCategoryVendors(route.params.categoryId, (success) => {
+        console.log('getCategoryVendors success')
+      }));
+    }
+  }, [route.params.categoryId, route.params.categoryName])
 
   const handleToggleHeader = () => {
     setToggleHeader(!toggleHeader);
     _scrollRef.current.scrollTo({y: 0, animated: true});
   };
 
-  const handleSelectedCategory = (category: string) => {
-    setSelectedCategory(category);
-    let data = STORES_DATA.filter(store => store.category === category);
-    setFilteredData(data);
+  const handleSelectedCategory = (categoryId: number, categoryName: string) => {
+    setSelectedCategory(categoryName);
+    dispatch(getCategoryVendors(categoryId, (success) => {
+      console.log('getCategoryVendors success')
+    }));
   };
-
-  useEffect(() => {
-    setSelectedCategory(t('Supermarket'));
-    let data = STORES_DATA.filter(store => store.category === t('Supermarket'));
-    setFilteredData(data);
-  }, []);
-
-  // useEffect(() => {
-  //   console.log('useEffect slideInOut', slideInOut)
-  // }, [slideInOut]);
 
   return (
     <Container style={styles.container}>
@@ -343,19 +185,18 @@ const Category: FC = () => {
             }}
             textInputContainer={{
               alignSelf: 'flex-start',
-              // paddingVertical: Pixel(33),
             }}
-            rightContent={() => <SearchSubmitBtn />}
+            rightContent={() => <SearchSubmitBtn/>}
             iconRightStyle={{top: 4.5}}
           />
         </Animated.View>
         <FlatList
-          data={DATA}
+          data={categories}
           style={{paddingBottom: 10}}
           renderItem={({item, index}) => (
             <Item
-              selectedCategory={selectedCategory}
-              handleSelectedCategory={title => handleSelectedCategory(title)}
+              selectedCategory={selectedCategory === (isRTL ? item.name_ar : item.name_en)}
+              handleSelectedCategory={() => handleSelectedCategory(item.id, isRTL ? item.name_ar : item.name_en)}
               item={item}
             />
           )}
@@ -367,14 +208,9 @@ const Category: FC = () => {
         <AnimatedScrollView
           contentContainerStyle={styles.contentContainer}
           ref={_scrollRef}
-          // onScroll={Animated.event(
-          //   [{nativeEvent: {contentOffset: {y: slideInOut}}}],
-          //   {useNativeDriver: true}
-          // )}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: slideInOut}}}],
             {
-              // listener: (event) => handleOnScroll(event),
               useNativeDriver: true,
             },
           )}
@@ -383,7 +219,7 @@ const Category: FC = () => {
           scrollEventThrottle={16}>
           <View>
             <Text style={[styles.sectionTitle]}>{selectedCategory}</Text>
-            <CategoryStoresList data={filteredData} />
+            <CategoryStoresList data={vendors}/>
           </View>
         </AnimatedScrollView>
       </Animated.View>
@@ -398,14 +234,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingVertical: Pixel(20),
     paddingBottom: 200,
+    borderTopWidth: 1,
+    borderColor: '#707070',
+
   },
   headerCategoryList: {
     // paddingHorizontal: 20,
     marginHorizontal: 20,
-    borderBottomWidth: 1,
-    borderColor: '#707070',
+    // borderBottomWidth: 1,
+    // borderColor: '#707070',
     paddingTop: Pixel(10),
     paddingBottom: Pixel(20),
+    // backgroundColor:'red'
     //marginTop:Pixel(320)
   },
   headerCategoryListItem: {

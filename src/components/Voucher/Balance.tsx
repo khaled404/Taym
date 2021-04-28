@@ -1,35 +1,29 @@
-import React, {FC} from 'react';
-import {ImageBackground, StyleSheet, Text, View} from 'react-native';
-import {Colors, Fonts, Pixel, Images} from '../../constants/styleConstants';
+import React, {FC, useEffect, useMemo, useState} from 'react';
+import {I18nManager, ImageBackground, StyleSheet, Text, View} from 'react-native';
+import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {useTranslation} from 'react-i18next';
-import {BlackLine} from '../../../assets/Icons/Icons';
 import LinearGradient from 'react-native-linear-gradient';
+
+const {isRTL} = I18nManager;
 
 interface IBalance {
   value: string;
   date: string;
   name: string;
 }
+
 const Balance: FC<IBalance> = ({date, value, name}) => {
+  const dateOptions = useMemo(() => ({day: 'numeric', month: 'short'}), []);
+  const [lastDate, setLastDate] = useState('');
+
+  useEffect(() => {
+    const event = new Date(date);
+    setLastDate(event.toLocaleDateString(isRTL ? 'ar-EG' : 'en-US', dateOptions))
+  }, [date]);
+
   const {t} = useTranslation();
-  const dat = new Date();
-  const month = dat.getMonth();
-  const mon = [
-    'Jan.',
-    'Feb.',
-    'Mar.',
-    'Apr.',
-    'May.',
-    'Jun.',
-    'Jul.',
-    'Aug.',
-    'Sep.',
-    'Oct.',
-    'Nov.',
-    'Dec.',
-  ];
-  const day = dat.getDate();
+
   return (
     <ImageBackground source={Images.voucherBackground} style={styles.container}>
       <View
@@ -76,7 +70,8 @@ const Balance: FC<IBalance> = ({date, value, name}) => {
             <Text style={styles.date1}>THRU</Text>
           </View>
           <Text style={styles.date2}>
-            {day} {mon[month]}
+            {/*{day} {mon[month]}*/}
+            {lastDate}
           </Text>
         </View>
       </View>

@@ -5,6 +5,7 @@ import settings from '../store/reducers/settings';
 import {PersistConfig} from '../constants/helpers';
 import auth from './reducers/auth';
 import categories from './reducers/categories';
+import vendors from './reducers/vendors';
 import voucher from './reducers/voucher';
 import address from './reducers/address';
 const authConfig: any = new PersistConfig('auth', 'userData', 'isLogin');
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   voucher: persistReducer(voucherConfig, voucher),
   address: persistReducer(addressConfig, address),
   categories: categories,
+  vendors: vendors,
 });
 
 export const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
