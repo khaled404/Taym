@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "226921527475",
-    "project_id": "taym-app",
-    "storage_bucket": "taym-app.appspot.com"
+    "project_number": "1092909459597",
+    "project_id": "taym-978cc",
+    "storage_bucket": "taym-978cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:226921527475:android:06480b227cac08368898c6",
+        "mobilesdk_app_id": "1:1092909459597:android:efdec9f5b05ae1faf9dac4",
         "android_client_info": {
           "package_name": "com.taym"
         }
       },
       "oauth_client": [
         {
-          "client_id": "226921527475-o64c9cief53ebakhnkcdl45nmi90tlot.apps.googleusercontent.com",
+          "client_id": "1092909459597-ub796bjkahttnihtftndk8t9nlbia1i3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBITXu2-R64qnxBqfeEQN-wuA_rz5bwALU"
+          "current_key": "AIzaSyABCVKqWAeJpyUpI3xlfHF_OWAfUHBgXrU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "226921527475-o64c9cief53ebakhnkcdl45nmi90tlot.apps.googleusercontent.com",
+              "client_id": "1092909459597-ub796bjkahttnihtftndk8t9nlbia1i3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1092909459597-1ohvr37479sji5makr3g6geq7dlopc7b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.taym.io"
+              }
             }
           ]
         }

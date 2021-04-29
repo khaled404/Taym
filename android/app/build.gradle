@@ -227,3 +227,8 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+/**
+ed:43:d8:18:a2:52:19:b2:73:a1:1a:e6:88:93:a0:8d:9e:4d:72:43
+5e:8f:16:06:2e:a3:cd:2c:4a:0d:54:78:76:ba:a6:f3:8c:ab:f6:25
+7d:e7:12:0e:1f:11:f2:eb:07:8a:ad:1c:04:e4:1e:e8:0f:45:c7:af
+*/
