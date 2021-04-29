@@ -37,6 +37,7 @@
     "react-native-flash-message": "^0.1.21",
     "react-native-geocoding": "^0.5.0",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-google-analytics-bridge": "^7.1.0",
     "react-native-google-places-autocomplete": "^2.2.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-maps": "0.26.1",
