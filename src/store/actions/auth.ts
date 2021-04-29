@@ -113,25 +113,28 @@ export const VerifyPhoneCodeHandler = (
       cb(true);
     } catch (error) {
       cb(false);
-      showMessage({
-        message: error?.response.data.message.code[0],
-        type: 'danger',
-      });
-      console.log(error?.response);
+      // showMessage({
+      //   message: error?.response.data.message.code[0],
+      //   type: 'danger',
+      // });
+      console.log('VerifyPhoneCodeHandler Error', error?.response.data.message);
     }
   };
 };
 
 /**
  * Register user step 4
- * @param coords user current location
+ * @param latitude
+ * @param longitude
  * @param cb callback function with success is true or false
+ * @param navigate
  */
 export const VerifyUserLocationHandler = (
   // coords: {latitude: string; longitude: string},
   latitude: number,
   longitude: number,
   cb: (success?: boolean) => void,
+  navigate: (screen: string) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
@@ -148,15 +151,15 @@ export const VerifyUserLocationHandler = (
       dispatch({
         type: ActionType.SAVE_USER_DATA_STEP_3,
       });
-
       cb(true);
+      navigate('Home');
     } catch (error) {
       cb(false);
       console.log('VerifyUserLocationHandler', error?.response);
-      // showMessage({
-      //   message: error?.response.data,
-      //   type: 'danger',
-      // });
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
     }
   };
 };
@@ -166,11 +169,13 @@ export const VerifyUserLocationHandler = (
  * @param email user email
  * @param password user password
  * @param cb callback function with success is true or false
+ * @param navigate
  */
 export const LoginHandler = (
   email: string,
   password: string,
   cb: (success?: boolean) => void,
+  navigate: (screen: string) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
@@ -196,6 +201,8 @@ export const LoginHandler = (
       cb(true);
     } catch (error) {
       cb(false);
+      console.log('error?.response.data.error', error?.response.data.error);
+
       dispatch({
         type: ActionType.SAVE_LOGIN_ERORRS,
         payload: error?.response.data.message,
@@ -203,11 +210,20 @@ export const LoginHandler = (
       {
         error.response.data.error
           ? showMessage({
-              message: error?.response.data.error,
-              type: 'danger',
-            })
+            message: error?.response.data.error,
+            type: 'danger',
+          })
           : null;
       }
+      if (error?.response.data.error === 'Please Verify phone') {
+        await saveItem(AsyncKeys.USER_DATA, {phone: error?.response.data.phone, token: error?.response.data.token});
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_STEP_2,
+          payload: error?.response.data.phone,
+        });
+        navigate('PhoneCode');
+      }
+
       console.log('Loginerorr', error?.response);
     }
   };

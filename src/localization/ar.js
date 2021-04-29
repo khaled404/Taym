@@ -27,6 +27,7 @@ export default {
   'Order Will Delivered Within 30 Min': 'الطلب سوف يصل في خلال 30 دقيقه',
   'Market Name': 'اسم المحل',
   Date: 'التاريخ',
+  'There is no vendors': 'لا يوجد متاجر',
   'Order Number': 'رقم الطلب',
   'Product Name': 'اسم المنتج',
   '1 KG': '1 كيلو',

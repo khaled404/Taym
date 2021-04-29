@@ -1,16 +1,16 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {StyleSheet, Text, View, TextInputProps} from 'react-native';
+import {I18nManager, StyleSheet, Text, TextInputProps, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
-import {RootState} from '../../store/store';
 import {commonStyles} from '../../styles/styles';
 import Touchable from '../touchables/Touchable';
 
+const {isRTL} = I18nManager;
+
 interface IApplyInput {
   onPress?: () => void;
-  options?: TextInputProps & {ref?: (ref: any) => void};
+  options?: TextInputProps & { ref?: (ref: any) => void };
 }
 
 const ApplyInput: FC<IApplyInput> = ({onPress, options}) => {
@@ -19,7 +19,8 @@ const ApplyInput: FC<IApplyInput> = ({onPress, options}) => {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-          style={[styles.textInput]}
+          style={[styles.textInput, {textAlign: isRTL ? 'right' : 'left'}]}
+
           placeholder={t('Add Voucher')}
           {...options}
         />
@@ -69,7 +70,6 @@ const styles = StyleSheet.create({
   textInput: {
     fontFamily: Fonts.bold,
     fontSize: Pixel(25),
-    alignSelf: 'flex-start',
     width: '100%',
   },
 });

@@ -19,7 +19,7 @@ export default (state = initialState, {type, payload}: IReduser) => {
     case ActionType.SAVE_USER_DATA_STEP_2:
       return {
         ...state,
-        userData: {...state.userData, phone: payload},
+        userData: {...state.userData, phone: payload.phone, token: payload.token},
       };
     case ActionType.SAVE_USER_DATA_STEP_3:
       return {

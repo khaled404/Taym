@@ -1,25 +1,21 @@
-import React, {FC, useRef, useEffect, useState, useMemo} from 'react';
+import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
 import {I18nManager, Platform, StyleSheet, View} from 'react-native';
-import {Container, Content} from '../../components/containers/Containers';
+import {Container} from '../../components/containers/Containers';
 import Header from '../../components/header/Header';
 import {Colors} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
-import MapView, {
-  AnimatedRegion,
-  Marker,
-  PROVIDER_GOOGLE,
-} from 'react-native-maps';
+import MapView, {AnimatedRegion, Marker, PROVIDER_GOOGLE,} from 'react-native-maps';
 import {useTranslation} from 'react-i18next';
 import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import Button from '../../components/touchables/Button';
 import {showMessage} from 'react-native-flash-message';
 import {useNavigation} from '@react-navigation/native';
-import {shallowEqual, useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {VerifyUserLocationHandler} from '../../store/actions/auth';
 import GooglePlacesInput from '../../components/MyAddresses/GooglePlacesInput';
 import {MAP_API_KEY} from '../../constants/Config';
-import {RootState} from '../../store/store';
+
 const {isRTL} = I18nManager;
 const RegisterLocation: FC = () => {
 
@@ -136,6 +132,7 @@ const RegisterLocation: FC = () => {
               navigate('Home');
             }
           },
+          () => navigate('Home')
         ),
       );
     } else {
@@ -168,16 +165,16 @@ const RegisterLocation: FC = () => {
         style={styles.map}
         initialRegion={state.region}
         onRegionChangeComplete={handleRegionChange}>
-        <Marker.Animated ref={_marker} coordinate={state.region} />
+        <Marker.Animated ref={_marker} coordinate={state.region}/>
       </MapView.Animated>
     ),
     [state.region],
   );
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
-      <Header title={t('Current Location')} />
+      <Header title={t('Current Location')}/>
       <View style={[styles.autoCompleteContainer]}>
-        <GooglePlacesInput onSelectResult={handleRegionChange} />
+        <GooglePlacesInput onSelectResult={handleRegionChange}/>
       </View>
       {renderMap}
       <View style={styles.submitBtnContainer}>

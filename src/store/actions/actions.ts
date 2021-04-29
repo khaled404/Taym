@@ -32,4 +32,5 @@ export enum ActionType {
   SAVE_ADDRESSLIST,
   DELETE_ADDRESS,
   SAVE_CATEGORIES,
+  SAVE_VENDORS,
 }
