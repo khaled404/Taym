@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>226921527475-92pbisrmnnn5dsiidk9ho0n5hropckc7.apps.googleusercontent.com</string>
+	<string>1092909459597-1ohvr37479sji5makr3g6geq7dlopc7b.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.226921527475-92pbisrmnnn5dsiidk9ho0n5hropckc7</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>226921527475-5mhe4v6kdqmnm2qudgh80cgc87o3qttg.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.1092909459597-1ohvr37479sji5makr3g6geq7dlopc7b</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDcuU2ksqSHML5SlmDaAPXlCTBua6GAP2E</string>
+	<string>AIzaSyCqtDSySX69mLs7X6AzdbK3IvdCw89Q7do</string>
 	<key>GCM_SENDER_ID</key>
-	<string>226921527475</string>
+	<string>1092909459597</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.taym.io</string>
 	<key>PROJECT_ID</key>
-	<string>taym-app</string>
+	<string>taym-978cc</string>
 	<key>STORAGE_BUCKET</key>
-	<string>taym-app.appspot.com</string>
+	<string>taym-978cc.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:226921527475:ios:9d4be9d4e6de453c8898c6</string>
+	<string>1:1092909459597:ios:594c64ae4ac042d8f9dac4</string>
 </dict>
 </plist>
