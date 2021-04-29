@@ -411,6 +411,10 @@ PODS:
     - React
   - react-native-geolocation (2.0.2):
     - React
+  - react-native-google-analytics-bridge (7.1.0):
+    - react-native-google-analytics-bridge/Core (= 7.1.0)
+  - react-native-google-analytics-bridge/Core (7.1.0):
+    - React
   - react-native-google-maps (0.26.1):
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.2.0)
@@ -567,6 +571,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-google-analytics-bridge (from `../node_modules/react-native-google-analytics-bridge`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-restart (from `../node_modules/react-native-restart`)
@@ -676,6 +681,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk-next"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
+  react-native-google-analytics-bridge:
+    :path: "../node_modules/react-native-google-analytics-bridge"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
@@ -787,6 +794,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 0ae35a37b20d5e031eb020a69cc5afdbd6406301
   react-native-fbsdk-next: f7c82b89362ce76911fc5655b027eab2cbbbcbf2
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
+  react-native-google-analytics-bridge: fac6becc9475cae635bff51382be089ea97bddda
   react-native-google-maps: 2e2e697dab576abd5809d78cd74e775865b62bf7
   react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
@@ -819,6 +827,6 @@ SPEC CHECKSUMS:
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: bce942da9fb3db1ee5a46897b9f4837ac41b4bda
+PODFILE CHECKSUM: 14181d45689f35e2cd125d2dd10de3ea9f896a62
 
 COCOAPODS: 1.10.1
