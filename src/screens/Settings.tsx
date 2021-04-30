@@ -19,7 +19,7 @@ const Settings: FC = () => {
           <SettingsItem
             title={t('Addresses')}
             btnTitle={t('Check Out  >')}
-            btnAction={'AddressLocation'}
+            btnAction={'MyAddresses'}
           />
           <SettingsItem
             title={t('My Cards')}

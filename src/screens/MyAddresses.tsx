@@ -15,6 +15,7 @@ import { RootState } from '../store/store';
 const MyAddresses: FC = () => {
   const [selectedId, setSelectedId] = useState(null);
   const { addressList }: any = useSelector((state: RootState) => state.address);
+  console.log('addressList',addressList)
   const dispatch = useDispatch();
   const { t } = useTranslation();
   useEffect(() => {
@@ -48,7 +49,7 @@ const MyAddresses: FC = () => {
             style={{ borderRadius: 10, ...commonStyles.boxShadow }}
             styleTitle={{ fontSize: Pixel(30) }}
             title={t('Add A New One +')}
-            onPress={() => navigate('AddLocation')}
+            onPress={() => navigate('AddressLocation')}
           />
         </View>
       </Content>

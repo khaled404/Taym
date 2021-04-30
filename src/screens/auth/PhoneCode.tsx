@@ -33,7 +33,9 @@ const PhoneCode: FC = () => {
       }),
     );
   };
-
+  // AboElela
+  // sayed.aboelela96@gmail.com
+  // Sayed@123
   return (
     <Container style={styles.container}>
       <AuthHeader />

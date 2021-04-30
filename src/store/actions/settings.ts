@@ -44,6 +44,11 @@ export const userHomeApi = () => {
     try {
       const {data} = await axiosAPI.post(`guest/user-home`);
       dispatch(saveCategories(data.data.categories));
+      console.log('data.data',data.data)
+      dispatch({
+        type: ActionType.SAVE_USER_LOCATION_SUPPORT,
+        payload: data.data.locationSupport,
+      });
     } catch (error) {
       console.log('userHomeApiError', error?.response);
     }

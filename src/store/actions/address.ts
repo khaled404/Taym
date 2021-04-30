@@ -20,6 +20,7 @@ export const getUserAddressApi = () => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const {data} = await axiosAPI.get(`user/user-addresses`);
+      console.log('getUserAddressApi data',data)
       dispatch(saveAddressList(data.data.addresses));
     } catch (error) {
       console.log('getUserAddressApiError', error.response);
@@ -66,6 +67,7 @@ interface IAddress {
   building_no: string;
   floor_no: string;
   apartment_no: string;
+  description: string;
   latitude: number;
   longitude: number;
 }
@@ -87,10 +89,10 @@ export const addAddressApi = (
       cb(true);
     } catch (error) {
       cb(false);
-      showMessage({
-        message: error?.response.data.error[0],
-        type: 'danger',
-      });
+      // showMessage({
+      //   message: error?.response,
+      //   type: 'danger',
+      // });
       console.log('addAddressApiError', error?.response);
     }
   };

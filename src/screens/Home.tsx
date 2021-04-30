@@ -10,6 +10,7 @@ import FavoriteList from '../components/Home/FavoriteList';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
+import {WarningIcon} from "../../assets/Icons/Icons";
 
 const Home: FC = () => {
   const {t} = useTranslation();
@@ -80,21 +81,22 @@ const Home: FC = () => {
   ];
 
   const dispatch = useDispatch();
-  const {isRTL}: any = useSelector((state: RootState) => state.settings);
   const {categories}: any = useSelector((state: RootState) => state.categories);
+  const {locationSupport,userData}: any = useSelector((state: RootState) => state.auth);
   const {navigate} = useNavigation();
 
-  useEffect(() => {
-    console.log('categories', categories)
-  }, []);
+  // useEffect(() => {
+    // console.log('userData',userData.userId)
+  // }, []);
 
   return (
     <Container style={styles.container}>
       <HomeHeader navigate={navigate} title={t('Home')}/>
       <Content noPadding>
-        {categories.length > 0 && <View style={styles.contentContainer}>
+        {locationSupport && categories.length > 0 && <View style={styles.contentContainer}>
           <CategoryList data={categories}/>
         </View>}
+        {/*<WarningIcon/>*/}
         <OfferSlider data={carouselItems}/>
         <View style={styles.contentContainer}>
           <FavoriteList inHome data={categoryHomeData}/>

@@ -18,8 +18,12 @@ const Balance: FC<IBalance> = ({date, value, name}) => {
   const [lastDate, setLastDate] = useState('');
 
   useEffect(() => {
-    const event = new Date(date);
-    setLastDate(event.toLocaleDateString(isRTL ? 'ar-EG' : 'en-US', dateOptions))
+    if (date !== '') {
+      const event = new Date(date);
+      setLastDate(event.toLocaleDateString(isRTL ? 'ar-EG' : 'en-US', dateOptions))
+    } else {
+      setLastDate('');
+    }
   }, [date]);
 
   const {t} = useTranslation();

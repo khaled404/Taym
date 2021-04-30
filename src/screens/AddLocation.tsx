@@ -23,7 +23,7 @@ const AddLocation: FC = () => {
   const [buildingNumber, setBuildingNumber] = useState('');
   const [floor, setFloor] = useState('');
   const [apartment, setApartment] = useState('');
-  const [landmark, setLandmark] = useState('');
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     if (newLocationObj !== null && Object.keys(newLocationObj).length > 0) {
@@ -36,11 +36,12 @@ const AddLocation: FC = () => {
     const addressData = {
       name: name,
       phone: phone,
-      area_id: area,
+      area: area,
       street_name: street,
       building_no: buildingNumber,
       floor_no: floor,
       apartment_no: apartment,
+      description: description,
       latitude: newLocationObj.latitude,
       longitude: newLocationObj.longitude,
     };
@@ -199,9 +200,9 @@ const AddLocation: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setLandmark(value);
+                  setDescription(value);
                 },
-                value: landmark,
+                value: description,
               }}
             />
           </View>
@@ -256,7 +257,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.bold,
     fontSize: Pixel(33),
     color: '#070707',
-    alignSelf:'flex-start'
+    alignSelf: 'flex-start'
   },
   contentContainerStyle: {
     borderRadius: 14,

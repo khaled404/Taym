@@ -24,12 +24,29 @@ const Voucher: FC = () => {
   const {userData}: any = useSelector((state: RootState) => state.auth);
   const [state, setstate] = useState({
     code: '',
+    balanceValue: '',
+    balanceDate: '',
     loader: false,
   });
   useEffect(() => {
     dispatch(getVoucherData());
   }, []);
 
+  useEffect(() => {
+    if (transaction !== undefined) {
+      setstate(old => ({
+        ...old,
+        balanceDate: transaction.length !== 0 ? transaction.slice(-1).pop().date : '',
+        balanceValue: transaction.length === 0 ? 0 : user
+      }));
+    } else {
+      setstate(old => ({
+        ...old,
+        balanceDate: '',
+        balanceValue: '0'
+      }));
+    }
+  }, [transaction, user]);
   const addVouchers = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
@@ -39,7 +56,7 @@ const Voucher: FC = () => {
       }),
     );
   };
-  console.log('transaction', transaction)
+  console.log('state.balanceDate', state.balanceDate)
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>
       <Header title={t('Voucher')}/>
@@ -47,8 +64,8 @@ const Voucher: FC = () => {
         <View style={styles.container}>
           <Balance
             name={userData.name}
-            value={(transaction === undefined || transaction.length === 0) ? '0' : user}
-            date={transaction !== undefined ? transaction.slice(-1).pop().date : ''}
+            value={state.balanceValue}
+            date={state.balanceDate}
           />
           <ApplyInput
             onPress={() => addVouchers()}

@@ -18,9 +18,9 @@ interface IAddress {
   building_no: string;
   floor_no: string;
   street_name: string;
-  area_ar: string;
-  area_en: string;
+  area: string;
   apartment_no: string;
+  description: string;
   phone: string;
   onPress: () => void;
   selected: boolean;
@@ -34,9 +34,9 @@ const Address: FC<IAddress> = ({
                                  building_no,
                                  floor_no,
                                  street_name,
-                                 area_ar,
-                                 area_en,
+                                 area,
                                  apartment_no,
+                                 description,
                                  onPress,
                                  selected,
                                  inCart,
@@ -57,9 +57,9 @@ const Address: FC<IAddress> = ({
               building_no,
               floor_no,
               street_name,
-              area_ar,
-              area_en,
+              area,
               apartment_no,
+              description,
             },
           })
         }>
@@ -101,7 +101,7 @@ const Address: FC<IAddress> = ({
             style={[
               styles.address,
             ]}>
-            {isRTL ? area_ar : area_en}{' '}
+            {area}
             {street_name != undefined && t('st') + '.'} {street_name}{' '}
             {building_no != undefined && ` - ` + t('Building No')} {building_no}
           </Text>
@@ -157,7 +157,8 @@ const styles = StyleSheet.create({
     fontSize: Pixel(25),
     color: '#4D4D4D',
     marginBottom: Pixel(10),
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    textAlign:'left'
   },
   actionsContainer: {
     justifyContent: 'space-between',
