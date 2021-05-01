@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/datetimepicker": "^3.4.7",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^11.2.0",
@@ -39,8 +40,10 @@
     "react-native-gesture-handler": "^1.9.0",
     "react-native-google-analytics-bridge": "^7.1.0",
     "react-native-google-places-autocomplete": "^2.2.0",
+    "react-native-image-picker": "^3.5.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-maps": "0.26.1",
+    "react-native-modal-datetime-picker": "^9.2.1",
     "react-native-optimized-flatlist": "^1.0.4",
     "react-native-reanimated": "^1.13.2",
     "react-native-restart": "^0.0.22",

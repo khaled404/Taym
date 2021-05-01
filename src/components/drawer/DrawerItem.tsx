@@ -55,7 +55,7 @@ const DrawerItem: FC<Props> = ({
                 color: isLogin ? Colors.white : Colors.dark,
               },
             ]}>
-            {isLogin ? voucher : '0 LE'}
+            {voucher}
           </Text>
         )}
       </View>

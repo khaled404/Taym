@@ -8,7 +8,8 @@ import {IDispatch} from '../../constants/interfaces';
 import {getVoucherData} from './voucher';
 import {saveCategories} from './categories';
 import {getUserAddressApi} from './address';
-import Geolocation from "@react-native-community/geolocation";
+import Geolocation from '@react-native-community/geolocation';
+import {RootState} from '../store';
 
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
@@ -40,35 +41,26 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
-const getCurrentLocation = async () => {
+const getCurrentLocation = async (latLong: any) => {
   Geolocation.getCurrentPosition(position => {
     console.log('getCurrentPosition info', position);
     return {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-    }
+    };
   });
-}
+};
 
-export const userHomeApi = () => {
+export const userHomeApi = (latLong: any) => {
   return async (dispatch: Dispatch<any>) => {
     try {
-
-      let latLong = {latitude: 0, longitude: 0};
-      Geolocation.getCurrentPosition(position => {
-        console.log('getCurrentPosition info', position);
-        latLong = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        }
-        // console.log('latLonglatLong', JSON.stringify(Object.values(latLong)))
-      });
+      console.log(`${latLong.latitude},${latLong.longitude}`);
       const {data} = await axiosAPI.post(`guest/user-home`, {
         // latLong: `30.880490,29.565331`,
         latLong: `${latLong.latitude},${latLong.longitude}`,
       });
       dispatch(saveCategories(data.data.categories));
-      console.log('data.data', data.data)
+      console.log('data.data', data.data);
       dispatch({
         type: ActionType.SAVE_USER_LOCATION_SUPPORT,
         payload: data.data.locationSupport,
@@ -95,14 +87,12 @@ const updateUserVouchers = () => {
 };
 
 export const initializApp = () => {
-  return async (dispatch: Dispatch<any>) => {
+  return async (dispatch: Dispatch<any>, getState: () => RootState) => {
     try {
-      const userData = await getItem(AsyncKeys.USER_DATA);
-      if (userData !== null) {
+      if (getState().auth.userData?.token !== undefined) {
         dispatch(getUserAddressApi());
         dispatch(updateUserVouchers());
       }
-      dispatch(userHomeApi());
       dispatch(loadApp());
     } catch (error) {
       console.log('initializApp', error);
