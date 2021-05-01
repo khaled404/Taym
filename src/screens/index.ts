@@ -19,6 +19,7 @@ export const Forget = register({loader: () => import('./auth/Forget')});
 export const Forget2 = register({loader: () => import('./auth/Forget2')});
 export const Forget3 = register({loader: () => import('./auth/Forget3')});
 export const PhoneCode = register({loader: () => import('./auth/PhoneCode')});
+export const NewPassword = register({loader: () => import('./auth/NewPassword')});
 export const OrderDetails = register({loader: () => import('./OrderDetails')});
 export const Settings = register({loader: () => import('./Settings')});
 export const MyAddresses = register({loader: () => import('./MyAddresses')});

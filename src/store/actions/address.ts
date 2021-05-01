@@ -62,7 +62,7 @@ export const deleteAddressApi = (
 interface IAddress {
   name: string;
   phone: string;
-  area_id: string;
+  area: string;
   street_name: string;
   building_no: string;
   floor_no: string;

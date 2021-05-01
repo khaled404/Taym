@@ -525,24 +525,9 @@ const ShopDetails: FC = () => {
               },
             )}
             scrollEventThrottle={16}>
-            {/* <FlatList
-          data={categoryHomeData}
-          numColumns={2}
-          contentContainerStyle={{
-            // flexDirection: 'row',
-            backgroundColor: '#000',
-            justifyContent: 'space-between',
-            // flexWrap: 'wrap',
-            // marginTop: 7,
-            // paddingBottom: 15,
-          }}
-          renderItem={({item, index}) => ( */}
             {categoryHomeData.map((item, index) => (
                <ProductListItem {...item} key={index} index={index} />
              ))}
-            {/* )}
-        /> */}
-            {/* <ProductsList data={} /> */}
           </AnimatedScrollView>
         </Animated.View>
       </View>
@@ -621,7 +606,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    backgroundColor: Colors.sacandAppBackgroundColor,
+    backgroundColor: Colors.white,
     padding: 4,
     borderRadius: 15,
   },

@@ -4,36 +4,39 @@ import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import Header from '../../components/header/Header';
-import {EditIcon, EyeIcon, InputEditIcon} from '../../../assets/Icons/Icons';
+import {EditIcon, InputEditIcon} from '../../../assets/Icons/Icons';
 import FastImage from 'react-native-fast-image';
 import {commonStyles} from '../../styles/styles';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import Input from '../../components/textInputs/Input';
 import IconTouchableContainer from '../../components/touchables/IconTouchableContainer';
+import Button from "../../components/touchables/Button";
+import {useNavigation} from "@react-navigation/native";
 
 const Profile: FC = () => {
   const {t} = useTranslation();
+  const {navigate} = useNavigation();
   const userData = useSelector((state: RootState) => state.auth.userData);
-
+  console.log('Profile userData', userData)
   const [username, setUsername] = useState(userData.name);
   const [email, setEmail] = useState(userData.email);
   const [phone, setPhone] = useState(userData.phone);
-  const [password, setPassword] = useState('0123456789');
-  const [birthdate, setBirthdate] = useState('3\\2\\1992');
+  const [password, setPassword] = useState(userData.password);
+  const [birthdate, setBirthdate] = useState(userData.birthday);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const PasswordIcon = () => {
     return (
       <IconTouchableContainer
-        onPress={() => setSecureTextEntry(!secureTextEntry)}>
-        <EyeIcon />
+        onPress={() => navigate('NewPassword')}>
+        <InputEditIcon/>
       </IconTouchableContainer>
     );
   };
   return (
     <Container style={styles.container}>
-      <Header title={t('Profile')} />
+      <Header title={t('Profile')}/>
       <Content
         noPadding
         contentContainerStyle={{
@@ -43,7 +46,7 @@ const Profile: FC = () => {
         <View style={styles.profileHeader}>
           <TouchableOpacity style={styles.userImage}>
             <View style={styles.editIcon}>
-              <EditIcon />
+              <EditIcon/>
             </View>
             <FastImage
               source={userData.image ? {uri: userData.image} : Images.userImage}
@@ -63,7 +66,7 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <InputEditIcon/>}
               options={{
                 editable: false,
                 onChangeText: value => {
@@ -79,7 +82,7 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <InputEditIcon/>}
               options={{
                 editable: false,
                 onChangeText: value => {
@@ -96,7 +99,7 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <InputEditIcon/>}
               options={{
                 editable: false,
                 onChangeText: value => {
@@ -114,7 +117,7 @@ const Profile: FC = () => {
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
               rightContent={PasswordIcon}
-              iconRightStyle={{top: 9}}
+              iconRightStyle={{top: 9, right: 5}}
               options={{
                 editable: false,
                 onChangeText: value => {
@@ -131,7 +134,7 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <InputEditIcon/>}
               options={{
                 editable: false,
                 onChangeText: value => {
@@ -141,6 +144,14 @@ const Profile: FC = () => {
               }}
             />
           </View>
+
+        </View>
+        <View style={styles.submitContainer}>
+          <Button
+            title={t('Save')}
+            // onPress={submitHandler}
+            // loader={state.loader}
+          />
         </View>
       </Content>
     </Container>
@@ -223,6 +234,9 @@ const styles = StyleSheet.create({
     padding: 0,
     paddingHorizontal: 15,
   },
+  submitContainer: {
+    marginTop: 30
+  }
 });
 
 export default Profile;

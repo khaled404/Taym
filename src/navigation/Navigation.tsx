@@ -12,6 +12,7 @@ import {
   Forget,
   Forget2,
   Forget3,
+  NewPassword,
   Home,
   Language,
   Login,
@@ -144,6 +145,7 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Forget" component={Forget} />
         <Stack.Screen name="Forget2" component={Forget2} />
         <Stack.Screen name="Forget3" component={Forget3} />
+        <Stack.Screen name="NewPassword" component={NewPassword} />
         <Stack.Screen name="ForgetPhoneCode" component={ForgetPhoneCode} />
         <Stack.Screen name="RegisterLocation" component={RegisterLocation} />
         <Stack.Screen name="PhoneCode" component={PhoneCode} />

@@ -71,7 +71,7 @@ const App: FC = () => {
       if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
       } else {
-        firebase.app(); // if already initialized, use that one
+        firebase.app();
       }
     }
     requestUserPermission();
@@ -90,18 +90,6 @@ const App: FC = () => {
       dispatch(createUpdateDeviceApi(fcmToken, uuid));
     }
   }, [fcmToken]);
-  // const ass = async () => {
-  //   let userV = await getItem(AsyncKeys.GET_USER_VOUCHERS);
-  //   if (userV !== null) {
-  //     dispatch({
-  //       type: ActionType.GET_USER_VOUCHERS,
-  //       payload: userV,
-  //     });
-  //   } else {
-  //     dispatch(getVoucherData());
-  //   }
-  //   console.log('userV', userV);
-  // };
 
   return (
     <>
@@ -128,6 +116,7 @@ const App: FC = () => {
           fontFamily: Fonts.medium,
           paddingTop:
             Platform.OS !== 'ios' ? ScreenOptions.StatusBarHeight : 10,
+          alignSelf: 'flex-start'
         }}
         textStyle={{
           fontFamily: Fonts.medium,
