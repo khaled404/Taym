@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -18,7 +18,7 @@ const CompleteRegister: FC = () => {
     phone: '',
     loader: false,
   });
-  const phone = useRef<string>('');
+  // const phone = useRef<string>('');
 
   const registerErorrs = useSelector(
     (state: RootState) => state.auth.registerErorrs,
@@ -29,10 +29,10 @@ const CompleteRegister: FC = () => {
   const {navigate} = useNavigation();
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
-    if (phone.current.length === 11) {
+    if (state.phone.length === 11) {
       dispatch(
         RegisterPhoneHandler(
-          phone.current,
+          state.phone,
           success => {
             setstate(old => ({...old, loader: false}));
             success && navigate('PhoneCode');
@@ -50,7 +50,7 @@ const CompleteRegister: FC = () => {
 
   return (
     <Container style={styles.container}>
-      <AuthHeader />
+      <AuthHeader/>
       <Content noPadding contentContainerStyle={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.mainTitle}>{t('Enter Mobile Number')}</Text>
@@ -65,9 +65,10 @@ const CompleteRegister: FC = () => {
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
-                onChangeText: value => {
-                  phone.current = value;
+                onChangeText: (value: string) => {
+                  setstate(old => ({...old, phone: value}));
                 },
+                value: state.phone,
                 keyboardType: 'number-pad',
                 onSubmitEditing: submitHandler,
               }}

@@ -25,11 +25,11 @@ const EditAddress: FC = () => {
   const [name, setName] = useState(address.name);
   const [phone, setPhone] = useState(address.phone);
   const [street, setStreet] = useState(address.street_name);
-  const [area, setArea] = useState(address.area_en);
+  const [area, setArea] = useState(address.area);
   const [buildingNumber, setBuildingNumber] = useState(address.building_no);
   const [floor, setFloor] = useState(address.floor_no);
   const [apartment, setApartment] = useState(address.apartment_no);
-  const [landmark, setLandmark] = useState('0');
+  const [description, setDescription] = useState(address.description);
 
   console.log('route.params.address', address);
 
@@ -38,7 +38,7 @@ const EditAddress: FC = () => {
     const addressData = {
       name: name,
       phone: phone,
-      area_id: '4',
+      area: area,
       street_name: street,
       building_no: buildingNumber,
       floor_no: floor,
@@ -197,9 +197,9 @@ const EditAddress: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  setLandmark(value);
+                  setDescription(value);
                 },
-                value: landmark,
+                value: description,
               }}
             />
           </View>

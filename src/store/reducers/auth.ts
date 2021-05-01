@@ -8,6 +8,7 @@ const initialState = {
   loginErorrs: {},
   forgetPasswordErorrs: {},
   phoneNumber: '',
+  locationSupport: false,
 };
 export default (state = initialState, {type, payload}: IReduser) => {
   switch (type) {
@@ -32,7 +33,12 @@ export default (state = initialState, {type, payload}: IReduser) => {
         userData: payload,
         isLogin: true,
       };
-
+    case ActionType.SAVE_USER_DATA_AFTER_VERIFY:
+      return {
+        ...state,
+        isLogin: true,
+        userData: {...state.userData, payload},
+      };
     case ActionType.LOGOUT:
       return {
         ...state,
@@ -47,6 +53,8 @@ export default (state = initialState, {type, payload}: IReduser) => {
       return {...state, forgetPasswordErorrs: payload};
     case ActionType.SAVE_PHONE:
       return {...state, phoneNumber: payload};
+    case ActionType.SAVE_USER_LOCATION_SUPPORT:
+      return {...state, locationSupport: payload};
   }
   return state;
 };

@@ -12,7 +12,7 @@ import Button from '../../components/touchables/Button';
 import {showMessage} from 'react-native-flash-message';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {VerifyUserLocationHandler} from '../../store/actions/auth';
+import {GetUserProfileData, VerifyUserLocationHandler} from '../../store/actions/auth';
 import GooglePlacesInput from '../../components/MyAddresses/GooglePlacesInput';
 import {MAP_API_KEY} from '../../constants/Config';
 
@@ -62,7 +62,12 @@ const RegisterLocation: FC = () => {
       console.log('clean');
     };
   }, []);
-
+  useEffect(() => {
+    dispatch(GetUserProfileData());
+    return () => {
+      console.log('clean');
+    };
+  }, []);
   const getLocationDetails = async (latitude: number, longitude: number) => {
     Geocoder.from(latitude, longitude)
       .then(json => {

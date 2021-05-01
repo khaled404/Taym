@@ -13,6 +13,7 @@ import {showMessage} from 'react-native-flash-message';
  * @param phone user phone number
  * @param cb callback function with success is true or false
  */
+
 export const RegisterHandler = (
   name: string,
   email: string,
@@ -72,7 +73,7 @@ export const RegisterPhoneHandler = (
       });
       dispatch({
         type: ActionType.SAVE_USER_DATA_STEP_2,
-        payload: phone,
+        payload: {phone: phone},
       });
       navigate('PhoneCode');
       cb(true);
@@ -113,10 +114,10 @@ export const VerifyPhoneCodeHandler = (
       cb(true);
     } catch (error) {
       cb(false);
-      // showMessage({
-      //   message: error?.response.data.message.code[0],
-      //   type: 'danger',
-      // });
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
       console.log('VerifyPhoneCodeHandler Error', error?.response.data.message);
     }
   };
@@ -216,10 +217,11 @@ export const LoginHandler = (
           : null;
       }
       if (error?.response.data.error === 'Please Verify phone') {
+        console.log('error?.response.data', error?.response.data.phone)
         await saveItem(AsyncKeys.USER_DATA, {phone: error?.response.data.phone, token: error?.response.data.token});
         dispatch({
           type: ActionType.SAVE_USER_DATA_STEP_2,
-          payload: error?.response.data.phone,
+          payload: {phone: error?.response.data.phone, token: error?.response.data.token},
         });
         navigate('PhoneCode');
       }
@@ -228,7 +230,8 @@ export const LoginHandler = (
     }
   };
 };
-
+//sayed@email.com
+//Sayed@123
 /**
  * Forget password step 1
  * @param phone user phone
@@ -375,6 +378,41 @@ export const SocialLoginHandler = (
       });
 
       console.log(error.response);
+    }
+  };
+};
+
+
+/**
+ * Register user step 3
+ * @param code otp code
+ * @param cb callback function with success is true or false
+ */
+export const GetUserProfileData = (
+  // cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.get('user/get-user-profile');
+      console.log(data);
+      console.log('GetUserProfileData data', data)
+      // showMessage({
+      //   message: data.message,
+      //   type: 'info',
+      // });
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
+        payload: data
+      });
+
+      // cb(true);
+    } catch (error) {
+      // cb(false);
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+      console.log('GetUserProfileData Error', error?.response.data.message);
     }
   };
 };

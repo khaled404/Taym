@@ -66,8 +66,8 @@ const AddressLocation: FC = () => {
   const getLocationDetails = async (latitude: number, longitude: number) => {
     Geocoder.from(latitude, longitude)
       .then(json => {
-        let addressComponent = json.results[0].address_components[0];
-        console.log('result geocoder', json.results[0].address_components[0]);
+        let addressComponent = json.results[0].formatted_address;
+        console.log('result geocoder', json.results[0].formatted_address);
         setstate(old => ({
           ...old,
           newLocationObj: {
@@ -76,7 +76,7 @@ const AddressLocation: FC = () => {
             areaName: addressComponent,
           },
         }));
-        console.log('addressComponent', addressComponent);
+        // console.log('addressComponent', addressComponent);
       })
       .catch(error => console.warn(error));
   };

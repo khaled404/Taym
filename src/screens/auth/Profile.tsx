@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   textInput: {
     height: Pixel(100),
     padding: 0,
-    fontFamily: Fonts.bold,
+    fontFamily: Fonts.medium,
     fontSize: Pixel(33),
     color: '#070707',
   },
