@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   text1: {
-    fontSize: 8,
+    fontSize: 9,
     fontFamily: Fonts.bold,
     color: Colors.warning,
   },
@@ -55,10 +55,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: Fonts.black,
     color: Colors.dark,
+    marginTop:5
   },
   button: {
     backgroundColor: Colors.white,
-    width: Pixel(300),
+    width: Pixel(270),
     height: Pixel(85),
   },
 });

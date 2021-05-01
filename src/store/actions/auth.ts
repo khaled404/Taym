@@ -310,6 +310,7 @@ export const VerifyPhoneForgetHandler = (
  * @param password_confirmation
  * @param cb callback function with success is true or false
  */
+
 export const NewPasswordHandler = (
   phone: string,
   password: string,
@@ -333,6 +334,32 @@ export const NewPasswordHandler = (
     } catch (error) {
       cb(false);
 
+      console.log(error?.response);
+    }
+  };
+};
+
+export const SetNewPasswordHandler = (
+  old_password: string,
+  password: string,
+  password_confirmation: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/update-user-password', {
+        old_password,
+        password,
+        password_confirmation,
+      });
+      console.log('SetNewPasswordHandler', data.data.message[0]);
+      showMessage({
+        message: data.data.message[0],
+        type: data.data.message[0] !== 'Check your old password.' ? 'success' : 'danger',
+      });
+      cb(data.data.message[0] !== 'Check your old password.');
+    } catch (error) {
+      cb(false);
       console.log(error?.response);
     }
   };
@@ -394,20 +421,13 @@ export const GetUserProfileData = (
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const {data} = await axiosAPI.get('user/get-user-profile');
-      console.log(data);
-      console.log('GetUserProfileData data', data)
-      // showMessage({
-      //   message: data.message,
-      //   type: 'info',
-      // });
+      // console.log(data);
+      // console.log('GetUserProfileData data', data)
       dispatch({
         type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
-        payload: data
+        payload: data.data
       });
-
-      // cb(true);
     } catch (error) {
-      // cb(false);
       showMessage({
         message: error?.response.data.message,
         type: 'danger',

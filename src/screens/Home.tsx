@@ -10,7 +10,8 @@ import FavoriteList from '../components/Home/FavoriteList';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
-import {WarningIcon} from "../../assets/Icons/Icons";
+import NotSupported from "../components/Home/NotSupported";
+import {GetUserProfileData} from "../store/actions/auth";
 
 const Home: FC = () => {
   const {t} = useTranslation();
@@ -82,12 +83,13 @@ const Home: FC = () => {
 
   const dispatch = useDispatch();
   const {categories}: any = useSelector((state: RootState) => state.categories);
-  const {locationSupport,userData}: any = useSelector((state: RootState) => state.auth);
+  const {locationSupport, userData}: any = useSelector((state: RootState) => state.auth);
   const {navigate} = useNavigation();
 
-  // useEffect(() => {
-    // console.log('userData',userData.userId)
-  // }, []);
+  useEffect(() => {
+    dispatch(GetUserProfileData())
+  console.log('userData',userData.userId)
+  }, []);
 
   return (
     <Container style={styles.container}>
@@ -95,6 +97,9 @@ const Home: FC = () => {
       <Content noPadding>
         {locationSupport && categories.length > 0 && <View style={styles.contentContainer}>
           <CategoryList data={categories}/>
+        </View>}
+        {!locationSupport && <View style={styles.contentContainer}>
+          <NotSupported/>
         </View>}
         {/*<WarningIcon/>*/}
         <OfferSlider data={carouselItems}/>

@@ -8,6 +8,7 @@ import {IDispatch} from '../../constants/interfaces';
 import {getVoucherData} from './voucher';
 import {saveCategories} from './categories';
 import {getUserAddressApi} from './address';
+import Geolocation from "@react-native-community/geolocation";
 
 const {allowRTL, forceRTL, swapLeftAndRightInRTL} = I18nManager;
 
@@ -39,12 +40,35 @@ export const createUpdateDeviceApi = (fcm_token: string, uuid: string) => {
   };
 };
 
+const getCurrentLocation = async () => {
+  Geolocation.getCurrentPosition(position => {
+    console.log('getCurrentPosition info', position);
+    return {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    }
+  });
+}
+
 export const userHomeApi = () => {
   return async (dispatch: Dispatch<any>) => {
     try {
-      const {data} = await axiosAPI.post(`guest/user-home`);
+
+      let latLong = {latitude: 0, longitude: 0};
+      Geolocation.getCurrentPosition(position => {
+        console.log('getCurrentPosition info', position);
+        latLong = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }
+        // console.log('latLonglatLong', JSON.stringify(Object.values(latLong)))
+      });
+      const {data} = await axiosAPI.post(`guest/user-home`, {
+        // latLong: `30.880490,29.565331`,
+        latLong: `${latLong.latitude},${latLong.longitude}`,
+      });
       dispatch(saveCategories(data.data.categories));
-      console.log('data.data',data.data)
+      console.log('data.data', data.data)
       dispatch({
         type: ActionType.SAVE_USER_LOCATION_SUPPORT,
         payload: data.data.locationSupport,
@@ -69,6 +93,7 @@ const updateUserVouchers = () => {
     }
   };
 };
+
 export const initializApp = () => {
   return async (dispatch: Dispatch<any>) => {
     try {

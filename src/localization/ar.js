@@ -159,6 +159,14 @@ export default {
   'Add Notes': 'اكتب ملاحظاتك',
   'Write Your Notes Here': 'اكتب ملاحظاتك',
   'Add To Cart': 'اضف الي السله',
-   "View Cart": "السله",
-  "30 LE To Reach Min Order": "متبقي لديك 30LE للوصول للحد الادني"
- };
+  "View Cart": "السله",
+  "Attention": "انتباه",
+  "Select Location": "اختر موقعا",
+  "New Password": "كلمة مرور جديدة",
+  "New password": "كلمة مرور جديدة",
+  "Old password": "كلمة مرور القديمة",
+  "Please fill all fields": "من فضلك قم بملئ جميع الحقول",
+  "Password and password confirmation does not match": "كلمة المرور غير متطابقة",
+  "New password confirmation": "تأكيد كلمة المرور الجديدة",
+  "we didn't support your current location for now": "لم ندعم موقعك الحالي في الوقت الحالي"
+};
