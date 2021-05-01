@@ -10,8 +10,9 @@ import FavoriteList from '../components/Home/FavoriteList';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/store';
 import {useNavigation} from '@react-navigation/native';
-import NotSupported from "../components/Home/NotSupported";
-import {GetUserProfileData} from "../store/actions/auth";
+import NotSupported from '../components/Home/NotSupported';
+import Geolocation from '@react-native-community/geolocation';
+import {userHomeApi} from '../store/actions/settings';
 
 const Home: FC = () => {
   const {t} = useTranslation();
@@ -81,31 +82,39 @@ const Home: FC = () => {
     },
   ];
 
-  const dispatch = useDispatch();
   const {categories}: any = useSelector((state: RootState) => state.categories);
-  const {locationSupport, userData}: any = useSelector((state: RootState) => state.auth);
+  const {locationSupport}: any = useSelector((state: RootState) => state.auth);
   const {navigate} = useNavigation();
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(GetUserProfileData())
-  console.log('userData',userData.userId)
+    Geolocation.getCurrentPosition(position => {
+      dispatch(
+        userHomeApi({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        }),
+      );
+    });
   }, []);
 
   return (
     <Container style={styles.container}>
-      <HomeHeader navigate={navigate} title={t('Home')}/>
+      <HomeHeader navigate={navigate} title={t('Home')} />
       <Content noPadding>
-        {locationSupport && categories.length > 0 && <View style={styles.contentContainer}>
-          <CategoryList data={categories}/>
-        </View>}
-        {!locationSupport && <View style={styles.contentContainer}>
-          <NotSupported/>
-        </View>}
-        {/*<WarningIcon/>*/}
-        <OfferSlider data={carouselItems}/>
-        <View style={styles.contentContainer}>
-          <FavoriteList inHome data={categoryHomeData}/>
-        </View>
+        {locationSupport && categories.length > 0 && (
+          <View style={styles.contentContainer}>
+            <CategoryList data={categories} />
+          </View>
+        )}
+        {!locationSupport && (
+          <View style={styles.contentContainer}>
+            <NotSupported />
+          </View>
+        )}
+        {/* <OfferSlider data={carouselItems} /> */}
+        {/* <View style={styles.contentContainer}>
+          <FavoriteList inHome data={categoryHomeData} />
+        </View> */}
       </Content>
     </Container>
   );

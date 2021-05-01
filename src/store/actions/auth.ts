@@ -88,6 +88,34 @@ export const RegisterPhoneHandler = (
   };
 };
 
+export const NewPhonePhoneHandler = (
+  old_phone: string,
+  new_phone: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/update-user-phone', {
+        new_phone,
+        old_phone,
+      });
+      console.log(data);
+
+      saveItem(AsyncKeys.NEW_PHONE_DATA, {new_phone, old_phone});
+
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message?.new_phone
+          ? error?.response.data.message?.new_phone[0]
+          : error?.response.data.message?.old_phone[0],
+        type: 'danger',
+      });
+      console.log(error?.response.data);
+    }
+  };
+};
 /**
  * Register user step 3
  * @param code otp code
@@ -123,6 +151,38 @@ export const VerifyPhoneCodeHandler = (
   };
 };
 
+export const VerifyNewPhoneCodeHandler = (
+  old_phone: string,
+  new_phone: string,
+  code: string,
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    console.log({old_phone, new_phone, code});
+
+    try {
+      const {data} = await axiosAPI.post('user/confirm-new-user-phone', {
+        old_phone,
+        new_phone,
+        code,
+      });
+      console.log(data);
+      showMessage({
+        message: data.data.message,
+        type: data.data.message === 'Code is Wrong' ? 'danger' : 'info',
+      });
+
+      cb(data.data.message !== 'Code is Wrong');
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+      console.log('VerifyPhoneCodeHandler Error', error?.response.data.message);
+    }
+  };
+};
 /**
  * Register user step 4
  * @param latitude
@@ -211,17 +271,23 @@ export const LoginHandler = (
       {
         error.response.data.error
           ? showMessage({
-            message: error?.response.data.error,
-            type: 'danger',
-          })
+              message: error?.response.data.error,
+              type: 'danger',
+            })
           : null;
       }
       if (error?.response.data.error === 'Please Verify phone') {
-        console.log('error?.response.data', error?.response.data.phone)
-        await saveItem(AsyncKeys.USER_DATA, {phone: error?.response.data.phone, token: error?.response.data.token});
+        console.log('error?.response.data', error?.response.data.phone);
+        await saveItem(AsyncKeys.USER_DATA, {
+          phone: error?.response.data.phone,
+          token: error?.response.data.token,
+        });
         dispatch({
           type: ActionType.SAVE_USER_DATA_STEP_2,
-          payload: {phone: error?.response.data.phone, token: error?.response.data.token},
+          payload: {
+            phone: error?.response.data.phone,
+            token: error?.response.data.token,
+          },
         });
         navigate('PhoneCode');
       }
@@ -355,7 +421,10 @@ export const SetNewPasswordHandler = (
       console.log('SetNewPasswordHandler', data.data.message[0]);
       showMessage({
         message: data.data.message[0],
-        type: data.data.message[0] !== 'Check your old password.' ? 'success' : 'danger',
+        type:
+          data.data.message[0] !== 'Check your old password.'
+            ? 'success'
+            : 'danger',
       });
       cb(data.data.message[0] !== 'Check your old password.');
     } catch (error) {
@@ -409,29 +478,81 @@ export const SocialLoginHandler = (
   };
 };
 
-
 /**
  * Register user step 3
  * @param code otp code
  * @param cb callback function with success is true or false
  */
-export const GetUserProfileData = (
+export const GetUserProfileData = () =>
   // cb: (success?: boolean) => void,
+  {
+    return async (dispatch: Dispatch<IDispatch>) => {
+      try {
+        const {data} = await axiosAPI.get('user/get-user-profile');
+        // console.log(data);
+        // console.log('GetUserProfileData data', data)
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
+          payload: data.data,
+        });
+      } catch (error) {
+        showMessage({
+          message: error?.response.data.message,
+          type: 'danger',
+        });
+        console.log('GetUserProfileData Error', error?.response.data.message);
+      }
+    };
+  };
+
+export const updateUserProfile = (
+  name: string,
+  email: string,
+  birthdate: string,
+  photo: string,
+  cb: () => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
-      const {data} = await axiosAPI.get('user/get-user-profile');
-      // console.log(data);
-      // console.log('GetUserProfileData data', data)
+      console.log({
+        name,
+        email,
+        birthdate,
+        photo,
+      });
+      const formData = new FormData();
+
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('birthdate', birthdate);
+      photo &&
+        formData.append('photo', {
+          uri: photo,
+          type: 'image/jpeg',
+          name: `${Math.random()}.jpg`,
+        });
+      console.log(formData);
+
+      const {data} = await axiosAPI.post('user/update-user-profile', formData);
+      console.log(data);
       dispatch({
         type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
-        payload: data.data
+        payload: data.data,
       });
+      showMessage({
+        message: data.success.message,
+        type: 'success',
+      });
+      cb && cb();
     } catch (error) {
       showMessage({
-        message: error?.response.data.message,
+        message: error?.response.data.message?.email
+          ? error?.response.data.message?.email[0]
+          : error?.response.data.message?.photo[0],
         type: 'danger',
       });
+      cb && cb();
+
       console.log('GetUserProfileData Error', error?.response.data.message);
     }
   };

@@ -30,7 +30,7 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
       webClientId:
-        '226921527475-o64c9cief53ebakhnkcdl45nmi90tlot.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+        '1092909459597-1ohvr37479sji5makr3g6geq7dlopc7b.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
       forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
     });

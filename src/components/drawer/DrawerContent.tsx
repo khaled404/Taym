@@ -16,7 +16,7 @@ import {commonStyles} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import {LogoutHandler} from '../../store/actions/auth';
+import {GetUserProfileData, LogoutHandler} from '../../store/actions/auth';
 import {
   HomeIcon,
   HeartIcon,
@@ -54,6 +54,11 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
     );
   };
 
+  useEffect(() => {
+    if (userData?.token !== undefined && userData?.name === undefined) {
+      dispatch(GetUserProfileData());
+    }
+  }, []);
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -120,7 +125,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             <DrawerItem
               Icon={VouchergIcon}
               title={t('Voucher')}
-              voucher={user + ' LE'}
+              voucher={user ? user + ' LE' : '0 LE'}
               onPress={() => {
                 navigation?.navigate('Voucher');
               }}

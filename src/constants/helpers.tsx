@@ -14,6 +14,7 @@ export enum AsyncKeys {
   NOTFICTION_TOKEN = 'NOTFICTION_TOKEN',
   IS_RTL = 'IS_RTL',
   GET_USER_VOUCHERS = 'GET_USER_VOUCHERS',
+  NEW_PHONE_DATA = ' NEW_PHONE_DATA',
 }
 
 /**
@@ -128,7 +129,7 @@ export const FormatAMPMHandler = (date: Date) => {
 export const getDateHandler = (date?: string, time?: boolean) => {
   const day = date ? new Date(date) : new Date();
   const hours = FormatAMPMHandler(day);
-  return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()} ${
+  return `${day.getFullYear()}-${day.getMonth() + 1}-${day.getDate()}${
     time ? hours : ''
   }`;
 };

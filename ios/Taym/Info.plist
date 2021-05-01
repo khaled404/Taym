@@ -33,7 +33,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.226921527475-92pbisrmnnn5dsiidk9ho0n5hropckc7</string>
+				<string>com.googleusercontent.apps.1092909459597-1ohvr37479sji5makr3g6geq7dlopc7b</string>
 			</array>
 		</dict>
 	</array>
@@ -104,6 +104,15 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+  <string>"tyem needs permission to your photo library in order to take request photos for upload"</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>tyem requires GPS to To fetch your place</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>tyem requires GPS to To fetch your place</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>tyem requires GPS to To fetch your place</string>
+ 
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

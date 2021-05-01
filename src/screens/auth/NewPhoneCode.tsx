@@ -1,17 +1,17 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
-import AuthHeader from '../../components/header/AuthHeader';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import Button from '../../components/touchables/Button';
 import CodeInput from '../../components/textInputs/CodeInput';
 import {shallowEqual, useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
-import {VerifyPhoneCodeHandler} from '../../store/actions/auth';
+import {VerifyNewPhoneCodeHandler} from '../../store/actions/auth';
+import Header from '../../components/header/Header';
 
-const PhoneCode: FC = () => {
+const NewPhoneCode: FC = () => {
   const [state, setstate] = useState({
     loader: false,
     code: '',
@@ -23,28 +23,34 @@ const PhoneCode: FC = () => {
     shallowEqual,
   );
   const {t} = useTranslation();
-  const {navigate} = useNavigation();
+  const {reset} = useNavigation();
+  const {params}: any = useRoute();
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
-      VerifyPhoneCodeHandler(state.code, success => {
-        setstate(old => ({...old, loader: false}));
-        success && navigate('RegisterLocation');
-      }),
+      VerifyNewPhoneCodeHandler(
+        params.oldPhone,
+        params.newPhone,
+        state.code,
+        success => {
+          setstate(old => ({...old, loader: false}));
+          console.log(success);
+
+          success && reset({index: 0, routes: [{name: 'Home'}]});
+        },
+      ),
     );
   };
-  // AboElela
-  // sayed.aboelela96@gmail.com
-  // Sayed@123
+
   return (
     <Container style={styles.container}>
-      <AuthHeader />
+      <Header title={t('New Mobile Number')} />
       <Content style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.sectionTitle}>
             {t('Enter the 4-digit code sent to number')}
           </Text>
-          <Text style={styles.sectionTitle}>{userData.phone}</Text>
+          <Text style={styles.sectionTitle}>{params.oldPhone}</Text>
         </View>
         <View style={styles.inputsContainer}>
           <View style={styles.inputContainer}>
@@ -124,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PhoneCode;
+export default NewPhoneCode;
