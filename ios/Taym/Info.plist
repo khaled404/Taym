@@ -74,8 +74,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>tyem requires GPS to To fetch your place</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>tyem requires GPS to To fetch your place</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>tyem requires GPS to To fetch your place</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>"tyem needs permission to your photo library in order to take request photos for upload"</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>"tyem needs permission to your photo library in order to take request photos for upload"</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Cairo-Black.ttf</string>
@@ -104,15 +112,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-  <string>"tyem needs permission to your photo library in order to take request photos for upload"</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>tyem requires GPS to To fetch your place</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>tyem requires GPS to To fetch your place</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>tyem requires GPS to To fetch your place</string>
- 
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

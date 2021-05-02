@@ -28,6 +28,7 @@ import {
   EditIcon,
   LogOut,
 } from '../../../assets/Icons/Icons';
+import {OpenUrlHandler} from '../../constants/helpers';
 
 const {height, width} = Dimensions.get('window');
 const DrawerContent: FC<ScreenProps> = ({navigation}) => {
@@ -159,7 +160,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               Icon={TelephoneIcon}
               title={t('Suport')}
               onPress={() => {
-                navigation?.navigate('Support');
+                OpenUrlHandler(`https://wa.me/+97335087827`);
               }}
               isLogin={true}
             />
