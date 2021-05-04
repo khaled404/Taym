@@ -32,9 +32,17 @@ const Profile: FC = () => {
     birthdate: userData.birthday ? userData.birthday : getDateHandler(),
     isDatePickerVisible: false,
     loader: false,
+    editUsername: false,
+    editEmail: false,
   });
+  const getLetter = (st: string) => {
+    const fullName = st?.split(' ');
+    const letters = fullName.shift().charAt(0);
+    return letters.toUpperCase();
+  };
   useEffect(() => {
     dispatch(GetUserProfileData());
+    console.log('ProfileuserData', userData)
   }, []);
   const picImageHandler = async () => {
     try {
@@ -45,9 +53,10 @@ const Profile: FC = () => {
           quality: 0.5,
         },
         response => {
+          console.log('responsepicImageHandler', response)
           setstate((old: any) => ({
             ...old,
-            photo: response.uri,
+            photo: response.base64,
           }));
         },
       );
@@ -58,7 +67,7 @@ const Profile: FC = () => {
   const PasswordIcon = () => {
     return (
       <IconTouchableContainer onPress={() => navigate('NewPassword')}>
-        <InputEditIcon />
+        <InputEditIcon/>
       </IconTouchableContainer>
     );
   };
@@ -79,7 +88,7 @@ const Profile: FC = () => {
   };
   return (
     <Container style={styles.container}>
-      <Header title={t('Profile')} />
+      <Header title={t('Profile')}/>
       <Content
         noPadding
         contentContainerStyle={{
@@ -104,22 +113,24 @@ const Profile: FC = () => {
         />
 
         <View style={styles.profileHeader}>
-          <TouchableOpacity style={styles.userImage} onPress={picImageHandler}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
             <View style={styles.editIcon}>
-              <EditIcon />
+              <EditIcon/>
             </View>
-            <FastImage
-              source={
-                userData.photo
-                  ? {uri: userData.photo}
-                  : state.photo
-                  ? {uri: state.photo}
-                  : Images.userImage
-              }
-              style={commonStyles.image}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.userImage} onPress={picImageHandler}>
+              <FastImage
+                source={
+                  userData.photo
+                    ? {uri: userData.photo}
+                    : state.photo
+                    ? {uri: state.photo}
+                    : Images.userImage
+                }
+                style={commonStyles.image}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
+          </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>{userData.name}</Text>
             <Text style={styles.userSupTitle}>{userData.phone}</Text>
@@ -132,12 +143,19 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <TouchableOpacity
+                onPress={() => setstate((old: any) => ({
+                  ...old,
+                  editUsername: !state.editUsername,
+                }))}>
+                <InputEditIcon/>
+              </TouchableOpacity>}
               options={{
                 onChangeText: value => {
                   setstate(old => ({...old, username: value}));
                 },
                 value: state.username,
+                editable: state.editUsername
               }}
             />
           </View>
@@ -147,7 +165,13 @@ const Profile: FC = () => {
             <Input
               textInputContainer={styles.textInput}
               contentContainerStyle={styles.contentContainerStyle}
-              rightContent={() => <InputEditIcon />}
+              rightContent={() => <TouchableOpacity
+                onPress={() => setstate((old: any) => ({
+                  ...old,
+                  editEmail: !state.editEmail,
+                }))}>
+                <InputEditIcon/>
+              </TouchableOpacity>}
               options={{
                 onChangeText: value => {
                   setstate(old => ({...old, email: value}));
@@ -168,7 +192,7 @@ const Profile: FC = () => {
                   onPress={() => {
                     navigate('NewPhoneNumber');
                   }}>
-                  <InputEditIcon />
+                  <InputEditIcon/>
                 </TouchableOpacity>
               )}
               options={{
@@ -210,7 +234,7 @@ const Profile: FC = () => {
                   onPress={() => {
                     setstate(old => ({...old, isDatePickerVisible: true}));
                   }}>
-                  <InputEditIcon />
+                  <InputEditIcon/>
                 </TouchableOpacity>
               )}
               options={{
@@ -255,9 +279,12 @@ const styles = StyleSheet.create({
   },
   userImage: {
     width: Pixel(160),
-    height: Pixel(170),
+    height: Pixel(160),
     position: 'relative',
     borderRadius: 50,
+    overflow: "hidden",
+    marginBottom: 10,
+    alignSelf: 'center'
   },
   userContent: {
     paddingLeft: 15,
@@ -280,9 +307,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 50,
     position: 'absolute',
-    right: Pixel(5),
-    top: Pixel(10),
-    zIndex: 5,
+    right: Pixel(0),
+    top: Pixel(5),
+    zIndex: 150,
+    elevation: 3,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -314,6 +342,21 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginTop: 30,
+  },
+  image: {
+    backgroundColor: '#00000029',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: Pixel(70),
+    width: Pixel(140),
+    height: Pixel(140),
+    alignSelf: 'center'
+  },
+  imageText: {
+    color: Colors.dark,
+    fontFamily: Fonts.bold,
+    fontSize: Pixel(45),
+    // textAlign: 'left',
   },
 });
 

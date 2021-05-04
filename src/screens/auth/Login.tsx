@@ -110,7 +110,11 @@ const Login: FC = () => {
               loader={state.loader}
             />
           </View>
-          <SocialLogin title={t('Or Sign In With')}/>
+          <SocialLogin
+            loaderHandler={(loaderStatus) => {
+              setstate(old => ({...old, loader: loaderStatus}));
+            }}
+            title={t('Or Sign In With')}/>
 
           <TouchableOpacity
             style={{

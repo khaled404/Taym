@@ -27,8 +27,8 @@ const GooglePlacesInput: FC<IAutoSearchMap> = ({onSelectResult}) => {
       const newRegion = {
         latitude: result.geometry.location.lat,
         longitude: result.geometry.location.lng,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
+        latitudeDelta: LATITUDE_DELTA / 2,
+        longitudeDelta: LONGITUDE_DELTA / 2,
       }
       onSelectResult(newRegion, result.name);
     }

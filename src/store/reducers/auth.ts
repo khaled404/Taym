@@ -4,7 +4,9 @@ import {ActionType} from '../actions/actions';
 const initialState = {
   userData: {},
   isLogin: false,
-  registerErorrs: {},
+  registerErorrs: {
+    password:['the password must be 8 ']
+  },
   loginErorrs: {},
   forgetPasswordErorrs: {},
   phoneNumber: '',

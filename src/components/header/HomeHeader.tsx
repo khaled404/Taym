@@ -54,6 +54,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
   titleStyle,
 }) => {
   const {t} = useTranslation();
+  const {currentLocationData}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
@@ -75,7 +76,7 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
               justifyContent: 'space-between',
               marginTop: 5,
             }}>
-            <Text style={styles.addressText}>Alexandria - Miami</Text>
+            <Text style={styles.addressText} numberOfLines={1}>{currentLocationData}</Text>
             <ArrowHeaderIcon />
           </TouchableOpacity>
         </View>
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.colorSacand,
     fontFamily: Fonts.medium,
-    fontSize: Pixel(25),
+    fontSize: Pixel(20),
     marginRight: Pixel(15),
   },
   searchInputContainer: {

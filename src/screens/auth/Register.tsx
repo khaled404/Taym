@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
@@ -31,6 +31,7 @@ const Register: FC = () => {
     (state: RootState) => state.auth,
     shallowEqual,
   );
+  console.log('Register loader', state.loader)
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
@@ -50,14 +51,14 @@ const Register: FC = () => {
         onPress={() => {
           setstate(old => ({...old, secureTextEntry: !old.secureTextEntry}));
         }}>
-        <EyeIcon />
+        <EyeIcon/>
       </IconTouchableContainer>
     );
   };
 
   return (
     <Container style={styles.container}>
-      <AuthHeader />
+      <AuthHeader/>
       <Content style={styles.contentContainer}>
         <Text style={styles.mainTitle}>{t('Register')}</Text>
         <View style={styles.inputsContainer}>
@@ -93,8 +94,8 @@ const Register: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Password')}</Text>
             <Input
+              contentContainerStyle={[styles.contentContainerStyle]}
               textInputContainer={styles.textInput}
-              contentContainerStyle={styles.contentContainerStyle}
               rightContent={PasswordIcon}
               iconRightStyle={{top: 10}}
               options={{
@@ -104,8 +105,17 @@ const Register: FC = () => {
                 secureTextEntry: state.secureTextEntry,
                 onSubmitEditing: submitHandler,
               }}
-              erorrMessage={InputErorrHandler(registerErorrs, 'password')}
+
             />
+            <View style={{marginTop:7}}>
+              <Text
+                style={[
+                  styles.errorMessage,
+                  {color: Colors.warning},
+                ]}>
+                {t('Password Should Be Min 8 Characters Contains Letters,numbers And Symbol.')}
+              </Text>
+            </View>
           </View>
           <View style={styles.submitContainer}>
             <Button
@@ -114,7 +124,11 @@ const Register: FC = () => {
               loader={state.loader}
             />
           </View>
-          <SocialLogin title={t('Or Register With')} />
+          <SocialLogin loaderHandler={(loaderStatus) => {
+            setstate(old => ({...old, loader: loaderStatus}));
+          }}
+                       title={t('Or Register With')}
+          />
           <TouchableOpacity
             style={{
               flexDirection: 'row',
@@ -193,6 +207,11 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     padding: 0,
     paddingHorizontal: 15,
+  },
+  errorMessage: {
+    fontFamily: Fonts.regular,
+    fontSize: Pixel(23),
+    // alignSelf:'flex-start',
   },
 });
 

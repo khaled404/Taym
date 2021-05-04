@@ -1,5 +1,5 @@
 import React, {FC, useRef, useState} from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {Container, Content} from '../../components/containers/Containers';
 import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
@@ -14,13 +14,13 @@ const Forget: FC = () => {
   const [state, setstate] = useState({
     loader: false,
   });
-  const phone = useRef<string>('');
+  const [phone, setPhone] = useState('')
   const dispatch = useDispatch();
   const submitHandler = () => {
     setstate(old => ({...old, loader: true}));
     dispatch(
       ForgetHandler(
-        phone.current,
+        phone,
         success => {
           setstate(old => ({...old, loader: false}));
           success && navigate('ForgetPhoneCode');
@@ -33,7 +33,7 @@ const Forget: FC = () => {
   const {navigate} = useNavigation();
   return (
     <Container style={styles.container}>
-      <AuthHeader />
+      <AuthHeader/>
       <Content style={styles.contentContainer}>
         <View style={styles.sectionTitleContainer}>
           <Text style={styles.mainTitle}>
@@ -51,7 +51,7 @@ const Forget: FC = () => {
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
-                  phone.current = value;
+                  setPhone(value);
                 },
                 onSubmitEditing: submitHandler,
               }}
