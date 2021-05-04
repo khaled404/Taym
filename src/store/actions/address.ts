@@ -1,12 +1,13 @@
 import {Dispatch} from 'redux';
 import {ActionType} from './actions';
-import {AsyncKeys, getItem, saveItem} from '../../constants/helpers';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store';
 import {showMessage} from 'react-native-flash-message';
 
+export const saveCurrentLocation = (payload: {}) => ({
+  type: ActionType.SAVE_CURRENT_LOCATION,
+  payload,
+});
 export const saveAddressList = (payload: []) => ({
   type: ActionType.SAVE_ADDRESSLIST,
   payload,
@@ -20,7 +21,7 @@ export const getUserAddressApi = () => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const {data} = await axiosAPI.get(`user/user-addresses`);
-      console.log('getUserAddressApi data',data)
+      console.log('getUserAddressApi data', data)
       dispatch(saveAddressList(data.data.addresses));
     } catch (error) {
       console.log('getUserAddressApiError', error.response);
@@ -71,6 +72,7 @@ interface IAddress {
   latitude: number;
   longitude: number;
 }
+
 export const addAddressApi = (
   addressData: IAddress,
   cb: (success?: boolean) => void,

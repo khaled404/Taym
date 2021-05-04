@@ -22,6 +22,11 @@ export const toggleLanguage = (payload: boolean) => ({
   payload,
 });
 
+export const saveCurrentLocationData = (payload: string) => ({
+  type: ActionType.SAVE_CURRENT_LOCATION_DATA,
+  payload,
+});
+
 export const createUpdateDevice = (payload: boolean) => ({
   type: ActionType.CREATE_UPDATE_DEVICE,
   payload,

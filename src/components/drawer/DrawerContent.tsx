@@ -1,34 +1,26 @@
-import React, {FC, useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import {ScreenProps} from '../../constants/interfaces';
 import DrawerItem from './DrawerItem';
-import FastImage from 'react-native-fast-image';
-import {commonStyles} from '../../styles/styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store/store';
 import {GetUserProfileData, LogoutHandler} from '../../store/actions/auth';
 import {
-  HomeIcon,
+  EditIcon,
   HeartIcon,
-  VouchergIcon,
+  HomeIcon,
   ListIcon,
+  LogOut,
   OffersIcon,
   SettingsIcon,
   TelephoneIcon,
-  EditIcon,
-  LogOut,
+  VouchergIcon,
 } from '../../../assets/Icons/Icons';
 import {OpenUrlHandler} from '../../constants/helpers';
+import {commonStyles} from "../../styles/styles";
 
 const {height, width} = Dimensions.get('window');
 const DrawerContent: FC<ScreenProps> = ({navigation}) => {
@@ -60,6 +52,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
       dispatch(GetUserProfileData());
     }
   }, []);
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -73,7 +66,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
           <View style={styles.userImage}>
             {isLogin ? (
               <View style={styles.editIcon}>
-                <EditIcon />
+                <EditIcon/>
               </View>
             ) : null}
             {/*   <FastImage
@@ -82,15 +75,18 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               resizeMode="contain"
             /> */}
 
-            {isLogin ? (
-              <View style={styles.image}>
-                <Text style={styles.imageText}>
-                  {!!userData.name && getLetter(userData.name)}
-                </Text>
-              </View>
-            ) : (
-              <Image source={Images.defAvatar} resizeMode="contain" />
-            )}
+            {isLogin ?
+              (userData.photo !== null ?
+                <View style={styles.image}>
+                  <Image source={{uri: userData.photo}} style={commonStyles.image} resizeMode="contain"/>
+                </View> : <View style={styles.image}>
+                  <Text style={styles.imageText}>
+                    {!!userData.name && getLetter(userData.name)}
+                  </Text>
+                </View>)
+              : (
+                <Image source={Images.defAvatar} resizeMode="contain"/>
+              )}
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
@@ -245,6 +241,7 @@ const styles = StyleSheet.create({
     borderRadius: Pixel(70),
     width: Pixel(140),
     height: Pixel(140),
+    overflow:'hidden'
   },
   imageText: {
     color: Colors.dark,

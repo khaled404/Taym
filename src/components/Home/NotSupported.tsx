@@ -4,12 +4,15 @@ import {Colors, Fonts, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import {WarningIcon} from '../../../assets/Icons/Icons';
 import Button from '../touchables/Button';
+import {useNavigation} from "@react-navigation/native";
+import {commonStyles} from "../../styles/styles";
 
 const NotSupported: FC = () => {
   const {t} = useTranslation();
+  const {navigate} = useNavigation();
   return (
     <View style={styles.offerItem}>
-      <WarningIcon />
+      <WarningIcon/>
       <Text style={styles.sectionTitle}>{t('Attention')}</Text>
       <Text style={styles.content}>
         {t("we didn't support your current location for now")}
@@ -18,7 +21,9 @@ const NotSupported: FC = () => {
         title={t('Select Location')}
         style={styles.selectLocationBtn}
         styleTitle={styles.selectLocationBtnText}
-        onPress={() => {}}
+        onPress={() => {
+          navigate('AddressLocation')
+        }}
         // loader={state.loader}
       />
     </View>
@@ -36,16 +41,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 15,
+    ...commonStyles.boxShadow,
   },
   sectionTitle: {
-    fontSize: Pixel(48),
+    fontSize: Pixel(45),
     fontFamily: Fonts.bold,
     color: Colors.colorSacand,
     textAlign: 'center',
-    marginTop: 12,
+    marginTop: 5,
   },
   content: {
-    fontSize: Pixel(30),
+    fontSize: Pixel(28),
     fontFamily: Fonts.regular,
     color: '#070707',
     textAlign: 'center',
@@ -53,14 +59,14 @@ const styles = StyleSheet.create({
   },
   selectLocationBtn: {
     backgroundColor: Colors.colorSacand,
-    width: '44%',
+    width: '43%',
     height: 31,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 12,
   },
   selectLocationBtnText: {
-    fontSize: Pixel(26),
+    fontSize: Pixel(23),
     fontFamily: Fonts.bold,
     color: Colors.minColor,
     // textAlign: 'center',

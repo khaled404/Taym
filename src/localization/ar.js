@@ -176,5 +176,9 @@ export default {
   'Old Mobile Number': 'رقم الهاتف المحمول القديم',
   'New Mobile Number': 'رقم الهاتف المحمول الجديد',
   'Coming Soon': 'قريبا',
+  'Remaining': 'الوقت المتبقي',
+  'RESEND OPT': 'اعادة ارسال الرمز',
+  "Don't Receive The OPT ?": "لم تتلقى رمز التحقيق ؟",
   Home: 'الرئسيه',
+  "Password Should Be Min 8 Characters Contains Letters,numbers And Symbol": 'يجب أن تكون كلمة المرور 8 أحرف على الأقل وتحتوي على أحرف وأرقام ورموز',
 };

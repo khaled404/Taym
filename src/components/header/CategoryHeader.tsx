@@ -10,12 +10,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {
-  Colors,
-  Fonts,
-  Pixel,
-  ScreenOptions,
-} from '../../constants/styleConstants';
+import {Colors, Fonts, Pixel, ScreenOptions,} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {NavigationProps} from '../../constants/interfaces';
 import {
@@ -50,29 +45,30 @@ interface ICategoryHeader {
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17} />
+      <SearchIcon width={17} height={17}/>
     </IconTouchableContainer>
   );
 };
 
 const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
-  navigate,
-  goBack,
-  name,
-  title,
-  containerStyle,
-  titleStyle,
-  toggleHeader,
-  handleToggleHeader,
-  opacity,
-  translateY,
-  reverseOpacity,
-  translateX,
-  translateCategoryTitleContainer,
-  translateXLeftContainer,
-  translateCategoryTitle,
-}) => {
+                                                                 navigate,
+                                                                 goBack,
+                                                                 name,
+                                                                 title,
+                                                                 containerStyle,
+                                                                 titleStyle,
+                                                                 toggleHeader,
+                                                                 handleToggleHeader,
+                                                                 opacity,
+                                                                 translateY,
+                                                                 reverseOpacity,
+                                                                 translateX,
+                                                                 translateCategoryTitleContainer,
+                                                                 translateXLeftContainer,
+                                                                 translateCategoryTitle,
+                                                               }) => {
   const {t} = useTranslation();
+  const {currentLocationData}: any = useSelector((state: RootState) => state.settings);
   return (
     <View style={[styles.mainContainer, containerStyle]}>
       <View style={[styles.rowConatiner]}>
@@ -85,10 +81,10 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
                 visibility: 'hidden',
               },
             ]}>
-            <LogoIcon width={56} height={30} />
+            <LogoIcon width={56} height={30}/>
           </Animated.View>
           <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
-            <MenuIcon />
+            <MenuIcon/>
           </IconTouchableContainer>
         </View>
 
@@ -101,8 +97,8 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
                 alignItems: 'center',
                 justifyContent: 'space-between',
               }}>
-              <Text style={styles.addressText}>Alexandria - Miami</Text>
-              <ArrowHeaderIcon />
+              <Text style={styles.addressText} numberOfLines={1}>{currentLocationData}</Text>
+              <ArrowHeaderIcon/>
             </TouchableOpacity>
           </Animated.View>
 
@@ -130,7 +126,7 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
           ]}>
           <Animated.View style={[{opacity: reverseOpacity}]}>
             <IconTouchableContainer onPress={handleToggleHeader}>
-              <HeaderSearchIcon />
+              <HeaderSearchIcon/>
             </IconTouchableContainer>
           </Animated.View>
 
@@ -139,7 +135,7 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
           {/*}]}>*/}
 
           <IconTouchableContainer onPress={() => navigate('Cart')}>
-            <CartIcon />
+            <CartIcon/>
           </IconTouchableContainer>
           {/*</Animated.View>*/}
 
@@ -151,7 +147,7 @@ const CategoryHeader: FC<NavigationProps & ICategoryHeader> = ({
               },
             ]}>
             <IconTouchableContainer onPress={() => navigate('Notifications')}>
-              <NotificationIcon />
+              <NotificationIcon/>
             </IconTouchableContainer>
           </Animated.View>
         </Animated.View>
@@ -227,7 +223,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.colorSacand,
     fontFamily: Fonts.medium,
-    fontSize: Pixel(25),
+    fontSize: Pixel(20),
     marginRight: Pixel(15),
   },
   searchInputContainer: {

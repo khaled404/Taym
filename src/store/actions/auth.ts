@@ -121,6 +121,7 @@ export const NewPhonePhoneHandler = (
  * @param code otp code
  * @param cb callback function with success is true or false
  */
+
 export const VerifyPhoneCodeHandler = (
   code: string,
   cb: (success?: boolean) => void,
@@ -147,6 +148,25 @@ export const VerifyPhoneCodeHandler = (
         type: 'danger',
       });
       console.log('VerifyPhoneCodeHandler Error', error?.response.data.message);
+    }
+  };
+};
+
+export const ResendPhoneCodeHandler = (
+  cb: (success?: boolean) => void,
+) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.post('user/resend-phone-code');
+      console.log('ResendPhoneCodeHandler data', data);
+      cb(true);
+    } catch (error) {
+      cb(false);
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+      console.log('ResendPhoneCodeHandler Error', error?.response.data.message);
     }
   };
 };
@@ -271,9 +291,9 @@ export const LoginHandler = (
       {
         error.response.data.error
           ? showMessage({
-              message: error?.response.data.error,
-              type: 'danger',
-            })
+            message: error?.response.data.error,
+            type: 'danger',
+          })
           : null;
       }
       if (error?.response.data.error === 'Please Verify phone') {
@@ -327,7 +347,7 @@ export const ForgetHandler = (
     } catch (error) {
       cb(false);
       showMessage({
-        message: error?.response.data.message,
+        message: error?.response.data.error,
         type: 'danger',
       });
 
@@ -441,6 +461,7 @@ export const SetNewPasswordHandler = (
  * @param email user email
  * @param type Social type  facebook | google
  * @param cb callback function with success is true or false
+ * @param navigate
  */
 export const SocialLoginHandler = (
   social_id: string,
@@ -448,6 +469,7 @@ export const SocialLoginHandler = (
   email: string,
   type: string,
   cb: (success?: boolean) => void,
+  navigate: (screen?: string) => void,
 ) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
@@ -457,23 +479,65 @@ export const SocialLoginHandler = (
         name: name,
         type: type,
       });
-      showMessage({
-        message: data.message,
-        type: 'success',
-      });
-      dispatch({
-        type: ActionType.SAVE_LOGIN_DATA,
-        payload: data.user,
-      });
-      await saveItem(AsyncKeys.USER_DATA, data.user);
-      cb && cb();
+      console.log('SocialLoginHandlerdatadata.user', data.user)
+      if (data.user.phone !== null) {
+        showMessage({
+          message: data.success.message,
+          type: 'success',
+        });
+        dispatch({
+          type: ActionType.SAVE_LOGIN_DATA,
+          payload: data.user,
+        });
+        await saveItem(AsyncKeys.USER_DATA, data.user);
+        cb && cb(true);
+        navigate('RegisterLocation');
+      } else {
+        showMessage({
+          message: 'need phone',
+          type: 'danger',
+        });
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_STEP_1,
+          payload: data.user,
+        });
+        await saveItem(AsyncKeys.USER_DATA, data.user);
+        cb && cb(false);
+        navigate('CompleteRegister');
+      }
     } catch (error) {
       showMessage({
         message: error?.response.data.message,
         type: 'danger',
       });
 
-      console.log(error.response);
+      if (error?.response.data.message === 'need_phone') {
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_STEP_1,
+          payload: error?.response.data.user,
+        });
+        await saveItem(AsyncKeys.USER_DATA, error?.response.data.user);
+        cb && cb(false);
+        navigate('CompleteRegister');
+      }
+
+      if (error?.response.data.error === 'Please Verify phone') {
+        console.log('error?.response.data', error?.response.data.phone);
+        await saveItem(AsyncKeys.USER_DATA, {
+          phone: error?.response.data.phone,
+          token: error?.response.data.token,
+        });
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_STEP_2,
+          payload: {
+            phone: error?.response.data.phone,
+            token: error?.response.data.token,
+          },
+        });
+        cb && cb(false);
+        navigate('PhoneCode');
+      }
+      console.log('SocialLoginHandler Error', error.response);
     }
   };
 };
@@ -485,25 +549,25 @@ export const SocialLoginHandler = (
  */
 export const GetUserProfileData = () =>
   // cb: (success?: boolean) => void,
-  {
-    return async (dispatch: Dispatch<IDispatch>) => {
-      try {
-        const {data} = await axiosAPI.get('user/get-user-profile');
-        // console.log(data);
-        // console.log('GetUserProfileData data', data)
-        dispatch({
-          type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
-          payload: data.data,
-        });
-      } catch (error) {
-        showMessage({
-          message: error?.response.data.message,
-          type: 'danger',
-        });
-        console.log('GetUserProfileData Error', error?.response.data.message);
-      }
-    };
+{
+  return async (dispatch: Dispatch<IDispatch>) => {
+    try {
+      const {data} = await axiosAPI.get('user/get-user-profile');
+      // console.log(data);
+      // console.log('GetUserProfileData data', data)
+      dispatch({
+        type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
+        payload: data.data,
+      });
+    } catch (error) {
+      showMessage({
+        message: error?.response.data.message,
+        type: 'danger',
+      });
+      console.log('GetUserProfileData Error', error?.response.data.message);
+    }
   };
+};
 
 export const updateUserProfile = (
   name: string,
@@ -525,22 +589,24 @@ export const updateUserProfile = (
       formData.append('name', name);
       formData.append('email', email);
       formData.append('birthdate', birthdate);
-      photo &&
-        formData.append('photo', {
-          uri: photo,
-          type: 'image/jpeg',
-          name: `${Math.random()}.jpg`,
-        });
-      console.log(formData);
+      photo && formData.append('photo', photo)
+
+      // formData.append('photo', {
+      //   uri: photo,
+      //   type: 'image/jpeg',
+      //   name: `${Math.random()}.jpg`,
+      // });
+
+      console.log('updateUserProfile formData', formData);
 
       const {data} = await axiosAPI.post('user/update-user-profile', formData);
-      console.log(data);
+      console.log('updateUserProfile response data',data.data);
       dispatch({
         type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
-        payload: data.data,
+        payload: data.data.user.data,
       });
       showMessage({
-        message: data.success.message,
+        message: data.data.message,
         type: 'success',
       });
       cb && cb();

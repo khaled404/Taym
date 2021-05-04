@@ -1,74 +1,86 @@
-import React, {FC, useEffect, useMemo, useRef, useState} from 'react';
+import React, {FC, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {I18nManager, Platform, StyleSheet, View} from 'react-native';
 import {Container} from '../../components/containers/Containers';
 import Header from '../../components/header/Header';
 import {Colors} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
-import MapView, {AnimatedRegion, Marker, PROVIDER_GOOGLE,} from 'react-native-maps';
+import MapView, {AnimatedRegion, Marker, PROVIDER_GOOGLE, Region,} from 'react-native-maps';
 import {useTranslation} from 'react-i18next';
-import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import Button from '../../components/touchables/Button';
 import {showMessage} from 'react-native-flash-message';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {GetUserProfileData, VerifyUserLocationHandler} from '../../store/actions/auth';
 import GooglePlacesInput from '../../components/MyAddresses/GooglePlacesInput';
-import {MAP_API_KEY} from '../../constants/Config';
+import {RootState} from "../../store/store";
 
 const {isRTL} = I18nManager;
 const RegisterLocation: FC = () => {
-
+  const {userCurrentLocation} = useSelector((state: RootState) => state.address);
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const {navigate} = useNavigation();
   const _map = useRef(null);
   const _marker = useRef(null);
-  const LATITUDE_DELTA = 0.0922;
-  const LONGITUDE_DELTA = 0.0421;
-  Geocoder.init(MAP_API_KEY, {language: isRTL ? 'ar' : 'en'});
+  const LATITUDE_DELTA = 0.0922 / 5;
+  const LONGITUDE_DELTA = 0.0421 / 5;
+  console.log('userCurrentLocation', userCurrentLocation)
   //local state handler
   const [state, setstate] = useState({
     loader: false,
     region: new AnimatedRegion({
-      latitude: 31.0449837,
-      longitude: 31.3655877,
-      latitudeDelta: LATITUDE_DELTA / 2,
-      longitudeDelta: LONGITUDE_DELTA / 2,
+      latitude: userCurrentLocation.latitude,
+      longitude: userCurrentLocation.longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    }),
+    markerRegion: new AnimatedRegion({
+      latitude: userCurrentLocation.latitude,
+      longitude: userCurrentLocation.longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
     }),
     currentLocation: {
       latitude: 0,
       longitude: 0,
+      latitudeDelta: LATITUDE_DELTA / 2,
+      longitudeDelta: LONGITUDE_DELTA / 2,
     },
     newLocationObj: {},
     areaName: null,
   });
-
+  // const handleCurrentLocation = async () => {
+  //   Geolocation.getCurrentPosition(position => {
+  //
+  //     getLocationDetails(position.coords.latitude, position.coords.longitude);
+  //
+  //     setstate(old => ({
+  //       ...old,
+  //       currentLocation: {
+  //         latitude: position.coords.latitude,
+  //         longitude: position.coords.longitude,
+  //         latitudeDelta: LATITUDE_DELTA / 2,
+  //         longitudeDelta: LONGITUDE_DELTA / 2,
+  //       },
+  //     }));
+  //
+  //   });
+  // }
   useEffect(() => {
-    //get current location
-    Geolocation.getCurrentPosition(position => {
-      console.log('getCurrentPosition info', position);
-      setstate(old => ({
-        ...old,
-        currentLocation: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        },
-      }));
-      getLocationDetails(position.coords.latitude, position.coords.longitude);
-    });
 
-    return () => {
-      console.log('clean');
-    };
-  }, []);
-  useEffect(() => {
+    animateMap(state.region, userCurrentLocation);
+    // animateMap(state.region, userCurrentLocation);
+    getLocationDetails(userCurrentLocation.latitude, userCurrentLocation.longitude);
     dispatch(GetUserProfileData());
     return () => {
       console.log('clean');
     };
-  }, []);
+  }, [userCurrentLocation]);
+
+
   const getLocationDetails = async (latitude: number, longitude: number) => {
+
     Geocoder.from(latitude, longitude)
       .then(json => {
         let addressComponent = json.results[0].address_components[0];
@@ -85,14 +97,26 @@ const RegisterLocation: FC = () => {
       })
       .catch(error => console.warn(error));
   };
-  console.log('_marker', _marker);
-  const animateMap = (element: any, n_region: any) => {
+
+  const DURATION: number = 500;
+  const animateMap = useCallback((element: any, n_region: any) => {
     setstate(old => ({...old, loader: true}));
     const DURATION: number = 500;
     if (Platform.OS === 'android') {
-      if (_marker) {
+      console.log('_marker.current', _marker.current)
+      if (_marker.current !== null) {
         _marker.current.animateMarkerToCoordinate(n_region, 500);
         setstate(old => ({...old, loader: false}));
+      }
+      if (_map.current !== null) {
+        _map.current.animateToRegion(
+          {
+            n_region,
+            latitudeDelta: state.region.latitudeDelta,
+            longitudeDelta: state.region.longitudeDelta,
+          },
+          350
+        );
       }
     } else {
       element
@@ -102,11 +126,10 @@ const RegisterLocation: FC = () => {
       setstate(old => ({...old, loader: false}));
     }
     getLocationDetails(n_region.latitude, n_region.longitude);
-  };
+  }, [_marker]);
 
-  const handleRegionChange = (n_region: any, areaName: string = '') => {
-    console.log('n_region', n_region);
-    console.log('areaName', areaName);
+
+  const handleRegionChange = (n_region: Region, areaName: string = '') => {
     animateMap(state.region, n_region);
     if (areaName !== '') {
       setstate(old => ({
@@ -119,6 +142,16 @@ const RegisterLocation: FC = () => {
       }));
     }
   };
+
+  // useEffect(() => {
+  //   console.log('state.currentLocation', state.currentLocation)
+  //   dispatch(GetUserProfileData());
+    // animateMap(state.region, state.currentLocation);
+    // animateMap(state.markerRegion, state.currentLocation);
+  //   return () => {
+  //     console.log('clean');
+  //   };
+  // }, [state.currentLocation]);
 
   //save location handler
   const submitHandler = () => {
@@ -161,19 +194,24 @@ const RegisterLocation: FC = () => {
   //     );
   //   }
   // }, []);
-
+  const _onRegionChangeComplete = (region: Region): void => {
+    animateMap(state.markerRegion, region)
+  };
   const renderMap = useMemo(
     () => (
       <MapView.Animated
         ref={_map}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
-        initialRegion={state.region}
-        onRegionChangeComplete={handleRegionChange}>
-        <Marker.Animated ref={_marker} coordinate={state.region}/>
+        // initialRegion={state.currentLocation}
+        region={state.region}
+        onRegionChangeComplete={_onRegionChangeComplete}
+        // onRegionChangeComplete={handleRegionChange}
+      >
+        <Marker.Animated ref={_marker} coordinate={state.markerRegion}/>
       </MapView.Animated>
     ),
-    [state.region],
+    [],
   );
   return (
     <Container style={{backgroundColor: Colors.sacandAppBackgroundColor}}>

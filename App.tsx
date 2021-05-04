@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React, {FC, useEffect, useState} from 'react';
 import {I18nManager, Platform, StatusBar, StyleSheet, View,} from 'react-native';
 import i18n from 'i18next';
@@ -18,17 +8,23 @@ import en from './src/localization/en';
 import {Colors, Fonts, ScreenOptions} from './src/constants/styleConstants';
 import AppInitializer from './src/screens/AppInitializer';
 import messaging, {firebase} from '@react-native-firebase/messaging';
-import {firebaseConfig} from './src/constants/Config';
+import {firebaseConfig, MAP_API_KEY} from './src/constants/Config';
 import {AsyncKeys, saveItem} from './src/constants/helpers';
 import {useDispatch, useSelector} from 'react-redux';
 import {createUpdateDeviceApi} from './src/store/actions/settings';
 import {RootState} from './src/store/store';
 import {getUniqueId} from 'react-native-device-info';
 import {GoogleAnalyticsTracker} from "react-native-google-analytics-bridge";
+import Geocoder from "react-native-geocoding";
 
-let tracker1 = new GoogleAnalyticsTracker("UA-195901314-1");
-const {isRTL, forceRTL, allowRTL} = I18nManager;
+let tracker = new GoogleAnalyticsTracker("UA-195901314-1");
+const payload = {session: "start"};
+tracker.trackScreenView("Home", payload);
+tracker.trackScreenView("Login", payload);
+tracker.trackScreenView("Category", payload);
 
+const {isRTL} = I18nManager;
+Geocoder.init(MAP_API_KEY, {language: isRTL ? 'ar' : 'en'});
 i18n.use(initReactI18next).init({
   resources: {
     ar: {

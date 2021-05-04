@@ -3,25 +3,18 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FacebookIcon, GoogleIcon} from '../../../assets/Icons/Icons';
 import {Fonts, Pixel} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-import {
-  AccessToken,
-  LoginManager,
-  GraphRequestManager,
-  GraphRequest,
-  Settings,
-} from 'react-native-fbsdk-next';
+import {GoogleSignin, statusCodes,} from '@react-native-google-signin/google-signin';
+import {AccessToken, GraphRequest, GraphRequestManager, LoginManager, Settings,} from 'react-native-fbsdk-next';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {SocialLoginHandler} from '../../store/actions/auth';
 
 interface ISocialLogin {
   title: string;
+  loaderHandler: (loaderStatus: boolean) => void;
 }
-const SocialLogin: FC<ISocialLogin> = ({title}) => {
+
+const SocialLogin: FC<ISocialLogin> = ({title, loaderHandler}) => {
   const dispatch = useDispatch();
   const {navigate} = useNavigation();
   useEffect(() => {
@@ -36,6 +29,7 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
     });
   }, []);
   const LoginWihGoogleHandler = async () => {
+    loaderHandler && loaderHandler(true);
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
@@ -47,12 +41,16 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
           userInfo.user.email,
           'google',
           () => {
-            navigate('Home');
+            loaderHandler && loaderHandler(false);
           },
+          (screen) => {
+            screen && navigate(screen)
+          }
         ),
       );
     } catch (error) {
       console.log(error);
+      loaderHandler && loaderHandler(false);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -76,8 +74,11 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
           result.email,
           'facebook',
           () => {
-            navigate('RegisterLocation');
+            loaderHandler && loaderHandler(false);
           },
+          (screen) => {
+            screen && navigate(screen)
+          }
         ),
       );
     }
@@ -96,18 +97,20 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
     responseInfoCallback,
   );
   const LoginWihFacebookHandler = async () => {
+    loaderHandler && loaderHandler(true);
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       (result: {
         isCancelled: any;
-        grantedPermissions: {toString: () => string};
+        grantedPermissions: { toString: () => string };
       }) => {
         console.log(result);
         if (result.isCancelled) {
           console.log('Login cancelled');
+          loaderHandler && loaderHandler(false);
         } else {
           console.log(
             'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
+            result.grantedPermissions.toString(),
           );
 
           AccessToken.getCurrentAccessToken().then(() => {
@@ -119,6 +122,7 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
       },
       function (error: string) {
         console.log('Login fail with error: ' + error);
+        loaderHandler && loaderHandler(false);
       },
     );
   };
@@ -130,12 +134,12 @@ const SocialLogin: FC<ISocialLogin> = ({title}) => {
         <TouchableOpacity
           style={styles.socialLoginBtn}
           onPress={LoginWihGoogleHandler}>
-          <GoogleIcon />
+          <GoogleIcon/>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.socialLoginBtn}
           onPress={LoginWihFacebookHandler}>
-          <FacebookIcon />
+          <FacebookIcon/>
         </TouchableOpacity>
       </View>
     </>

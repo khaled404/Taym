@@ -30,6 +30,7 @@ const AddLocation: FC = () => {
       setArea(newLocationObj.areaName);
     }
   }, [newLocationObj]);
+  console.log('AddLocationnewLocationObj',newLocationObj)
 
   const handlSubmit = () => {
     setLoader(true);
