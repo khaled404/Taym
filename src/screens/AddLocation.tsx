@@ -12,9 +12,10 @@ import {useNavigation} from '@react-navigation/native';
 import {addAddressApi} from '../store/actions/address';
 import {RootState} from '../store/store';
 import {showMessage} from "react-native-flash-message";
+import {InputErorrHandler} from "../constants/helpers";
 
 const AddLocation: FC = () => {
-  const {newLocationObj}: any = useSelector((state: RootState) => state.address);
+  const {newLocationObj,addAddressErorrs}: any = useSelector((state: RootState) => state.address);
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -86,6 +87,7 @@ const AddLocation: FC = () => {
                 },
                 value: name,
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'name')}
             />
           </View>
 
@@ -103,6 +105,7 @@ const AddLocation: FC = () => {
                 value: phone,
                 keyboardType: 'number-pad',
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'phone')}
             />
           </View>
 
@@ -120,6 +123,7 @@ const AddLocation: FC = () => {
                 value: street,
                 keyboardType: 'number-pad',
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'street_name')}
             />
           </View>
 
@@ -136,7 +140,9 @@ const AddLocation: FC = () => {
                 },
                 value: area,
                 keyboardType: 'number-pad',
+                editable:false
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'area')}
             />
           </View>
 
@@ -154,6 +160,7 @@ const AddLocation: FC = () => {
                 value: buildingNumber,
                 keyboardType: 'number-pad',
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'building_no')}
             />
           </View>
 
@@ -172,6 +179,7 @@ const AddLocation: FC = () => {
                   value: floor,
                   keyboardType: 'number-pad',
                 }}
+                erorrMessage={InputErorrHandler(addAddressErorrs, 'floor_no')}
               />
             </View>
 
@@ -189,6 +197,7 @@ const AddLocation: FC = () => {
                   value: apartment,
                   keyboardType: 'number-pad',
                 }}
+                erorrMessage={InputErorrHandler(addAddressErorrs, 'apartment_no')}
               />
             </View>
           </View>
@@ -205,6 +214,7 @@ const AddLocation: FC = () => {
                 },
                 value: description,
               }}
+              erorrMessage={InputErorrHandler(addAddressErorrs, 'description')}
             />
           </View>
         </View>

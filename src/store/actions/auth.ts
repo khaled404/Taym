@@ -241,6 +241,7 @@ export const VerifyUserLocationHandler = (
       dispatch({
         type: ActionType.SAVE_USER_DATA_STEP_3,
       });
+
       cb(true);
       navigate('Home');
     } catch (error) {

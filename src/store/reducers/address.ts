@@ -5,6 +5,7 @@ const initialState = {
   userCurrentLocation: {},
   newLocationObj: {},
   addressList: [],
+  addAddressErorrs: {},
 };
 export default (state = initialState, action: IReduser) => {
   switch (action.type) {
@@ -12,10 +13,12 @@ export default (state = initialState, action: IReduser) => {
       return {...state, addressList: action.payload};
     case ActionType.SAVE_CURRENT_LOCATION:
       return {...state, userCurrentLocation: action.payload};
-      case ActionType.SAVE_NEW_LOCATION_OBJ:
+    case ActionType.SAVE_NEW_LOCATION_OBJ:
       return {...state, newLocationObj: action.payload};
     case ActionType.DELETE_ADDRESS:
       return {...state, addressList: action.payload};
+    case ActionType.SAVE_ADD_ADDRESS_ERORRS:
+      return {...state, addAddressErorrs: action.payload};
   }
   return state;
 };

@@ -12,8 +12,13 @@ export const saveAddressList = (payload: []) => ({
   type: ActionType.SAVE_ADDRESSLIST,
   payload,
 });
+
 export const saveNewAddress = (payload: {}) => ({
   type: ActionType.SAVE_NEW_LOCATION_OBJ,
+  payload,
+});
+export const saveAddAddressErrors = (payload: {}) => ({
+  type: ActionType.SAVE_ADD_ADDRESS_ERORRS,
   payload,
 });
 
@@ -90,6 +95,7 @@ export const addAddressApi = (
       });
       cb(true);
     } catch (error) {
+      dispatch(saveAddAddressErrors(error?.response.data.message))
       cb(false);
       // showMessage({
       //   message: error?.response,

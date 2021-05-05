@@ -78,7 +78,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
             {isLogin ?
               (userData.photo !== null ?
                 <View style={styles.image}>
-                  <Image source={{uri: userData.photo}} style={commonStyles.image} resizeMode="contain"/>
+                  <Image source={{uri: userData.photo}} style={commonStyles.image} resizeMode="cover"/>
                 </View> : <View style={styles.image}>
                   <Text style={styles.imageText}>
                     {!!userData.name && getLetter(userData.name)}

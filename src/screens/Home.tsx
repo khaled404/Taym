@@ -112,7 +112,7 @@ const Home: FC = () => {
     <Container style={styles.container}>
       <HomeHeader navigate={navigate} title={t('Home')}/>
       <Content noPadding>
-        {locationSupport && categories.length > 0 && (
+        {!locationSupport && categories.length > 0 && (
           <View style={styles.contentContainer}>
             <CategoryList data={categories}/>
           </View>
