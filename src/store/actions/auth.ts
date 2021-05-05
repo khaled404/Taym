@@ -131,16 +131,25 @@ export const VerifyPhoneCodeHandler = (
       const {data} = await axiosAPI.post('user/verify-phone', {
         code,
       });
-      console.log(data);
-      showMessage({
-        message: data.message,
-        type: 'info',
-      });
+      console.log('VerifyPhoneCodeHandler', data.message);
+      if (data.message === 'invalid Code') {
+        showMessage({
+          message: data.message,
+          type: 'danger',
+        });
+        cb(false);
+      } else {
+        showMessage({
+          message: data.message,
+          type: 'info',
+        });
+        cb(true);
+      }
       // dispatch({
       //   type: ActionType.SAVE_USER_DATA_STEP_3,
       // });
 
-      cb(true);
+
     } catch (error) {
       cb(false);
       showMessage({
@@ -600,7 +609,7 @@ export const updateUserProfile = (
       console.log('updateUserProfile formData', formData);
 
       const {data} = await axiosAPI.post('user/update-user-profile', formData);
-      console.log('updateUserProfile response data',data.data);
+      console.log('updateUserProfile response data', data.data);
       dispatch({
         type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
         payload: data.data.user.data,

@@ -40,7 +40,7 @@ import {
   MinusQuantity,
   NewPhoneNumber,
   NewPhoneCode,
-  ComingSoon,
+  ComingSoon, DeliveryLocation,
 } from '../screens/index';
 
 import Animated from 'react-native-reanimated';
@@ -138,6 +138,7 @@ const Stacks: FC<any> = ({style}) => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Voucher" component={Voucher} />
         <Stack.Screen name="MyOrders" component={ComingSoon} />
+        <Stack.Screen name="DeliveryLocation" component={DeliveryLocation} />
         <Stack.Screen name="OrderDetails" component={ComingSoon} />
         <Stack.Screen name="OrderDone" component={ComingSoon} />
         <Stack.Screen name="Favorite" component={ComingSoon} />

@@ -9,6 +9,7 @@ export const OrderDone = register({loader: () => import('./OrderDone')});
 export const Favorite = register({loader: () => import('./Favorite')});
 export const Login = register({loader: () => import('./auth/Login')});
 export const Register = register({loader: () => import('./auth/Register')});
+export const DeliveryLocation= register({loader: () => import('./DeliveryLocation')});
 export const RegisterLocation = register({
   loader: () => import('./auth/RegisterLocation'),
 });

@@ -22,7 +22,7 @@ const NotSupported: FC = () => {
         style={styles.selectLocationBtn}
         styleTitle={styles.selectLocationBtnText}
         onPress={() => {
-          navigate('AddressLocation')
+          navigate('DeliveryLocation')
         }}
         // loader={state.loader}
       />
