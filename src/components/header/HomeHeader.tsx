@@ -75,7 +75,9 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
               alignItems: 'center',
               justifyContent: 'space-between',
               marginTop: 5,
-            }}>
+            }}
+          onPress={()=>navigate('AddressLocation')}
+          >
             <Text style={styles.addressText} numberOfLines={1}>{currentLocationData}</Text>
             <ArrowHeaderIcon />
           </TouchableOpacity>
