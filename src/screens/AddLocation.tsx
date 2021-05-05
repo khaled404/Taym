@@ -11,10 +11,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {addAddressApi} from '../store/actions/address';
 import {RootState} from '../store/store';
-import {showMessage} from "react-native-flash-message";
+import {showMessage} from 'react-native-flash-message';
 
 const AddLocation: FC = () => {
-  const {newLocationObj}: any = useSelector((state: RootState) => state.address);
+  const {newLocationObj}: any = useSelector(
+    (state: RootState) => state.address,
+  );
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -30,7 +32,7 @@ const AddLocation: FC = () => {
       setArea(newLocationObj.areaName);
     }
   }, [newLocationObj]);
-  console.log('AddLocationnewLocationObj',newLocationObj)
+  console.log('AddLocationnewLocationObj', newLocationObj);
 
   const handlSubmit = () => {
     setLoader(true);
@@ -67,7 +69,7 @@ const AddLocation: FC = () => {
   const {t} = useTranslation();
   return (
     <Container style={styles.container}>
-      <Header title={t('Add Location')}/>
+      <Header title={t('Add Location')} />
       <Content
         noPadding
         style={styles.contentContainer}
@@ -76,9 +78,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Name')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -92,9 +92,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Mobile Number')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -109,9 +107,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Street Number')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -126,9 +122,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Area')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -143,9 +137,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Building No')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -161,9 +153,7 @@ const AddLocation: FC = () => {
             <View style={[styles.inputContainer, {flex: 0.47}]}>
               <Text style={styles.inputLabel}>{t('Floor')}</Text>
               <Input
-                textInputContainer={[
-                  styles.textInput,
-                ]}
+                textInputContainer={[styles.textInput]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
                   onChangeText: value => {
@@ -178,9 +168,7 @@ const AddLocation: FC = () => {
             <View style={[styles.inputContainer, {flex: 0.47}]}>
               <Text style={styles.inputLabel}>{t('Apartment')}</Text>
               <Input
-                textInputContainer={[
-                  styles.textInput,
-                ]}
+                textInputContainer={[styles.textInput]}
                 contentContainerStyle={styles.contentContainerStyle}
                 options={{
                   onChangeText: value => {
@@ -195,9 +183,7 @@ const AddLocation: FC = () => {
           <View style={styles.inputContainer}>
             <Text style={styles.inputLabel}>{t('Landmark')}</Text>
             <Input
-              textInputContainer={[
-                styles.textInput,
-              ]}
+              textInputContainer={[styles.textInput]}
               contentContainerStyle={styles.contentContainerStyle}
               options={{
                 onChangeText: value => {
@@ -253,18 +239,11 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   textInput: {
-    height: Pixel(100),
-    padding: 0,
-    fontFamily: Fonts.bold,
-    fontSize: Pixel(33),
-    color: '#070707',
-    alignSelf: 'flex-start'
+    width: '100%',
+    height: '100%',
   },
   contentContainerStyle: {
-    borderRadius: 14,
-    borderWidth: 0,
-    padding: 0,
-    paddingHorizontal: 15,
+    height: Pixel(100),
   },
 });
 

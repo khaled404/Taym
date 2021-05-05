@@ -1,5 +1,5 @@
-import React, {FC, useCallback, useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {FC, useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {Container, Content} from '../components/containers/Containers';
 import HomeHeader from '../components/header/HomeHeader';
 import {Colors} from '../constants/styleConstants';
@@ -11,7 +11,9 @@ import {useNavigation} from '@react-navigation/native';
 import NotSupported from '../components/Home/NotSupported';
 import Geolocation from '@react-native-community/geolocation';
 import {saveCurrentLocationData, userHomeApi} from '../store/actions/settings';
-import Geocoder from "react-native-geocoding";
+import Geocoder from 'react-native-geocoding';
+import OfferSlider from '../components/Home/OfferSlider';
+import FavoriteList from '../components/Home/FavoriteList';
 
 const Home: FC = () => {
   const {t} = useTranslation();
@@ -85,17 +87,18 @@ const Home: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     Geolocation.getCurrentPosition(position => {
       Geocoder.from(position.coords.latitude, position.coords.longitude)
         .then(json => {
-          let locationStreetName = json.results[0].address_components[0].long_name;
+          let locationStreetName =
+            json.results[0].address_components[0].long_name;
           if (locationStreetName !== undefined) {
-            dispatch(
-              saveCurrentLocationData(locationStreetName),
-            );
+            dispatch(saveCurrentLocationData(locationStreetName));
           }
-          console.log('result geocoder', json.results[0].address_components[0].long_name);
+          console.log(
+            'result geocoder',
+            json.results[0].address_components[0].long_name,
+          );
         })
         .catch(error => console.warn(error));
       dispatch(
@@ -104,25 +107,23 @@ const Home: FC = () => {
           longitude: position.coords.longitude,
         }),
       );
-
     });
-
   }, []);
   return (
     <Container style={styles.container}>
-      <HomeHeader navigate={navigate} title={t('Home')}/>
+      <HomeHeader navigate={navigate} title={t('Home')} />
       <Content noPadding>
         {locationSupport && categories.length > 0 && (
           <View style={styles.contentContainer}>
-            <CategoryList data={categories}/>
+            <CategoryList data={categories} />
           </View>
         )}
         {!locationSupport && (
           <View style={styles.contentContainer}>
-            <NotSupported/>
+            <NotSupported />
           </View>
         )}
-        {/* <OfferSlider data={carouselItems} /> */}
+        <OfferSlider data={carouselItems} />
         {/* <View style={styles.contentContainer}>
           <FavoriteList inHome data={categoryHomeData} />
         </View> */}

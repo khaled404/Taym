@@ -1,4 +1,10 @@
-import {I18nManager, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  I18nManager,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import CategoryItem from './CategoryItem';
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -25,7 +31,7 @@ const CategoryList: FC<ICategoryList> = ({data}) => {
         <Text style={styles.sectionTitle}>{t('Explore Category')}</Text>
         <TouchableOpacity
           onPress={() => {
-            // navigate('Category')
+            // navigate('Category');
           }}>
           <Text style={styles.viewAllBtnText}>{t('View All')}</Text>
         </TouchableOpacity>
@@ -33,7 +39,7 @@ const CategoryList: FC<ICategoryList> = ({data}) => {
       <View style={styles.listContainer}>
         {data.map((item, index) => {
           if (index <= 5) {
-            return <CategoryItem {...item} key={index} index={index}/>;
+            return <CategoryItem {...item} key={index} index={index} />;
           }
         })}
       </View>

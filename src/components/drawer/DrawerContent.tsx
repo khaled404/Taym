@@ -1,5 +1,12 @@
 import React, {FC, useEffect} from 'react';
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Colors, Fonts, Images, Pixel} from '../../constants/styleConstants';
 import {useTranslation} from 'react-i18next';
 import {ScreenProps} from '../../constants/interfaces';
@@ -20,7 +27,7 @@ import {
   VouchergIcon,
 } from '../../../assets/Icons/Icons';
 import {OpenUrlHandler} from '../../constants/helpers';
-import {commonStyles} from "../../styles/styles";
+import {commonStyles} from '../../styles/styles';
 
 const {height, width} = Dimensions.get('window');
 const DrawerContent: FC<ScreenProps> = ({navigation}) => {
@@ -66,7 +73,7 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
           <View style={styles.userImage}>
             {isLogin ? (
               <View style={styles.editIcon}>
-                <EditIcon/>
+                <EditIcon />
               </View>
             ) : null}
             {/*   <FastImage
@@ -75,18 +82,25 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               resizeMode="contain"
             /> */}
 
-            {isLogin ?
-              (userData.photo !== null ?
+            {isLogin ? (
+              userData.photo !== null ? (
                 <View style={styles.image}>
-                  <Image source={{uri: userData.photo}} style={commonStyles.image} resizeMode="contain"/>
-                </View> : <View style={styles.image}>
+                  <Image
+                    source={{uri: userData.photo}}
+                    style={commonStyles.image}
+                    resizeMode="contain"
+                  />
+                </View>
+              ) : (
+                <View style={styles.image}>
                   <Text style={styles.imageText}>
                     {!!userData.name && getLetter(userData.name)}
                   </Text>
-                </View>)
-              : (
-                <Image source={Images.defAvatar} resizeMode="contain"/>
-              )}
+                </View>
+              )
+            ) : (
+              <Image source={Images.defAvatar} resizeMode="contain" />
+            )}
           </View>
           <View style={styles.userContent}>
             <Text style={styles.userTitle}>
@@ -111,14 +125,14 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               }}
               isLogin={true}
             />
-            <DrawerItem
+            {/* <DrawerItem
               Icon={HeartIcon}
               title={t('Favorite')}
               onPress={() => {
                 navigation?.navigate('Favorite');
               }}
               isLogin={isLogin}
-            />
+            /> */}
             <DrawerItem
               Icon={VouchergIcon}
               title={t('Voucher')}
@@ -128,22 +142,22 @@ const DrawerContent: FC<ScreenProps> = ({navigation}) => {
               }}
               isLogin={isLogin}
             />
-            <DrawerItem
+            {/* <DrawerItem
               Icon={ListIcon}
               title={t('My Orders')}
               onPress={() => {
                 navigation?.navigate('MyOrders');
               }}
               isLogin={isLogin}
-            />
-            <DrawerItem
+            /> */}
+            {/* <DrawerItem
               Icon={OffersIcon}
               title={t('Offers')}
               onPress={() => {
                 navigation?.navigate('Offers');
               }}
               isLogin={true}
-            />
+            /> */}
             <DrawerItem
               Icon={SettingsIcon}
               title={t('Settings')}
@@ -241,7 +255,7 @@ const styles = StyleSheet.create({
     borderRadius: Pixel(70),
     width: Pixel(140),
     height: Pixel(140),
-    overflow:'hidden'
+    overflow: 'hidden',
   },
   imageText: {
     color: Colors.dark,

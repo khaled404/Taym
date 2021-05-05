@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 import {axiosAPI} from '../../constants/Config';
 import {IDispatch} from '../../constants/interfaces';
 import {ActionType} from './actions';
-import {AsyncKeys, saveItem} from '../../constants/helpers';
+import {AsyncKeys, clear, saveItem} from '../../constants/helpers';
 import {showMessage} from 'react-native-flash-message';
 
 /**
@@ -148,8 +148,6 @@ export const VerifyPhoneCodeHandler = (
       // dispatch({
       //   type: ActionType.SAVE_USER_DATA_STEP_3,
       // });
-
-
     } catch (error) {
       cb(false);
       showMessage({
@@ -161,9 +159,7 @@ export const VerifyPhoneCodeHandler = (
   };
 };
 
-export const ResendPhoneCodeHandler = (
-  cb: (success?: boolean) => void,
-) => {
+export const ResendPhoneCodeHandler = (cb: (success?: boolean) => void) => {
   return async (dispatch: Dispatch<IDispatch>) => {
     try {
       const {data} = await axiosAPI.post('user/resend-phone-code');
@@ -300,9 +296,9 @@ export const LoginHandler = (
       {
         error.response.data.error
           ? showMessage({
-            message: error?.response.data.error,
-            type: 'danger',
-          })
+              message: error?.response.data.error,
+              type: 'danger',
+            })
           : null;
       }
       if (error?.response.data.error === 'Please Verify phone') {
@@ -488,7 +484,7 @@ export const SocialLoginHandler = (
         name: name,
         type: type,
       });
-      console.log('SocialLoginHandlerdatadata.user', data.user)
+      console.log('SocialLoginHandlerdatadata.user', data.user);
       if (data.user.phone !== null) {
         showMessage({
           message: data.success.message,
@@ -558,25 +554,25 @@ export const SocialLoginHandler = (
  */
 export const GetUserProfileData = () =>
   // cb: (success?: boolean) => void,
-{
-  return async (dispatch: Dispatch<IDispatch>) => {
-    try {
-      const {data} = await axiosAPI.get('user/get-user-profile');
-      // console.log(data);
-      // console.log('GetUserProfileData data', data)
-      dispatch({
-        type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
-        payload: data.data,
-      });
-    } catch (error) {
-      showMessage({
-        message: error?.response.data.message,
-        type: 'danger',
-      });
-      console.log('GetUserProfileData Error', error?.response.data.message);
-    }
+  {
+    return async (dispatch: Dispatch<IDispatch>) => {
+      try {
+        const {data} = await axiosAPI.get('user/get-user-profile');
+        // console.log(data);
+        // console.log('GetUserProfileData data', data)
+        dispatch({
+          type: ActionType.SAVE_USER_DATA_AFTER_VERIFY,
+          payload: data.data,
+        });
+      } catch (error) {
+        showMessage({
+          message: error?.response.data.message,
+          type: 'danger',
+        });
+        console.log('GetUserProfileData Error', error?.response.data.message);
+      }
+    };
   };
-};
 
 export const updateUserProfile = (
   name: string,
@@ -598,7 +594,7 @@ export const updateUserProfile = (
       formData.append('name', name);
       formData.append('email', email);
       formData.append('birthdate', birthdate);
-      photo && formData.append('photo', photo)
+      photo && formData.append('photo', photo);
 
       // formData.append('photo', {
       //   uri: photo,
@@ -638,8 +634,9 @@ export const updateUserProfile = (
  * @param cb callback function
  */
 export const LogoutHandler = (cb?: () => void) => {
-  return (dispatch: Dispatch<IDispatch>) => {
+  return async (dispatch: Dispatch<IDispatch>) => {
     dispatch({type: ActionType.LOGOUT});
+    await clear();
     cb && cb();
   };
 };

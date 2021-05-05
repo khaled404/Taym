@@ -61,8 +61,8 @@ export const userHomeApi = (latLong: any) => {
     try {
       console.log(`${latLong.latitude},${latLong.longitude}`);
       const {data} = await axiosAPI.post(`guest/user-home`, {
-        // latLong: `30.880490,29.565331`,
-        latLong: `${latLong.latitude},${latLong.longitude}`,
+        latLong: `30.880490,29.565331`,
+        // latLong: `${latLong.latitude},${latLong.longitude}`,
       });
       dispatch(saveCategories(data.data.categories));
       console.log('data.data', data.data);
