@@ -1,20 +1,6 @@
 import React, {FC} from 'react';
-import {
-  Platform,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
-import {
-  Colors,
-  Fonts,
-  Pixel,
-  ScreenOptions,
-} from '../../constants/styleConstants';
+import {Platform, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle,} from 'react-native';
+import {Colors, Fonts, Pixel, ScreenOptions,} from '../../constants/styleConstants';
 import {commonStyles} from '../../styles/styles';
 import {NavigationProps} from '../../constants/interfaces';
 import {
@@ -28,9 +14,9 @@ import {
 import IconTouchableContainer from '../touchables/IconTouchableContainer';
 import {useTranslation} from 'react-i18next';
 import Input from '../textInputs/Input';
-import {useNavigation} from '@react-navigation/native';
 import {RootState} from '../../store/store';
 import {useSelector} from 'react-redux';
+
 interface IHeader {
   title: string;
   containerStyle?: StyleProp<ViewStyle>;
@@ -40,19 +26,19 @@ interface IHeader {
 const SearchSubmitBtn: FC = () => {
   return (
     <IconTouchableContainer style={styles.submitSearchBtn}>
-      <SearchIcon width={17} height={17} />
+      <SearchIcon width={17} height={17}/>
     </IconTouchableContainer>
   );
 };
 
 const HomeHeader: FC<NavigationProps & IHeader> = ({
-  navigate,
-  goBack,
-  name,
-  title,
-  containerStyle,
-  titleStyle,
-}) => {
+                                                     navigate,
+                                                     goBack,
+                                                     name,
+                                                     title,
+                                                     containerStyle,
+                                                     titleStyle,
+                                                   }) => {
   const {t} = useTranslation();
   const {currentLocationData}: any = useSelector((state: RootState) => state.settings);
   return (
@@ -60,10 +46,10 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
       <View style={[styles.rowConatiner]}>
         <View style={styles.right}>
           <View style={styles.titleConatiner}>
-            <LogoIcon width={56} height={30} />
+            <LogoIcon width={56} height={30}/>
           </View>
           <IconTouchableContainer onPress={global.DrawerProps.openDrawer}>
-            <MenuIcon />
+            <MenuIcon/>
           </IconTouchableContainer>
         </View>
 
@@ -76,19 +62,19 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
               justifyContent: 'space-between',
               marginTop: 5,
             }}
-          onPress={()=>navigate('AddressLocation')}
+            onPress={() => navigate('DeliveryLocation')}
           >
             <Text style={styles.addressText} numberOfLines={1}>{currentLocationData}</Text>
-            <ArrowHeaderIcon />
+            <ArrowHeaderIcon/>
           </TouchableOpacity>
         </View>
 
         <View style={styles.leftContainer}>
           <IconTouchableContainer onPress={() => navigate('Cart')}>
-            <CartIcon />
+            <CartIcon/>
           </IconTouchableContainer>
           <IconTouchableContainer onPress={() => navigate('Notifications')}>
-            <NotificationIcon />
+            <NotificationIcon/>
           </IconTouchableContainer>
         </View>
       </View>
@@ -103,9 +89,9 @@ const HomeHeader: FC<NavigationProps & IHeader> = ({
           textInputContainer={{
             // textAlign: language === 'ar' ? 'right' : 'left',
             // paddingVertical: Pixel(33),
-            alignSelf:'flex-start'
+            alignSelf: 'flex-start'
           }}
-          rightContent={() => <SearchSubmitBtn />}
+          rightContent={() => <SearchSubmitBtn/>}
           iconRightStyle={{top: 4.5}}
         />
       </View>
